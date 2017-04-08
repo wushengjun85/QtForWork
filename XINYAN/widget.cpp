@@ -30,8 +30,19 @@ uchar LCMachineModeMenu = 0;
 uchar LCEngineSwitchMenu = 0;
 bool LCBoolMachineModenu = true;
 
+//2017.4.7 add
+uchar LCBiaoDingRow = 0;
+uchar LCPiPeixingBiaoDing = 0;
+
 uchar LCZhujiFault = 0;
 uchar LCEngineFault = 0;
+
+
+//2017.4.8
+//标定 标志判断
+uchar FlagShouBing = 0;
+uchar FlagXingzouBeng = 0;
+uchar FlagAoBanjianxi = 0;
 
 //蜂鸣器状态标志
 uchar flagbeep = 1;
@@ -92,7 +103,9 @@ enum uiFlag
     FazhibiaodingMenu,    //阀值标定       12
     EngineFault,         //发动机故障查询   13
     ZhujiFault,           //主机故障查询    14
-    Shaomiao              //扫码查询        15
+    JiQiXinXi,        //机器信息           15
+    BiaoDing,          //标定菜单           16
+    Shaomiao              //扫码查询        17
 };
 uiFlag flagwidget;
 
@@ -475,6 +488,37 @@ Widget::Widget(QWidget *parent) :
     /***********************************************************************************************/
 
 
+
+    /**************************************************************/
+
+    //2017.4.7
+    //过滤器安装
+
+    /*设置中文显示编码，否则为乱码*/
+    QTextCodec::setCodecForCStrings( QTextCodec::codecForName("utf8"));
+
+    ui->listWidget_6->installEventFilter(this);
+
+    //标定选择
+    QListWidgetItem * BiaoItem1 = new QListWidgetItem;
+    QListWidgetItem * BiaoItem2 = new QListWidgetItem;
+    //QListWidgetItem * pItem3 = new QListWidgetItem;
+
+    BiaoItem1->setSizeHint(QSize(30, 52));  //每次改变Item的高度
+    BiaoItem1->setText("匹配性标定");//
+
+    BiaoItem2->setSizeHint(QSize(30, 52));  //每次改变Item的高度
+    BiaoItem2->setText("阀值标定");//
+
+    ui->listWidget_6->insertItem(0,BiaoItem1);
+    ui->listWidget_6->insertItem(1,BiaoItem2);
+
+
+
+    /**************************************************************/
+
+
+
     //过滤器安装
     ui->lineEdit->installEventFilter(this);
     ui->lineEdit_2->installEventFilter(this);
@@ -499,8 +543,8 @@ Widget::Widget(QWidget *parent) :
 //    ui->lineEdit->setFocusPolicy(Qt::StrongFocus);
 
 
-    /*设置中文显示编码，否则为乱码*/
-    QTextCodec::setCodecForCStrings( QTextCodec::codecForName( "utf8"));
+//    /*设置中文显示编码，否则为乱码*/
+//    QTextCodec::setCodecForCStrings( QTextCodec::codecForName( "utf8"));
     //清零 里程 米计
     QListWidgetItem * pItem1 = new QListWidgetItem;
     QListWidgetItem * pItem2 = new QListWidgetItem;
@@ -685,6 +729,10 @@ Widget::Widget(QWidget *parent) :
         ui->tableWidget_3->setRowHeight(0,43);
         ui->tableWidget_3->setRowHeight(1,43);
         ui->tableWidget_3->setRowHeight(2,43);
+
+        //2017.4.8
+        //匹配性标定
+        ui->tableWidget_3->installEventFilter(this);
 }
 
 
@@ -813,10 +861,17 @@ void Widget::paintEvent(QPaintEvent *)
         pix.load("./img/jiemian/ZhujiFault.bmp");
         break;
 
+        case JiQiXinXi:
+        pix.load("./img/jiemian/JiQiXinXi.bmp");
+        break;
+
+        case BiaoDing:
+        pix.load("./img/jiemian/BiaoDing.bmp");
+        break;
+
         case Shaomiao:
         pix.load("./img/jiemian/Shaomiao.bmp");
         break;
-
 
         default:
         break;
@@ -3338,6 +3393,47 @@ void Widget::paintEvent(QPaintEvent *)
 
 /***************************************************************************************************************/
 
+    /**************************************************************************************************/
+               if(flagwidget == PipeixingbiaodingMenu)
+               {
+                   qDebug()<<"jddddddddddddddddddddddddddddddddddddddddddddddddddddd ====  "<<LCPiPeixingBiaoDing<<endl;
+                    if((LCPiPeixingBiaoDing == 1)&&(FlagShouBing ==0))
+                    {
+                        ui->label_17->setText("请按F5开始标定手柄");
+                    }
+                    else if((LCPiPeixingBiaoDing == 1)&&(FlagShouBing ==1))
+                    {
+                        ui->label_17->setText("请推动手柄到最大位置等待");
+                    }
+                    else if((LCPiPeixingBiaoDing == 2)&&(FlagXingzouBeng ==0))
+                    {
+                        ui->label_17->setText("按F5键开始标定行走泵杆");
+                    }
+                    else if((LCPiPeixingBiaoDing == 2)&&(FlagXingzouBeng ==1))
+                    {
+                         ui->label_17->setText("请推动手柄到最大位置等待");
+                    }
+                    else if((LCPiPeixingBiaoDing == 3)&&(FlagAoBanjianxi ==0))
+                    {
+                        ui->label_17->setText("按F5键开始标定凹板间隙");
+                    }
+                    else if((LCPiPeixingBiaoDing == 3)&&(FlagAoBanjianxi ==1))
+                    {
+                        ui->label_17->setText("请按住凹板间隙增大调整开关并等待");
+                    }
+
+                    //偏移量
+                    else if((LCPiPeixingBiaoDing == 4)||(LCPiPeixingBiaoDing == 5))
+                    {
+                        ui->label_17->setText(" ");
+                    }
+
+               }
+
+    /**************************************************************************************************/
+
+
+
 
 
         if(flagwidget == SystemMenu)
@@ -3721,19 +3817,28 @@ void Widget::keyPressEvent(QKeyEvent *e)
              ui->stackedWidget->setCurrentIndex(2);
              break;
 
-             /*
-             case HelpMenu:
+
+        case HelpMenu:
              flagwidget = Shaomiao;
-             ui->stackedWidget->setCurrentIndex(15);
+             ui->stackedWidget->setCurrentIndex(17);
              break;
-             */
 
+             //标定菜单
+        case BiaoDing:
+             flagwidget = MainMenu;
+             ui->stackedWidget->setCurrentIndex(2);
+             break;
 
-             //2017.4.6 暂时添加
-         case HelpMenu:
-             flagwidget = FazhibiaodingMenu;
-             ui->stackedWidget->setCurrentIndex(12);
-             ui->lineEdit_23->setFocus();
+             //阀值标定
+        case FazhibiaodingMenu:
+             flagwidget = MainMenu;
+             ui->stackedWidget->setCurrentIndex(2);
+             break;
+
+             //匹配性标定
+        case PipeixingbiaodingMenu:
+             flagwidget = MainMenu;
+             ui->stackedWidget->setCurrentIndex(2);
              break;
 
              default:
@@ -3827,7 +3932,7 @@ void Widget::keyPressEvent(QKeyEvent *e)
 
              case HelpMenu:     //维修保养
              flagwidget = Shaomiao;
-             ui->stackedWidget->setCurrentIndex(15);
+             ui->stackedWidget->setCurrentIndex(17);
              break;
 
              default:
@@ -4124,11 +4229,29 @@ void Widget::keyPressEvent(QKeyEvent *e)
             }
             break;
 
+            //2017.4.7
             //系统标定
             case SystemMenu:
-            flagwidget = PipeixingbiaodingMenu;
-            ui->stackedWidget->setCurrentIndex(11);
+            {
+                flagwidget = BiaoDing;
+                ui->stackedWidget->setCurrentIndex(16);
+                ui->listWidget_6->setFocus();
+            }
             break;
+
+            //xitongbiaoding 确认
+            case BiaoDing:
+            if(LCBiaoDingRow == 1)//匹配性标定
+            {
+              flagwidget = PipeixingbiaodingMenu;
+              ui->stackedWidget->setCurrentIndex(11);
+            }
+            else if(LCBiaoDingRow == 2) //阀值标定
+            {
+                flagwidget = FazhibiaodingMenu;
+                ui->stackedWidget->setCurrentIndex(12);
+            }
+          break;
 
             /*********************************************************/
             //确定键
@@ -4155,6 +4278,41 @@ void Widget::keyPressEvent(QKeyEvent *e)
                 flagzhuqueren = 1;
             }
             break;
+
+/**************************************************************************************************/
+        case PipeixingbiaodingMenu:
+           {
+                if((LCPiPeixingBiaoDing == 1)&&(FlagShouBing ==0))
+                {
+                    FlagShouBing = 1;
+                    //ui->label_16->setText("请推动手柄到最大位置等待");
+                    FlagXingzouBeng = 0;
+                    FlagAoBanjianxi = 0;
+                }
+                else if((LCPiPeixingBiaoDing == 2)&&(FlagXingzouBeng ==0))
+                {
+                    FlagXingzouBeng = 1;
+                    //ui->label_16->setText("请推动手柄到最大位置等待");
+                     FlagShouBing = 0;
+                      FlagAoBanjianxi = 0;
+                }
+                else if((LCPiPeixingBiaoDing == 3)&&(FlagAoBanjianxi ==0))
+                {
+                    FlagAoBanjianxi = 1;
+                    //ui->label_16->setText("请按住凹板间隙增大调整开关并等待");
+                     FlagShouBing = 0;
+                     FlagXingzouBeng = 0;
+                }
+
+                //
+
+
+           }
+            break;
+
+
+
+/**************************************************************************************************/
 
 
             default:
@@ -4237,10 +4395,10 @@ void Widget::keyPressEvent(QKeyEvent *e)
             ui->stackedWidget->setCurrentIndex(2);
             break;
 
-            case PipeixingbiaodingMenu:
-            flagwidget = SystemMenu;
-            ui->stackedWidget->setCurrentIndex(4);
-            break;
+//            case PipeixingbiaodingMenu:
+//            flagwidget = SystemMenu;
+//            ui->stackedWidget->setCurrentIndex(4);
+//            break;
 
 
             case HelpMenu:
@@ -4251,6 +4409,21 @@ void Widget::keyPressEvent(QKeyEvent *e)
             case Shaomiao:     //返回上一级菜单
             flagwidget = HelpMenu;
             ui->stackedWidget->setCurrentIndex(7);
+            break;
+
+            case FazhibiaodingMenu:     //返回上一级菜单
+            flagwidget = BiaoDing;//系统标定
+            ui->stackedWidget->setCurrentIndex(16);
+            break;
+
+            case BiaoDing:     //返回上一级菜单
+            flagwidget = SystemMenu;//系统标定
+            ui->stackedWidget->setCurrentIndex(4);
+            break;
+
+            case PipeixingbiaodingMenu:     //返回上一级菜单
+            flagwidget = BiaoDing;//
+            ui->stackedWidget->setCurrentIndex(16);
             break;
 
             default:
@@ -4963,6 +5136,121 @@ bool Widget::eventFilter(QObject *watched, QEvent *event)
             }
         }
     } //clearmenu F2键过滤
+
+
+    //标定菜单
+    else if(watched == ui->listWidget_6)
+    {
+        if(event->type() == QEvent::KeyPress)
+        {
+            QKeyEvent *key_event = static_cast < QKeyEvent *>(event); //将事件转化为键盘事件
+            {
+                if(key_event->key() == Qt::Key_F2)//下键
+                {
+                     qDebug()<<"Biaodingcaidan"<<endl;
+                    if(LCBiaoDingRow>1)
+                    {
+                        LCBiaoDingRow = 0;
+                        ui->listWidget_6->item(1)->setBackgroundColor(Qt::transparent);
+                        ui->listWidget_6->item(1)->setTextColor(Qt::black);
+                    }
+
+
+                    ui->listWidget_6->item(LCBiaoDingRow)->setBackgroundColor(Qt::yellow);
+                    ui->listWidget_6->item(LCBiaoDingRow)->setTextColor(Qt::red);
+
+                    if(LCBiaoDingRow == 1)
+                    {
+                        ui->listWidget_6->item(0)->setBackgroundColor(Qt::transparent);
+                        ui->listWidget_6->item(0)->setTextColor(Qt::black);
+                    }
+
+                    flagaction = true;
+                    LCBiaoDingRow++;
+                    //return true;
+                }
+
+            }
+        }
+    }//end of else if(watched == ui->listWidget_6)
+
+    //匹配性标定
+    else if(watched == ui->tableWidget_3)
+    {
+        if(event->type() == QEvent::KeyPress)
+        {
+            QKeyEvent *key_event = static_cast < QKeyEvent *>(event); //将事件转化为键盘事件
+            {
+                if(key_event->key() == Qt::Key_F2)//下键
+                {
+
+                    if(LCPiPeixingBiaoDing>=5)
+                    {
+                        LCPiPeixingBiaoDing = 0;
+                       // ui->tableWidget->setStyleSheet("background-color:red;");//selection-
+                        ui->tableWidget_3->hasFocus();
+
+                        #if 0
+                        ui->tableWidget_3->setCurrentCell(LCPiPeixingBiaoDing,0);
+                        ui->tableWidget_3->setSelectionBehavior(QAbstractItemView::SelectItems);
+                        #endif
+
+                        ui->tableWidget_3->setCurrentCell(LCPiPeixingBiaoDing,0);
+                        ui->tableWidget_3->setSelectionBehavior(QAbstractItemView::SelectItems);
+
+                    }
+                    else
+                    {
+
+                        if(LCPiPeixingBiaoDing>=3)
+                        {
+                            ui->tableWidget_3->setCurrentCell(LCPiPeixingBiaoDing-3,4);
+                            ui->tableWidget_3->setSelectionBehavior(QAbstractItemView::SelectItems);//SelectRows
+
+                        }
+                        else
+                        {
+                            ui->tableWidget_3->setCurrentCell(LCPiPeixingBiaoDing,0);
+                            ui->tableWidget_3->setSelectionBehavior(QAbstractItemView::SelectItems);//SelectRows
+
+                        }
+                    }
+
+                    flagaction = true;
+                    LCPiPeixingBiaoDing++;
+
+                }
+                //向下键
+                else if (key_event->key() == Qt::Key_F3)
+                {
+                    LCPiPeixingBiaoDing--;
+                    if(LCPiPeixingBiaoDing <= 0)
+                    {
+                        LCPiPeixingBiaoDing = 0;
+                    }
+                    ui->tableWidget_3->setCurrentCell(LCPiPeixingBiaoDing,0);
+                    ui->tableWidget_3->setSelectionBehavior(QAbstractItemView::SelectRows);
+                    flagaction = true;
+                    return true;
+                }//向上键
+                else if (key_event->key() == Qt::Key_F4)
+                {
+                    LCPiPeixingBiaoDing++;
+
+                    if(LCPiPeixingBiaoDing >= 3)
+                    {
+                        LCPiPeixingBiaoDing = 0;
+                    }
+
+                    ui->tableWidget_3->setCurrentCell(LCPiPeixingBiaoDing,0);
+                    ui->tableWidget_3->setSelectionBehavior(QAbstractItemView::SelectRows);
+                    flagaction = true;
+                    return true;
+                }
+
+            }
+        }
+    }//end of  else if(watched == ui->tableWidget_3)
 
 
 
