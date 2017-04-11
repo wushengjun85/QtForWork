@@ -839,8 +839,14 @@ font: 75 italic 16pt &quot;Ubuntu&quot;;</string>
        <height>32</height>
       </rect>
      </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 16pt &quot;Ubuntu&quot;;</string>
+     </property>
      <property name="text">
       <string>发动机品牌</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
      </property>
     </widget>
     <widget class="QLabel" name="label_19">
@@ -852,8 +858,14 @@ font: 75 italic 16pt &quot;Ubuntu&quot;;</string>
        <height>32</height>
       </rect>
      </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 16pt &quot;Ubuntu&quot;;</string>
+     </property>
      <property name="text">
       <string>机器型号</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
      </property>
     </widget>
    </widget>

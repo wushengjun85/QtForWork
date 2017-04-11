@@ -407,9 +407,13 @@ public:
         label_18 = new QLabel(page_16);
         label_18->setObjectName(QString::fromUtf8("label_18"));
         label_18->setGeometry(QRect(360, 207, 201, 32));
+        label_18->setStyleSheet(QString::fromUtf8("font: 75 16pt \"Ubuntu\";"));
+        label_18->setAlignment(Qt::AlignCenter);
         label_19 = new QLabel(page_16);
         label_19->setObjectName(QString::fromUtf8("label_19"));
         label_19->setGeometry(QRect(360, 173, 201, 32));
+        label_19->setStyleSheet(QString::fromUtf8("font: 75 16pt \"Ubuntu\";"));
+        label_19->setAlignment(Qt::AlignCenter);
         stackedWidget->addWidget(page_16);
         page_17 = new QWidget();
         page_17->setObjectName(QString::fromUtf8("page_17"));

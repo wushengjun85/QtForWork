@@ -1017,29 +1017,37 @@ void Widget::paintEvent(QPaintEvent *)
             {
                 case 0:
                 flagmatchion = YZB_3A_B;
+                ui->label_19->setText("4YZB-3A/B  4YZB-4A/B");
                 break;
                 case 1:
                 flagmatchion = YZT_10;
+                ui->label_19->setText("4YZT-10");
                 break;
                 case 2:
                 flagmatchion = YZB_4_5_7_8;
+                ui->label_19->setText("4YZB-4/5/7/8");
                 break;
 
                 case 3:
                 flagmatchion = JZ_3600;
+                ui->label_19->setText("4JZ-3600");
                 break;
 
                 case 4:
                 flagmatchion = YZBT_5;
+
+                ui->label_19->setText("4YZT-5/8");
                 break;
 
                 case 5:
                 flagmatchion = YZT_5;
+                ui->label_19->setText("4YZT-5");
                 break;
 
 
                 case 6:
                 flagmatchion = S3000;
+                ui->label_19->setText("S3000/S3000A");
                 break;
 
                 default:
@@ -2135,25 +2143,6 @@ void Widget::paintEvent(QPaintEvent *)
                    painter.translate(-390,-226);//平移到左边角
 
 
-                    #if 0
-                            //
-                            //控件显示
-                            //显示时间 。2017.1.14
-                    //        QString timeStr1= QTime::currentTime().toString();     //绘制当前的时间
-                    //        QString dateStr1 = QDate::currentDate().toString("yyyy-MM-dd");
-
-                            QString  timeStr1 = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss dddd");
-
-                            //不同界面显示时间
-
-                            if(flagwidget == xingZouWidget)
-                            {
-                                ui->label_3->setText(timeStr1);//dateStr1
-                            }
-
-                    #endif
-
-
                //报警灯
               QPainter paintdeng(this);
               QPixmap pixdeng;
@@ -2277,7 +2266,7 @@ void Widget::paintEvent(QPaintEvent *)
               //显示油量，机油压力，小时计 等要显示的值
               //
               //机油压力
-              ui->label_7->setText("jiyouyali");
+              //ui->label_7->setText("jiyouyali");
 
 
             }//end of if(flagmatchion == YZB_4_5_7_8)
@@ -2431,24 +2420,6 @@ void Widget::paintEvent(QPaintEvent *)
                    painter.translate(-390,-226);//平移到左边角
 
 
-                    #if 0
-                            //
-                            //控件显示
-                            //显示时间 。2017.1.14
-                    //        QString timeStr1= QTime::currentTime().toString();     //绘制当前的时间
-                    //        QString dateStr1 = QDate::currentDate().toString("yyyy-MM-dd");
-
-                            QString  timeStr1 = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss dddd");
-
-                            //不同界面显示时间
-
-                            if(flagwidget == xingZouWidget)
-                            {
-                                ui->label_3->setText(timeStr1);//dateStr1
-                            }
-                    #endif
-
-
                //报警灯
               QPainter paintdeng(this);
               QPixmap pixdeng;
@@ -2574,7 +2545,7 @@ void Widget::paintEvent(QPaintEvent *)
               //显示油量，机油压力，小时计 等要显示的值
               //
               //机油压力
-              ui->label_7->setText("jiyouyali");
+              //ui->label_7->setText("jiyouyali");
 
 
             }//end of if(flagmatchion == YZBT_5)
@@ -2744,24 +2715,6 @@ void Widget::paintEvent(QPaintEvent *)
                 //凹槽
                 pixShanshuo_W.load("./img/aocao/05.png");//07.jpg
                 paintShanshuo_W.drawPixmap(760,275,28,119,pixShanshuo_W);
-
-                 #if 0
-                         //
-                         //控件显示
-                         //显示时间 。2017.1.14
-                 //        QString timeStr1= QTime::currentTime().toString();     //绘制当前的时间
-                 //        QString dateStr1 = QDate::currentDate().toString("yyyy-MM-dd");
-
-                         QString  timeStr1 = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss dddd");
-
-                         //不同界面显示时间
-
-                         if(flagwidget == xingZouWidget)
-                         {
-                             ui->label_3->setText(timeStr1);//dateStr1
-                         }
-                 #endif
-
 
             //报警灯
 
@@ -3092,25 +3045,6 @@ void Widget::paintEvent(QPaintEvent *)
                    //处理图片闪烁
                    painter.translate(-390,-226);//平移到左边角
 
-
-                    #if 0
-                            //
-                            //控件显示
-                            //显示时间 。2017.1.14
-                    //        QString timeStr1= QTime::currentTime().toString();     //绘制当前的时间
-                    //        QString dateStr1 = QDate::currentDate().toString("yyyy-MM-dd");
-
-                            QString  timeStr1 = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss dddd");
-
-                            //不同界面显示时间
-
-                            if(flagwidget == xingZouWidget)
-                            {
-                                ui->label_3->setText(timeStr1);//dateStr1
-                            }
-                    #endif
-
-
                //报警灯
               QPainter paintdeng(this);
               QPixmap pixdeng;
@@ -3234,7 +3168,7 @@ void Widget::paintEvent(QPaintEvent *)
               //显示油量，机油压力，小时计 等要显示的值
               //
               //机油压力
-              ui->label_7->setText("jiyouyali");
+             // ui->label_7->setText("jiyouyali");
 
 
             }//end of if(flagmatchion == YZB_4_5_7_8)
@@ -3269,8 +3203,8 @@ void Widget::paintEvent(QPaintEvent *)
 //        JYYL = JYYL/1000;
 //        ui->label_10->setText(QString::number(JYYL,'f',2));//机油压力
 
-        //机油温度
-        ui->label_7->setText(QString::number(ecutest.VolJYWD));
+//        //机油温度
+//        ui->label_7->setText(QString::number(ecutest.VolJYWD));
 
         //总里程
         //显示 里程
@@ -3582,22 +3516,29 @@ void Widget::paintEvent(QPaintEvent *)
                     if(ReadConfigArry[0]==YuCai)
                     {
                        Can_set_Fdj_id(0);//设置发动机厂家ID，用于SPN中文查询
+
+                       ui->label_18->setText("玉柴");
                     }
                     else if(ReadConfigArry[0]==WeiCai)
                     {
                         Can_set_Fdj_id(1);//设置发动机厂家ID，用于SPN中文查询
+                        ui->label_18->setText("潍柴");
                     }
                     else if(ReadConfigArry[0] == XiCai)
                     {
                         Can_set_Fdj_id(2);//设置发动机厂家ID，用于SPN中文查询
+
+                        ui->label_18->setText("锡柴");
                     }
                     else if(ReadConfigArry[0]==HangFa)
                     {
                         Can_set_Fdj_id(3);//设置发动机厂家ID，用于SPN中文查询
+                        ui->label_18->setText("杭发");
                     }
                     else if(ReadConfigArry[0] == DongfangHong)
                     {
                         Can_set_Fdj_id(4);//设置发动机厂家ID，用于SPN中文查询
+                        ui->label_18->setText("东方红");
                     }
 
 
@@ -4315,6 +4256,13 @@ void Widget::keyPressEvent(QKeyEvent *e)
 /**************************************************************************************************/
 
 
+            //2017.4.10
+            case HelpMenu:
+            flagwidget = JiQiXinXi;
+            ui->stackedWidget->setCurrentIndex(15);
+            break;
+
+
             default:
             break;
         }
@@ -4424,6 +4372,12 @@ void Widget::keyPressEvent(QKeyEvent *e)
             case PipeixingbiaodingMenu:     //返回上一级菜单
             flagwidget = BiaoDing;//
             ui->stackedWidget->setCurrentIndex(16);
+            break;
+
+            //2017.4.10
+            case JiQiXinXi:
+            flagwidget = HelpMenu;
+            ui->stackedWidget->setCurrentIndex(7);
             break;
 
             default:
@@ -6294,14 +6248,20 @@ void Widget::xiaoshiji()//小时计
    xiaoshiJi_h = (xiaoshiJi_m/3600)*1000 + ((xiaoshiJi_m%3600)*1000)/3600;
    xiaoshiJi_h /= 1000;
 
-   if((flagmatchion == YZB_4_5_7_8)||(flagmatchion == YZB_3A_B))
-   {
-        ui->label_10->setText(QString::number(xiaoshiJi_h,'f',1));
-   }
-   else if(flagmatchion == YZT_10)
+   if((flagmatchion == YZT_10)||(flagmatchion == YZT_5)||(flagmatchion == JZ_3600))
    {
         ui->label_7->setText(QString::number(xiaoshiJi_h,'f',1));
+        //qDebug()<<"1111111111111111111111111111111111111111"<<endl;
    }
+   else
+   {
+        ui->label_10->setText(QString::number(xiaoshiJi_h,'f',1));
+
+        //机油温度
+        ui->label_7->setText(QString::number(ecutest.VolJYWD));
+
+   }
+
    query.prepare("update xsj set age = :age where id = :id");
 
    //query.prepare(update_sql);
