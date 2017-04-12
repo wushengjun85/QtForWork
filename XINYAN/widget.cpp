@@ -2147,67 +2147,67 @@ void Widget::paintEvent(QPaintEvent *)
               QPainter paintdeng(this);
               QPixmap pixdeng;
               //左转灯
-              if(Led)
+              if(cantest.flagLeft)
               {
                   pixdeng.load("./img/dengshan/01.png");//
                   paintdeng.drawPixmap(5,415,49,55,pixdeng);//正上方位置显示的图标
               }
               //发动机故障
-              if(1)
+              if(ecutest.flagFDJGZ_ECU)
               {
                   pixdeng.load("./img/dengshan/14.png");//
                   paintdeng.drawPixmap(73,435,36,23,pixdeng);//正上方位置显示的图标
               }
               //充电指示灯
-              if(1)
+              if(cantest.flagBattery)
               {
                   pixdeng.load("./img/dengshan/17.png");//
                   paintdeng.drawPixmap(118,434,34,24,pixdeng);//正上方位置显示的图标
               }
               //水温
-              if(1)
+              if(0)
               {
                   pixdeng.load("./img/dengshan/09.png");//
                   paintdeng.drawPixmap(161,432,31,28,pixdeng);//正上方位置显示的图标
               }
               //油压
-              if(1)
+              if(0)
               {
                   pixdeng.load("./img/dengshan/12.png");//
                   paintdeng.drawPixmap(200,436,39,20,pixdeng);//正上方位置显示的图标
               }
               //油量
-              if(1)
+              if(0)
               {
                   pixdeng.load("./img/dengshan/10.png");//
                   paintdeng.drawPixmap(248,430,24,28,pixdeng);//正上方位置显示的图标
               }
               //手刹
-              if(1)
+              if(cantest.flagSS)
               {
                   pixdeng.load("./img/dengshan/13.png");//
                   paintdeng.drawPixmap(278,433,37,29,pixdeng);//正上方位置显示的图标
               }
               //远光
-              if(1)
+              if(cantest.flagYG)
               {
                   pixdeng.load("./img/dengshan/02.png");//
                   paintdeng.drawPixmap(322,434,38,23,pixdeng);//正上方位置显示的图标
               }
               //示宽灯
-              if(1)
+              if(cantest.flagWidthlamp)
               {
                   pixdeng.load("./img/dengshan/04.png");//
                   paintdeng.drawPixmap(367,434,43,24,pixdeng);//正上方位置显示的图标
               }
               //近光灯
-              if(1)
+              if(cantest.flagJG)
               {
                   pixdeng.load("./img/dengshan/03.png");//
                   paintdeng.drawPixmap(418,433,37,27,pixdeng);//正上方位置显示的图标
               }
               //发动机预热灯
-              if(1)
+              if(ecutest.flagFDJYR_ECU)
               {
                   pixdeng.load("./img/dengshan/11.png");//
                   paintdeng.drawPixmap(463,434,37,23,pixdeng);//正上方位置显示的图标
@@ -2225,7 +2225,7 @@ void Widget::paintEvent(QPaintEvent *)
    //               paintdeng.drawPixmap(550,435,29,20,pixdeng);//正上方位置显示的图标
    //           }
               //燃油进水指示灯
-              if(1)
+              if(shanshuoYZYS)
               {
                   pixdeng.load("./img/dengshan/07.png");//
                   paintdeng.drawPixmap(586,432,24,28,pixdeng);//正上方位置显示的图标
@@ -2257,11 +2257,44 @@ void Widget::paintEvent(QPaintEvent *)
               }
 
               //右转灯
-              if(1)
+              if(cantest.flagRight)
               {
                   pixdeng.load("./img/dengshan/18.png");//
                   paintdeng.drawPixmap(740,415,49,55,pixdeng);//正上方位置显示的图标
               }
+
+
+              //闪烁控制
+               if(shanshuoSW)//水温 0~120度  95度以上报警。
+               {
+                   pixdeng.load("./img/dengshan/09.png");//
+                   paintdeng.drawPixmap(161,432,31,28,pixdeng);//正上方位置显示的图标
+               }
+
+               if(shanshuoJYYL) //机油  油压报警 0～1 MPa,在0.1 MPa 以下为报警区。
+               {
+                   pixdeng.load("./img/dengshan/12.png");//
+                   paintdeng.drawPixmap(200,436,39,20,pixdeng);//正上方位置显示的图标
+               }
+
+               if (shanshuoYL)//油量
+               {
+                   pixdeng.load("./img/dengshan/10.png");//
+                   paintdeng.drawPixmap(248,430,24,28,pixdeng);//正上方位置显示的图标
+               }
+
+               //油中右水  油水分离  需要闪烁
+               if(shanshuoYZYS)
+               {
+                   pixdeng.load("./img/dengshan/07.png");//
+                   paintdeng.drawPixmap(586,432,24,28,pixdeng);//正上方位置显示的图标
+               }
+
+               //液压油温
+               if(shanshuoYYYW)//液压油温  cantest.VolYeyayouwen
+               {
+
+               }
 
               //显示油量，机油压力，小时计 等要显示的值
               //
@@ -2424,73 +2457,73 @@ void Widget::paintEvent(QPaintEvent *)
               QPainter paintdeng(this);
               QPixmap pixdeng;
               //左转灯
-              if(Led)
+              if(cantest.flagLeft)
               {
                   pixdeng.load("./img/dengshan/01.png");//
                   paintdeng.drawPixmap(5,415,49,55,pixdeng);//正上方位置显示的图标
               }
               //发动机故障
-              if(1)
+              if(ecutest.flagFDJGZ_ECU)
               {
                   pixdeng.load("./img/dengshan/14.png");//
                   paintdeng.drawPixmap(73,435,36,23,pixdeng);//正上方位置显示的图标
               }
               //充电指示灯
-              if(1)
+              if(cantest.flagBattery)
               {
                   pixdeng.load("./img/dengshan/17.png");//
                   paintdeng.drawPixmap(118,434,34,24,pixdeng);//正上方位置显示的图标
               }
               //水温
-              if(1)
+              if(0)
               {
                   pixdeng.load("./img/dengshan/09.png");//
                   paintdeng.drawPixmap(161,432,31,28,pixdeng);//正上方位置显示的图标
               }
               //油压
-              if(1)
+              if(0)
               {
                   pixdeng.load("./img/dengshan/12.png");//
                   paintdeng.drawPixmap(200,436,39,20,pixdeng);//正上方位置显示的图标
               }
               //油量
-              if(1)
+              if(0)
               {
                   pixdeng.load("./img/dengshan/10.png");//
                   paintdeng.drawPixmap(248,430,24,28,pixdeng);//正上方位置显示的图标
               }
               //手刹
-              if(1)
+              if(cantest.flagSS)
               {
                   pixdeng.load("./img/dengshan/13.png");//
                   paintdeng.drawPixmap(278,433,37,29,pixdeng);//正上方位置显示的图标
               }
               //远光
-              if(1)
+              if(cantest.flagYG)
               {
                   pixdeng.load("./img/dengshan/02.png");//
                   paintdeng.drawPixmap(322,434,38,23,pixdeng);//正上方位置显示的图标
               }
               //示宽灯
-              if(1)
+              if(cantest.flagWidthlamp)
               {
                   pixdeng.load("./img/dengshan/04.png");//
                   paintdeng.drawPixmap(367,434,43,24,pixdeng);//正上方位置显示的图标
               }
               //近光灯
-              if(1)
+              if(cantest.flagJG)
               {
                   pixdeng.load("./img/dengshan/03.png");//
                   paintdeng.drawPixmap(418,433,37,27,pixdeng);//正上方位置显示的图标
               }
               //发动机预热灯
-              if(1)
+              if(ecutest.flagFDJYR_ECU)
               {
                   pixdeng.load("./img/dengshan/11.png");//
                   paintdeng.drawPixmap(463,434,37,23,pixdeng);//正上方位置显示的图标
               }
               //粮满
-              if(1)
+              if(cantest.flagLCM)
               {
                   pixdeng.load("./img/dengshan/15.png");//
                   paintdeng.drawPixmap(509,430,32,32,pixdeng);//正上方位置显示的图标
@@ -2502,7 +2535,7 @@ void Widget::paintEvent(QPaintEvent *)
                   paintdeng.drawPixmap(550,435,29,20,pixdeng);//正上方位置显示的图标
               }
               //燃油进水指示灯
-              if(1)
+              if(shanshuoYZYS)
               {
                   pixdeng.load("./img/dengshan/07.png");//
                   paintdeng.drawPixmap(586,432,24,28,pixdeng);//正上方位置显示的图标
@@ -2536,11 +2569,44 @@ void Widget::paintEvent(QPaintEvent *)
 //                  paintdeng.drawPixmap(643,431,34,26,pixdeng);//正上方位置显示的图标
 //              }
               //右转灯
-              if(1)
+              if(cantest.flagRight)
               {
                   pixdeng.load("./img/dengshan/18.png");//
                   paintdeng.drawPixmap(740,415,49,55,pixdeng);//正上方位置显示的图标
               }
+
+
+              //闪烁控制
+               if(shanshuoSW)//水温 0~120度  95度以上报警。
+               {
+                   pixdeng.load("./img/dengshan/09.png");//
+                   paintdeng.drawPixmap(161,432,31,28,pixdeng);//正上方位置显示的图标
+               }
+
+               if(shanshuoJYYL) //机油  油压报警 0～1 MPa,在0.1 MPa 以下为报警区。
+               {
+                   pixdeng.load("./img/dengshan/12.png");//
+                   paintdeng.drawPixmap(200,436,39,20,pixdeng);//正上方位置显示的图标
+               }
+
+               if (shanshuoYL)//油量
+               {
+                   pixdeng.load("./img/dengshan/10.png");//
+                   paintdeng.drawPixmap(248,430,24,28,pixdeng);//正上方位置显示的图标
+               }
+
+               //油中右水  油水分离  需要闪烁
+               if(shanshuoYZYS)
+               {
+                   pixdeng.load("./img/dengshan/07.png");//
+                   paintdeng.drawPixmap(586,432,24,28,pixdeng);//正上方位置显示的图标
+               }
+
+               //液压油温
+               if(shanshuoYYYW)//液压油温  cantest.VolYeyayouwen
+               {
+
+               }
 
               //显示油量，机油压力，小时计 等要显示的值
               //
@@ -2721,73 +2787,73 @@ void Widget::paintEvent(QPaintEvent *)
            QPainter paintdeng(this);
            QPixmap pixdeng;
            //左转灯
-           if(1)
+           if(cantest.flagLeft)
            {
                pixdeng.load("./img/dengshan/01.png");//
                paintdeng.drawPixmap(5,415,49,55,pixdeng);//正上方位置显示的图标
            }
            //发动机故障
-           if(1)
+           if(ecutest.flagFDJGZ_ECU)
            {
                pixdeng.load("./img/dengshan/14.png");//
                paintdeng.drawPixmap(73,435,36,23,pixdeng);//正上方位置显示的图标
            }
            //充电指示灯
-           if(1)
+           if(cantest.flagBattery)
            {
                pixdeng.load("./img/dengshan/17.png");//
                paintdeng.drawPixmap(118,434,34,24,pixdeng);//正上方位置显示的图标
            }
            //水温
-           if(1)
+           if(0)
            {
                pixdeng.load("./img/dengshan/09.png");//
                paintdeng.drawPixmap(161,432,31,28,pixdeng);//正上方位置显示的图标
            }
            //油压
-           if(1)
+           if(0)
            {
                pixdeng.load("./img/dengshan/12.png");//
                paintdeng.drawPixmap(200,436,39,20,pixdeng);//正上方位置显示的图标
            }
            //油量
-           if(1)
+           if(0)
            {
                pixdeng.load("./img/dengshan/10.png");//
                paintdeng.drawPixmap(248,430,24,28,pixdeng);//正上方位置显示的图标
            }
            //手刹
-           if(1)
+           if(cantest.flagSS)
            {
                pixdeng.load("./img/dengshan/13.png");//
                paintdeng.drawPixmap(278,433,37,29,pixdeng);//正上方位置显示的图标
            }
            //远光
-           if(1)
+           if(cantest.flagYG)
            {
                pixdeng.load("./img/dengshan/02.png");//
                paintdeng.drawPixmap(322,434,38,23,pixdeng);//正上方位置显示的图标
            }
            //示宽灯
-           if(1)
+           if(cantest.flagWidthlamp)
            {
                pixdeng.load("./img/dengshan/04.png");//
                paintdeng.drawPixmap(367,434,43,24,pixdeng);//正上方位置显示的图标
            }
            //近光灯
-           if(1)
+           if(cantest.flagJG)
            {
                pixdeng.load("./img/dengshan/03.png");//
                paintdeng.drawPixmap(418,433,37,27,pixdeng);//正上方位置显示的图标
            }
            //发动机预热灯
-           if(1)
+           if(ecutest.flagFDJYR_ECU)
            {
                pixdeng.load("./img/dengshan/11.png");//
                paintdeng.drawPixmap(463,434,37,23,pixdeng);//正上方位置显示的图标
            }
            //量满
-           if(1)
+           if(cantest.flagLCM)
            {
                pixdeng.load("./img/dengshan/15.png");//
                paintdeng.drawPixmap(509,430,32,32,pixdeng);//正上方位置显示的图标
@@ -2799,7 +2865,7 @@ void Widget::paintEvent(QPaintEvent *)
                paintdeng.drawPixmap(550,435,29,20,pixdeng);//正上方位置显示的图标
            }
            //燃油进水指示灯
-           if(1)
+           if(shanshuoYZYS)
            {
                pixdeng.load("./img/dengshan/07.png");//
                paintdeng.drawPixmap(586,432,24,28,pixdeng);//正上方位置显示的图标
@@ -2811,7 +2877,7 @@ void Widget::paintEvent(QPaintEvent *)
                paintdeng.drawPixmap(619,432,15,28,pixdeng);//正上方位置显示的图标
            }
            //空滤灯
-           if(1)
+           if(cantest.flagKL)
            {
                pixdeng.load("./img/dengshan/05.png");//
                paintdeng.drawPixmap(640,430,32,32,pixdeng);//正上方位置显示的图标
@@ -2823,7 +2889,7 @@ void Widget::paintEvent(QPaintEvent *)
                paintdeng.drawPixmap(680,430,44,29,pixdeng);//正上方位置显示的图标
            }
            //右转灯
-           if(1)
+           if(cantest.flagRight)
            {
                pixdeng.load("./img/dengshan/18.png");//
                paintdeng.drawPixmap(740,415,49,55,pixdeng);//正上方位置显示的图标
@@ -2894,6 +2960,40 @@ void Widget::paintEvent(QPaintEvent *)
                pixdeng.load("./img/zhujiemianicon/10.png");//
                paintdeng.drawPixmap(475,355,31,24,pixdeng);//正上方位置显示的图标
            }
+
+
+           //闪烁控制
+            if(shanshuoSW)//水温 0~120度  95度以上报警。
+            {
+                pixdeng.load("./img/dengshan/09.png");//
+                paintdeng.drawPixmap(161,432,31,28,pixdeng);//正上方位置显示的图标
+            }
+
+            if(shanshuoJYYL) //机油  油压报警 0～1 MPa,在0.1 MPa 以下为报警区。
+            {
+                pixdeng.load("./img/dengshan/12.png");//
+                paintdeng.drawPixmap(200,436,39,20,pixdeng);//正上方位置显示的图标
+            }
+
+            if (shanshuoYL)//油量
+            {
+                pixdeng.load("./img/dengshan/10.png");//
+                paintdeng.drawPixmap(248,430,24,28,pixdeng);//正上方位置显示的图标
+            }
+
+            //油中右水  油水分离  需要闪烁
+            if(shanshuoYZYS)
+            {
+                pixdeng.load("./img/dengshan/07.png");//
+                paintdeng.drawPixmap(586,432,24,28,pixdeng);//正上方位置显示的图标
+            }
+
+            //液压油温
+            if(shanshuoYYYW)//液压油温  cantest.VolYeyayouwen
+            {
+
+            }
+
 
             }//end of if(flagmatchion == YZB_4_5_7_8)
 
@@ -3049,67 +3149,67 @@ void Widget::paintEvent(QPaintEvent *)
               QPainter paintdeng(this);
               QPixmap pixdeng;
               //左转灯
-              if(Led)
+              if(cantest.flagLeft)
               {
                   pixdeng.load("./img/dengshan/01.png");//
                   paintdeng.drawPixmap(5,415,49,55,pixdeng);//正上方位置显示的图标
               }
               //发动机故障
-              if(1)
+              if(ecutest.flagFDJGZ_ECU)
               {
                   pixdeng.load("./img/dengshan/14.png");//
                   paintdeng.drawPixmap(73,435,36,23,pixdeng);//正上方位置显示的图标
               }
               //充电指示灯
-              if(1)
+              if(cantest.flagBattery)
               {
                   pixdeng.load("./img/dengshan/17.png");//
                   paintdeng.drawPixmap(118,434,34,24,pixdeng);//正上方位置显示的图标
               }
               //水温
-              if(1)
+              if(0)
               {
                   pixdeng.load("./img/dengshan/09.png");//
                   paintdeng.drawPixmap(161,432,31,28,pixdeng);//正上方位置显示的图标
               }
               //油压
-              if(1)
+              if(0)
               {
                   pixdeng.load("./img/dengshan/12.png");//
                   paintdeng.drawPixmap(200,436,39,20,pixdeng);//正上方位置显示的图标
               }
               //油量
-              if(1)
+              if(0)
               {
                   pixdeng.load("./img/dengshan/10.png");//
                   paintdeng.drawPixmap(248,430,24,28,pixdeng);//正上方位置显示的图标
               }
               //手刹
-              if(1)
+              if(cantest.flagSS)
               {
                   pixdeng.load("./img/dengshan/13.png");//
                   paintdeng.drawPixmap(278,433,37,29,pixdeng);//正上方位置显示的图标
               }
               //远光
-              if(1)
+              if(cantest.flagYG)
               {
                   pixdeng.load("./img/dengshan/02.png");//
                   paintdeng.drawPixmap(322,434,38,23,pixdeng);//正上方位置显示的图标
               }
               //示宽灯
-              if(1)
+              if(cantest.flagWidthlamp)
               {
                   pixdeng.load("./img/dengshan/04.png");//
                   paintdeng.drawPixmap(367,434,43,24,pixdeng);//正上方位置显示的图标
               }
               //近光灯
-              if(1)
+              if(cantest.flagJG)
               {
                   pixdeng.load("./img/dengshan/03.png");//
                   paintdeng.drawPixmap(418,433,37,27,pixdeng);//正上方位置显示的图标
               }
               //发动机预热灯
-              if(1)
+              if(ecutest.flagFDJYR_ECU)
               {
                   pixdeng.load("./img/dengshan/11.png");//
                   paintdeng.drawPixmap(463,434,37,23,pixdeng);//正上方位置显示的图标
@@ -3127,7 +3227,7 @@ void Widget::paintEvent(QPaintEvent *)
    //               paintdeng.drawPixmap(550,435,29,20,pixdeng);//正上方位置显示的图标
    //           }
               //燃油进水指示灯
-              if(1)
+              if(shanshuoYZYS)
               {
                   pixdeng.load("./img/dengshan/07.png");//
                   paintdeng.drawPixmap(586,432,24,28,pixdeng);//正上方位置显示的图标
@@ -3159,11 +3259,45 @@ void Widget::paintEvent(QPaintEvent *)
               }
 
               //右转灯
-              if(1)
+              if(cantest.flagRight)
               {
                   pixdeng.load("./img/dengshan/18.png");//
                   paintdeng.drawPixmap(740,415,49,55,pixdeng);//正上方位置显示的图标
               }
+
+
+              //闪烁控制
+               if(shanshuoSW)//水温 0~120度  95度以上报警。
+               {
+                   pixdeng.load("./img/dengshan/09.png");//
+                   paintdeng.drawPixmap(161,432,31,28,pixdeng);//正上方位置显示的图标
+               }
+
+               if(shanshuoJYYL) //机油  油压报警 0～1 MPa,在0.1 MPa 以下为报警区。
+               {
+                   pixdeng.load("./img/dengshan/12.png");//
+                   paintdeng.drawPixmap(200,436,39,20,pixdeng);//正上方位置显示的图标
+               }
+
+               if (shanshuoYL)//油量
+               {
+                   pixdeng.load("./img/dengshan/10.png");//
+                   paintdeng.drawPixmap(248,430,24,28,pixdeng);//正上方位置显示的图标
+               }
+
+               //油中右水  油水分离  需要闪烁
+               if(shanshuoYZYS)
+               {
+                   pixdeng.load("./img/dengshan/07.png");//
+                   paintdeng.drawPixmap(586,432,24,28,pixdeng);//正上方位置显示的图标
+               }
+
+               //液压油温
+               if(shanshuoYYYW)//液压油温  cantest.VolYeyayouwen
+               {
+
+               }
+
 
               //显示油量，机油压力，小时计 等要显示的值
               //
