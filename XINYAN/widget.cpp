@@ -1162,8 +1162,7 @@ void Widget::paintEvent(QPaintEvent *)
 
                //painter.rotate(6.0 *time.second());  //设旋转(角度 = 6° * (分钟 + 秒 / 60))
                painter.rotate(-114);
-               //painter.rotate(8*nu3);
-               painter.rotate(7.6*floatnu1);//
+               painter.rotate(7.6*nu3);//
 
 
 
@@ -1200,20 +1199,177 @@ void Widget::paintEvent(QPaintEvent *)
                //喂入
                QPainter paintShanshuo_W(this);
                QPixmap pixShanshuo_W;
-               pixShanshuo_W.load("./img/weiruliang/09.png");//07.jpg
-               paintShanshuo_W.drawPixmap(10,110,28,121,pixShanshuo_W);
+//               pixShanshuo_W.load("./img/weiruliang/09.png");//07.jpg
+//               paintShanshuo_W.drawPixmap(10,110,28,121,pixShanshuo_W);
+
+               switch(cantest.WeiRu_Vol)
+               {
+                   case 1:
+                   pixShanshuo_W.load("./img/weiruliang/10.png");//07.jpg
+                   paintShanshuo_W.drawPixmap(10,110,28,121,pixShanshuo_W);
+                   break;
+                   case 2:
+                   pixShanshuo_W.load("./img/weiruliang/9.png");//07.jpg
+                   paintShanshuo_W.drawPixmap(10,110,28,121,pixShanshuo_W);
+                   break;
+
+                   case 3:
+                   pixShanshuo_W.load("./img/weiruliang/8.png");//07.jpg
+                   paintShanshuo_W.drawPixmap(10,110,28,121,pixShanshuo_W);
+                   break;
+
+                   case 4:
+                   pixShanshuo_W.load("./img/weiruliang/7.png");//07.jpg
+                   paintShanshuo_W.drawPixmap(10,110,28,121,pixShanshuo_W);
+                   break;
+
+                   case 5:
+                   pixShanshuo_W.load("./img/weiruliang/6.png");//07.jpg
+                   paintShanshuo_W.drawPixmap(10,110,28,121,pixShanshuo_W);
+                   break;
+
+                   case 6:
+                   pixShanshuo_W.load("./img/weiruliang/5.png");//07.jpg
+                   paintShanshuo_W.drawPixmap(10,110,28,121,pixShanshuo_W);
+                   break;
+
+                   case 7:
+                   pixShanshuo_W.load("./img/weiruliang/4.png");//07.jpg
+                   paintShanshuo_W.drawPixmap(10,110,28,121,pixShanshuo_W);
+                   break;
+
+                   case 8:
+                   pixShanshuo_W.load("./img/weiruliang/3.png");//07.jpg
+                   paintShanshuo_W.drawPixmap(10,110,28,121,pixShanshuo_W);
+                   break;
+
+                   case 9:
+                   pixShanshuo_W.load("./img/weiruliang/2.png");//07.jpg
+                   paintShanshuo_W.drawPixmap(10,110,28,121,pixShanshuo_W);
+                   break;
+
+                   case 10:
+                   pixShanshuo_W.load("./img/weiruliang/1.png");//07.jpg
+                   paintShanshuo_W.drawPixmap(10,110,28,121,pixShanshuo_W);
+                   break;
+
+               }
+
+
+
 
                //粮损
-               pixShanshuo_W.load("./img/liangshun/06.png");//07.jpg
-               paintShanshuo_W.drawPixmap(760,110,27,120,pixShanshuo_W);
+//               pixShanshuo_W.load("./img/liangshun/06.png");//07.jpg
+//               paintShanshuo_W.drawPixmap(760,110,27,120,pixShanshuo_W);
+
+               switch(cantest.SaLiangLV)
+               {
+                   case 1:
+                   pixShanshuo_W.load("./img/liangshun/06.png");//07.jpg
+                   paintShanshuo_W.drawPixmap(760,110,27,120,pixShanshuo_W);
+                   break;
+
+                   case 2:
+                   pixShanshuo_W.load("./img/liangshun/05.png");//07.jpg
+                   paintShanshuo_W.drawPixmap(760,110,27,120,pixShanshuo_W);
+                   break;
+
+                   case 3:
+                   pixShanshuo_W.load("./img/liangshun/04.png");//07.jpg
+                   paintShanshuo_W.drawPixmap(760,110,27,120,pixShanshuo_W);
+                   break;
+
+                   case 4:
+                   pixShanshuo_W.load("./img/liangshun/03.png");//07.jpg
+                   paintShanshuo_W.drawPixmap(760,110,27,120,pixShanshuo_W);
+                   break;
+
+                   case 5:
+                   pixShanshuo_W.load("./img/liangshun/02.png");//07.jpg
+                   paintShanshuo_W.drawPixmap(760,110,27,120,pixShanshuo_W);
+                   break;
+
+                   case 6:
+                   pixShanshuo_W.load("./img/liangshun/01.png");//07.jpg
+                   paintShanshuo_W.drawPixmap(760,110,27,120,pixShanshuo_W);
+                   break;
+
+               }
 
                //油量
+//               pixShanshuo_W.load("./img/ranyou/07.png");//07.jpg
+//               paintShanshuo_W.drawPixmap(10,275,27,118,pixShanshuo_W);
+
+               switch(cantest.VolYL)
+               {
+                case 1:
+                pixShanshuo_W.load("./img/ranyou/08.png");//07.jpg
+                 paintShanshuo_W.drawPixmap(10,275,27,118,pixShanshuo_W);
+                break;
+               case 2:
                pixShanshuo_W.load("./img/ranyou/07.png");//07.jpg
-               paintShanshuo_W.drawPixmap(10,275,27,118,pixShanshuo_W);
+                paintShanshuo_W.drawPixmap(10,275,27,118,pixShanshuo_W);
+               break;
+               case 3:
+               pixShanshuo_W.load("./img/ranyou/06.png");//07.jpg
+                paintShanshuo_W.drawPixmap(10,275,27,118,pixShanshuo_W);
+               break;
+               case 4:
+               pixShanshuo_W.load("./img/ranyou/05.png");//07.jpg
+                paintShanshuo_W.drawPixmap(10,275,27,118,pixShanshuo_W);
+               break;
+               case 5:
+               pixShanshuo_W.load("./img/ranyou/04.png");//07.jpg
+                paintShanshuo_W.drawPixmap(10,275,27,118,pixShanshuo_W);
+               break;
+               case 6:
+               pixShanshuo_W.load("./img/ranyou/03.png");//07.jpg
+                paintShanshuo_W.drawPixmap(10,275,27,118,pixShanshuo_W);
+               break;
+               case 7:
+               pixShanshuo_W.load("./img/ranyou/02.png");//07.jpg
+                paintShanshuo_W.drawPixmap(10,275,27,118,pixShanshuo_W);
+               break;
+               case 8:
+               pixShanshuo_W.load("./img/ranyou/01.png");//07.jpg
+                paintShanshuo_W.drawPixmap(10,275,27,118,pixShanshuo_W);
+               break;
+
+               }
+
 
                //凹槽
-               pixShanshuo_W.load("./img/aocao/05.png");//07.jpg
-               paintShanshuo_W.drawPixmap(760,275,28,119,pixShanshuo_W);
+//               pixShanshuo_W.load("./img/aocao/05.png");//07.jpg
+//               paintShanshuo_W.drawPixmap(760,275,28,119,pixShanshuo_W);
+
+               switch(cantest.m_AoBanJianXi)
+               {
+                    case 1:
+                    pixShanshuo_W.load("./img/aocao/05.png");//07.jpg
+                    paintShanshuo_W.drawPixmap(760,275,28,119,pixShanshuo_W);
+
+                    break;
+                   case 2:
+                   pixShanshuo_W.load("./img/aocao/04.png");//07.jpg
+                   paintShanshuo_W.drawPixmap(760,275,28,119,pixShanshuo_W);
+
+                   break;
+                   case 3:
+                   pixShanshuo_W.load("./img/aocao/03.png");//07.jpg
+                   paintShanshuo_W.drawPixmap(760,275,28,119,pixShanshuo_W);
+
+                   break;
+                   case 4:
+                   pixShanshuo_W.load("./img/aocao/02.png");//07.jpg
+                   paintShanshuo_W.drawPixmap(760,275,28,119,pixShanshuo_W);
+
+                   break;
+                   case 5:
+                   pixShanshuo_W.load("./img/aocao/01.png");//07.jpg
+                   paintShanshuo_W.drawPixmap(760,275,28,119,pixShanshuo_W);
+
+                   break;
+               }
 
 
 
@@ -1287,14 +1443,14 @@ void Widget::paintEvent(QPaintEvent *)
               pixdeng.load("./img/dengshan/11.png");//
               paintdeng.drawPixmap(463,434,37,23,pixdeng);//正上方位置显示的图标
           }
-          //粮食仓自己公司图标满
-          if(cantest.flagLCM)
+          //籽粒回收满
+           if(CHK_GZ_BIT(cantest.m_extLampBitFlag,LAMP_BIT_ZhiLiHuiShou))
           {
               pixdeng.load("./img/dengshan/15.png");//
               paintdeng.drawPixmap(509,430,32,32,pixdeng);//正上方位置显示的图标
           }
           //粮仓满
-          if(1)
+          if(CHK_GZ_BIT(cantest.m_extLampBitFlag,LAMP_BIT_LiangCangMan))
           {
               pixdeng.load("./img/dengshan/08.png");//
               paintdeng.drawPixmap(550,435,29,20,pixdeng);//正上方位置显示的图标
@@ -1306,7 +1462,7 @@ void Widget::paintEvent(QPaintEvent *)
               paintdeng.drawPixmap(586,432,24,28,pixdeng);//正上方位置显示的图标
           }
           //液压油压力
-          if(shanshuoJYYL)
+          if(CHK_GZ_BIT(cantest.m_extLampBitFlag,LAMP_BIT_YeYaYouYa))
           {
               pixdeng.load("./img/dengshan/99.png");//
               paintdeng.drawPixmap(616,432,15,28,pixdeng);//正上方位置显示的图标
@@ -1318,7 +1474,7 @@ void Widget::paintEvent(QPaintEvent *)
               paintdeng.drawPixmap(640,430,32,32,pixdeng);//正上方位置显示的图标
           }
           //主机故障灯
-          if(1)
+          if(CHK_GZ_BIT(cantest.m_GZBitFlag,GZ_BIT_ZHUJI))
           {
               pixdeng.load("./img/dengshan/06.png");//
               paintdeng.drawPixmap(680,430,44,29,pixdeng);//正上方位置显示的图标
@@ -1334,63 +1490,63 @@ void Widget::paintEvent(QPaintEvent *)
 
           //主界面中央灯区
           //粮筒摆出
-          if(1)
+          if(CHK_GZ_BIT(cantest.m_extLampBitFlag,LAMP_BIT_LiangTongBaiChu))
           {
               pixdeng.load("./img/zhujiemianicon/01.png");//
               paintdeng.drawPixmap(255,266,30,19,pixdeng);//正上方位置显示的图标
           }
           //过桥故障
-          if(1)
+          if(CHK_GZ_BIT(cantest.m_GZBitFlag,GZ_BIT_GUOQIAO))
           {
               pixdeng.load("./img/zhujiemianicon/02.png");//
               paintdeng.drawPixmap(307,258,32,29,pixdeng);//正上方位置显示的图标
           }
           //风机故障
-          if(1)
+          if(CHK_GZ_BIT(cantest.m_GZBitFlag,GZ_BIT_FENGJI))
           {
               pixdeng.load("./img/zhujiemianicon/03.png");//
               paintdeng.drawPixmap(273,281,31,32,pixdeng);//正上方位置显示的图标
           }
 
           //滚筒故障
-          if(1)
+          if(CHK_GZ_BIT(cantest.m_GZBitFlag,GZ_BIT_GUNTONG))
           {
               pixdeng.load("./img/zhujiemianicon/04.png");//
               paintdeng.drawPixmap(288,322,31,28,pixdeng);//正上方位置显示的图标
           }
           //刹车盘磨损
-          if(1)
+           if(CHK_GZ_BIT(cantest.m_GZBitFlag,GZ_BIT_SHACHEPANMOSUN))
           {
               pixdeng.load("./img/zhujiemianicon/05.png");//
               paintdeng.drawPixmap(294,355,30,24,pixdeng);//正上方位置显示的图标
           }
           //升运器故障
-          if(1)
+          if(CHK_GZ_BIT(cantest.m_GZBitFlag,GZ_BIT_SHENGYUNQI))
           {
               pixdeng.load("./img/zhujiemianicon/06.png");//
               paintdeng.drawPixmap(463,258,31,25,pixdeng);//正上方位置显示的图标
           }
 
           //卸粮中
-          if(1)
+         if(CHK_GZ_BIT(cantest.m_extLampBitFlag,LAMP_BIT_XieLiangZhong))
           {
               pixdeng.load("./img/zhujiemianicon/07.png");//
               paintdeng.drawPixmap(513,260,34,24,pixdeng);//正上方位置显示的图标
           }
           //粮仓盖
-          if(1)
+          if(CHK_GZ_BIT(cantest.m_GZBitFlag,GZ_BIT_LIANGCANGGAI))
           {
               pixdeng.load("./img/zhujiemianicon/08.png");//
               paintdeng.drawPixmap(499,292,27,23,pixdeng);//正上方位置显示的图标
           }
           //液压滤清
-          if(1)
+          if(CHK_GZ_BIT(cantest.m_extLampBitFlag,LAMP_BIT_YeYaLvQing))
           {
               pixdeng.load("./img/zhujiemianicon/09.png");//
               paintdeng.drawPixmap(490,319,16,28,pixdeng);//正上方位置显示的图标
           }
           //刹车制动故障
-          if(1)
+          if(CHK_GZ_BIT(cantest.m_GZBitFlag,GZ_BIT_SHACHEZHIDONG))
           {
               pixdeng.load("./img/zhujiemianicon/10.png");//
               paintdeng.drawPixmap(475,355,31,24,pixdeng);//正上方位置显示的图标
@@ -1511,7 +1667,7 @@ void Widget::paintEvent(QPaintEvent *)
                 //painter.rotate(6.0 *time.second());  //设旋转(角度 = 6° * (分钟 + 秒 / 60))
                  painter.rotate(-113);
                 //painter.rotate(8*nu3);
-                painter.rotate(7.6*floatnu1);//
+                painter.rotate(7.6*nu3);//
 
 
 
@@ -1569,24 +1725,7 @@ void Widget::paintEvent(QPaintEvent *)
                pixdeng.load("./img/dengshan/17.png");//
                paintdeng.drawPixmap(118,434,34,24,pixdeng);//正上方位置显示的图标
            }
-           //水温
-           if(0)
-           {
-               pixdeng.load("./img/dengshan/09.png");//
-               paintdeng.drawPixmap(161,432,31,28,pixdeng);//正上方位置显示的图标
-           }
-           //油压
-           if(0)
-           {
-               pixdeng.load("./img/dengshan/12.png");//
-               paintdeng.drawPixmap(200,436,39,20,pixdeng);//正上方位置显示的图标
-           }
-           //油量
-           if(0)
-           {
-               pixdeng.load("./img/dengshan/10.png");//
-               paintdeng.drawPixmap(248,430,24,28,pixdeng);//正上方位置显示的图标
-           }
+
            //手刹
            if(cantest.flagSS)
            {
@@ -1636,7 +1775,7 @@ void Widget::paintEvent(QPaintEvent *)
                paintdeng.drawPixmap(586,432,24,28,pixdeng);//正上方位置显示的图标
            }
            //液压油压力
-           if(1)
+           if(CHK_GZ_BIT(cantest.m_extLampBitFlag,LAMP_BIT_YeYaYouYa))
            {
                pixdeng.load("./img/dengshan/99.png");//
                paintdeng.drawPixmap(616,432,15,28,pixdeng);//正上方位置显示的图标
@@ -1648,7 +1787,7 @@ void Widget::paintEvent(QPaintEvent *)
                paintdeng.drawPixmap(510,430,32,32,pixdeng);//正上方位置显示的图标
            }
            //草箱限制
-           if(1)
+          if(CHK_GZ_BIT(cantest.m_extLampBitFlag,LAMP_BIT_CaoXiangXianZhi))
            {
                pixdeng.load("./img/dengshan/19.png");//
                paintdeng.drawPixmap(643,431,34,26,pixdeng);//正上方位置显示的图标
@@ -1809,7 +1948,7 @@ void Widget::paintEvent(QPaintEvent *)
                    //painter.rotate(6.0 *time.second());  //设旋转(角度 = 6° * (分钟 + 秒 / 60))
                    painter.rotate(-114);
                    //painter.rotate(8*nu3);
-                   painter.rotate(7.6*floatnu1);//
+                   painter.rotate(7.6*nu3);//
 
 
 
@@ -1866,24 +2005,7 @@ void Widget::paintEvent(QPaintEvent *)
                pixdeng.load("./img/dengshan/17.png");//
                paintdeng.drawPixmap(118,434,34,24,pixdeng);//正上方位置显示的图标
            }
-           //水温
-           if(0)
-           {
-               pixdeng.load("./img/dengshan/09.png");//
-               paintdeng.drawPixmap(161,432,31,28,pixdeng);//正上方位置显示的图标
-           }
-           //油压
-           if(0)
-           {
-               pixdeng.load("./img/dengshan/12.png");//
-               paintdeng.drawPixmap(200,436,39,20,pixdeng);//正上方位置显示的图标
-           }
-           //油量
-           if(0)
-           {
-               pixdeng.load("./img/dengshan/10.png");//
-               paintdeng.drawPixmap(248,430,24,28,pixdeng);//正上方位置显示的图标
-           }
+
            //手刹
            if(cantest.flagSS)
            {
@@ -1914,8 +2036,8 @@ void Widget::paintEvent(QPaintEvent *)
                pixdeng.load("./img/dengshan/11.png");//
                paintdeng.drawPixmap(463,434,37,23,pixdeng);//正上方位置显示的图标
            }
-           //量满
-           if(cantest.flagLCM)
+           //籽粒满仓
+           if(CHK_GZ_BIT(cantest.m_extLampBitFlag,LAMP_BIT_ZhiLiHuiShou))
            {
                pixdeng.load("./img/dengshan/15.png");//
                paintdeng.drawPixmap(509,430,32,32,pixdeng);//正上方位置显示的图标
@@ -1933,7 +2055,7 @@ void Widget::paintEvent(QPaintEvent *)
                paintdeng.drawPixmap(586,432,24,28,pixdeng);//正上方位置显示的图标
            }
            //液压油压力
-           if(1)
+           if(CHK_GZ_BIT(cantest.m_extLampBitFlag,LAMP_BIT_YeYaYouYa))
            {
                pixdeng.load("./img/dengshan/99.png");//
                paintdeng.drawPixmap(616,432,15,28,pixdeng);//正上方位置显示的图标
@@ -1945,7 +2067,7 @@ void Widget::paintEvent(QPaintEvent *)
                paintdeng.drawPixmap(510,430,32,32,pixdeng);//正上方位置显示的图标
            }
            //草箱限制
-           if(1)
+           if(CHK_GZ_BIT(cantest.m_extLampBitFlag,LAMP_BIT_CaoXiangXianZhi))
            {
                pixdeng.load("./img/dengshan/19.png");//
                paintdeng.drawPixmap(643,431,34,26,pixdeng);//正上方位置显示的图标
@@ -2019,7 +2141,7 @@ void Widget::paintEvent(QPaintEvent *)
                        QPoint(1, -55)
                    };
 
-                   //水温
+                   //油压
 
                    painter.setPen(Qt::NoPen);//填充时针，不需要边线所以NoPen
                    painter.setBrush(Qt::red);
@@ -2032,7 +2154,7 @@ void Widget::paintEvent(QPaintEvent *)
                    //painter.rotate(4.0 );//*shisu
 
                    //painter.rotate(8*nu1);//floatnu2
-                   painter.rotate(8*floatnu1);//floatnu1
+                   painter.rotate(8*floatnu3);//floatnu1
 
                    painter.drawConvexPolygon(minuteHand, 4);  //填充分针部分
                    painter.restore();
@@ -2065,7 +2187,7 @@ void Widget::paintEvent(QPaintEvent *)
                    //painter.rotate(6.0 *time.second());  //设旋转(角度 = 6° * (分钟 + 秒 / 60))
                    painter.rotate(-120);
                    //painter.rotate(8*nu3);
-                   painter.rotate(8*floatnu1);//
+                   painter.rotate(8*nu1);//
 
 
 
@@ -2108,7 +2230,7 @@ void Widget::paintEvent(QPaintEvent *)
                    //painter.rotate(6.0 *time.second());  //设旋转(角度 = 6° * (分钟 + 秒 / 60))
                    painter.rotate(-120);
                    //painter.rotate(8*nu3);
-                   painter.rotate(8*floatnu1);//
+                   painter.rotate(8*nu3);//
 
 
 
@@ -2164,24 +2286,7 @@ void Widget::paintEvent(QPaintEvent *)
                   pixdeng.load("./img/dengshan/17.png");//
                   paintdeng.drawPixmap(118,434,34,24,pixdeng);//正上方位置显示的图标
               }
-              //水温
-              if(0)
-              {
-                  pixdeng.load("./img/dengshan/09.png");//
-                  paintdeng.drawPixmap(161,432,31,28,pixdeng);//正上方位置显示的图标
-              }
-              //油压
-              if(0)
-              {
-                  pixdeng.load("./img/dengshan/12.png");//
-                  paintdeng.drawPixmap(200,436,39,20,pixdeng);//正上方位置显示的图标
-              }
-              //油量
-              if(0)
-              {
-                  pixdeng.load("./img/dengshan/10.png");//
-                  paintdeng.drawPixmap(248,430,24,28,pixdeng);//正上方位置显示的图标
-              }
+
               //手刹
               if(cantest.flagSS)
               {
@@ -2231,7 +2336,7 @@ void Widget::paintEvent(QPaintEvent *)
                   paintdeng.drawPixmap(586,432,24,28,pixdeng);//正上方位置显示的图标
               }
               //液压油压力
-              if(1)
+              if(CHK_GZ_BIT(cantest.m_extLampBitFlag,LAMP_BIT_YeYaYouYa))
               {
                   pixdeng.load("./img/dengshan/99.png");//
                   paintdeng.drawPixmap(616,432,15,28,pixdeng);//正上方位置显示的图标
@@ -2250,7 +2355,7 @@ void Widget::paintEvent(QPaintEvent *)
 //              }
 
               //刹车自动故障
-              if(1)
+              if(CHK_GZ_BIT(cantest.m_GZBitFlag,GZ_BIT_SHACHEZHIDONG))
               {
                   pixdeng.load("./img/zhujiemianicon/10.png");//
                   paintdeng.drawPixmap(643,434,31,24,pixdeng);//正上方位置显示的图标
@@ -2337,12 +2442,7 @@ void Widget::paintEvent(QPaintEvent *)
                    painter.save();
                    //painter.rotate(6.0 *time.second());  //设旋转(角度 = 6° * (分钟 + 秒 / 60))
                    painter.rotate(-120);
-                   //painter.rotate(6.0 *numtmp);  //设置旋转(6° * 秒)
-                   //painter.rotate(numtmp++);  //设置旋转(6° * 秒)
-                   //painter.rotate(4.0 );//*shisu
-
-                   //painter.rotate(8*nu1);//floatnu2
-                   painter.rotate(8*floatnu1);//floatnu1
+                   painter.rotate(8*floatnu3);//floatnu1
 
                    painter.drawConvexPolygon(minuteHand, 4);  //填充分针部分
                    painter.restore();
@@ -2375,7 +2475,7 @@ void Widget::paintEvent(QPaintEvent *)
                    //painter.rotate(6.0 *time.second());  //设旋转(角度 = 6° * (分钟 + 秒 / 60))
                    painter.rotate(-120);
                    //painter.rotate(8*nu3);
-                   painter.rotate(8*floatnu1);//
+                   painter.rotate(8*nu1);//
 
 
 
@@ -2418,7 +2518,7 @@ void Widget::paintEvent(QPaintEvent *)
                    //painter.rotate(6.0 *time.second());  //设旋转(角度 = 6° * (分钟 + 秒 / 60))
                    painter.rotate(-120);
                    //painter.rotate(8*nu3);
-                   painter.rotate(8*floatnu1);//
+                   painter.rotate(8*floatnu3);//
 
 
 
@@ -2474,24 +2574,7 @@ void Widget::paintEvent(QPaintEvent *)
                   pixdeng.load("./img/dengshan/17.png");//
                   paintdeng.drawPixmap(118,434,34,24,pixdeng);//正上方位置显示的图标
               }
-              //水温
-              if(0)
-              {
-                  pixdeng.load("./img/dengshan/09.png");//
-                  paintdeng.drawPixmap(161,432,31,28,pixdeng);//正上方位置显示的图标
-              }
-              //油压
-              if(0)
-              {
-                  pixdeng.load("./img/dengshan/12.png");//
-                  paintdeng.drawPixmap(200,436,39,20,pixdeng);//正上方位置显示的图标
-              }
-              //油量
-              if(0)
-              {
-                  pixdeng.load("./img/dengshan/10.png");//
-                  paintdeng.drawPixmap(248,430,24,28,pixdeng);//正上方位置显示的图标
-              }
+
               //手刹
               if(cantest.flagSS)
               {
@@ -2522,14 +2605,14 @@ void Widget::paintEvent(QPaintEvent *)
                   pixdeng.load("./img/dengshan/11.png");//
                   paintdeng.drawPixmap(463,434,37,23,pixdeng);//正上方位置显示的图标
               }
-              //粮满
-              if(cantest.flagLCM)
+              //籽粒满仓
+               if(CHK_GZ_BIT(cantest.m_extLampBitFlag,LAMP_BIT_ZhiLiHuiShou))
               {
                   pixdeng.load("./img/dengshan/15.png");//
                   paintdeng.drawPixmap(509,430,32,32,pixdeng);//正上方位置显示的图标
               }
               //粮仓满
-              if(1)
+              if(CHK_GZ_BIT(cantest.m_extLampBitFlag,LAMP_BIT_LiangCangMan))
               {
                   pixdeng.load("./img/dengshan/08.png");//
                   paintdeng.drawPixmap(550,435,29,20,pixdeng);//正上方位置显示的图标
@@ -2542,7 +2625,7 @@ void Widget::paintEvent(QPaintEvent *)
               }
 
               //液压滤清
-              if(1)
+              if(CHK_GZ_BIT(cantest.m_extLampBitFlag,LAMP_BIT_YeYaLvQing))
               {
                   pixdeng.load("./img/zhujiemianicon/09.png");//
                   //paintdeng.drawPixmap(586,432,12,28,pixdeng);//正上方位置显示的图标
@@ -2647,14 +2730,8 @@ void Widget::paintEvent(QPaintEvent *)
                 painter.setBrush(Qt::red);
                 painter.setRenderHint(QPainter::Antialiasing, true);
                 painter.save();
-                //painter.rotate(6.0 *time.second());  //设旋转(角度 = 6° * (分钟 + 秒 / 60))
-                painter.rotate(-120);
-                //painter.rotate(6.0 *numtmp);  //设置旋转(6° * 秒)
-                //painter.rotate(numtmp++);  //设置旋转(6° * 秒)
-                //painter.rotate(4.0 );//*shisu
-
-                painter.rotate(8*60);//floatnu2
-                //painter.rotate(8*floatnu1);//floatnu1
+                painter.rotate(-114.5);
+                painter.rotate(228*floatnu3);//floatnu1
 
                 painter.drawConvexPolygon(minuteHand, 4);  //填充分针部分
                 painter.restore();
@@ -2675,9 +2752,8 @@ void Widget::paintEvent(QPaintEvent *)
                 painter.restore();
 
 
-                //风机转速
-                painter.translate(380,3);//重新定位坐标起始点，把坐标原点放到窗体的中央
-                //painter.scale(side / 400.0, side / 300.0);
+                //滚筒转速
+                painter.translate(377,1);//重新定位坐标起始点，把坐标原点放到窗体的中央
 
                 painter.setPen(Qt::NoPen);
                 painter.setBrush(Qt::red);
@@ -2685,8 +2761,8 @@ void Widget::paintEvent(QPaintEvent *)
                 painter.save();
 
                 //painter.rotate(6.0 *time.second());  //设旋转(角度 = 6° * (分钟 + 秒 / 60))
-                painter.rotate(-120);
-                painter.rotate(8*60);
+                painter.rotate(-114.5);
+                painter.rotate(7.6*nu1);//
                // painter.rotate(8*floatnu1);//
 
 
@@ -2727,11 +2803,9 @@ void Widget::paintEvent(QPaintEvent *)
                 painter.setRenderHint(QPainter::Antialiasing, true);
                 painter.save();
 
-                //painter.rotate(6.0 *time.second());  //设旋转(角度 = 6° * (分钟 + 秒 / 60))
-                painter.rotate(-120);
-                painter.rotate(8*60);
-                //painter.rotate(8*floatnu1);//
-
+                painter.rotate(-114);
+                //painter.rotate(8*nu3);
+                painter.rotate(7.6*nu3);//
 
 
                 //painter.rotate(4.0 );  //设旋转(角度 = 6° * (分钟 + 秒 / 60))*shisu
@@ -2764,23 +2838,209 @@ void Widget::paintEvent(QPaintEvent *)
                 //处理图片闪烁
                 painter.translate(-390,-226);//平移到左边角
 
+//                //喂入
+//                QPainter paintShanshuo_W(this);
+//                QPixmap pixShanshuo_W;
+//                pixShanshuo_W.load("./img/weiruliang/09.png");//07.jpg
+//                paintShanshuo_W.drawPixmap(10,110,28,121,pixShanshuo_W);
+
+//                //粮损
+//                pixShanshuo_W.load("./img/liangshun/06.png");//07.jpg
+//                paintShanshuo_W.drawPixmap(760,110,27,120,pixShanshuo_W);
+
+//                //油量
+//                pixShanshuo_W.load("./img/ranyou/07.png");//07.jpg
+//                paintShanshuo_W.drawPixmap(10,275,27,118,pixShanshuo_W);
+
+//                //凹槽
+//                pixShanshuo_W.load("./img/aocao/05.png");//07.jpg
+//                paintShanshuo_W.drawPixmap(760,275,28,119,pixShanshuo_W);
+
                 //喂入
                 QPainter paintShanshuo_W(this);
                 QPixmap pixShanshuo_W;
-                pixShanshuo_W.load("./img/weiruliang/09.png");//07.jpg
-                paintShanshuo_W.drawPixmap(10,110,28,121,pixShanshuo_W);
+ //               pixShanshuo_W.load("./img/weiruliang/09.png");//07.jpg
+ //               paintShanshuo_W.drawPixmap(10,110,28,121,pixShanshuo_W);
+
+                switch(cantest.WeiRu_Vol)
+                {
+                    case 1:
+                    pixShanshuo_W.load("./img/weiruliang/10.png");//07.jpg
+                    paintShanshuo_W.drawPixmap(10,110,28,121,pixShanshuo_W);
+                    break;
+
+                    case 2:
+                    pixShanshuo_W.load("./img/weiruliang/9.png");//07.jpg
+                    paintShanshuo_W.drawPixmap(10,110,28,121,pixShanshuo_W);
+                    break;
+
+                    case 3:
+                    pixShanshuo_W.load("./img/weiruliang/8.png");//07.jpg
+                    paintShanshuo_W.drawPixmap(10,110,28,121,pixShanshuo_W);
+
+                    break;
+
+                    case 4:
+                    pixShanshuo_W.load("./img/weiruliang/7.png");//07.jpg
+                    paintShanshuo_W.drawPixmap(10,110,28,121,pixShanshuo_W);
+
+                    break;
+
+                    case 5:
+                    pixShanshuo_W.load("./img/weiruliang/6.png");//07.jpg
+                    paintShanshuo_W.drawPixmap(10,110,28,121,pixShanshuo_W);
+
+                    break;
+
+                    case 6:
+                    pixShanshuo_W.load("./img/weiruliang/5.png");//07.jpg
+                    paintShanshuo_W.drawPixmap(10,110,28,121,pixShanshuo_W);
+
+                    break;
+
+                    case 7:
+                    pixShanshuo_W.load("./img/weiruliang/4.png");//07.jpg
+                    paintShanshuo_W.drawPixmap(10,110,28,121,pixShanshuo_W);
+
+                    break;
+
+                    case 8:
+                    pixShanshuo_W.load("./img/weiruliang/3.png");//07.jpg
+                    paintShanshuo_W.drawPixmap(10,110,28,121,pixShanshuo_W);
+
+                    break;
+
+                    case 9:
+                    pixShanshuo_W.load("./img/weiruliang/2.png");//07.jpg
+                    paintShanshuo_W.drawPixmap(10,110,28,121,pixShanshuo_W);
+
+                    break;
+
+                    case 10:
+                    pixShanshuo_W.load("./img/weiruliang/1.png");//07.jpg
+                    paintShanshuo_W.drawPixmap(10,110,28,121,pixShanshuo_W);
+                    break;
+
+                }
+
+
 
                 //粮损
-                pixShanshuo_W.load("./img/liangshun/06.png");//07.jpg
-                paintShanshuo_W.drawPixmap(760,110,27,120,pixShanshuo_W);
+ //               pixShanshuo_W.load("./img/liangshun/06.png");//07.jpg
+ //               paintShanshuo_W.drawPixmap(760,110,27,120,pixShanshuo_W);
+
+                switch(cantest.SaLiangLV)
+                {
+                    case 1:
+                    pixShanshuo_W.load("./img/liangshun/06.png");//07.jpg
+                    paintShanshuo_W.drawPixmap(760,110,27,120,pixShanshuo_W);
+                    break;
+
+                    case 2:
+                    pixShanshuo_W.load("./img/liangshun/05.png");//07.jpg
+                    paintShanshuo_W.drawPixmap(760,110,27,120,pixShanshuo_W);
+                    break;
+
+                    case 3:
+                    pixShanshuo_W.load("./img/liangshun/04.png");//07.jpg
+                    paintShanshuo_W.drawPixmap(760,110,27,120,pixShanshuo_W);
+                    break;
+
+                    case 4:
+                    pixShanshuo_W.load("./img/liangshun/03.png");//07.jpg
+                    paintShanshuo_W.drawPixmap(760,110,27,120,pixShanshuo_W);
+                    break;
+
+                    case 5:
+                    pixShanshuo_W.load("./img/liangshun/02.png");//07.jpg
+                    paintShanshuo_W.drawPixmap(760,110,27,120,pixShanshuo_W);
+                    break;
+
+                    case 6:
+                    pixShanshuo_W.load("./img/liangshun/01.png");//07.jpg
+                    paintShanshuo_W.drawPixmap(760,110,27,120,pixShanshuo_W);
+                    break;
+
+
+                }
+
 
                 //油量
+ //               pixShanshuo_W.load("./img/ranyou/07.png");//07.jpg
+ //               paintShanshuo_W.drawPixmap(10,275,27,118,pixShanshuo_W);
+
+                switch(cantest.VolYL)
+                {
+                 case 1:
+                 pixShanshuo_W.load("./img/ranyou/08.png");//07.jpg
+                 paintShanshuo_W.drawPixmap(10,275,27,118,pixShanshuo_W);
+
+                 break;
+                case 2:
                 pixShanshuo_W.load("./img/ranyou/07.png");//07.jpg
                 paintShanshuo_W.drawPixmap(10,275,27,118,pixShanshuo_W);
 
+                break;
+                case 3:
+                pixShanshuo_W.load("./img/ranyou/06.png");//07.jpg
+                paintShanshuo_W.drawPixmap(10,275,27,118,pixShanshuo_W);
+
+                break;
+                case 4:
+                pixShanshuo_W.load("./img/ranyou/05.png");//07.jpg
+                paintShanshuo_W.drawPixmap(10,275,27,118,pixShanshuo_W);
+
+                break;
+                case 5:
+                pixShanshuo_W.load("./img/ranyou/04.png");//07.jpg
+                paintShanshuo_W.drawPixmap(10,275,27,118,pixShanshuo_W);
+
+                break;
+                case 6:
+                pixShanshuo_W.load("./img/ranyou/03.png");//07.jpg
+                paintShanshuo_W.drawPixmap(10,275,27,118,pixShanshuo_W);
+
+                break;
+                case 7:
+                pixShanshuo_W.load("./img/ranyou/02.png");//07.jpg
+                paintShanshuo_W.drawPixmap(10,275,27,118,pixShanshuo_W);
+                break;
+
+                case 8:
+                pixShanshuo_W.load("./img/ranyou/01.png");//07.jpg
+                paintShanshuo_W.drawPixmap(10,275,27,118,pixShanshuo_W);
+                break;
+                }
+
                 //凹槽
-                pixShanshuo_W.load("./img/aocao/05.png");//07.jpg
-                paintShanshuo_W.drawPixmap(760,275,28,119,pixShanshuo_W);
+ //               pixShanshuo_W.load("./img/aocao/05.png");//07.jpg
+ //               paintShanshuo_W.drawPixmap(760,275,28,119,pixShanshuo_W);
+
+                switch(cantest.m_AoBanJianXi)
+                {
+                     case 1:
+                     pixShanshuo_W.load("./img/aocao/05.png");//07.jpg
+                     paintShanshuo_W.drawPixmap(760,275,28,119,pixShanshuo_W);
+                     break;
+                    case 2:
+                    pixShanshuo_W.load("./img/aocao/04.png");//07.jpg
+                    paintShanshuo_W.drawPixmap(760,275,28,119,pixShanshuo_W);
+                    break;
+                    case 3:
+                    pixShanshuo_W.load("./img/aocao/03.png");//07.jpg
+                    paintShanshuo_W.drawPixmap(760,275,28,119,pixShanshuo_W);
+                    break;
+                    case 4:
+                    pixShanshuo_W.load("./img/aocao/02.png");//07.jpg
+                    paintShanshuo_W.drawPixmap(760,275,28,119,pixShanshuo_W);
+                    break;
+                    case 5:
+                    pixShanshuo_W.load("./img/aocao/01.png");//07.jpg
+                    paintShanshuo_W.drawPixmap(760,275,28,119,pixShanshuo_W);
+                    break;
+                }
+
+
 
             //报警灯
 
@@ -2803,24 +3063,6 @@ void Widget::paintEvent(QPaintEvent *)
            {
                pixdeng.load("./img/dengshan/17.png");//
                paintdeng.drawPixmap(118,434,34,24,pixdeng);//正上方位置显示的图标
-           }
-           //水温
-           if(0)
-           {
-               pixdeng.load("./img/dengshan/09.png");//
-               paintdeng.drawPixmap(161,432,31,28,pixdeng);//正上方位置显示的图标
-           }
-           //油压
-           if(0)
-           {
-               pixdeng.load("./img/dengshan/12.png");//
-               paintdeng.drawPixmap(200,436,39,20,pixdeng);//正上方位置显示的图标
-           }
-           //油量
-           if(0)
-           {
-               pixdeng.load("./img/dengshan/10.png");//
-               paintdeng.drawPixmap(248,430,24,28,pixdeng);//正上方位置显示的图标
            }
            //手刹
            if(cantest.flagSS)
@@ -2852,14 +3094,14 @@ void Widget::paintEvent(QPaintEvent *)
                pixdeng.load("./img/dengshan/11.png");//
                paintdeng.drawPixmap(463,434,37,23,pixdeng);//正上方位置显示的图标
            }
-           //量满
-           if(cantest.flagLCM)
+           //籽粒回收满
+           if(CHK_GZ_BIT(cantest.m_extLampBitFlag,LAMP_BIT_ZhiLiHuiShou))
            {
                pixdeng.load("./img/dengshan/15.png");//
                paintdeng.drawPixmap(509,430,32,32,pixdeng);//正上方位置显示的图标
            }
-           //粮仓满
-           if(1)
+           //量仓满
+           if(CHK_GZ_BIT(cantest.m_extLampBitFlag,LAMP_BIT_LiangCangMan))
            {
                pixdeng.load("./img/dengshan/08.png");//
                paintdeng.drawPixmap(550,435,29,20,pixdeng);//正上方位置显示的图标
@@ -2871,7 +3113,7 @@ void Widget::paintEvent(QPaintEvent *)
                paintdeng.drawPixmap(586,432,24,28,pixdeng);//正上方位置显示的图标
            }
            //液压油压力
-           if(1)
+           if(CHK_GZ_BIT(cantest.m_extLampBitFlag,LAMP_BIT_YeYaYouYa))
            {
                pixdeng.load("./img/dengshan/99.png");//
                paintdeng.drawPixmap(619,432,15,28,pixdeng);//正上方位置显示的图标
@@ -2883,7 +3125,7 @@ void Widget::paintEvent(QPaintEvent *)
                paintdeng.drawPixmap(640,430,32,32,pixdeng);//正上方位置显示的图标
            }
            //主机故障灯
-           if(1)
+           if(CHK_GZ_BIT(cantest.m_GZBitFlag,GZ_BIT_ZHUJI))
            {
                pixdeng.load("./img/dengshan/06.png");//
                paintdeng.drawPixmap(680,430,44,29,pixdeng);//正上方位置显示的图标
@@ -2899,63 +3141,63 @@ void Widget::paintEvent(QPaintEvent *)
 
            //主界面中央灯区
            //粮筒摆出
-           if(1)
+           if(CHK_GZ_BIT(cantest.m_extLampBitFlag,LAMP_BIT_LiangTongBaiChu))
            {
                pixdeng.load("./img/zhujiemianicon/01.png");//
                paintdeng.drawPixmap(255,266,30,19,pixdeng);//正上方位置显示的图标
            }
            //过桥故障
-           if(1)
+           if(CHK_GZ_BIT(cantest.m_GZBitFlag,GZ_BIT_GUOQIAO))
            {
                pixdeng.load("./img/zhujiemianicon/02.png");//
                paintdeng.drawPixmap(307,258,32,29,pixdeng);//正上方位置显示的图标
            }
            //风机故障
-           if(1)
+           if(CHK_GZ_BIT(cantest.m_GZBitFlag,GZ_BIT_FENGJI))
            {
                pixdeng.load("./img/zhujiemianicon/03.png");//
                paintdeng.drawPixmap(273,281,31,32,pixdeng);//正上方位置显示的图标
            }
 
            //滚筒故障
-           if(1)
+           if(CHK_GZ_BIT(cantest.m_GZBitFlag,GZ_BIT_GUNTONG))
            {
                pixdeng.load("./img/zhujiemianicon/04.png");//
                paintdeng.drawPixmap(288,322,31,28,pixdeng);//正上方位置显示的图标
            }
            //刹车盘磨损
-           if(1)
+            if(CHK_GZ_BIT(cantest.m_GZBitFlag,GZ_BIT_SHACHEPANMOSUN))
            {
                pixdeng.load("./img/zhujiemianicon/05.png");//
                paintdeng.drawPixmap(294,355,30,24,pixdeng);//正上方位置显示的图标
            }
            //升运器故障
-           if(1)
+           if(CHK_GZ_BIT(cantest.m_GZBitFlag,GZ_BIT_SHENGYUNQI))
            {
                pixdeng.load("./img/zhujiemianicon/06.png");//
                paintdeng.drawPixmap(463,258,31,25,pixdeng);//正上方位置显示的图标
            }
 
            //卸粮中
-           if(1)
+           if(CHK_GZ_BIT(cantest.m_extLampBitFlag,LAMP_BIT_XieLiangZhong))
            {
                pixdeng.load("./img/zhujiemianicon/07.png");//
                paintdeng.drawPixmap(513,260,34,24,pixdeng);//正上方位置显示的图标
            }
            //粮仓盖
-           if(1)
+           if(CHK_GZ_BIT(cantest.m_GZBitFlag,GZ_BIT_LIANGCANGGAI))
            {
                pixdeng.load("./img/zhujiemianicon/08.png");//
                paintdeng.drawPixmap(499,292,27,23,pixdeng);//正上方位置显示的图标
            }
            //液压滤清
-           if(1)
+           if(CHK_GZ_BIT(cantest.m_extLampBitFlag,LAMP_BIT_YeYaLvQing))
            {
                pixdeng.load("./img/zhujiemianicon/09.png");//
                paintdeng.drawPixmap(490,319,16,28,pixdeng);//正上方位置显示的图标
            }
            //刹车制动故障
-           if(1)
+           if(CHK_GZ_BIT(cantest.m_GZBitFlag,GZ_BIT_SHACHEZHIDONG))
            {
                pixdeng.load("./img/zhujiemianicon/10.png");//
                paintdeng.drawPixmap(475,355,31,24,pixdeng);//正上方位置显示的图标
@@ -3035,7 +3277,7 @@ void Widget::paintEvent(QPaintEvent *)
                    //painter.rotate(4.0 );//*shisu
 
                    //painter.rotate(8*nu1);//floatnu2
-                   painter.rotate(8*floatnu1);//floatnu1
+                   painter.rotate(8*floatnu3);//floatnu1
 
                    painter.drawConvexPolygon(minuteHand, 4);  //填充分针部分
                    painter.restore();
@@ -3068,7 +3310,7 @@ void Widget::paintEvent(QPaintEvent *)
                    //painter.rotate(6.0 *time.second());  //设旋转(角度 = 6° * (分钟 + 秒 / 60))
                    painter.rotate(-120);
                    //painter.rotate(8*nu3);
-                   painter.rotate(8*floatnu1);//
+                   painter.rotate(8*nu1);//
 
 
 
@@ -3111,7 +3353,7 @@ void Widget::paintEvent(QPaintEvent *)
                    //painter.rotate(6.0 *time.second());  //设旋转(角度 = 6° * (分钟 + 秒 / 60))
                    painter.rotate(-120);
                    //painter.rotate(8*nu3);
-                   painter.rotate(8*floatnu1);//
+                   painter.rotate(8*nu3);//
 
 
 
@@ -3166,24 +3408,7 @@ void Widget::paintEvent(QPaintEvent *)
                   pixdeng.load("./img/dengshan/17.png");//
                   paintdeng.drawPixmap(118,434,34,24,pixdeng);//正上方位置显示的图标
               }
-              //水温
-              if(0)
-              {
-                  pixdeng.load("./img/dengshan/09.png");//
-                  paintdeng.drawPixmap(161,432,31,28,pixdeng);//正上方位置显示的图标
-              }
-              //油压
-              if(0)
-              {
-                  pixdeng.load("./img/dengshan/12.png");//
-                  paintdeng.drawPixmap(200,436,39,20,pixdeng);//正上方位置显示的图标
-              }
-              //油量
-              if(0)
-              {
-                  pixdeng.load("./img/dengshan/10.png");//
-                  paintdeng.drawPixmap(248,430,24,28,pixdeng);//正上方位置显示的图标
-              }
+
               //手刹
               if(cantest.flagSS)
               {
@@ -3233,7 +3458,7 @@ void Widget::paintEvent(QPaintEvent *)
                   paintdeng.drawPixmap(586,432,24,28,pixdeng);//正上方位置显示的图标
               }
               //液压油压力
-              if(1)
+              if(CHK_GZ_BIT(cantest.m_extLampBitFlag,LAMP_BIT_YeYaYouYa))
               {
                   pixdeng.load("./img/dengshan/99.png");//
                   paintdeng.drawPixmap(616,432,15,28,pixdeng);//正上方位置显示的图标
@@ -3252,7 +3477,7 @@ void Widget::paintEvent(QPaintEvent *)
 //              }
 
               //刹车自动故障
-              if(1)
+               if(CHK_GZ_BIT(cantest.m_GZBitFlag,GZ_BIT_SHACHEZHIDONG))
               {
                   pixdeng.load("./img/zhujiemianicon/10.png");//
                   paintdeng.drawPixmap(643,434,31,24,pixdeng);//正上方位置显示的图标
@@ -3318,17 +3543,16 @@ void Widget::paintEvent(QPaintEvent *)
         //电池电压
         DCDY =cantest.VOLV;
         DCDY /= 10;
-        if((flagmatchion == YZB_3A_B)||(flagmatchion == YZB_4_5_7_8))
+        //label_11 he label_14 处理
+        if((flagmatchion == YZT_10)||(flagmatchion == YZT_5))
         {
-            ui->label_11->setText(QString::number(DCDY,'f',1));//电池电压
-            ui->label_14->setText("");//电池电压
+            ui->label_14->setText(QString::number(DCDY,'f',1));//系统电压
+            ui->label_11->setText(QString::number(cantest.m_Speed[SPEED_FENGJI]));//风机转速
         }
-        else if(flagmatchion == YZT_10)
+        else
         {
-            ui->label_14->setText(QString::number(DCDY,'f',1));//电池电压
-
-           //风机转速
-          //ui->label_11->setText(QString::number(DCDY,'f',1));//风机转速
+            ui->label_14->setText(QString::number(DCDY,'f',1));//风机转速
+            ui->label_11->setText("");//系统电压
         }
 
 
@@ -3382,6 +3606,39 @@ void Widget::paintEvent(QPaintEvent *)
         //        {
         //             ui->label_11->setText(QString::number(YLBFB));
         //        }
+
+
+        //2017.4.15
+        //处理label_10 搅龙转速
+        if((flagmatchion == YZT_10)||(flagmatchion == YZT_5))
+        {
+            ui->label_10->setText(QString::number(cantest.m_Speed[SPEED_JIAOLONG]));
+        }
+        else
+        {
+            ui->label_10->setText(" ");
+        }
+
+        //处理label_20
+        if(flagmatchion == YZT_10) //过桥转速
+        {
+            ui->label_20->setText(QString::number(cantest.m_Speed[SPEED_GUOQIAO]));
+        }
+        else if(flagmatchion == YZT_5)//主力合工作时间
+        {
+            ui->label_20->setText(QString::number(cantest.m_ZhuLiHeWorkTime));
+        }
+        else if(flagmatchion == JZ_3600)//割台转速
+        {
+           ui->label_20->setText(QString::number(cantest.m_Speed[SPEED_GETAI]));
+        }
+        else //工作时间
+        {
+            ui->label_20->setText(QString::number(xiaoshiJi_h,'f',1));
+        }
+
+        //处理label_6 瞬时油耗
+        //ui->label_6->setText(QString::number());
 
 
 
@@ -5883,22 +6140,45 @@ void Widget::shanhua()//闪烁和平滑转动
 {
 
 #if 1
-    //油量
-    nu2 = cantest.VolYL;
+    //油量 和 滚筒转速
 
-    if(nu2 > 6)
+    if((flagmatchion == YZT_10)||(flagmatchion == YZBT_5)) //滚筒转速
     {
-        nu2 = 6;
+        nu2 = cantest.m_Speed[SPEED_GUNTONG];
+
+        if(nu2 > 3000)//3000 转
+        {
+            nu2 = 3000;
+        }
+
+        if(nu1 < nu2)//
+        {
+            nu1++;
+        }
+        else if(nu1 > nu2)//
+        {
+            nu1--;
+        }
+    }
+    else  //燃油量
+    {
+        nu2 = cantest.VolYL;
+
+        if(nu2 > 6)
+        {
+            nu2 = 6;
+        }
+
+        if(nu1 < nu2)//cantest.FDJ_speed
+        {
+            nu1++;
+        }
+        else if(nu1 > nu2)//cantest.FDJ_speed
+        {
+            nu1--;
+        }
     }
 
-    if(nu1 < nu2)//cantest.FDJ_speed
-    {
-        nu1++;
-    }
-    else if(nu1 > nu2)//cantest.FDJ_speed
-    {
-        nu1--;
-    }
 
 
 
@@ -5969,6 +6249,10 @@ void Widget::shanhua()//闪烁和平滑转动
         //qDebug()<<"4------"<<cantest.FDJ_speed<<endl;
     }
 
+
+
+
+
     if(flagaddnum)
     {
 
@@ -6025,7 +6309,7 @@ void Widget::shanhua()//闪烁和平滑转动
         }
 
 
-        //闪烁算法
+        //闪烁算法 核心
         flagnum++;
         if(flagnum>15)//30
         {
@@ -6389,7 +6673,7 @@ void Widget::xiaoshiji()//小时计
    }
    else
    {
-        ui->label_10->setText(QString::number(xiaoshiJi_h,'f',1));
+        //ui->label_10->setText(QString::number(xiaoshiJi_h,'f',1));
 
         //机油温度
         ui->label_7->setText(QString::number(ecutest.VolJYWD));
