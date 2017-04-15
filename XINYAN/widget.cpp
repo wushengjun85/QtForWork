@@ -3551,8 +3551,8 @@ void Widget::paintEvent(QPaintEvent *)
         }
         else
         {
-            ui->label_14->setText(QString::number(DCDY,'f',1));//风机转速
-            ui->label_11->setText("");//系统电压
+            ui->label_11->setText(QString::number(DCDY,'f',1));//风机转速
+            ui->label_14->setText("");//系统电压
         }
 
 
@@ -3609,32 +3609,27 @@ void Widget::paintEvent(QPaintEvent *)
 
 
         //2017.4.15
-        //处理label_10 搅龙转速
-        if((flagmatchion == YZT_10)||(flagmatchion == YZT_5))
-        {
-            ui->label_10->setText(QString::number(cantest.m_Speed[SPEED_JIAOLONG]));
-        }
-        else
-        {
-            ui->label_10->setText(" ");
-        }
 
         //处理label_20
         if(flagmatchion == YZT_10) //过桥转速
         {
             ui->label_20->setText(QString::number(cantest.m_Speed[SPEED_GUOQIAO]));
+            ui->label_10->setText(QString::number(cantest.m_Speed[SPEED_JIAOLONG]));//处理label_10 搅龙转速
         }
         else if(flagmatchion == YZT_5)//主力合工作时间
         {
             ui->label_20->setText(QString::number(cantest.m_ZhuLiHeWorkTime));
+            ui->label_10->setText(QString::number(cantest.m_Speed[SPEED_JIAOLONG]));//处理label_10 搅龙转速
         }
         else if(flagmatchion == JZ_3600)//割台转速
         {
-           ui->label_20->setText(QString::number(cantest.m_Speed[SPEED_GETAI]));
+           ui->label_10->setText(QString::number(cantest.m_Speed[SPEED_GETAI]));
+           ui->label_20->setText(" ");
         }
         else //工作时间
         {
-            ui->label_20->setText(QString::number(xiaoshiJi_h,'f',1));
+            ui->label_10->setText(QString::number(xiaoshiJi_h,'f',1));
+            ui->label_20->setText(" ");
         }
 
         //处理label_6 瞬时油耗
