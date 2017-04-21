@@ -104,8 +104,8 @@ font: 75 14pt &quot;Ubuntu&quot;;</string>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">font: 75 italic 14pt &quot;Ubuntu&quot;;
-font: 75 14pt &quot;Ubuntu&quot;;</string>
+      <string notr="true">font: 75 italic 16pt &quot;Ubuntu&quot;;
+font: 75 16pt &quot;Ubuntu&quot;;</string>
      </property>
      <property name="text">
       <string>123</string>
@@ -124,8 +124,8 @@ font: 75 14pt &quot;Ubuntu&quot;;</string>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">font: 75 italic 14pt &quot;Ubuntu&quot;;
-font: 75 14pt &quot;Ubuntu&quot;;</string>
+      <string notr="true">font: 75 italic 16pt &quot;Ubuntu&quot;;
+font: 75 16pt &quot;Ubuntu&quot;;</string>
      </property>
      <property name="text">
       <string>456</string>
@@ -144,8 +144,8 @@ font: 75 14pt &quot;Ubuntu&quot;;</string>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">font: 75 italic 14pt &quot;Ubuntu&quot;;
-font: 75 14pt &quot;Ubuntu&quot;;
+      <string notr="true">font: 75 italic 16pt &quot;Ubuntu&quot;;
+font: 75 16pt &quot;Ubuntu&quot;;
 </string>
      </property>
      <property name="text">
@@ -165,7 +165,7 @@ font: 75 14pt &quot;Ubuntu&quot;;
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">font: 75 14pt &quot;Ubuntu&quot;;
+      <string notr="true">font: 75 16pt &quot;Ubuntu&quot;;
 color: rgb(255, 255, 255);</string>
      </property>
      <property name="text">
@@ -206,7 +206,7 @@ color: rgb(255, 255, 0);</string>
      </property>
      <property name="styleSheet">
       <string notr="true">color: rgb(255, 255, 255);
-font: 75 14pt &quot;Ubuntu&quot;;</string>
+font: 75 16pt &quot;Ubuntu&quot;;</string>
      </property>
      <property name="text">
       <string>8977</string>
@@ -226,7 +226,7 @@ font: 75 14pt &quot;Ubuntu&quot;;</string>
      </property>
      <property name="styleSheet">
       <string notr="true">color: rgb(255, 255, 255);
-font: 75 14pt &quot;Ubuntu&quot;;</string>
+font: 75 16pt &quot;Ubuntu&quot;;</string>
      </property>
      <property name="text">
       <string>898</string>
@@ -277,7 +277,7 @@ font: 75 14pt &quot;Ubuntu&quot;;</string>
      </property>
      <property name="styleSheet">
       <string notr="true">color: rgb(255, 255, 255);
-font: 75 14pt &quot;Ubuntu&quot;;</string>
+font: 75 16pt &quot;Ubuntu&quot;;</string>
      </property>
      <property name="text">
       <string/>
@@ -312,8 +312,34 @@ font: 75 italic 16pt &quot;Ubuntu&quot;;</string>
        <height>31</height>
       </rect>
      </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);
+font: 75 16pt &quot;Ubuntu&quot;;</string>
+     </property>
      <property name="text">
       <string>TextLabel</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_21">
+     <property name="geometry">
+      <rect>
+       <x>554</x>
+       <y>391</y>
+       <width>54</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 16pt &quot;Ubuntu&quot;;</string>
+     </property>
+     <property name="text">
+      <string>66666</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
     </widget>
    </widget>

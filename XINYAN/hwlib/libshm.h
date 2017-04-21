@@ -19,7 +19,7 @@ extern "C"{
 /****************************************************/
 enum LAMP_BIT_TYPE
 {
-	LAMP_BIT_ZhiLiHuiShou,			/*	籽粒回收	*/
+	LAMP_BIT_ZhiLiHuiShou,			/*	籽粒回收满	*/
 	LAMP_BIT_LiangCangMan,			/*	粮仓满		*/
 	LAMP_BIT_LiangTongBaiChu,		/*	粮筒摆出	*/
 	LAMP_BIT_XieLiangZhong,			/*	卸粮中		*/
@@ -47,6 +47,10 @@ enum GZ_BIT_TYPE
 #define SET_GZ_BIT(x,index)	( x |= 1 < index )			/* 设置 故障 bit 位 */
 #define CLR_GZ_BIT(x,index)	( x &= ~(1 < index) )		/* 清除 故障 bit 位 */
 #define CHK_GZ_BIT(x,index)	( x & (1 < index) )			/* 检测 故障 bit 位 */
+
+#define SET_BIT(x,index)	SET_GZ_BIT(x,index)
+#define CLR_BIT(x,index)	CLR_GZ_BIT(x,index)
+#define CHK_BIT(x,index)	CHK_GZ_BIT(x,index)
 
 
 #define MAX_SPEED_TYPE_NUM		15
@@ -238,7 +242,8 @@ typedef struct
 	int VolJYYL;//机油压力
 	int FDJ_speed;//发动机转速
 #if JINYEE_EXT	
-	int VolYH;//油耗
+	float m_FuelVal;		/* 油耗值 INSTANT FUEL value */
+	float m_InsFuelVal;		/* 瞬间油耗值 INSTANT FUEL value */
 #endif	
 	
 	//SPN故障

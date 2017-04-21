@@ -1202,6 +1202,7 @@ void Widget::paintEvent(QPaintEvent *)
 //               pixShanshuo_W.load("./img/weiruliang/09.png");//07.jpg
 //               paintShanshuo_W.drawPixmap(10,110,28,121,pixShanshuo_W);
 
+               //qDebug()<<"cantest.WeiRu_Vol: "<<cantest.WeiRu_Vol<<endl;
                switch(cantest.WeiRu_Vol)
                {
                    case 1:
@@ -1209,47 +1210,47 @@ void Widget::paintEvent(QPaintEvent *)
                    paintShanshuo_W.drawPixmap(10,110,28,121,pixShanshuo_W);
                    break;
                    case 2:
-                   pixShanshuo_W.load("./img/weiruliang/9.png");//07.jpg
+                   pixShanshuo_W.load("./img/weiruliang/09.png");//07.jpg
                    paintShanshuo_W.drawPixmap(10,110,28,121,pixShanshuo_W);
                    break;
 
                    case 3:
-                   pixShanshuo_W.load("./img/weiruliang/8.png");//07.jpg
+                   pixShanshuo_W.load("./img/weiruliang/08.png");//07.jpg
                    paintShanshuo_W.drawPixmap(10,110,28,121,pixShanshuo_W);
                    break;
 
                    case 4:
-                   pixShanshuo_W.load("./img/weiruliang/7.png");//07.jpg
+                   pixShanshuo_W.load("./img/weiruliang/07.png");//07.jpg
                    paintShanshuo_W.drawPixmap(10,110,28,121,pixShanshuo_W);
                    break;
 
                    case 5:
-                   pixShanshuo_W.load("./img/weiruliang/6.png");//07.jpg
+                   pixShanshuo_W.load("./img/weiruliang/06.png");//07.jpg
                    paintShanshuo_W.drawPixmap(10,110,28,121,pixShanshuo_W);
                    break;
 
                    case 6:
-                   pixShanshuo_W.load("./img/weiruliang/5.png");//07.jpg
+                   pixShanshuo_W.load("./img/weiruliang/05.png");//07.jpg
                    paintShanshuo_W.drawPixmap(10,110,28,121,pixShanshuo_W);
                    break;
 
                    case 7:
-                   pixShanshuo_W.load("./img/weiruliang/4.png");//07.jpg
+                   pixShanshuo_W.load("./img/weiruliang/04.png");//07.jpg
                    paintShanshuo_W.drawPixmap(10,110,28,121,pixShanshuo_W);
                    break;
 
                    case 8:
-                   pixShanshuo_W.load("./img/weiruliang/3.png");//07.jpg
+                   pixShanshuo_W.load("./img/weiruliang/03.png");//07.jpg
                    paintShanshuo_W.drawPixmap(10,110,28,121,pixShanshuo_W);
                    break;
 
                    case 9:
-                   pixShanshuo_W.load("./img/weiruliang/2.png");//07.jpg
+                   pixShanshuo_W.load("./img/weiruliang/02.png");//07.jpg
                    paintShanshuo_W.drawPixmap(10,110,28,121,pixShanshuo_W);
                    break;
 
                    case 10:
-                   pixShanshuo_W.load("./img/weiruliang/1.png");//07.jpg
+                   pixShanshuo_W.load("./img/weiruliang/01.png");//07.jpg
                    paintShanshuo_W.drawPixmap(10,110,28,121,pixShanshuo_W);
                    break;
 
@@ -1585,7 +1586,7 @@ void Widget::paintEvent(QPaintEvent *)
                 painter.setRenderHint(QPainter::Antialiasing, true);
                 painter.save();
                 //painter.rotate(6.0 *time.second());  //设旋转(角度 = 6° * (分钟 + 秒 / 60))
-                 painter.rotate(-114);
+                 painter.rotate(-114.5);
                 //painter.rotate(6.0 *numtmp);  //设置旋转(6° * 秒)
                 //painter.rotate(numtmp++);  //设置旋转(6° * 秒)
                 //painter.rotate(4.0 );//*shisu
@@ -1622,7 +1623,7 @@ void Widget::paintEvent(QPaintEvent *)
                 painter.save();
 
                 //painter.rotate(6.0 *time.second());  //设旋转(角度 = 6° * (分钟 + 秒 / 60))
-                 painter.rotate(-112);
+                 painter.rotate(-114);
                 //painter.rotate(8*nu3);
                 painter.rotate(7.6*nu1);//
 
@@ -1665,7 +1666,7 @@ void Widget::paintEvent(QPaintEvent *)
                 painter.save();
 
                 //painter.rotate(6.0 *time.second());  //设旋转(角度 = 6° * (分钟 + 秒 / 60))
-                 painter.rotate(-113);
+                 painter.rotate(-114);
                 //painter.rotate(8*nu3);
                 painter.rotate(7.6*nu3);//
 
@@ -1866,7 +1867,7 @@ void Widget::paintEvent(QPaintEvent *)
                    painter.setRenderHint(QPainter::Antialiasing, true);
                    painter.save();
                    //painter.rotate(6.0 *time.second());  //设旋转(角度 = 6° * (分钟 + 秒 / 60))
-                    painter.rotate(-114);
+                    painter.rotate(-114.5);
                    //painter.rotate(6.0 *numtmp);  //设置旋转(6° * 秒)
                    //painter.rotate(numtmp++);  //设置旋转(6° * 秒)
                    //painter.rotate(4.0 );//*shisu
@@ -1903,7 +1904,7 @@ void Widget::paintEvent(QPaintEvent *)
                    painter.save();
 
                    //painter.rotate(6.0 *time.second());  //设旋转(角度 = 6° * (分钟 + 秒 / 60))
-                    painter.rotate(-113);
+                    painter.rotate(-114.5);
                    //painter.rotate(8*nu3);
                    painter.rotate(7.6*nu1);//
 
@@ -2148,13 +2149,13 @@ void Widget::paintEvent(QPaintEvent *)
                    painter.setRenderHint(QPainter::Antialiasing, true);
                    painter.save();
                    //painter.rotate(6.0 *time.second());  //设旋转(角度 = 6° * (分钟 + 秒 / 60))
-                   painter.rotate(-120);
+                   painter.rotate(-114.5);
                    //painter.rotate(6.0 *numtmp);  //设置旋转(6° * 秒)
                    //painter.rotate(numtmp++);  //设置旋转(6° * 秒)
                    //painter.rotate(4.0 );//*shisu
 
                    //painter.rotate(8*nu1);//floatnu2
-                   painter.rotate(8*floatnu3);//floatnu1
+                   painter.rotate(228*floatnu3);//floatnu1
 
                    painter.drawConvexPolygon(minuteHand, 4);  //填充分针部分
                    painter.restore();
@@ -2185,9 +2186,9 @@ void Widget::paintEvent(QPaintEvent *)
                    painter.save();
 
                    //painter.rotate(6.0 *time.second());  //设旋转(角度 = 6° * (分钟 + 秒 / 60))
-                   painter.rotate(-120);
+                   painter.rotate(-114.5);
                    //painter.rotate(8*nu3);
-                   painter.rotate(8*nu1);//
+                   painter.rotate(7.6*nu1);//
 
 
 
@@ -2228,9 +2229,9 @@ void Widget::paintEvent(QPaintEvent *)
                    painter.save();
 
                    //painter.rotate(6.0 *time.second());  //设旋转(角度 = 6° * (分钟 + 秒 / 60))
-                   painter.rotate(-120);
+                   painter.rotate(-114);
                    //painter.rotate(8*nu3);
-                   painter.rotate(8*nu3);//
+                   painter.rotate(7.6*nu3);//
 
 
 
@@ -2441,8 +2442,8 @@ void Widget::paintEvent(QPaintEvent *)
                    painter.setRenderHint(QPainter::Antialiasing, true);
                    painter.save();
                    //painter.rotate(6.0 *time.second());  //设旋转(角度 = 6° * (分钟 + 秒 / 60))
-                   painter.rotate(-120);
-                   painter.rotate(8*floatnu3);//floatnu1
+                   painter.rotate(-114.5);
+                   painter.rotate(228*floatnu3);//floatnu1
 
                    painter.drawConvexPolygon(minuteHand, 4);  //填充分针部分
                    painter.restore();
@@ -2473,9 +2474,9 @@ void Widget::paintEvent(QPaintEvent *)
                    painter.save();
 
                    //painter.rotate(6.0 *time.second());  //设旋转(角度 = 6° * (分钟 + 秒 / 60))
-                   painter.rotate(-120);
+                   painter.rotate(-114.5);
                    //painter.rotate(8*nu3);
-                   painter.rotate(8*nu1);//
+                   painter.rotate(7.6*nu1);//
 
 
 
@@ -2516,9 +2517,9 @@ void Widget::paintEvent(QPaintEvent *)
                    painter.save();
 
                    //painter.rotate(6.0 *time.second());  //设旋转(角度 = 6° * (分钟 + 秒 / 60))
-                   painter.rotate(-120);
+                   painter.rotate(-114);
                    //painter.rotate(8*nu3);
-                   painter.rotate(8*floatnu3);//
+                   painter.rotate(7.6*floatnu3);//
 
 
 
@@ -2870,54 +2871,54 @@ void Widget::paintEvent(QPaintEvent *)
                     break;
 
                     case 2:
-                    pixShanshuo_W.load("./img/weiruliang/9.png");//07.jpg
+                    pixShanshuo_W.load("./img/weiruliang/09.png");//07.jpg
                     paintShanshuo_W.drawPixmap(10,110,28,121,pixShanshuo_W);
                     break;
 
                     case 3:
-                    pixShanshuo_W.load("./img/weiruliang/8.png");//07.jpg
+                    pixShanshuo_W.load("./img/weiruliang/08.png");//07.jpg
                     paintShanshuo_W.drawPixmap(10,110,28,121,pixShanshuo_W);
 
                     break;
 
                     case 4:
-                    pixShanshuo_W.load("./img/weiruliang/7.png");//07.jpg
+                    pixShanshuo_W.load("./img/weiruliang/07.png");//07.jpg
                     paintShanshuo_W.drawPixmap(10,110,28,121,pixShanshuo_W);
 
                     break;
 
                     case 5:
-                    pixShanshuo_W.load("./img/weiruliang/6.png");//07.jpg
+                    pixShanshuo_W.load("./img/weiruliang/06.png");//07.jpg
                     paintShanshuo_W.drawPixmap(10,110,28,121,pixShanshuo_W);
 
                     break;
 
                     case 6:
-                    pixShanshuo_W.load("./img/weiruliang/5.png");//07.jpg
+                    pixShanshuo_W.load("./img/weiruliang/05.png");//07.jpg
                     paintShanshuo_W.drawPixmap(10,110,28,121,pixShanshuo_W);
 
                     break;
 
                     case 7:
-                    pixShanshuo_W.load("./img/weiruliang/4.png");//07.jpg
+                    pixShanshuo_W.load("./img/weiruliang/04.png");//07.jpg
                     paintShanshuo_W.drawPixmap(10,110,28,121,pixShanshuo_W);
 
                     break;
 
                     case 8:
-                    pixShanshuo_W.load("./img/weiruliang/3.png");//07.jpg
+                    pixShanshuo_W.load("./img/weiruliang/03.png");//07.jpg
                     paintShanshuo_W.drawPixmap(10,110,28,121,pixShanshuo_W);
 
                     break;
 
                     case 9:
-                    pixShanshuo_W.load("./img/weiruliang/2.png");//07.jpg
+                    pixShanshuo_W.load("./img/weiruliang/02.png");//07.jpg
                     paintShanshuo_W.drawPixmap(10,110,28,121,pixShanshuo_W);
 
                     break;
 
                     case 10:
-                    pixShanshuo_W.load("./img/weiruliang/1.png");//07.jpg
+                    pixShanshuo_W.load("./img/weiruliang/01.png");//07.jpg
                     paintShanshuo_W.drawPixmap(10,110,28,121,pixShanshuo_W);
                     break;
 
@@ -3271,13 +3272,13 @@ void Widget::paintEvent(QPaintEvent *)
                    painter.setRenderHint(QPainter::Antialiasing, true);
                    painter.save();
                    //painter.rotate(6.0 *time.second());  //设旋转(角度 = 6° * (分钟 + 秒 / 60))
-                   painter.rotate(-120);
+                   painter.rotate(-114.5);
                    //painter.rotate(6.0 *numtmp);  //设置旋转(6° * 秒)
                    //painter.rotate(numtmp++);  //设置旋转(6° * 秒)
                    //painter.rotate(4.0 );//*shisu
 
                    //painter.rotate(8*nu1);//floatnu2
-                   painter.rotate(8*floatnu3);//floatnu1
+                   painter.rotate(228*floatnu3);//floatnu1
 
                    painter.drawConvexPolygon(minuteHand, 4);  //填充分针部分
                    painter.restore();
@@ -3308,9 +3309,9 @@ void Widget::paintEvent(QPaintEvent *)
                    painter.save();
 
                    //painter.rotate(6.0 *time.second());  //设旋转(角度 = 6° * (分钟 + 秒 / 60))
-                   painter.rotate(-120);
+                   painter.rotate(-114.5);
                    //painter.rotate(8*nu3);
-                   painter.rotate(8*nu1);//
+                   painter.rotate(7.6*nu1);//
 
 
 
@@ -3351,9 +3352,9 @@ void Widget::paintEvent(QPaintEvent *)
                    painter.save();
 
                    //painter.rotate(6.0 *time.second());  //设旋转(角度 = 6° * (分钟 + 秒 / 60))
-                   painter.rotate(-120);
+                   painter.rotate(-114);
                    //painter.rotate(8*nu3);
-                   painter.rotate(8*nu3);//
+                   painter.rotate(7.6*nu3);//
 
 
 
@@ -3548,11 +3549,13 @@ void Widget::paintEvent(QPaintEvent *)
         {
             ui->label_14->setText(QString::number(DCDY,'f',1));//系统电压
             ui->label_11->setText(QString::number(cantest.m_Speed[SPEED_FENGJI]));//风机转速
+            ui->label_21->setText(QString::number(cantest.m_Speed[SPEED_GUNTONG]));//滚筒转速
         }
         else
         {
             ui->label_11->setText(QString::number(DCDY,'f',1));//风机转速
             ui->label_14->setText("");//系统电压
+            ui->label_21->setText("");//滚筒转速
         }
 
 
@@ -3570,19 +3573,22 @@ void Widget::paintEvent(QPaintEvent *)
         lichengsum /= 10;
         ui->label_9->setText(QString::number(lichengsum));//里程
 
-        //发动机转速
-        if(ecutest.FDJ_speed > 3000)
-        {
-           ui->label_6->setText(QString::number(3000));// r/min
-        }
-        else
-        {
-            ui->label_6->setText(QString::number(ecutest.FDJ_speed));// r/min
-        }
+//        //发动机转速
+//        if(ecutest.FDJ_speed > 3000)
+//        {
+//           ui->label_6->setText(QString::number(3000));// r/min
+//        }
+//        else
+//        {
+//            ui->label_6->setText(QString::number(ecutest.FDJ_speed));// r/min
+//        }
+
+        //2017.4.17 瞬时油耗
+        ui->label_6->setText(QString::number(ecutest.m_InsFuelVal,'f',1));
 
         //KM/H
         float floatworknu4 = (cantest.HourSpeed);///100
-        floatworknu4 /= 10;
+        //floatworknu4 /= 10;
         if(floatworknu4 > 30)
         {
             floatworknu4 = 30;
@@ -3590,6 +3596,7 @@ void Widget::paintEvent(QPaintEvent *)
 
         //时速
         ui->label_8->setText(QString::number(floatworknu4,'f',1));// km/h
+        ui->label_9->setText(QString::number(cantest.VolMIJISUM));//总里程
 
 
 
@@ -6224,6 +6231,7 @@ void Widget::shanhua()//闪烁和平滑转动
 
 
     //zan 时不用
+    nu4 = cantest.HourSpeed;
     if(nu4>30)
     {
         nu4 = 30;
