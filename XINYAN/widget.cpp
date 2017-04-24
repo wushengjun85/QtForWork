@@ -55,8 +55,6 @@ bool f3;
 bool f4;
 
 
-
-
 //2017.4.6
 //
 //主离合
@@ -81,6 +79,21 @@ QString strjlzs = QString("%1").arg(jlzs);
 //过桥
 int gqzs = 80;
 QString strgqzs = QString("%1").arg(gqzs);
+
+
+//过渡变量 //临时变量
+
+int tempzlh;
+int tempxllh;
+int tempgqlh;
+int tempgtzs;
+int tempfjzs;
+int tempjlzs;
+int tempgqzs;
+
+//标志变量
+bool FaZhiReadOK = true;
+//bool FlagFaZhirecover = false;
 
 /*******************************************************************************************************************/
 //2017.1.14 wsj
@@ -452,29 +465,106 @@ Widget::Widget(QWidget *parent) :
     ui->lineEdit_30->installEventFilter(this);
 
 
+
+
+    //2017.4.22    //读取阀值设定数据库
+    #if 1
+
+     if(FaZhiReadOK)
+     {
+      //static unsigned char nn = 1;
+      QTextCodec::setCodecForTr(QTextCodec::codecForLocale());//汉字显示
+      QSqlDatabase db;
+      if(QSqlDatabase::contains("qt_sql_default_connection"))
+        db = QSqlDatabase::database("qt_sql_default_connection");
+      else
+        db = QSqlDatabase::addDatabase("QSQLITE");
+
+     db.setDatabaseName("jy.db");
+     if (!db.open())
+     {
+         qDebug()<<"open database failed ---"<<db.lastError().text()<<endl;
+     }
+     QSqlQuery query;
+     #if 0
+     bool ok = query.exec("create table FaZhiBingBD(ZLH INTEGER,XLLH INTEGER,GQLH INTEGER,LmdGTZS INTEGER,LmdFengJi INTEGER,LmdJiaoLong INTEGER,LmdGuoQiao INTEGER)");
+     if (ok)
+     {
+         qDebug()<<"ceate table partition success"<<endl;
+     }
+     else
+     {
+         qDebug()<<"ceate table partition failed"<<endl;
+     }
+     #endif
+
+#if 0
+     //query.prepare("INSERT INTO FaZhiBingBD(ZLH, XLLH, GQLH,LmdGTZS,LmdFengJi,LmdJiaoLong,LmdGuoQiao) VALUES (:ZLH, :XLLH, :GQLH, :LmdGQZS, :LmdFengJi, :LmdJiaoLong, :LmdGuoQiao)");
+     query.prepare("update FaZhiBingBD set ZLH = :ZLH,XLLH = :XLLH,GQLH = :GQLH,LmdGQZS = :LmdGQZS,LmdFengJi = :LmdFengJi,LmdJiaoLong = :LmdJiaoLong,LmdGuoQiao = :LmdGuoQiao");//where
+
+     query.bindValue(":ZLH",10);
+     query.bindValue(":XLLH", 11);
+     query.bindValue(":GQLH", 12);
+     query.bindValue(":LmdGTZS", 13);
+     query.bindValue(":LmdFengJi", 14);
+     query.bindValue(":LmdJiaoLong", 15);
+     query.bindValue(":LmdGuoQiao", 16);
+     query.exec();
+#endif
+
+    query.exec("select ZLH, XLLH, GQLH,LmdGTZS,LmdFengJi,LmdJiaoLong,LmdGuoQiao from FaZhiBingBD");
+    while (query.next())
+    {
+
+      qDebug()<<"id("<<query.value(0).toInt()<<")  name:"<<query.value(1).toString()<<"  age:"<<query.value(2).toInt();
+      tempzlh = query.value(0).toInt();
+      tempxllh = query.value(1).toInt();
+      tempgqlh = query.value(2).toInt();
+      tempgtzs = query.value(3).toInt();
+      tempfjzs = query.value(4).toInt();
+      tempjlzs = query.value(5).toInt();
+      tempgqzs = query.value(6).toInt();
+
+
+    }
+    query.exec(QObject::tr("drop FaZhiBingBD"));
+
+    zlh  = tempzlh;
+    xllh = tempxllh;
+    gqlh = tempgqlh;
+    gtzs = tempgtzs;
+    fjzs = tempfjzs;
+    jlzs = tempjlzs;
+    gqzs = tempgqzs;
+
+    //FaZhiReadOK = false;
+}
+    #endif
+
+
     //2017.4.6
     //
     //主离合
-    int zlh = 80;
+    //int zlh = 80;
     QString strzlh = QString("%1").arg(zlh);
     //卸粮离合
-    int xllh = 80;
+    //int xllh = 80;
     QString strxllh = QString("%1").arg(xllh);
     //过桥离合
-    int gqlh = 80;
+    //int gqlh = 80;
     QString strgqlh = QString("%1").arg(gqlh);
 
     //滚筒
-    int gtzs = 80;
+    //int gtzs = 80;
     QString strgtzs = QString("%1").arg(gtzs);
     //风机
-    int fjzs = 80;
+    //int fjzs = 80;
     QString strfjzs = QString("%1").arg(fjzs);
     //搅龙
-    int jlzs = 80;
+    //int jlzs = 80;
     QString strjlzs = QString("%1").arg(jlzs);
     //过桥
-    int gqzs = 80;
+    //int gqzs = 80;
     QString strgqzs = QString("%1").arg(gqzs);
 
     ui->lineEdit_23->setText(strzlh);
@@ -4648,6 +4738,84 @@ void Widget::keyPressEvent(QKeyEvent *e)
 
 /**************************************************************************************************/
 
+/**************************************************************************************************/
+//阀值标定
+           case FazhibiaodingMenu:
+            {
+            //2017.4.22    //更新阀值设定数据库
+            #if 1
+
+             if(FaZhiReadOK)
+             {
+
+              QTextCodec::setCodecForTr(QTextCodec::codecForLocale());//汉字显示
+              QSqlDatabase db;
+              if(QSqlDatabase::contains("qt_sql_default_connection"))
+                db = QSqlDatabase::database("qt_sql_default_connection");
+              else
+                db = QSqlDatabase::addDatabase("QSQLITE");
+
+             db.setDatabaseName("jy.db");
+             if (!db.open())
+             {
+                 qDebug()<<"open database failed ---"<<db.lastError().text()<<endl;
+             }
+             QSqlQuery query;
+             #if 0
+             bool ok = query.exec("create table FaZhiBingBD(ZLH INTEGER,XLLH INTEGER,GQLH INTEGER,LmdGTZS INTEGER,LmdFengJi INTEGER,LmdJiaoLong INTEGER,LmdGuoQiao INTEGER)");
+             if (ok)
+             {
+                 qDebug()<<"ceate table partition success"<<endl;
+             }
+             else
+             {
+                 qDebug()<<"ceate table partition failed"<<endl;
+             }
+             #endif
+
+        #if 1
+             //query.prepare("INSERT INTO FaZhiBingBD(ZLH, XLLH, GQLH,LmdGTZS,LmdFengJi,LmdJiaoLong,LmdGuoQiao) VALUES (:ZLH, :XLLH, :GQLH, :LmdGQZS, :LmdFengJi, :LmdJiaoLong, :LmdGuoQiao)");
+             query.prepare("update FaZhiBingBD set ZLH = :ZLH,XLLH = :XLLH,GQLH = :GQLH,LmdGTZS = :LmdGQZS,LmdFengJi = :LmdFengJi,LmdJiaoLong = :LmdJiaoLong,LmdGuoQiao = :LmdGuoQiao");//where
+
+             query.bindValue(":ZLH",zlh);
+             query.bindValue(":XLLH", xllh);
+             query.bindValue(":GQLH", gqlh);
+             query.bindValue(":LmdGTZS", gtzs);
+             query.bindValue(":LmdFengJi", fjzs);
+             query.bindValue(":LmdJiaoLong", jlzs);
+             query.bindValue(":LmdGuoQiao", gqzs);
+             query.exec();
+
+        #endif
+
+             #if 0
+            query.exec("select ZLH, XLLH, GQLH,LmdGTZS,LmdFengJi,LmdJiaoLong,LmdGuoQiao from FaZhiBingBD");
+            while (query.next())
+            {
+
+              qDebug()<<"id("<<query.value(0).toInt()<<")  name:"<<query.value(1).toString()<<"  age:"<<query.value(2).toInt();
+              tempzlh = query.value(0).toInt();
+              tempxllh = query.value(1).toInt();
+              tempgqlh = query.value(2).toInt();
+              tempgtzs = query.value(3).toInt();
+              tempfjzs = query.value(4).toInt();
+              tempjlzs = query.value(5).toInt();
+              tempgqzs = query.value(6).toInt();
+
+
+            }
+            #endif
+            query.exec(QObject::tr("drop FaZhiBingBD"));
+
+        }
+            #endif
+            }
+            break;
+
+
+/**************************************************************************************************/
+
+
 
             //2017.4.10
             case HelpMenu:
@@ -4880,7 +5048,7 @@ bool Widget::eventFilter(QObject *watched, QEvent *event)
                         ui->listWidget->item(2)->setTextColor(Qt::black);
                     }
 
-                    ui->listWidget->item(LCClearMenuRow)->setBackgroundColor(Qt::yellow);
+                    ui->listWidget->item(LCClearMenuRow)->setBackgroundColor(Qt::blue);
                     ui->listWidget->item(LCClearMenuRow)->setTextColor(Qt::red);
 
                     if(LCClearMenuRow == 1)
@@ -4921,7 +5089,7 @@ bool Widget::eventFilter(QObject *watched, QEvent *event)
                         ui->listWidget_2->item(1)->setTextColor(Qt::black);
                     }
 
-                    ui->listWidget_2->item(LCSwitchmatchineRow)->setBackgroundColor(Qt::yellow);
+                    ui->listWidget_2->item(LCSwitchmatchineRow)->setBackgroundColor(Qt::blue);
                     ui->listWidget_2->item(LCSwitchmatchineRow)->setTextColor(Qt::red);
 
                     if(LCSwitchmatchineRow == 1)
@@ -4957,14 +5125,14 @@ bool Widget::eventFilter(QObject *watched, QEvent *event)
                         ui->listWidget_3->item(5)->setTextColor(Qt::black);
 
                         ui->listWidget_4->setFocus();
-                        ui->listWidget_4->item(LCMachineModeMenu)->setBackgroundColor(Qt::yellow);
+                        ui->listWidget_4->item(LCMachineModeMenu)->setBackgroundColor(Qt::blue);
                         ui->listWidget_4->item(LCMachineModeMenu)->setTextColor(Qt::red);
                         LCBoolMachineModenu = false;
                     }
 
                     else
                     {
-                        ui->listWidget_3->item(LCMachineModeMenu)->setBackgroundColor(Qt::yellow);
+                        ui->listWidget_3->item(LCMachineModeMenu)->setBackgroundColor(Qt::blue);
                         ui->listWidget_3->item(LCMachineModeMenu)->setTextColor(Qt::red);
                     }
 
@@ -5039,13 +5207,13 @@ bool Widget::eventFilter(QObject *watched, QEvent *event)
                         ui->listWidget_4->item(5)->setTextColor(Qt::black);
 
                         ui->listWidget_3->setFocus();
-                        ui->listWidget_3->item(0)->setBackgroundColor(Qt::yellow);
+                        ui->listWidget_3->item(0)->setBackgroundColor(Qt::blue);
                         ui->listWidget_3->item(0)->setTextColor(Qt::red);
                         LCBoolMachineModenu = true;
                     }
                     else
                     {
-                        ui->listWidget_4->item(LCMachineModeMenu)->setBackgroundColor(Qt::yellow);
+                        ui->listWidget_4->item(LCMachineModeMenu)->setBackgroundColor(Qt::blue);
                         ui->listWidget_4->item(LCMachineModeMenu)->setTextColor(Qt::red);
                     }
 
@@ -5120,7 +5288,7 @@ bool Widget::eventFilter(QObject *watched, QEvent *event)
                         ui->listWidget_5->item(4)->setTextColor(Qt::black);
                     }
 
-                    ui->listWidget_5->item(LCEngineSwitchMenu)->setBackgroundColor(Qt::yellow);
+                    ui->listWidget_5->item(LCEngineSwitchMenu)->setBackgroundColor(Qt::blue);
                     ui->listWidget_5->item(LCEngineSwitchMenu)->setTextColor(Qt::red);
 
                     if(LCEngineSwitchMenu == 1)
@@ -5475,6 +5643,64 @@ bool Widget::eventFilter(QObject *watched, QEvent *event)
                         QString strgqzs = QString("%1").arg(gqzs);
                         ui->lineEdit_29->setText(strgqzs);
                     }
+
+                    flagaction = true;
+                    return true;
+                }
+
+                else if ((key_event->key() == Qt::Key_F5)&&(watched == ui->lineEdit_30))
+                {
+                    bool mm8 = ui->lineEdit_30->hasFocus();
+                    if(mm8)
+                    {
+
+                        qDebug()<<"kddddddddddddddddddddddddddddddddddddddddddddddddd"<<endl;
+                    }
+
+
+                    zlh  = 80;
+                    xllh = 80;
+                    gqlh = 80;
+                    gtzs = 80;
+                    fjzs = 80;
+                    jlzs = 80;
+                    gqzs = 80;
+
+                    //2017.4.22    //更新阀值设定数据库
+
+                      QTextCodec::setCodecForTr(QTextCodec::codecForLocale());//汉字显示
+                      QSqlDatabase db;
+                      if(QSqlDatabase::contains("qt_sql_default_connection"))
+                        db = QSqlDatabase::database("qt_sql_default_connection");
+                      else
+                        db = QSqlDatabase::addDatabase("QSQLITE");
+
+                     db.setDatabaseName("jy.db");
+                     if (!db.open())
+                     {
+                         qDebug()<<"open database failed ---"<<db.lastError().text()<<endl;
+                     }
+                     QSqlQuery query;
+
+                     query.prepare("update FaZhiBingBD set ZLH = :ZLH,XLLH = :XLLH,GQLH = :GQLH,LmdGTZS = :LmdGQZS,LmdFengJi = :LmdFengJi,LmdJiaoLong = :LmdJiaoLong,LmdGuoQiao = :LmdGuoQiao");//where
+                     query.bindValue(":ZLH",zlh);
+                     query.bindValue(":XLLH", xllh);
+                     query.bindValue(":GQLH", gqlh);
+                     query.bindValue(":LmdGTZS", gtzs);
+                     query.bindValue(":LmdFengJi", fjzs);
+                     query.bindValue(":LmdJiaoLong", jlzs);
+                     query.bindValue(":LmdGuoQiao", gqzs);
+                     query.exec();
+
+                    query.exec(QObject::tr("drop FaZhiBingBD"));
+
+                    ui->lineEdit_23->setText("80");
+                    ui->lineEdit_24->setText("80");
+                    ui->lineEdit_25->setText("80");
+                    ui->lineEdit_26->setText("80");
+                    ui->lineEdit_27->setText("80");
+                    ui->lineEdit_28->setText("80");
+                    ui->lineEdit_29->setText("80");
 
                     flagaction = true;
                     return true;
