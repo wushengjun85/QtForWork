@@ -5777,15 +5777,13 @@ bool Widget::eventFilter(QObject *watched, QEvent *event)
 
                         if(LCPiPeixingBiaoDing>=3)
                         {
-                            ui->tableWidget_3->setCurrentCell(LCPiPeixingBiaoDing-3,4);
+                            ui->tableWidget_3->setCurrentCell(LCPiPeixingBiaoDing-3,5);
                             ui->tableWidget_3->setSelectionBehavior(QAbstractItemView::SelectItems);//SelectRows
-
                         }
                         else
                         {
                             ui->tableWidget_3->setCurrentCell(LCPiPeixingBiaoDing,0);
                             ui->tableWidget_3->setSelectionBehavior(QAbstractItemView::SelectItems);//SelectRows
-
                         }
                     }
 
