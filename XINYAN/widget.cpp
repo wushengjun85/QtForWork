@@ -3742,8 +3742,8 @@ void Widget::paintEvent(QPaintEvent *)
             floatworknu4 = 30;
         }
 
-        //时速
-        ui->label_8->setText(QString::number(floatworknu4,'f',1));// km/h
+        //单次里程 和 总里程
+        ui->label_8->setText(QString::number(cantest.MIJI));// 单次里程floatworknu4,'f',1
         ui->label_9->setText(QString::number(cantest.VolMIJISUM));//总里程
 
 
@@ -3910,8 +3910,8 @@ void Widget::paintEvent(QPaintEvent *)
 #endif
 
 /***************************************************************************************************************/
-                             //if(flagwidget == PipeixingbiaodingMenu)
-                   if(1)
+                             if(flagwidget == PipeixingbiaodingMenu)
+                   //if(1)
                               {
                                  /****************************添加最小值，最大值，中间值，偏移量*******************************************************/
                                  //2017.4.26
