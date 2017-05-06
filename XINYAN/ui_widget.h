@@ -91,6 +91,12 @@ public:
     QWidget *page_17;
     QListWidget *listWidget_6;
     QWidget *page_18;
+    QWidget *page_19;
+    QLineEdit *lineEdit_14;
+    QLineEdit *lineEdit_12;
+    QLineEdit *lineEdit_13;
+    QLineEdit *lineEdit_15;
+    QListWidget *listWidget_7;
 
     void setupUi(QWidget *Widget)
     {
@@ -434,11 +440,48 @@ public:
         page_17->setObjectName(QString::fromUtf8("page_17"));
         listWidget_6 = new QListWidget(page_17);
         listWidget_6->setObjectName(QString::fromUtf8("listWidget_6"));
-        listWidget_6->setGeometry(QRect(307, 164, 221, 106));
+        listWidget_6->setGeometry(QRect(307, 164, 221, 158));
         stackedWidget->addWidget(page_17);
         page_18 = new QWidget();
         page_18->setObjectName(QString::fromUtf8("page_18"));
         stackedWidget->addWidget(page_18);
+        page_19 = new QWidget();
+        page_19->setObjectName(QString::fromUtf8("page_19"));
+        lineEdit_14 = new QLineEdit(page_19);
+        lineEdit_14->setObjectName(QString::fromUtf8("lineEdit_14"));
+        lineEdit_14->setGeometry(QRect(450, 270, 81, 27));
+        lineEdit_12 = new QLineEdit(page_19);
+        lineEdit_12->setObjectName(QString::fromUtf8("lineEdit_12"));
+        lineEdit_12->setGeometry(QRect(450, 150, 91, 31));
+        lineEdit_13 = new QLineEdit(page_19);
+        lineEdit_13->setObjectName(QString::fromUtf8("lineEdit_13"));
+        lineEdit_13->setGeometry(QRect(450, 210, 81, 27));
+        lineEdit_15 = new QLineEdit(page_19);
+        lineEdit_15->setObjectName(QString::fromUtf8("lineEdit_15"));
+        lineEdit_15->setGeometry(QRect(480, 310, 111, 31));
+        listWidget_7 = new QListWidget(page_19);
+        QFont font;
+        font.setPointSize(16);
+        QListWidgetItem *__qlistwidgetitem = new QListWidgetItem(listWidget_7);
+        __qlistwidgetitem->setFont(font);
+        QListWidgetItem *__qlistwidgetitem1 = new QListWidgetItem(listWidget_7);
+        __qlistwidgetitem1->setFont(font);
+        QListWidgetItem *__qlistwidgetitem2 = new QListWidgetItem(listWidget_7);
+        __qlistwidgetitem2->setFont(font);
+        QListWidgetItem *__qlistwidgetitem3 = new QListWidgetItem(listWidget_7);
+        __qlistwidgetitem3->setFont(font);
+        QListWidgetItem *__qlistwidgetitem4 = new QListWidgetItem(listWidget_7);
+        __qlistwidgetitem4->setFont(font);
+        QListWidgetItem *__qlistwidgetitem5 = new QListWidgetItem(listWidget_7);
+        __qlistwidgetitem5->setFont(font);
+        QListWidgetItem *__qlistwidgetitem6 = new QListWidgetItem(listWidget_7);
+        __qlistwidgetitem6->setFont(font);
+        QListWidgetItem *__qlistwidgetitem7 = new QListWidgetItem(listWidget_7);
+        __qlistwidgetitem7->setFont(font);
+        listWidget_7->setObjectName(QString::fromUtf8("listWidget_7"));
+        listWidget_7->setGeometry(QRect(315, 120, 91, 241));
+        listWidget_7->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        stackedWidget->addWidget(page_19);
 
         retranslateUi(Widget);
 
@@ -509,6 +552,28 @@ public:
         ___qtablewidgetitem13->setText(QApplication::translate("Widget", "\346\225\205\351\232\234\346\217\217\350\277\260", 0, QApplication::UnicodeUTF8));
         label_18->setText(QApplication::translate("Widget", "\345\217\221\345\212\250\346\234\272\345\223\201\347\211\214", 0, QApplication::UnicodeUTF8));
         label_19->setText(QApplication::translate("Widget", "\346\234\272\345\231\250\345\236\213\345\217\267", 0, QApplication::UnicodeUTF8));
+        lineEdit_15->setText(QApplication::translate("Widget", "\346\201\242\345\244\215\351\273\230\350\256\244\345\200\274", 0, QApplication::UnicodeUTF8));
+
+        const bool __sortingEnabled1 = listWidget_7->isSortingEnabled();
+        listWidget_7->setSortingEnabled(false);
+        QListWidgetItem *___qlistwidgetitem = listWidget_7->item(0);
+        ___qlistwidgetitem->setText(QApplication::translate("Widget", "\347\216\211\347\261\263", 0, QApplication::UnicodeUTF8));
+        QListWidgetItem *___qlistwidgetitem1 = listWidget_7->item(1);
+        ___qlistwidgetitem1->setText(QApplication::translate("Widget", "\345\260\217\351\272\246", 0, QApplication::UnicodeUTF8));
+        QListWidgetItem *___qlistwidgetitem2 = listWidget_7->item(2);
+        ___qlistwidgetitem2->setText(QApplication::translate("Widget", "\346\260\264\347\250\273", 0, QApplication::UnicodeUTF8));
+        QListWidgetItem *___qlistwidgetitem3 = listWidget_7->item(3);
+        ___qlistwidgetitem3->setText(QApplication::translate("Widget", "\345\244\247\350\261\206", 0, QApplication::UnicodeUTF8));
+        QListWidgetItem *___qlistwidgetitem4 = listWidget_7->item(4);
+        ___qlistwidgetitem4->setText(QApplication::translate("Widget", "\346\262\271\350\217\234\347\261\275", 0, QApplication::UnicodeUTF8));
+        QListWidgetItem *___qlistwidgetitem5 = listWidget_7->item(5);
+        ___qlistwidgetitem5->setText(QApplication::translate("Widget", "\345\244\247\351\272\246", 0, QApplication::UnicodeUTF8));
+        QListWidgetItem *___qlistwidgetitem6 = listWidget_7->item(6);
+        ___qlistwidgetitem6->setText(QApplication::translate("Widget", "\347\207\225\351\272\246", 0, QApplication::UnicodeUTF8));
+        QListWidgetItem *___qlistwidgetitem7 = listWidget_7->item(7);
+        ___qlistwidgetitem7->setText(QApplication::translate("Widget", "\351\273\221\351\272\246", 0, QApplication::UnicodeUTF8));
+        listWidget_7->setSortingEnabled(__sortingEnabled1);
+
     } // retranslateUi
 
 };

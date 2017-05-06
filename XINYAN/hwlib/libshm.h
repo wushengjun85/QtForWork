@@ -15,8 +15,29 @@ extern "C"{
 /****************************************************/
 //2017/4/1 wangxw add,由于金亿显示器用的老结构体,
 //后期结构体有所修改,为了兼容金亿老结构体,特定义该宏用于区分;
-#define JINYEE_EXT		1
+#define JINYEE_EXT		1 	
+
 /****************************************************/
+
+enum XINYAN_MACHINE_MODEL
+{
+	XY_MODEL_4YZT_5,								/* 4YZT-5 */
+	XY_MODEL_4YZT_10,								/* 4YZT-10 */
+	XY_MODEL_4YZT_8,								/* 4YZT-8 */
+	XY_MODEL_4YZB_4_7_8,							/* 4YZB-4/7/8 */
+	XY_MODEL_4YZB_3A,								/* 4YZB-3A */
+	XY_MODEL_4YZB_4B,								/* 4YZB-4B */
+	XY_MODEL_4YZBT_5_8,							/* 4YZBT-5/8 */
+	XY_MODEL_4YZ_3_12V,							/* 4YZ-3(12V) */
+	XY_MODEL_4QZ_2200_2600,						/* 4QZ-2200/2600 */
+	XY_MODEL_4QZ_S3000,							/* 4QZ-S3000 */
+	XY_MODEL_4JZ_3600							/* 4JZ-3600	*/
+};
+
+typedef struct{
+		XINYAN_MACHINE_MODEL m_Model;
+}XY_MachineInfo;
+
 enum LAMP_BIT_TYPE
 {
 	LAMP_BIT_ZhiLiHuiShou,			/*	籽粒回收满	*/
@@ -40,7 +61,7 @@ enum GZ_BIT_TYPE
 	GZ_BIT_SHENGYUNQI, 		/* 升运器故障 */
 	GZ_BIT_GUOQIAO, 		/* 过桥故障 */
 	GZ_BIT_SHACHEZHIDONG, 	/* 刹车制动故障 */
-	GZ_BIT_SHACHEPANMOSUN, 	/* 刹车盘磨损 */
+	GZ_BIT_SHACHEPANMOSUN, 	/* 刹车盘磨损*/
 	GZ_BIT_BUTT
 };
 
@@ -65,6 +86,83 @@ enum SPEED_TYPE_EN
 	SPEED_XINGZOU,			/* 时速/行走转速 */
 	SPEED_BUTT		
 };
+
+enum GUI_CMD_CFG_REQ_TYPE_EN
+{
+	GUI_CMD_CFG_REQ_ALL,						/* 请求读取所有标定数据*/
+	GUI_CMD_CFG_REQ_XinZouJuBing_Data,			/* 行走句柄 标定数据*/
+	GUI_CMD_CFG_REQ_XinZouJuBing_Offset=4,		/* 行走句柄中间位置偏移量 */
+	GUI_CMD_CFG_REQ_XinZouLaGan_Data=11,		/* 行走拉杆标定数据 */
+	GUI_CMD_CFG_REQ_XinZouLaGan_Offset=14,		/* 行走拉杆中间位置偏移量 */
+	GUI_CMD_CFG_REQ_AoBanJianXi_Minimum=21,		/* 凹板间隙最小值 */
+	GUI_CMD_CFG_REQ_AoBanJianXi_Maximum=22,	/* 凹板间隙最大值 */
+	GUI_CMD_CFG_REQ_ZhuLiHeZhangJinLi=31,		/* 主离合张紧力	 */
+	GUI_CMD_CFG_REQ_XieLiangLiHeZhangJinLi,		/* 卸粮离合张紧力 */
+	GUI_CMD_CFG_REQ_GuoQiaoLiHeZhangJinLi,		/* 过桥离合张紧力 */
+	GUI_CMD_CFG_REQ_GunTongZhuanSuLinMinDu,	/* 滚筒转速灵敏度 */
+	GUI_CMD_CFG_REQ_FengJiZhuanSuLinMinDu,		/* 风机转速灵敏度 */
+	GUI_CMD_CFG_REQ_JiaoLongZhuanSuLinMinDu,	/* 搅龙转速灵敏度 */
+	GUI_CMD_CFG_REQ_GuoQiaoZhuanSuLinMinDu,		/* 过桥转速灵敏度 */
+	GUI_CMD_CFG_REQ_GeFuKuanDu,					/* 割幅宽度	*/
+	GUI_CMD_CFG_REQ_ZaiHeXiShu,					/* 载荷系数	*/
+	GUI_CMD_CFG_REQ_TiaoSuXiShu,					/* 调速系数	*/
+	GUI_CMD_CFG_REQ_GuWuZhongLei,				/* 谷物种类	*/
+	GUI_CMD_CFG_REQ_DefaultRestore_XinZouJuBing=231,	/* 行走手柄所有标定值恢复到默认值 */
+	GUI_CMD_CFG_REQ_DefaultRestore_XinZouLaGan=232,	/* 行走拉杆所有标定值恢复到默认值 */
+	GUI_CMD_CFG_REQ_DefaultRestore_AoBanJianXi=233,	/* 凹板间隙所有标定值恢复到默认值 */
+};
+
+typedef struct
+{
+	unsigned char m_ucCmdHead1;	//引导码0x11
+	unsigned char m_ucCmdHead2;	//引导码0x22
+	unsigned char m_ucCmdHead3;	//引导码0x33
+	unsigned char m_ucIdentifier;		//标定标识码
+	unsigned char m_ucData[4];	//数据
+} BiaoDingCmdDataProtocol;
+
+typedef struct
+{
+	
+   BiaoDingCmdDataProtocol 	m_BDCmdData;
+}BiaoDingDataReq;
+
+enum BIAO_DING_DATA_TYPE_EN
+{
+	BD_DATA_ZhuLiHeZhangJinLi,			/* 主离合张紧力	 */
+	BD_DATA_XieLiangLiHeZhangJinLi,	/* 卸粮离合张紧力 */
+	BD_DATA_GuoQiaoLiHeZhangJinLi,		/* 过桥离合张紧力 */
+	BD_DATA_GunTongZhuanSuLinMinDu,	/* 滚筒转速灵敏度 */
+	BD_DATA_FengJiZhuanSuLinMinDu,	/* 风机转速灵敏度 */
+	BD_DATA_JiaoLongZhuanSuLinMinDu,	/* 搅龙转速灵敏度 */
+	BD_DATA_GuoQiaoZhuanSuLinMinDu,	/* 过桥转速灵敏度 */
+	BD_DATA_BUTT
+};
+
+enum BIAO_DING_VALUE_TYPE_EN
+{
+	BD_VALUE_RealValue,
+	BD_VALUE_Minimum,
+	BD_VALUE_Median,
+	BD_VALUE_Maximum,
+	BD_VALUE_Offset,
+	BD_VALUE_BUTT
+};
+
+#define MAX_BD_VALUE_NUM		BD_VALUE_BUTT
+typedef struct 
+{
+	BiaoDingCmdDataProtocol 	m_BDCmdData;
+	int m_XinZouJubing[MAX_BD_VALUE_NUM];
+	int m_XinZouLaGan[MAX_BD_VALUE_NUM];	
+	int m_AoBanJianXi[MAX_BD_VALUE_NUM];
+	int m_ZhangJinLi_And_Sensitivity[BD_DATA_BUTT];
+	int m_GeFuKuanDu;		/* 割幅宽度*/
+	int m_ZaiKeXiShu;		/* 载荷系数*/
+	int m_TiaoSuXiShu;		/* 调速系数 */
+	int m_GuWuZhongLei;		/* 谷物种类 */
+}BiaoDingDataRsp;
+
 
 /************************************************/
 /* CAN 中间层数据传输结构 */
@@ -147,7 +245,7 @@ typedef struct
 	int StaYL;//油量故障状态
 #endif	
 	int VolYeyayouwen;//液压油温
-	int MIJI;//米计
+	int MIJI;//米计、单次里程
 	int SaLiangLV;//撒粮损失率
 	int GeChaheight;//割茬高度
 	int FTspeed;//复脱转速
@@ -155,7 +253,7 @@ typedef struct
 	int ZLspeed;//轴流转速
 	int HourSpeed;//时速
 	int VOLV;//电池电压
-	int VolMIJISUM;//总米计
+	int VolMIJISUM;//总米计、总里程
 	int VolLICHENG;//里程
 	int VolMCL;//亩产量
 	int VolGTweith;//割台宽度
@@ -260,6 +358,12 @@ void Can_set_Fdj_id(int id);//设置发动机厂家ID，用于SPN中文查询
 void Can_set_mijiclr_flag(int flag);
 void Can_set_MCL_flag(int chanliang);
 void Can_set_GTweith_flag(int weith);
+int SendReqCmdToController(GUI_CMD_CFG_REQ_TYPE_EN enReqCmd,unsigned char ucData);
+int GetRspDataFromController(BiaoDingDataRsp *_ptRsp);
+void SetXinYanMachineModel(XINYAN_MACHINE_MODEL _enModel);
+int GetXinYanMachineModel(void);
+int GuiTransportInit();
+
 
 //加共享内存锁
 void lockshm();

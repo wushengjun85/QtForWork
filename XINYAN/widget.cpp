@@ -11,14 +11,11 @@
 
 #include"hwlib/libshm.h"
 
-
-
 //故障码清除标志
 bool flagGzmclear = false;
 unsigned char clearItem;
 
 QString trd;
-
 
 int focuseflag;
 uchar valueprogressbar;
@@ -29,6 +26,14 @@ uchar LCSwitchmatchineRow = 0;
 uchar LCMachineModeMenu = 0;
 uchar LCEngineSwitchMenu = 0;
 bool LCBoolMachineModenu = true;
+
+
+//2017.5.4  割台设置
+uchar LCGetaiSetup = 3;
+uchar GeFuWidth = 0;
+uchar Zaihexishu = 0;
+uchar Autospeed = 0;
+//
 
 //2017.4.7 add
 uchar LCBiaoDingRow = 0;
@@ -58,26 +63,26 @@ bool f4;
 //2017.4.6
 //
 //主离合
-int zlh = 80;
+unsigned char zlh = 0;
 QString strzlh = QString("%1").arg(zlh);
 //卸粮离合
-int xllh = 80;
+unsigned char xllh = 0;
 QString strxllh = QString("%1").arg(xllh);
 //过桥离合
-int gqlh = 80;
+unsigned char gqlh = 0;
 QString strgqlh = QString("%1").arg(gqlh);
 
 //滚筒
-int gtzs = 80;
+unsigned char gtzs = 0;
 QString strgtzs = QString("%1").arg(gtzs);
 //风机
-int fjzs = 80;
+unsigned char fjzs = 0;
 QString strfjzs = QString("%1").arg(fjzs);
 //搅龙
-int jlzs = 80;
+unsigned char jlzs = 0;
 QString strjlzs = QString("%1").arg(jlzs);
 //过桥
-int gqzs = 80;
+unsigned char gqzs = 0;
 QString strgqzs = QString("%1").arg(gqzs);
 
 
@@ -118,7 +123,8 @@ enum uiFlag
     ZhujiFault,           //主机故障查询    14
     JiQiXinXi,        //机器信息           15
     BiaoDing,          //标定菜单           16
-    Shaomiao              //扫码查询        17
+    Shaomiao,              //扫码查询        17
+    Getai              //割台参数设置        18
 };
 uiFlag flagwidget;
 
@@ -221,7 +227,7 @@ char *p4 = "油量异常";
  unsigned char numdaoche = 0;
 
 
- /*******************************************************************************************************************/
+/*******************************************************************************************************************/
 
 /*******************************************************************************************************************/
 
@@ -384,9 +390,9 @@ unsigned int ReadConfigArry[3] = {0};
 RAM_CAN_sData cantest;
 RAM_CAN_sData_ECU ecutest;
 
+
+BiaoDingDataRsp biaoding;
 /*******************************************************************************************************************/
-
-
 
 Widget::Widget(QWidget *parent) :
     QWidget(parent),
@@ -442,8 +448,6 @@ Widget::Widget(QWidget *parent) :
 
     timergzmTihuan->start(1000);//故障码替换显示  显示 “ ” 空//3s
 
-
-
     //过滤器安装
     ui->label_2->installEventFilter(this);
     ui->label_5->installEventFilter(this);
@@ -465,10 +469,15 @@ Widget::Widget(QWidget *parent) :
     ui->lineEdit_30->installEventFilter(this);
 
 
+    //2017.5.4
+    ui->lineEdit_12->installEventFilter(this);
+    ui->lineEdit_13->installEventFilter(this);
+    ui->lineEdit_14->installEventFilter(this);
+    ui->lineEdit_15->installEventFilter(this);
 
 
     //2017.4.22    //读取阀值设定数据库
-    #if 1
+    #if 0
 
      if(FaZhiReadOK)
      {
@@ -541,6 +550,31 @@ Widget::Widget(QWidget *parent) :
 }
     #endif
 
+     //2017.5.2
+     //2017.5.2 add wsj
+     SendReqCmdToController(GUI_CMD_CFG_REQ_ALL,0);
+     GetRspDataFromController(&biaoding);
+
+     //
+     zlh = biaoding.m_ZhangJinLi_And_Sensitivity[BD_DATA_ZhuLiHeZhangJinLi];
+     xllh = biaoding.m_ZhangJinLi_And_Sensitivity[BD_DATA_XieLiangLiHeZhangJinLi];
+     gqlh = biaoding.m_ZhangJinLi_And_Sensitivity[BD_DATA_GuoQiaoLiHeZhangJinLi];
+     gtzs = biaoding.m_ZhangJinLi_And_Sensitivity[BD_DATA_GunTongZhuanSuLinMinDu];
+     fjzs = biaoding.m_ZhangJinLi_And_Sensitivity[BD_DATA_FengJiZhuanSuLinMinDu];
+     jlzs = biaoding.m_ZhangJinLi_And_Sensitivity[BD_DATA_JiaoLongZhuanSuLinMinDu];
+     gqzs = biaoding.m_ZhangJinLi_And_Sensitivity[BD_DATA_GuoQiaoZhuanSuLinMinDu];
+
+     qDebug()<<"FAZHIBIAODING..............................."<<endl;
+     qDebug()<<"zlh = "<<zlh;
+     qDebug()<<"xllh = "<<xllh;
+     qDebug()<<"gqlh = "<<gqlh;
+     qDebug()<<"gtzs = "<<gtzs;
+     qDebug()<<"fjzs = "<<fjzs;
+     qDebug()<<"jlzs = "<<jlzs;
+     qDebug()<<"gqzs = "<<gqzs;
+
+
+
 
     //2017.4.6
     //
@@ -579,7 +613,7 @@ Widget::Widget(QWidget *parent) :
 
 
 
-    /**************************************************************/
+    /**********************************************************************************************/
 
     //2017.4.7
     //过滤器安装
@@ -592,7 +626,7 @@ Widget::Widget(QWidget *parent) :
     //标定选择
     QListWidgetItem * BiaoItem1 = new QListWidgetItem;
     QListWidgetItem * BiaoItem2 = new QListWidgetItem;
-    //QListWidgetItem * pItem3 = new QListWidgetItem;
+    QListWidgetItem * BiaoItem3 = new QListWidgetItem;
 
     BiaoItem1->setSizeHint(QSize(30, 52));  //每次改变Item的高度
     BiaoItem1->setText("匹配性标定");//
@@ -600,14 +634,15 @@ Widget::Widget(QWidget *parent) :
     BiaoItem2->setSizeHint(QSize(30, 52));  //每次改变Item的高度
     BiaoItem2->setText("阀值标定");//
 
+    //2017.5.4
+    BiaoItem3->setSizeHint(QSize(30, 52));  //每次改变Item的高度
+    BiaoItem3->setText("收割参数设定");//
+
     ui->listWidget_6->insertItem(0,BiaoItem1);
     ui->listWidget_6->insertItem(1,BiaoItem2);
+    ui->listWidget_6->insertItem(2,BiaoItem3);
 
-
-
-    /**************************************************************/
-
-
+/**************************************************************/
 
     //过滤器安装
     ui->lineEdit->installEventFilter(this);
@@ -620,6 +655,11 @@ Widget::Widget(QWidget *parent) :
     ui->listWidget_3->installEventFilter(this);
     ui->listWidget_4->installEventFilter(this);
     ui->listWidget_5->installEventFilter(this);
+
+
+    //2017.5.4
+    ui->listWidget_7->installEventFilter(this);
+    //
 
     ui->tableWidget->installEventFilter(this);
     ui->tableWidget_2->installEventFilter(this);
@@ -826,8 +866,6 @@ Widget::Widget(QWidget *parent) :
 }
 
 
-
-
 Widget::~Widget()
 {
     delete ui;
@@ -885,12 +923,10 @@ void Widget::paintEvent(QPaintEvent *)
             ui->label_5->setStyleSheet("border-image: url(:/new/prefix1/img/icon/shuiwen.png);");
             break;
 
-
             case S3000:
             pix.load("./img/jiemian/S3000.bmp");
             ui->label_5->setStyleSheet("border-image: url(:/new/prefix1/img/icon/jiyouyali.png);");
             break;
-
 
             default:
             break;
@@ -961,6 +997,11 @@ void Widget::paintEvent(QPaintEvent *)
 
         case Shaomiao:
         pix.load("./img/jiemian/Shaomiao.bmp");
+        break;
+
+        //2017.5.4
+        case Getai:
+        pix.load("./img/jiemian/Getai.bmp");//Getai
         break;
 
         default:
@@ -2500,6 +2541,7 @@ void Widget::paintEvent(QPaintEvent *)
 
             }//end of if(flagmatchion == YZB_4_5_7_8)
 
+
             else if(flagmatchion == YZBT_5)
             {
                    //int side = qMin(width(), height());  //绘制的范围(宽、高中最小值)
@@ -2790,6 +2832,13 @@ void Widget::paintEvent(QPaintEvent *)
 
             }//end of if(flagmatchion == YZBT_5)
 
+
+
+
+
+
+            //
+            //2017.5.6 东北测试机型
             else if(flagmatchion == YZT_5)
             {
                 //int side = qMin(width(), height());  //绘制的范围(宽、高中最小值)
@@ -4265,6 +4314,11 @@ void Widget::keyPressEvent(QKeyEvent *e)
              ui->stackedWidget->setCurrentIndex(2);
              break;
 
+         case Getai:
+         flagwidget = MainMenu;
+         ui->stackedWidget->setCurrentIndex(2);
+         break;
+
              default:
                  break;
 
@@ -4542,6 +4596,11 @@ void Widget::keyPressEvent(QKeyEvent *e)
              {
                 //qDebug()<<"matchine.......  ==  "<<query.value(0).toInt()<<endl;
              }
+
+
+             //2017.5.6  暂时先这样给下边传数据
+             SetXinYanMachineModel(	XY_MODEL_4YZT_5);
+
              query.exec(QObject::tr("drop config"));
 
           }
@@ -4603,6 +4662,10 @@ void Widget::keyPressEvent(QKeyEvent *e)
              {
                 qDebug()<<"888888888888888888888888   matchine.......  ==  "<<query.value(0).toInt()<<endl;
              }
+
+             //2017.5.6 设置发动机厂家ID，用于SPN中文查询
+             Can_set_Fdj_id(CJSwitch);//设置发动机厂家ID，用于SPN中文查询
+
              query.exec(QObject::tr("drop config"));
             }
             break;
@@ -4674,6 +4737,42 @@ void Widget::keyPressEvent(QKeyEvent *e)
             {
                 flagwidget = FazhibiaodingMenu;
                 ui->stackedWidget->setCurrentIndex(12);
+
+//                //2017.5.2 add wsj
+//                SendReqCmdToController(GUI_CMD_CFG_REQ_ALL,0);
+//                GetRspDataFromController(&biaoding);
+
+//                //
+//                zlh = biaoding.m_ZhangJinLi_And_Sensitivity[BD_DATA_ZhuLiHeZhangJinLi];
+//                xllh = biaoding.m_ZhangJinLi_And_Sensitivity[BD_DATA_XieLiangLiHeZhangJinLi];
+//                gqlh = biaoding.m_ZhangJinLi_And_Sensitivity[BD_DATA_GuoQiaoLiHeZhangJinLi];
+//                gtzs = biaoding.m_ZhangJinLi_And_Sensitivity[BD_DATA_GunTongZhuanSuLinMinDu];
+//                fjzs = biaoding.m_ZhangJinLi_And_Sensitivity[BD_DATA_FengJiZhuanSuLinMinDu];
+//                jlzs = biaoding.m_ZhangJinLi_And_Sensitivity[BD_DATA_JiaoLongZhuanSuLinMinDu];
+//                gqzs = biaoding.m_ZhangJinLi_And_Sensitivity[BD_DATA_GuoQiaoZhuanSuLinMinDu];
+
+//                qDebug()<<"FAZHIBIAODING..............................."<<endl;
+//                qDebug()<<"zlh = "<<zlh;
+//                qDebug()<<"xllh = "<<xllh;
+//                qDebug()<<"gqlh = "<<gqlh;
+//                qDebug()<<"gtzs = "<<gtzs;
+//                qDebug()<<"fjzs = "<<fjzs;
+//                qDebug()<<"jlzs = "<<jlzs;
+//                qDebug()<<"gqzs = "<<gqzs;
+            }
+
+            //2017.5.4
+            else if(LCBiaoDingRow == 3) //割台设定
+            {
+                qDebug()<<"GETATI)))))))))))))))))))))))))))))))))))))))))))))))";
+                flagwidget = Getai;
+                ui->stackedWidget->setCurrentIndex(18);
+
+                //2017.5.4
+                ui->listWidget_7->setFocus();
+                ui->lineEdit_12->setText(QString::number(GeFuWidth));
+                ui->lineEdit_13->setText(QString::number(Zaihexishu));
+                ui->lineEdit_14->setText(QString::number(Autospeed));
             }
           break;
 
@@ -4788,6 +4887,18 @@ void Widget::keyPressEvent(QKeyEvent *e)
 
         #endif
 
+
+             //2017.5.2
+             SendReqCmdToController(GUI_CMD_CFG_REQ_ZhuLiHeZhangJinLi,zlh);
+             SendReqCmdToController(GUI_CMD_CFG_REQ_XieLiangLiHeZhangJinLi,xllh);
+             SendReqCmdToController(GUI_CMD_CFG_REQ_GuoQiaoLiHeZhangJinLi,gqlh);
+             SendReqCmdToController(GUI_CMD_CFG_REQ_GunTongZhuanSuLinMinDu,gtzs);
+             SendReqCmdToController(GUI_CMD_CFG_REQ_FengJiZhuanSuLinMinDu,fjzs);
+             SendReqCmdToController(GUI_CMD_CFG_REQ_JiaoLongZhuanSuLinMinDu,jlzs);
+             SendReqCmdToController(GUI_CMD_CFG_REQ_GuoQiaoZhuanSuLinMinDu,gqzs);
+
+
+
              #if 0
             query.exec("select ZLH, XLLH, GQLH,LmdGTZS,LmdFengJi,LmdJiaoLong,LmdGuoQiao from FaZhiBingBD");
             while (query.next())
@@ -4814,8 +4925,59 @@ void Widget::keyPressEvent(QKeyEvent *e)
 
 
 /**************************************************************************************************/
+/**************************************************************************************************/
 
+                            case Getai:
+                            {
+                            //2017.5.5 割台参数设置
+                            #if 1
+                            QTextCodec::setCodecForTr(QTextCodec::codecForLocale());//汉字显示
+                            QSqlDatabase db;
+                            if(QSqlDatabase::contains("qt_sql_default_connection"))
+                              db = QSqlDatabase::database("qt_sql_default_connection");
+                            else
+                              db = QSqlDatabase::addDatabase("QSQLITE");
 
+                           db.setDatabaseName("jy.db");
+                           if (!db.open())
+                           {
+                               qDebug()<<"open database failed ---"<<db.lastError().text()<<endl;
+                           }
+                           QSqlQuery query;
+                           #if 0
+                           bool ok = query.exec("create table GeTaiBD(GuWuSwitch INTEGER,GeFuWidth INTEGER,ZaiHeXishu INTEGER,ChangeSpeed INTEGER)");
+                           if (ok)
+                           {
+                               qDebug()<<"ceate table partition success"<<endl;
+                           }
+                           else
+                           {
+                               qDebug()<<"ceate table partition failed"<<endl;
+                           }
+                           #endif
+
+                           //query.prepare("INSERT INTO GeTaiBD(GuWuSwitch, GeFuWidth, ZaiHeXishu,ChangeSpeed) VALUES (:GuWuSwitch, :GeFuWidth,:ZaiHeXishu, :ChangeSpeed)");
+                           query.prepare("update GeTaiBD set GuWuSwitch = :GuWuSwitch,GeFuWidth = :GeFuWidth,ZaiHeXishu = :ZaiHeXishu,ChangeSpeed = :ChangeSpeed");//where
+
+                           query.bindValue(":GuWuSwitch",3000);
+                           query.bindValue(":GeFuWidth", 11);
+                           query.bindValue(":ZaiHeXishu", 66);
+                           query.bindValue(":ChangeSpeed", 77);
+                           query.exec();
+
+                         query.exec("select GuWuSwitch, GeFuWidth, ZaiHeXishu,ChangeSpeed from GeTaiBD");
+                         while (query.next())
+                         {
+
+                            qDebug()<<"id("<<query.value(0).toInt()<<")  name:"<<query.value(1).toString()<<"  age:"<<query.value(2).toInt();
+
+                         }
+                          query.exec(QObject::tr("drop GuWuSwitch"));
+
+                      #endif
+                          }
+                          break;
+/**************************************************************************************************/
 
             //2017.4.10
             case HelpMenu:
@@ -4873,7 +5035,6 @@ void Widget::keyPressEvent(QKeyEvent *e)
             break;
 
             //视频界面返回到系统设置界面
-
 
             case VideoSetupMenu://设为主屏幕
             {
@@ -4939,6 +5100,12 @@ void Widget::keyPressEvent(QKeyEvent *e)
             case JiQiXinXi:
             flagwidget = HelpMenu;
             ui->stackedWidget->setCurrentIndex(7);
+            break;
+
+            //2017.5.4
+            case Getai:
+            flagwidget = BiaoDing;
+            ui->stackedWidget->setCurrentIndex(16);
             break;
 
             default:
@@ -5695,12 +5862,12 @@ bool Widget::eventFilter(QObject *watched, QEvent *event)
                     query.exec(QObject::tr("drop FaZhiBingBD"));
 
                     ui->lineEdit_23->setText("80");
-                    ui->lineEdit_24->setText("80");
+                    ui->lineEdit_24->setText("10");
                     ui->lineEdit_25->setText("80");
-                    ui->lineEdit_26->setText("80");
+                    ui->lineEdit_26->setText("10");
                     ui->lineEdit_27->setText("80");
-                    ui->lineEdit_28->setText("80");
-                    ui->lineEdit_29->setText("80");
+                    ui->lineEdit_28->setText("10");
+                    ui->lineEdit_29->setText("10");
 
                     flagaction = true;
                     return true;
@@ -5720,23 +5887,27 @@ bool Widget::eventFilter(QObject *watched, QEvent *event)
             {
                 if(key_event->key() == Qt::Key_F2)//下键
                 {
-                     qDebug()<<"Biaodingcaidan"<<endl;
-                    if(LCBiaoDingRow>1)
-                    {
-                        LCBiaoDingRow = 0;
-                        ui->listWidget_6->item(1)->setBackgroundColor(Qt::transparent);
-                        ui->listWidget_6->item(1)->setTextColor(Qt::black);
-                    }
+                    qDebug()<<"Biaodingcaidan"<<endl;
+                   if(LCBiaoDingRow>2)
+                   {
+                       LCBiaoDingRow = 0;
+                       ui->listWidget_6->item(2)->setBackgroundColor(Qt::transparent);
+                       ui->listWidget_6->item(2)->setTextColor(Qt::black);
+                   }
 
+                   ui->listWidget_6->item(LCBiaoDingRow)->setBackgroundColor(Qt::blue);
+                   ui->listWidget_6->item(LCBiaoDingRow)->setTextColor(Qt::red);
 
-                    ui->listWidget_6->item(LCBiaoDingRow)->setBackgroundColor(Qt::yellow);
-                    ui->listWidget_6->item(LCBiaoDingRow)->setTextColor(Qt::red);
-
-                    if(LCBiaoDingRow == 1)
-                    {
-                        ui->listWidget_6->item(0)->setBackgroundColor(Qt::transparent);
-                        ui->listWidget_6->item(0)->setTextColor(Qt::black);
-                    }
+                   if(LCBiaoDingRow == 1)
+                   {
+                       ui->listWidget_6->item(0)->setBackgroundColor(Qt::transparent);
+                       ui->listWidget_6->item(0)->setTextColor(Qt::black);
+                   }
+                   if(LCBiaoDingRow == 2)
+                   {
+                       ui->listWidget_6->item(1)->setBackgroundColor(Qt::transparent);
+                       ui->listWidget_6->item(1)->setTextColor(Qt::black);
+                   }
 
                     flagaction = true;
                     LCBiaoDingRow++;
@@ -5746,6 +5917,181 @@ bool Widget::eventFilter(QObject *watched, QEvent *event)
             }
         }
     }//end of else if(watched == ui->listWidget_6)
+
+
+    //2017.5.5 从新开始新的交互体验
+    else if((watched == ui->listWidget_7)||(watched == ui->lineEdit_12)||(watched == ui->lineEdit_13)||(watched == ui->lineEdit_14)||(watched == ui->lineEdit_15))
+    {
+        if(event->type() == QEvent::KeyPress)
+        {
+            QKeyEvent *key_event = static_cast < QKeyEvent *>(event); //将事件转化为键盘事件
+            {
+                bool ff1 = ui->listWidget_7->hasFocus();
+                bool ff2 = ui->lineEdit_12->hasFocus();
+                bool ff3 = ui->lineEdit_13->hasFocus();
+                bool ff4 = ui->lineEdit_14->hasFocus();
+                bool ff5 = ui->lineEdit_15->hasFocus();
+
+                if(ff1)
+                {
+                    ui->listWidget_7->item(LCGetaiSetup)->setBackgroundColor(Qt::yellow);
+                    ui->listWidget_7->item(LCGetaiSetup)->setTextColor(Qt::red);
+                }
+
+                if(key_event->key() == Qt::Key_F2)//下键
+                {
+
+                    if(ff1)
+                    {
+                        focusNextChild();
+                        ui->lineEdit_12->hasFocus();
+                    }
+                    if(ff2)
+                    {
+                        focusNextChild();
+                        ui->lineEdit_13->hasFocus();
+
+                    }
+                    if(ff3)
+                    {
+                        focusNextChild();
+                        ui->lineEdit_14->hasFocus();
+                    }
+                    if(ff4)
+                    {
+                        focusNextChild();
+                        ui->lineEdit_15->hasFocus();
+                    }
+                    if(ff5)
+                    {
+                        focusNextChild();
+                        ui->listWidget_7->hasFocus();
+                    }
+
+                    flagaction = true;
+                }
+
+                else if (key_event->key() == Qt::Key_F3)
+                {
+                    if(ff1)
+                    {
+                      LCGetaiSetup--;
+                      ui->listWidget_7->item(LCGetaiSetup)->setBackgroundColor(Qt::yellow);
+                      ui->listWidget_7->item(LCGetaiSetup)->setTextColor(Qt::red);
+                      ui->listWidget_7->item(LCGetaiSetup+1)->setBackgroundColor(Qt::transparent);
+                      ui->listWidget_7->item(LCGetaiSetup+1)->setTextColor(Qt::black);
+                    }
+
+                    if(ff2)
+                    {
+                        GeFuWidth--;
+                        QString strGeFuWidth = QString("%1").arg(GeFuWidth);
+                        ui->lineEdit_12->setText(strGeFuWidth);
+                    }
+                    if(ff3)
+                    {
+                         Zaihexishu--;
+                        QString strZaihexishu = QString("%1").arg(Zaihexishu);
+                        ui->lineEdit_13->setText(strZaihexishu);
+                    }
+                    if(ff4)
+                    {
+                        Autospeed--;
+                        QString strAutospeed = QString("%1").arg(Autospeed);
+                        ui->lineEdit_14->setText(strAutospeed);
+                    }
+                    flagaction = true;
+                }
+                else if (key_event->key() == Qt::Key_F4)
+                {
+                    if(ff1)
+                    {
+                        LCGetaiSetup++;
+                        ui->listWidget_7->item(LCGetaiSetup)->setBackgroundColor(Qt::yellow);
+                        ui->listWidget_7->item(LCGetaiSetup)->setTextColor(Qt::red);
+                        ui->listWidget_7->item(LCGetaiSetup-1)->setBackgroundColor(Qt::transparent);
+                        ui->listWidget_7->item(LCGetaiSetup-1)->setTextColor(Qt::black);
+                    }
+                    if(ff2)
+                    {
+                        GeFuWidth++;
+                        QString strGeFuWidth = QString("%1").arg(GeFuWidth);
+                        ui->lineEdit_12->setText(strGeFuWidth);
+                    }
+                    if(ff3)
+                    {
+                         Zaihexishu++;
+                        QString strZaihexishu = QString("%1").arg(Zaihexishu);
+                        ui->lineEdit_13->setText(strZaihexishu);
+                    }
+                    if(ff4)
+                    {
+                        Autospeed++;
+                        QString strAutospeed = QString("%1").arg(Autospeed);
+                        ui->lineEdit_14->setText(strAutospeed);
+                    }
+                    flagaction = true;
+                }
+                else if ((key_event->key() == Qt::Key_F5)&&(watched == ui->lineEdit_15))
+                {
+                    //2017.5.5 割台数据库添加
+                    //割台参数设置
+                  #if 1
+                        QTextCodec::setCodecForTr(QTextCodec::codecForLocale());//汉字显示
+                        QSqlDatabase db;
+                        if(QSqlDatabase::contains("qt_sql_default_connection"))
+                          db = QSqlDatabase::database("qt_sql_default_connection");
+                        else
+                          db = QSqlDatabase::addDatabase("QSQLITE");
+
+                       db.setDatabaseName("jy.db");
+                       if (!db.open())
+                       {
+                           qDebug()<<"open database failed ---"<<db.lastError().text()<<endl;
+                       }
+                       QSqlQuery query;
+                       #if 0
+                       bool ok = query.exec("create table GeTaiBD(GuWuSwitch INTEGER,GeFuWidth INTEGER,ZaiHeXishu INTEGER,ChangeSpeed INTEGER)");
+                       if (ok)
+                       {
+                           qDebug()<<"ceate table partition success"<<endl;
+                       }
+                       else
+                       {
+                           qDebug()<<"ceate table partition failed"<<endl;
+                       }
+                       #endif
+
+                       //query.prepare("INSERT INTO GeTaiBD(GuWuSwitch, GeFuWidth, ZaiHeXishu,ChangeSpeed) VALUES (:GuWuSwitch, :GeFuWidth,:ZaiHeXishu, :ChangeSpeed)");
+                       query.prepare("update GeTaiBD set GuWuSwitch = :GuWuSwitch,GeFuWidth = :GeFuWidth,ZaiHeXishu = :ZaiHeXishu,ChangeSpeed = :ChangeSpeed");//where
+
+                       query.bindValue(":GuWuSwitch",3000);
+                       query.bindValue(":GeFuWidth", 11);
+                       query.bindValue(":ZaiHeXishu", 66);
+                       query.bindValue(":ChangeSpeed", 77);
+                       query.exec();
+
+                     query.exec("select GuWuSwitch, GeFuWidth, ZaiHeXishu,ChangeSpeed from GeTaiBD");
+                     while (query.next())
+                     {
+
+                        qDebug()<<"id("<<query.value(0).toInt()<<")  name:"<<query.value(1).toString()<<"  age:"<<query.value(2).toInt();
+
+                     }
+                      query.exec(QObject::tr("drop GuWuSwitch"));
+
+                  #endif
+
+                    ui->lineEdit_12->setText("3140");
+                    ui->lineEdit_13->setText("5");
+                    ui->lineEdit_14->setText("80");
+                    flagaction = true;
+                }
+
+            }
+        }
+    }
+
 
     //匹配性标定
     else if(watched == ui->tableWidget_3)
