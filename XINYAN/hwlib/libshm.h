@@ -65,9 +65,9 @@ enum GZ_BIT_TYPE
 	GZ_BIT_BUTT
 };
 
-#define SET_GZ_BIT(x,index)	( x |= 1 < index )			/* ÉèÖÃ ¹ÊÕÏ bit Î» */
-#define CLR_GZ_BIT(x,index)	( x &= ~(1 < index) )		/* Çå³ý ¹ÊÕÏ bit Î» */
-#define CHK_GZ_BIT(x,index)	( x & (1 < index) )			/* ¼ì²â ¹ÊÕÏ bit Î» */
+#define SET_GZ_BIT(x,index)	( x |= 1 << index )			/* ÉèÖÃ ¹ÊÕÏ bit Î» */
+#define CLR_GZ_BIT(x,index)	( x &= ~(1 << index) )		/* Çå³ý ¹ÊÕÏ bit Î» */
+#define CHK_GZ_BIT(x,index)	( x & (1 << index) )			/* ¼ì²â ¹ÊÕÏ bit Î» */
 
 #define SET_BIT(x,index)	SET_GZ_BIT(x,index)
 #define CLR_BIT(x,index)	CLR_GZ_BIT(x,index)

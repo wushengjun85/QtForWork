@@ -100,6 +100,15 @@ int tempgqzs;
 bool FaZhiReadOK = true;
 //bool FlagFaZhirecover = false;
 
+//3秒内无变化函数
+int Shijizhi;
+int TempShijizhi;
+bool FlagNext = false;
+uchar ThreeOut;
+
+//2017.4.28
+bool tempflagShoubing = false;
+
 /*******************************************************************************************************************/
 //2017.1.14 wsj
 //uchar flagFrame;
@@ -3859,7 +3868,8 @@ void Widget::paintEvent(QPaintEvent *)
 
 /***************************************************************************************************************/
 
-    /**************************************************************************************************/
+#if 0
+/**************************************************************************************************/
                if(flagwidget == PipeixingbiaodingMenu)
                {
                    qDebug()<<"jddddddddddddddddddddddddddddddddddddddddddddddddddddd ====  "<<LCPiPeixingBiaoDing<<endl;
@@ -3896,8 +3906,85 @@ void Widget::paintEvent(QPaintEvent *)
 
                }
 
-    /**************************************************************************************************/
+/**************************************************************************************************/
+#endif
 
+/***************************************************************************************************************/
+                             //if(flagwidget == PipeixingbiaodingMenu)
+                   if(1)
+                              {
+                                 /****************************添加最小值，最大值，中间值，偏移量*******************************************************/
+                                 //2017.4.26
+                                     //ui->tableWidget_3->setItem(0,0,new QTableWidgetItem("99"));
+                                     ui->tableWidget_3->setItem(0,1,new QTableWidgetItem("10"));
+                                     ui->tableWidget_3->setItem(0,2,new QTableWidgetItem("11"));
+                                     ui->tableWidget_3->setItem(0,3,new QTableWidgetItem("12"));
+                                     ui->tableWidget_3->setItem(0,4,new QTableWidgetItem("13"));
+                                     ui->tableWidget_3->setItem(0,5,new QTableWidgetItem("14"));
+
+
+                                     //ui->tableWidget_3->setItem(1,0,new QTableWidgetItem(10));
+                                     ui->tableWidget_3->setItem(1,1,new QTableWidgetItem("15"));
+                                     ui->tableWidget_3->setItem(1,2,new QTableWidgetItem("16"));
+                                     ui->tableWidget_3->setItem(1,3,new QTableWidgetItem("17"));
+                                     ui->tableWidget_3->setItem(1,4,new QTableWidgetItem("18"));
+                                     ui->tableWidget_3->setItem(1,5,new QTableWidgetItem("19"));
+
+                                     //ui->tableWidget_3->setItem(2,0,new QTableWidgetItem(10));
+                                     ui->tableWidget_3->setItem(2,1,new QTableWidgetItem("20"));
+                                     ui->tableWidget_3->setItem(2,2,new QTableWidgetItem("21"));
+                                     ui->tableWidget_3->setItem(2,3,new QTableWidgetItem("22"));
+                                     ui->tableWidget_3->setItem(2,4,new QTableWidgetItem("23"));
+                                     ui->tableWidget_3->setItem(2,5,new QTableWidgetItem("24"));
+
+                                 /***************************************************************************************************************/
+                                   if((LCPiPeixingBiaoDing == 1)&&(FlagShouBing ==0))
+                                   {
+                                       ui->label_17->setText("请按F5开始标定手柄");
+                                   }
+                                   else if((LCPiPeixingBiaoDing == 1)&&(FlagShouBing ==1))
+                                   {
+                                       ui->label_17->setText("请推动手柄到最大位置等待");
+                                   }
+
+                                   //2017.4.28
+                                   else if((tempflagShoubing ==true)&&(LCPiPeixingBiaoDing ==1)&&(FlagShouBing ==1))
+                                   {
+                                       ui->label_17->setText("请推动手柄到最小位置等待");
+                                       qDebug()<<"jddddddddddddddddddddddddddddddddddddddddddddddddddddd ====  "<<LCPiPeixingBiaoDing<<endl;
+                                   }
+                                   else if((FlagNext == true)&&(FlagShouBing ==1)&&(LCPiPeixingBiaoDing ==1)&&(FlagShouBing ==1))
+                                   {
+                                      ui->label_17->setText("手柄标定完成");
+                                   }
+                                   //
+
+                                   else if((LCPiPeixingBiaoDing == 2)&&(FlagXingzouBeng ==0))
+                                   {
+                                       ui->label_17->setText("按F5键开始标定行走泵杆");
+                                   }
+                                   else if((LCPiPeixingBiaoDing == 2)&&(FlagXingzouBeng ==1))
+                                   {
+                                        ui->label_17->setText("请推动手柄到最大位置等待");
+                                   }
+                                   else if((LCPiPeixingBiaoDing == 3)&&(FlagAoBanjianxi ==0))
+                                   {
+                                       ui->label_17->setText("按F5键开始标定凹板间隙");
+                                   }
+                                   else if((LCPiPeixingBiaoDing == 3)&&(FlagAoBanjianxi ==1))
+                                   {
+                                       ui->label_17->setText("请按住凹板间隙增大调整开关并等待");
+                                   }
+
+                                   //偏移量
+                                   else if((LCPiPeixingBiaoDing == 4)||(LCPiPeixingBiaoDing == 5))
+                                   {
+                                       ui->label_17->setText(" ");
+                                   }
+
+                              }
+
+/**************************************************************************************************/
 
 
 
@@ -6092,7 +6179,7 @@ bool Widget::eventFilter(QObject *watched, QEvent *event)
         }
     }
 
-
+#if 0
     //匹配性标定
     else if(watched == ui->tableWidget_3)
     {
@@ -6168,7 +6255,203 @@ bool Widget::eventFilter(QObject *watched, QEvent *event)
             }
         }
     }//end of  else if(watched == ui->tableWidget_3)
+#endif
 
+    //匹配性标定
+    else if((watched == ui->tableWidget_3)||(watched == ui->lineEdit_22))//
+    {
+        if(event->type() == QEvent::KeyPress)
+        {
+            QKeyEvent *key_event = static_cast < QKeyEvent *>(event); //将事件转化为键盘事件
+            {
+                if(key_event->key() == Qt::Key_F2)//下键
+                {
+
+                    bool mm1 = ui->tableWidget_3->hasFocus();
+                    bool mm2 = ui->lineEdit_22->hasFocus();
+                    if(mm1)
+                    {
+#if 1
+                    if(LCPiPeixingBiaoDing>=6)
+                    {
+                        LCPiPeixingBiaoDing = 0;
+                       // ui->tableWidget->setStyleSheet("background-color:red;");//selection-
+                        ui->tableWidget_3->hasFocus();
+
+                        #if 0
+                        ui->tableWidget_3->setCurrentCell(LCPiPeixingBiaoDing,0);
+                        ui->tableWidget_3->setSelectionBehavior(QAbstractItemView::SelectItems);
+                        #endif
+
+                        ui->tableWidget_3->setCurrentCell(LCPiPeixingBiaoDing,0);
+                        ui->tableWidget_3->setSelectionBehavior(QAbstractItemView::SelectItems);
+
+                    }
+                    else
+                    {
+                        if(LCPiPeixingBiaoDing>=3)
+                        {
+                                ui->tableWidget_3->setCurrentCell(LCPiPeixingBiaoDing-3,5);
+                                ui->tableWidget_3->setSelectionBehavior(QAbstractItemView::SelectItems);//SelectRows
+                                if(LCPiPeixingBiaoDing == 5)
+                                {
+                                    focusNextChild();
+                                    ui->lineEdit_22->setFocus();
+                                }
+                        }
+                        else
+                        {
+                            qDebug()<<"k666666666666666666666666666kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk"<<endl;
+
+                            ui->tableWidget_3->setCurrentCell(LCPiPeixingBiaoDing,0);
+                            ui->tableWidget_3->setSelectionBehavior(QAbstractItemView::SelectItems);//SelectRows
+                            //ui->tableWidget_3->hasFocus();
+                        }
+
+                    }
+//                    flagaction = true;
+                    LCPiPeixingBiaoDing++;
+#endif
+                    }
+                    if(mm2)
+                    {
+                        LCPiPeixingBiaoDing = 0;
+                        focusNextChild();
+                        ui->tableWidget_3->hasFocus();
+                        ui->tableWidget_3->setCurrentCell(LCPiPeixingBiaoDing,0);
+                        ui->tableWidget_3->setSelectionBehavior(QAbstractItemView::SelectItems);//SelectRows
+                        LCPiPeixingBiaoDing++;
+                    }
+
+                    flagaction = true;
+                    return true;
+                }
+
+                //向下键
+                else if (key_event->key() == Qt::Key_F3)
+                {
+                    LCPiPeixingBiaoDing--;
+                    if(LCPiPeixingBiaoDing <= 0)
+                    {
+                        LCPiPeixingBiaoDing = 0;
+                    }
+                    ui->tableWidget_3->setCurrentCell(LCPiPeixingBiaoDing,0);
+                    ui->tableWidget_3->setSelectionBehavior(QAbstractItemView::SelectRows);
+
+                    /********************2017.4.27************************************/
+                     ui->tableWidget_3->setItem(0,5,new QTableWidgetItem("Mar"));
+                     ui->tableWidget_3->setItem(1,5,new QTableWidgetItem("lskdkdk"));
+                     /*****************************************************************/
+
+                    flagaction = true;
+                    return true;
+                }//向上键
+                else if (key_event->key() == Qt::Key_F4)
+                {
+                    LCPiPeixingBiaoDing++;
+
+                    if(LCPiPeixingBiaoDing >= 3)
+                    {
+                        LCPiPeixingBiaoDing = 0;
+                    }
+
+                    ui->tableWidget_3->setCurrentCell(LCPiPeixingBiaoDing,0);
+                    ui->tableWidget_3->setSelectionBehavior(QAbstractItemView::SelectRows);
+                    flagaction = true;
+                    return true;
+                }
+                else if ((key_event->key() == Qt::Key_F5)&&(watched == ui->lineEdit_22))
+                {
+
+                    //2017.4.28    //更新匹配性标定设定数据库
+
+                    //手柄标定数据库创建
+
+                        //static unsigned char nn = 1;
+                        QTextCodec::setCodecForTr(QTextCodec::codecForLocale());//汉字显示
+                        QSqlDatabase db;
+                        if(QSqlDatabase::contains("qt_sql_default_connection"))
+                          db = QSqlDatabase::database("qt_sql_default_connection");
+                        else
+                          db = QSqlDatabase::addDatabase("QSQLITE");
+
+                       db.setDatabaseName("jy.db");
+                       if (!db.open())
+                       {
+                           qDebug()<<"open database failed ---"<<db.lastError().text()<<endl;
+                       }
+                       QSqlQuery query;
+                       #if 0
+                       bool ok = query.exec("create table ShouBingBD(TrueValue INTEGER,SmallValue INTEGER,MiddleValue INTEGER,BigValue INTEGER,OffSetValue INTEGER)");
+                       if (ok)
+                       {
+                           qDebug()<<"ceate table partition success"<<endl;
+                       }
+                       else
+                       {
+                           qDebug()<<"ceate table partition failed"<<endl;
+                       }
+                       #endif
+
+                       //query.prepare("INSERT INTO ShouBingBD(TrueValue, SmallValue, MiddleValue,BigValue,OffSetValue) VALUES (:TrueValue, :SmallValue,:MiddleValue, :BigValue,:OffSetValue)");
+                       query.prepare("update ShouBingBD set TrueValue = :TrueValue,SmallValue = :SmallValue,MiddleValue = :MiddleValue,BigValue = :BigValue,OffSetValue = :OffSetValue");//where
+
+                       query.bindValue(":TrueValue",66);
+                       query.bindValue(":SmallValue", 66);
+                       query.bindValue(":MiddleValue", 66);
+                       query.bindValue(":BigValue", 66);
+                       query.bindValue(":OffSetValue", 66);
+                       query.exec();
+
+
+                       query.bindValue(":TrueValue",66);
+                       query.bindValue(":SmallValue", 66);
+                       query.bindValue(":MiddleValue", 66);
+                       query.bindValue(":BigValue", 66);
+                       query.bindValue(":OffSetValue", 66);
+                       query.exec();
+
+                     query.exec("select TrueValue, SmallValue,MiddleValue,BigValue,OffSetValue from ShouBingBDS");
+                     while (query.next())
+                     {
+
+                        qDebug()<<"id("<<query.value(0).toInt()<<")  name:"<<query.value(1).toString()<<"  age:"<<query.value(2).toInt();
+
+                     }
+
+                      query.exec(QObject::tr("drop ShouBingBDS"));
+
+
+                    /****************************添加最小值，最大值，中间值，偏移量*******************************************************/
+                    //2017.4.26
+                        //ui->tableWidget_3->setItem(0,0,new QTableWidgetItem("99"));
+                        ui->tableWidget_3->setItem(0,1,new QTableWidgetItem("99"));
+                        ui->tableWidget_3->setItem(0,2,new QTableWidgetItem("99"));
+                        ui->tableWidget_3->setItem(0,3,new QTableWidgetItem("99"));
+                        ui->tableWidget_3->setItem(0,4,new QTableWidgetItem("99"));
+                        ui->tableWidget_3->setItem(0,5,new QTableWidgetItem("99"));
+
+
+                        //ui->tableWidget_3->setItem(1,0,new QTableWidgetItem(10));
+                        ui->tableWidget_3->setItem(1,1,new QTableWidgetItem("99"));
+                        ui->tableWidget_3->setItem(1,2,new QTableWidgetItem("99"));
+                        ui->tableWidget_3->setItem(1,3,new QTableWidgetItem("99"));
+                        ui->tableWidget_3->setItem(1,4,new QTableWidgetItem("99"));
+                        ui->tableWidget_3->setItem(1,5,new QTableWidgetItem("99"));
+
+                        //ui->tableWidget_3->setItem(2,0,new QTableWidgetItem(10));
+                        ui->tableWidget_3->setItem(2,1,new QTableWidgetItem("99"));
+                        ui->tableWidget_3->setItem(2,2,new QTableWidgetItem("99"));
+                        ui->tableWidget_3->setItem(2,3,new QTableWidgetItem("99"));
+                        ui->tableWidget_3->setItem(2,4,new QTableWidgetItem("99"));
+                        ui->tableWidget_3->setItem(2,5,new QTableWidgetItem("99"));
+
+                    /***************************************************************************************************************/
+
+                }
+            }
+        }
+    }//end of  else if(watched == ui->tableWidget_3)
 
 
     return QWidget::eventFilter(watched,event);

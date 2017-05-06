@@ -70,8 +70,9 @@ public:
     QWidget *page_11;
     QLabel *label_16;
     QWidget *page_12;
-    QLabel *label_17;
     QTableWidget *tableWidget_3;
+    QLabel *label_17;
+    QLineEdit *lineEdit_22;
     QWidget *page_13;
     QLineEdit *lineEdit_30;
     QLineEdit *lineEdit_23;
@@ -274,11 +275,6 @@ public:
         stackedWidget->addWidget(page_11);
         page_12 = new QWidget();
         page_12->setObjectName(QString::fromUtf8("page_12"));
-        label_17 = new QLabel(page_12);
-        label_17->setObjectName(QString::fromUtf8("label_17"));
-        label_17->setGeometry(QRect(178, 303, 451, 41));
-        label_17->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);"));
-        label_17->setFrameShape(QFrame::Box);
         tableWidget_3 = new QTableWidget(page_12);
         if (tableWidget_3->columnCount() < 6)
             tableWidget_3->setColumnCount(6);
@@ -315,11 +311,22 @@ public:
         QTableWidgetItem *__qtablewidgetitem14 = new QTableWidgetItem();
         tableWidget_3->setItem(2, 1, __qtablewidgetitem14);
         tableWidget_3->setObjectName(QString::fromUtf8("tableWidget_3"));
-        tableWidget_3->setGeometry(QRect(178, 143, 451, 160));
+        tableWidget_3->setGeometry(QRect(178, 110, 451, 160));
         tableWidget_3->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         tableWidget_3->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         tableWidget_3->setAutoScroll(true);
         tableWidget_3->setShowGrid(true);
+        label_17 = new QLabel(page_12);
+        label_17->setObjectName(QString::fromUtf8("label_17"));
+        label_17->setGeometry(QRect(178, 303, 451, 41));
+        label_17->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);"));
+        label_17->setFrameShape(QFrame::Box);
+        lineEdit_22 = new QLineEdit(page_12);
+        lineEdit_22->setObjectName(QString::fromUtf8("lineEdit_22"));
+        lineEdit_22->setGeometry(QRect(490, 270, 141, 36));
+        lineEdit_22->setStyleSheet(QString::fromUtf8("font: 75 16pt \"Ubuntu\";\n"
+"color: rgb(255, 0, 0);"));
+        lineEdit_22->setAlignment(Qt::AlignCenter);
         stackedWidget->addWidget(page_12);
         page_13 = new QWidget();
         page_13->setObjectName(QString::fromUtf8("page_13"));
@@ -515,7 +522,6 @@ public:
         lineEdit_2->setText(QApplication::translate("Widget", "English", 0, QApplication::UnicodeUTF8));
         pushButton_2->setText(QString());
         label_16->setText(QString());
-        label_17->setText(QApplication::translate("Widget", "\346\223\215\344\275\234\346\217\220\347\244\272\357\274\232", 0, QApplication::UnicodeUTF8));
         QTableWidgetItem *___qtablewidgetitem = tableWidget_3->horizontalHeaderItem(0);
         ___qtablewidgetitem->setText(QApplication::translate("Widget", "\345\220\215\347\247\260", 0, QApplication::UnicodeUTF8));
         QTableWidgetItem *___qtablewidgetitem1 = tableWidget_3->horizontalHeaderItem(1);
@@ -539,6 +545,8 @@ public:
         ___qtablewidgetitem8->setText(QApplication::translate("Widget", "\345\207\271\346\235\277\351\227\264\351\232\231", 0, QApplication::UnicodeUTF8));
         tableWidget_3->setSortingEnabled(__sortingEnabled);
 
+        label_17->setText(QApplication::translate("Widget", "\346\223\215\344\275\234\346\217\220\347\244\272\357\274\232", 0, QApplication::UnicodeUTF8));
+        lineEdit_22->setText(QApplication::translate("Widget", "\346\201\242\345\244\215\351\273\230\350\256\244\345\200\274", 0, QApplication::UnicodeUTF8));
         lineEdit_30->setText(QApplication::translate("Widget", "\346\201\242\345\244\215\345\210\260\351\273\230\350\256\244\345\200\274", 0, QApplication::UnicodeUTF8));
         QTableWidgetItem *___qtablewidgetitem9 = tableWidget_2->horizontalHeaderItem(0);
         ___qtablewidgetitem9->setText(QApplication::translate("Widget", "SPN", 0, QApplication::UnicodeUTF8));

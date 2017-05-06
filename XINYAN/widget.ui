@@ -507,30 +507,11 @@ font: 75 16pt &quot;Ubuntu&quot;;</string>
     </widget>
    </widget>
    <widget class="QWidget" name="page_12">
-    <widget class="QLabel" name="label_17">
-     <property name="geometry">
-      <rect>
-       <x>178</x>
-       <y>303</y>
-       <width>451</width>
-       <height>41</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">background-color: rgb(255, 255, 255);</string>
-     </property>
-     <property name="frameShape">
-      <enum>QFrame::Box</enum>
-     </property>
-     <property name="text">
-      <string>操作提示：</string>
-     </property>
-    </widget>
     <widget class="QTableWidget" name="tableWidget_3">
      <property name="geometry">
       <rect>
        <x>178</x>
-       <y>143</y>
+       <y>110</y>
        <width>451</width>
        <height>160</height>
       </rect>
@@ -622,6 +603,45 @@ font: 75 16pt &quot;Ubuntu&quot;;</string>
        <string/>
       </property>
      </item>
+    </widget>
+    <widget class="QLabel" name="label_17">
+     <property name="geometry">
+      <rect>
+       <x>178</x>
+       <y>303</y>
+       <width>451</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::Box</enum>
+     </property>
+     <property name="text">
+      <string>操作提示：</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_22">
+     <property name="geometry">
+      <rect>
+       <x>490</x>
+       <y>270</y>
+       <width>141</width>
+       <height>36</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 16pt &quot;Ubuntu&quot;;
+color: rgb(255, 0, 0);</string>
+     </property>
+     <property name="text">
+      <string>恢复默认值</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
     </widget>
    </widget>
    <widget class="QWidget" name="page_13">
