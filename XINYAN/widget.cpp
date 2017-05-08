@@ -29,7 +29,7 @@ bool LCBoolMachineModenu = true;
 
 
 //2017.5.4  割台设置
-uchar LCGetaiSetup = 3;
+uchar LCGetaiSetup = 0;
 uchar GeFuWidth = 0;
 uchar Zaihexishu = 0;
 uchar Autospeed = 0;
@@ -2840,9 +2840,6 @@ void Widget::paintEvent(QPaintEvent *)
 
 
             }//end of if(flagmatchion == YZBT_5)
-
-
-
 
 
 
@@ -6041,6 +6038,7 @@ bool Widget::eventFilter(QObject *watched, QEvent *event)
                     }
                     if(ff3)
                     {
+                        qDebug()<<"99999999999999999999888888888888888888888888899999999999999"<<endl;
                         focusNextChild();
                         ui->lineEdit_14->hasFocus();
                     }
