@@ -31,3 +31,9 @@ int main(int argc, char *argv[])
 //QT += sql
 //LIBS += -L./hwlib -lcamera_interface
 //LIBS += -L ./hwlib -lshm
+
+
+
+//QT += sql
+//LIBS += -L./hwlib -lcamera_interface
+//LIBS += -L ./hwlib -lshm

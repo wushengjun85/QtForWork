@@ -71,8 +71,8 @@ public:
     QLabel *label_16;
     QWidget *page_12;
     QTableWidget *tableWidget_3;
+    QLineEdit *lineEdit_7;
     QLabel *label_17;
-    QLineEdit *lineEdit_22;
     QWidget *page_13;
     QLineEdit *lineEdit_30;
     QLineEdit *lineEdit_23;
@@ -93,11 +93,11 @@ public:
     QListWidget *listWidget_6;
     QWidget *page_18;
     QWidget *page_19;
-    QLineEdit *lineEdit_14;
-    QLineEdit *lineEdit_12;
-    QLineEdit *lineEdit_13;
-    QLineEdit *lineEdit_15;
     QListWidget *listWidget_7;
+    QLineEdit *lineEdit_3;
+    QLineEdit *lineEdit_4;
+    QLineEdit *lineEdit_5;
+    QLineEdit *lineEdit_6;
 
     void setupUi(QWidget *Widget)
     {
@@ -292,7 +292,10 @@ public:
         tableWidget_3->setHorizontalHeaderItem(5, __qtablewidgetitem5);
         if (tableWidget_3->rowCount() < 3)
             tableWidget_3->setRowCount(3);
+        QFont font;
+        font.setPointSize(17);
         QTableWidgetItem *__qtablewidgetitem6 = new QTableWidgetItem();
+        __qtablewidgetitem6->setFont(font);
         tableWidget_3->setVerticalHeaderItem(0, __qtablewidgetitem6);
         QTableWidgetItem *__qtablewidgetitem7 = new QTableWidgetItem();
         tableWidget_3->setVerticalHeaderItem(1, __qtablewidgetitem7);
@@ -301,32 +304,25 @@ public:
         QTableWidgetItem *__qtablewidgetitem9 = new QTableWidgetItem();
         tableWidget_3->setItem(0, 0, __qtablewidgetitem9);
         QTableWidgetItem *__qtablewidgetitem10 = new QTableWidgetItem();
-        tableWidget_3->setItem(0, 1, __qtablewidgetitem10);
+        tableWidget_3->setItem(1, 0, __qtablewidgetitem10);
         QTableWidgetItem *__qtablewidgetitem11 = new QTableWidgetItem();
-        tableWidget_3->setItem(1, 0, __qtablewidgetitem11);
-        QTableWidgetItem *__qtablewidgetitem12 = new QTableWidgetItem();
-        tableWidget_3->setItem(1, 1, __qtablewidgetitem12);
-        QTableWidgetItem *__qtablewidgetitem13 = new QTableWidgetItem();
-        tableWidget_3->setItem(2, 0, __qtablewidgetitem13);
-        QTableWidgetItem *__qtablewidgetitem14 = new QTableWidgetItem();
-        tableWidget_3->setItem(2, 1, __qtablewidgetitem14);
+        tableWidget_3->setItem(2, 0, __qtablewidgetitem11);
         tableWidget_3->setObjectName(QString::fromUtf8("tableWidget_3"));
-        tableWidget_3->setGeometry(QRect(178, 110, 451, 160));
+        tableWidget_3->setGeometry(QRect(178, 110, 451, 175));
         tableWidget_3->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         tableWidget_3->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-        tableWidget_3->setAutoScroll(true);
-        tableWidget_3->setShowGrid(true);
+        lineEdit_7 = new QLineEdit(page_12);
+        lineEdit_7->setObjectName(QString::fromUtf8("lineEdit_7"));
+        lineEdit_7->setGeometry(QRect(490, 275, 141, 36));
+        lineEdit_7->setStyleSheet(QString::fromUtf8("color: rgb(255, 0, 0);\n"
+"font: 75 16pt \"Ubuntu\";"));
         label_17 = new QLabel(page_12);
         label_17->setObjectName(QString::fromUtf8("label_17"));
-        label_17->setGeometry(QRect(178, 303, 451, 41));
-        label_17->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);"));
+        label_17->setGeometry(QRect(178, 310, 451, 41));
+        label_17->setStyleSheet(QString::fromUtf8("font: 75 12pt \"Ubuntu\";\n"
+"background-color: rgb(255, 255, 255);\n"
+""));
         label_17->setFrameShape(QFrame::Box);
-        lineEdit_22 = new QLineEdit(page_12);
-        lineEdit_22->setObjectName(QString::fromUtf8("lineEdit_22"));
-        lineEdit_22->setGeometry(QRect(490, 270, 141, 36));
-        lineEdit_22->setStyleSheet(QString::fromUtf8("font: 75 16pt \"Ubuntu\";\n"
-"color: rgb(255, 0, 0);"));
-        lineEdit_22->setAlignment(Qt::AlignCenter);
         stackedWidget->addWidget(page_12);
         page_13 = new QWidget();
         page_13->setObjectName(QString::fromUtf8("page_13"));
@@ -360,34 +356,34 @@ public:
         tableWidget_2 = new QTableWidget(page_14);
         if (tableWidget_2->columnCount() < 3)
             tableWidget_2->setColumnCount(3);
-        QTableWidgetItem *__qtablewidgetitem15 = new QTableWidgetItem();
-        tableWidget_2->setHorizontalHeaderItem(0, __qtablewidgetitem15);
-        QTableWidgetItem *__qtablewidgetitem16 = new QTableWidgetItem();
-        tableWidget_2->setHorizontalHeaderItem(1, __qtablewidgetitem16);
-        QTableWidgetItem *__qtablewidgetitem17 = new QTableWidgetItem();
-        tableWidget_2->setHorizontalHeaderItem(2, __qtablewidgetitem17);
+        QTableWidgetItem *__qtablewidgetitem12 = new QTableWidgetItem();
+        tableWidget_2->setHorizontalHeaderItem(0, __qtablewidgetitem12);
+        QTableWidgetItem *__qtablewidgetitem13 = new QTableWidgetItem();
+        tableWidget_2->setHorizontalHeaderItem(1, __qtablewidgetitem13);
+        QTableWidgetItem *__qtablewidgetitem14 = new QTableWidgetItem();
+        tableWidget_2->setHorizontalHeaderItem(2, __qtablewidgetitem14);
         if (tableWidget_2->rowCount() < 10)
             tableWidget_2->setRowCount(10);
+        QTableWidgetItem *__qtablewidgetitem15 = new QTableWidgetItem();
+        tableWidget_2->setVerticalHeaderItem(0, __qtablewidgetitem15);
+        QTableWidgetItem *__qtablewidgetitem16 = new QTableWidgetItem();
+        tableWidget_2->setVerticalHeaderItem(1, __qtablewidgetitem16);
+        QTableWidgetItem *__qtablewidgetitem17 = new QTableWidgetItem();
+        tableWidget_2->setVerticalHeaderItem(2, __qtablewidgetitem17);
         QTableWidgetItem *__qtablewidgetitem18 = new QTableWidgetItem();
-        tableWidget_2->setVerticalHeaderItem(0, __qtablewidgetitem18);
+        tableWidget_2->setVerticalHeaderItem(3, __qtablewidgetitem18);
         QTableWidgetItem *__qtablewidgetitem19 = new QTableWidgetItem();
-        tableWidget_2->setVerticalHeaderItem(1, __qtablewidgetitem19);
+        tableWidget_2->setVerticalHeaderItem(4, __qtablewidgetitem19);
         QTableWidgetItem *__qtablewidgetitem20 = new QTableWidgetItem();
-        tableWidget_2->setVerticalHeaderItem(2, __qtablewidgetitem20);
+        tableWidget_2->setVerticalHeaderItem(5, __qtablewidgetitem20);
         QTableWidgetItem *__qtablewidgetitem21 = new QTableWidgetItem();
-        tableWidget_2->setVerticalHeaderItem(3, __qtablewidgetitem21);
+        tableWidget_2->setVerticalHeaderItem(6, __qtablewidgetitem21);
         QTableWidgetItem *__qtablewidgetitem22 = new QTableWidgetItem();
-        tableWidget_2->setVerticalHeaderItem(4, __qtablewidgetitem22);
+        tableWidget_2->setVerticalHeaderItem(7, __qtablewidgetitem22);
         QTableWidgetItem *__qtablewidgetitem23 = new QTableWidgetItem();
-        tableWidget_2->setVerticalHeaderItem(5, __qtablewidgetitem23);
+        tableWidget_2->setVerticalHeaderItem(8, __qtablewidgetitem23);
         QTableWidgetItem *__qtablewidgetitem24 = new QTableWidgetItem();
-        tableWidget_2->setVerticalHeaderItem(6, __qtablewidgetitem24);
-        QTableWidgetItem *__qtablewidgetitem25 = new QTableWidgetItem();
-        tableWidget_2->setVerticalHeaderItem(7, __qtablewidgetitem25);
-        QTableWidgetItem *__qtablewidgetitem26 = new QTableWidgetItem();
-        tableWidget_2->setVerticalHeaderItem(8, __qtablewidgetitem26);
-        QTableWidgetItem *__qtablewidgetitem27 = new QTableWidgetItem();
-        tableWidget_2->setVerticalHeaderItem(9, __qtablewidgetitem27);
+        tableWidget_2->setVerticalHeaderItem(9, __qtablewidgetitem24);
         tableWidget_2->setObjectName(QString::fromUtf8("tableWidget_2"));
         tableWidget_2->setGeometry(QRect(216, 110, 415, 250));
         tableWidget_2->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -398,34 +394,34 @@ public:
         tableWidget = new QTableWidget(page_15);
         if (tableWidget->columnCount() < 2)
             tableWidget->setColumnCount(2);
-        QTableWidgetItem *__qtablewidgetitem28 = new QTableWidgetItem();
-        __qtablewidgetitem28->setTextAlignment(Qt::AlignHCenter|Qt::AlignVCenter|Qt::AlignCenter);
-        tableWidget->setHorizontalHeaderItem(0, __qtablewidgetitem28);
-        QTableWidgetItem *__qtablewidgetitem29 = new QTableWidgetItem();
-        __qtablewidgetitem29->setTextAlignment(Qt::AlignHCenter|Qt::AlignVCenter|Qt::AlignCenter);
-        tableWidget->setHorizontalHeaderItem(1, __qtablewidgetitem29);
+        QTableWidgetItem *__qtablewidgetitem25 = new QTableWidgetItem();
+        __qtablewidgetitem25->setTextAlignment(Qt::AlignHCenter|Qt::AlignVCenter|Qt::AlignCenter);
+        tableWidget->setHorizontalHeaderItem(0, __qtablewidgetitem25);
+        QTableWidgetItem *__qtablewidgetitem26 = new QTableWidgetItem();
+        __qtablewidgetitem26->setTextAlignment(Qt::AlignHCenter|Qt::AlignVCenter|Qt::AlignCenter);
+        tableWidget->setHorizontalHeaderItem(1, __qtablewidgetitem26);
         if (tableWidget->rowCount() < 10)
             tableWidget->setRowCount(10);
+        QTableWidgetItem *__qtablewidgetitem27 = new QTableWidgetItem();
+        tableWidget->setVerticalHeaderItem(0, __qtablewidgetitem27);
+        QTableWidgetItem *__qtablewidgetitem28 = new QTableWidgetItem();
+        tableWidget->setVerticalHeaderItem(1, __qtablewidgetitem28);
+        QTableWidgetItem *__qtablewidgetitem29 = new QTableWidgetItem();
+        tableWidget->setVerticalHeaderItem(2, __qtablewidgetitem29);
         QTableWidgetItem *__qtablewidgetitem30 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(0, __qtablewidgetitem30);
+        tableWidget->setVerticalHeaderItem(3, __qtablewidgetitem30);
         QTableWidgetItem *__qtablewidgetitem31 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(1, __qtablewidgetitem31);
+        tableWidget->setVerticalHeaderItem(4, __qtablewidgetitem31);
         QTableWidgetItem *__qtablewidgetitem32 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(2, __qtablewidgetitem32);
+        tableWidget->setVerticalHeaderItem(5, __qtablewidgetitem32);
         QTableWidgetItem *__qtablewidgetitem33 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(3, __qtablewidgetitem33);
+        tableWidget->setVerticalHeaderItem(6, __qtablewidgetitem33);
         QTableWidgetItem *__qtablewidgetitem34 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(4, __qtablewidgetitem34);
+        tableWidget->setVerticalHeaderItem(7, __qtablewidgetitem34);
         QTableWidgetItem *__qtablewidgetitem35 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(5, __qtablewidgetitem35);
+        tableWidget->setVerticalHeaderItem(8, __qtablewidgetitem35);
         QTableWidgetItem *__qtablewidgetitem36 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(6, __qtablewidgetitem36);
-        QTableWidgetItem *__qtablewidgetitem37 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(7, __qtablewidgetitem37);
-        QTableWidgetItem *__qtablewidgetitem38 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(8, __qtablewidgetitem38);
-        QTableWidgetItem *__qtablewidgetitem39 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(9, __qtablewidgetitem39);
+        tableWidget->setVerticalHeaderItem(9, __qtablewidgetitem36);
         tableWidget->setObjectName(QString::fromUtf8("tableWidget"));
         tableWidget->setGeometry(QRect(256, 116, 304, 247));
         tableWidget->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -454,40 +450,43 @@ public:
         stackedWidget->addWidget(page_18);
         page_19 = new QWidget();
         page_19->setObjectName(QString::fromUtf8("page_19"));
-        lineEdit_14 = new QLineEdit(page_19);
-        lineEdit_14->setObjectName(QString::fromUtf8("lineEdit_14"));
-        lineEdit_14->setGeometry(QRect(450, 270, 81, 27));
-        lineEdit_12 = new QLineEdit(page_19);
-        lineEdit_12->setObjectName(QString::fromUtf8("lineEdit_12"));
-        lineEdit_12->setGeometry(QRect(450, 150, 91, 31));
-        lineEdit_13 = new QLineEdit(page_19);
-        lineEdit_13->setObjectName(QString::fromUtf8("lineEdit_13"));
-        lineEdit_13->setGeometry(QRect(450, 210, 81, 27));
-        lineEdit_15 = new QLineEdit(page_19);
-        lineEdit_15->setObjectName(QString::fromUtf8("lineEdit_15"));
-        lineEdit_15->setGeometry(QRect(480, 310, 111, 31));
         listWidget_7 = new QListWidget(page_19);
-        QFont font;
-        font.setPointSize(16);
+        QFont font1;
+        font1.setPointSize(16);
+        font1.setBold(true);
+        font1.setWeight(75);
         QListWidgetItem *__qlistwidgetitem = new QListWidgetItem(listWidget_7);
-        __qlistwidgetitem->setFont(font);
+        __qlistwidgetitem->setFont(font1);
         QListWidgetItem *__qlistwidgetitem1 = new QListWidgetItem(listWidget_7);
-        __qlistwidgetitem1->setFont(font);
+        __qlistwidgetitem1->setFont(font1);
         QListWidgetItem *__qlistwidgetitem2 = new QListWidgetItem(listWidget_7);
-        __qlistwidgetitem2->setFont(font);
+        __qlistwidgetitem2->setFont(font1);
         QListWidgetItem *__qlistwidgetitem3 = new QListWidgetItem(listWidget_7);
-        __qlistwidgetitem3->setFont(font);
+        __qlistwidgetitem3->setFont(font1);
         QListWidgetItem *__qlistwidgetitem4 = new QListWidgetItem(listWidget_7);
-        __qlistwidgetitem4->setFont(font);
+        __qlistwidgetitem4->setFont(font1);
         QListWidgetItem *__qlistwidgetitem5 = new QListWidgetItem(listWidget_7);
-        __qlistwidgetitem5->setFont(font);
+        __qlistwidgetitem5->setFont(font1);
         QListWidgetItem *__qlistwidgetitem6 = new QListWidgetItem(listWidget_7);
-        __qlistwidgetitem6->setFont(font);
+        __qlistwidgetitem6->setFont(font1);
         QListWidgetItem *__qlistwidgetitem7 = new QListWidgetItem(listWidget_7);
-        __qlistwidgetitem7->setFont(font);
+        __qlistwidgetitem7->setFont(font1);
         listWidget_7->setObjectName(QString::fromUtf8("listWidget_7"));
-        listWidget_7->setGeometry(QRect(315, 120, 91, 241));
+        listWidget_7->setGeometry(QRect(315, 120, 91, 235));
         listWidget_7->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        lineEdit_3 = new QLineEdit(page_19);
+        lineEdit_3->setObjectName(QString::fromUtf8("lineEdit_3"));
+        lineEdit_3->setGeometry(QRect(450, 150, 91, 31));
+        lineEdit_4 = new QLineEdit(page_19);
+        lineEdit_4->setObjectName(QString::fromUtf8("lineEdit_4"));
+        lineEdit_4->setGeometry(QRect(450, 210, 81, 27));
+        lineEdit_5 = new QLineEdit(page_19);
+        lineEdit_5->setObjectName(QString::fromUtf8("lineEdit_5"));
+        lineEdit_5->setGeometry(QRect(450, 270, 81, 27));
+        lineEdit_6 = new QLineEdit(page_19);
+        lineEdit_6->setObjectName(QString::fromUtf8("lineEdit_6"));
+        lineEdit_6->setGeometry(QRect(480, 310, 111, 31));
+        lineEdit_6->setStyleSheet(QString::fromUtf8("font: 75 14pt \"Ubuntu\";"));
         stackedWidget->addWidget(page_19);
 
         retranslateUi(Widget);
@@ -545,8 +544,8 @@ public:
         ___qtablewidgetitem8->setText(QApplication::translate("Widget", "\345\207\271\346\235\277\351\227\264\351\232\231", 0, QApplication::UnicodeUTF8));
         tableWidget_3->setSortingEnabled(__sortingEnabled);
 
+        lineEdit_7->setText(QApplication::translate("Widget", "\346\201\242\345\244\215\351\273\230\350\256\244\345\200\274", 0, QApplication::UnicodeUTF8));
         label_17->setText(QApplication::translate("Widget", "\346\223\215\344\275\234\346\217\220\347\244\272\357\274\232", 0, QApplication::UnicodeUTF8));
-        lineEdit_22->setText(QApplication::translate("Widget", "\346\201\242\345\244\215\351\273\230\350\256\244\345\200\274", 0, QApplication::UnicodeUTF8));
         lineEdit_30->setText(QApplication::translate("Widget", "\346\201\242\345\244\215\345\210\260\351\273\230\350\256\244\345\200\274", 0, QApplication::UnicodeUTF8));
         QTableWidgetItem *___qtablewidgetitem9 = tableWidget_2->horizontalHeaderItem(0);
         ___qtablewidgetitem9->setText(QApplication::translate("Widget", "SPN", 0, QApplication::UnicodeUTF8));
@@ -560,7 +559,6 @@ public:
         ___qtablewidgetitem13->setText(QApplication::translate("Widget", "\346\225\205\351\232\234\346\217\217\350\277\260", 0, QApplication::UnicodeUTF8));
         label_18->setText(QApplication::translate("Widget", "\345\217\221\345\212\250\346\234\272\345\223\201\347\211\214", 0, QApplication::UnicodeUTF8));
         label_19->setText(QApplication::translate("Widget", "\346\234\272\345\231\250\345\236\213\345\217\267", 0, QApplication::UnicodeUTF8));
-        lineEdit_15->setText(QApplication::translate("Widget", "\346\201\242\345\244\215\351\273\230\350\256\244\345\200\274", 0, QApplication::UnicodeUTF8));
 
         const bool __sortingEnabled1 = listWidget_7->isSortingEnabled();
         listWidget_7->setSortingEnabled(false);
@@ -582,6 +580,7 @@ public:
         ___qlistwidgetitem7->setText(QApplication::translate("Widget", "\351\273\221\351\272\246", 0, QApplication::UnicodeUTF8));
         listWidget_7->setSortingEnabled(__sortingEnabled1);
 
+        lineEdit_6->setText(QApplication::translate("Widget", "\346\201\242\345\244\215\351\273\230\350\256\244\345\200\274", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

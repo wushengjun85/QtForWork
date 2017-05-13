@@ -29,7 +29,7 @@ bool LCBoolMachineModenu = true;
 
 
 //2017.5.4  割台设置
-uchar LCGetaiSetup = 0;
+int LCGetaiSetup = 0;
 uchar GeFuWidth = 0;
 uchar Zaihexishu = 0;
 uchar Autospeed = 0;
@@ -41,6 +41,9 @@ uchar LCPiPeixingBiaoDing = 0;
 
 uchar LCZhujiFault = 0;
 uchar LCEngineFault = 0;
+//2017.5.9
+uint shoubingoffset;
+uint langanoffset;
 
 
 //2017.4.8
@@ -479,10 +482,12 @@ Widget::Widget(QWidget *parent) :
 
 
     //2017.5.4
-    ui->lineEdit_12->installEventFilter(this);
-    ui->lineEdit_13->installEventFilter(this);
-    ui->lineEdit_14->installEventFilter(this);
-    ui->lineEdit_15->installEventFilter(this);
+    ui->lineEdit_3->installEventFilter(this);
+    ui->lineEdit_4->installEventFilter(this);
+    ui->lineEdit_5->installEventFilter(this);
+    ui->lineEdit_6->installEventFilter(this);
+
+    ui->lineEdit_7->installEventFilter(this);
 
 
     //2017.4.22    //读取阀值设定数据库
@@ -716,8 +721,6 @@ Widget::Widget(QWidget *parent) :
 
     ui->listWidget_2->insertItem(0,AItem1);
     ui->listWidget_2->insertItem(1,AItem2);
-
-
 
     //整机型号选择
     //机型选择
@@ -2256,7 +2259,7 @@ void Widget::paintEvent(QPaintEvent *)
 
 
             //
-            //2017.4.2
+            //2017.4.2  辣椒机器
             else if(flagmatchion == JZ_3600)
             {
                    //int side = qMin(width(), height());  //绘制的范围(宽、高中最小值)
@@ -2290,11 +2293,6 @@ void Widget::paintEvent(QPaintEvent *)
                    painter.save();
                    //painter.rotate(6.0 *time.second());  //设旋转(角度 = 6° * (分钟 + 秒 / 60))
                    painter.rotate(-114.5);
-                   //painter.rotate(6.0 *numtmp);  //设置旋转(6° * 秒)
-                   //painter.rotate(numtmp++);  //设置旋转(6° * 秒)
-                   //painter.rotate(4.0 );//*shisu
-
-                   //painter.rotate(8*nu1);//floatnu2
                    painter.rotate(228*floatnu3);//floatnu1
 
                    painter.drawConvexPolygon(minuteHand, 4);  //填充分针部分
@@ -2302,7 +2300,7 @@ void Widget::paintEvent(QPaintEvent *)
 
                    /***********************************************/
                    //2016.6.25   画白圈
-                   painter.setBrush(Qt::darkGray); //画上中心原点/home/vmuser/qtworkplace/chanpin/img2
+                   painter.setBrush(Qt::green); //画上中心原点/home/vmuser/qtworkplace/chanpin/img2
                    painter.save();
                    painter.drawEllipse(QPoint(0,0),13,13);
                    painter.restore();
@@ -2310,7 +2308,7 @@ void Widget::paintEvent(QPaintEvent *)
                    //画白圈
                    /***********************************************/
 
-                   painter.setBrush(Qt::black);//画上中心原点/home/vmuser/qtworkplace/chanpin/img2
+                   painter.setBrush(Qt::darkGray);//画上中心原点/home/vmuser/qtworkplace/chanpin/img2
                    painter.save();
                    painter.drawEllipse(QPoint(0,0),10,10);
                    painter.restore();
@@ -2325,12 +2323,10 @@ void Widget::paintEvent(QPaintEvent *)
                    painter.setRenderHint(QPainter::Antialiasing, true);
                    painter.save();
 
-                   //painter.rotate(6.0 *time.second());  //设旋转(角度 = 6° * (分钟 + 秒 / 60))
                    painter.rotate(-114.5);
-                   //painter.rotate(8*nu3);
-                   painter.rotate(7.6*nu1);//
-
-
+                   painter.rotate(28.2*nu1);//
+                   //painter.rotate(7.6*nu1);//
+                   //qDebug()<<"nu1 =======================================   "<<nu1<<endl;
 
                    //painter.rotate(4.0 );  //设旋转(角度 = 6° * (分钟 + 秒 / 60))*shisu
                    //内测用
@@ -2345,7 +2341,7 @@ void Widget::paintEvent(QPaintEvent *)
 
                    /***********************************************/
                    //2016.6.25   画白圈
-                   painter.setBrush(Qt::darkGray); //画上中心原点/home/vmuser/qtworkplace/chanpin/img2
+                   painter.setBrush(Qt::green); //画上中心原点/home/vmuser/qtworkplace/chanpin/img2
                    painter.save();
                    painter.drawEllipse(QPoint(0,0),13,13);
                    painter.restore();
@@ -2354,7 +2350,7 @@ void Widget::paintEvent(QPaintEvent *)
                    /***********************************************/
 
 
-                   painter.setBrush(Qt::black);
+                   painter.setBrush(Qt::darkGray);
                    painter.save();//画上中心原点
                    painter.drawEllipse(QPoint(0,0),10,10);
                    painter.restore();
@@ -2388,7 +2384,7 @@ void Widget::paintEvent(QPaintEvent *)
 
                    /***********************************************/
                    //2016.6.25   画白圈
-                   painter.setBrush(Qt::darkGray); //画上中心原点/home/vmuser/qtworkplace/chanpin/img2
+                   painter.setBrush(Qt::green); //画上中心原点/home/vmuser/qtworkplace/chanpin/img2
                    painter.save();
                    painter.drawEllipse(QPoint(0,0),13,13);
                    painter.restore();
@@ -2397,7 +2393,7 @@ void Widget::paintEvent(QPaintEvent *)
                    /***********************************************/
 
 
-                   painter.setBrush(Qt::black);
+                   painter.setBrush(Qt::darkGray);
                    painter.save();//画上中心原点
                    painter.drawEllipse(QPoint(0,0),10,10);
                    painter.restore();
@@ -2840,6 +2836,9 @@ void Widget::paintEvent(QPaintEvent *)
 
 
             }//end of if(flagmatchion == YZBT_5)
+
+
+
 
 
 
@@ -3679,8 +3678,6 @@ void Widget::paintEvent(QPaintEvent *)
             }//end of if(flagmatchion == YZB_4_5_7_8)
 
 
-
-
         }//end of if(flagwidget == xingZouWidget)
 
         //油温，发动机转速，小时计，KM/H，油量
@@ -3690,7 +3687,7 @@ void Widget::paintEvent(QPaintEvent *)
         DCDY =cantest.VOLV;
         DCDY /= 10;
         //label_11 he label_14 处理
-        if((flagmatchion == YZT_10)||(flagmatchion == YZT_5))
+        if((flagmatchion == YZT_10)||(flagmatchion == YZT_5)||(flagmatchion == JZ_3600))
         {
             ui->label_14->setText(QString::number(DCDY,'f',1));//系统电压
             ui->label_11->setText(QString::number(cantest.m_Speed[SPEED_FENGJI]));//风机转速
@@ -3913,6 +3910,33 @@ void Widget::paintEvent(QPaintEvent *)
                                  /****************************添加最小值，最大值，中间值，偏移量*******************************************************/
                                  //2017.4.26
                                      //ui->tableWidget_3->setItem(0,0,new QTableWidgetItem("99"));
+
+                                 ui->tableWidget_3->setItem(0,1,new QTableWidgetItem(QString::number(biaoding.m_XinZouJubing[BD_VALUE_RealValue])));
+                                 ui->tableWidget_3->setItem(0,2,new QTableWidgetItem(QString::number(biaoding.m_XinZouJubing[BD_VALUE_Maximum])));
+                                 ui->tableWidget_3->setItem(0,3,new QTableWidgetItem(QString::number(biaoding.m_XinZouJubing[BD_VALUE_Maximum])));
+                                 ui->tableWidget_3->setItem(0,4,new QTableWidgetItem(QString::number(biaoding.m_XinZouJubing[BD_VALUE_Minimum])));
+                                 ui->tableWidget_3->setItem(0,5,new QTableWidgetItem(QString::number(biaoding.m_XinZouJubing[BD_VALUE_Offset])));
+
+
+                                 //ui->tableWidget_3->setItem(1,0,new QTableWidgetItem(10));
+                                 ui->tableWidget_3->setItem(1,1,new QTableWidgetItem(QString::number(biaoding.m_XinZouLaGan[BD_VALUE_RealValue])));
+                                 ui->tableWidget_3->setItem(1,2,new QTableWidgetItem(QString::number(biaoding.m_XinZouLaGan[BD_VALUE_Maximum])));
+                                 ui->tableWidget_3->setItem(1,3,new QTableWidgetItem(QString::number(biaoding.m_XinZouLaGan[BD_VALUE_Maximum])));
+                                 ui->tableWidget_3->setItem(1,4,new QTableWidgetItem(QString::number(biaoding.m_XinZouLaGan[BD_VALUE_Minimum])));
+                                 ui->tableWidget_3->setItem(1,5,new QTableWidgetItem(QString::number(biaoding.m_XinZouLaGan[BD_VALUE_Offset])));
+
+                                 //ui->tableWidget_3->setItem(2,0,new QTableWidgetItem(10));
+                                 ui->tableWidget_3->setItem(2,1,new QTableWidgetItem(QString::number(biaoding.m_AoBanJianXi[BD_VALUE_RealValue])));
+                                 ui->tableWidget_3->setItem(2,2,new QTableWidgetItem(QString::number(biaoding.m_AoBanJianXi[BD_VALUE_Maximum])));
+                                 ui->tableWidget_3->setItem(2,3,new QTableWidgetItem(QString::number(biaoding.m_AoBanJianXi[BD_VALUE_Maximum])));
+                                 ui->tableWidget_3->setItem(2,4,new QTableWidgetItem(QString::number(biaoding.m_AoBanJianXi[BD_VALUE_Minimum])));
+                                 ui->tableWidget_3->setItem(2,5,new QTableWidgetItem(" "));//QString::number(biaoding.m_AoBanJianXi[BD_VALUE_Offset]
+
+
+                                 shoubingoffset = biaoding.m_XinZouJubing[BD_VALUE_Offset];
+                                 langanoffset =   biaoding.m_XinZouJubing[BD_VALUE_Offset];
+#if 0
+
                                      ui->tableWidget_3->setItem(0,1,new QTableWidgetItem("10"));
                                      ui->tableWidget_3->setItem(0,2,new QTableWidgetItem("11"));
                                      ui->tableWidget_3->setItem(0,3,new QTableWidgetItem("12"));
@@ -3934,6 +3958,7 @@ void Widget::paintEvent(QPaintEvent *)
                                      ui->tableWidget_3->setItem(2,4,new QTableWidgetItem("23"));
                                      ui->tableWidget_3->setItem(2,5,new QTableWidgetItem("24"));
 
+#endif
                                  /***************************************************************************************************************/
                                    if((LCPiPeixingBiaoDing == 1)&&(FlagShouBing ==0))
                                    {
@@ -4854,9 +4879,20 @@ void Widget::keyPressEvent(QKeyEvent *e)
 
                 //2017.5.4
                 ui->listWidget_7->setFocus();
-                ui->lineEdit_12->setText(QString::number(GeFuWidth));
-                ui->lineEdit_13->setText(QString::number(Zaihexishu));
-                ui->lineEdit_14->setText(QString::number(Autospeed));
+                //2017.5.9
+
+                GeFuWidth = biaoding.m_GeFuKuanDu;
+                Zaihexishu = biaoding.m_ZaiKeXiShu;
+                Autospeed = biaoding.m_TiaoSuXiShu;
+
+                LCGetaiSetup = biaoding.m_GuWuZhongLei;
+
+
+                ui->lineEdit_3->setText(QString::number(GeFuWidth));
+                ui->lineEdit_4->setText(QString::number(Zaihexishu));
+                ui->lineEdit_5->setText(QString::number(Autospeed));
+
+
             }
           break;
 
@@ -5043,7 +5079,7 @@ void Widget::keyPressEvent(QKeyEvent *e)
                            //query.prepare("INSERT INTO GeTaiBD(GuWuSwitch, GeFuWidth, ZaiHeXishu,ChangeSpeed) VALUES (:GuWuSwitch, :GeFuWidth,:ZaiHeXishu, :ChangeSpeed)");
                            query.prepare("update GeTaiBD set GuWuSwitch = :GuWuSwitch,GeFuWidth = :GeFuWidth,ZaiHeXishu = :ZaiHeXishu,ChangeSpeed = :ChangeSpeed");//where
 
-                           query.bindValue(":GuWuSwitch",3000);
+                           query.bindValue(":GuWuSwitch",1);
                            query.bindValue(":GeFuWidth", 11);
                            query.bindValue(":ZaiHeXishu", 66);
                            query.bindValue(":ChangeSpeed", 77);
@@ -6004,17 +6040,17 @@ bool Widget::eventFilter(QObject *watched, QEvent *event)
 
 
     //2017.5.5 从新开始新的交互体验
-    else if((watched == ui->listWidget_7)||(watched == ui->lineEdit_12)||(watched == ui->lineEdit_13)||(watched == ui->lineEdit_14)||(watched == ui->lineEdit_15))
+    else if((watched == ui->listWidget_7)||(watched == ui->lineEdit_3)||(watched == ui->lineEdit_4)||(watched == ui->lineEdit_5)||(watched == ui->lineEdit_6))
     {
         if(event->type() == QEvent::KeyPress)
         {
             QKeyEvent *key_event = static_cast < QKeyEvent *>(event); //将事件转化为键盘事件
             {
                 bool ff1 = ui->listWidget_7->hasFocus();
-                bool ff2 = ui->lineEdit_12->hasFocus();
-                bool ff3 = ui->lineEdit_13->hasFocus();
-                bool ff4 = ui->lineEdit_14->hasFocus();
-                bool ff5 = ui->lineEdit_15->hasFocus();
+                bool ff2 = ui->lineEdit_3->hasFocus();
+                bool ff3 = ui->lineEdit_4->hasFocus();
+                bool ff4 = ui->lineEdit_5->hasFocus();
+                bool ff5 = ui->lineEdit_6->hasFocus();
 
                 if(ff1)
                 {
@@ -6028,24 +6064,23 @@ bool Widget::eventFilter(QObject *watched, QEvent *event)
                     if(ff1)
                     {
                         focusNextChild();
-                        ui->lineEdit_12->hasFocus();
+                        ui->lineEdit_3->hasFocus();
                     }
                     if(ff2)
                     {
                         focusNextChild();
-                        ui->lineEdit_13->hasFocus();
+                        ui->lineEdit_4->hasFocus();
 
                     }
                     if(ff3)
                     {
-                        qDebug()<<"99999999999999999999888888888888888888888888899999999999999"<<endl;
                         focusNextChild();
-                        ui->lineEdit_14->hasFocus();
+                        ui->lineEdit_5->hasFocus();
                     }
                     if(ff4)
                     {
                         focusNextChild();
-                        ui->lineEdit_15->hasFocus();
+                        ui->lineEdit_6->hasFocus();
                     }
                     if(ff5)
                     {
@@ -6061,6 +6096,10 @@ bool Widget::eventFilter(QObject *watched, QEvent *event)
                     if(ff1)
                     {
                       LCGetaiSetup--;
+                      if(LCGetaiSetup <=0)
+                      {
+                          LCGetaiSetup = 0;
+                      }
                       ui->listWidget_7->item(LCGetaiSetup)->setBackgroundColor(Qt::yellow);
                       ui->listWidget_7->item(LCGetaiSetup)->setTextColor(Qt::red);
                       ui->listWidget_7->item(LCGetaiSetup+1)->setBackgroundColor(Qt::transparent);
@@ -6071,19 +6110,19 @@ bool Widget::eventFilter(QObject *watched, QEvent *event)
                     {
                         GeFuWidth--;
                         QString strGeFuWidth = QString("%1").arg(GeFuWidth);
-                        ui->lineEdit_12->setText(strGeFuWidth);
+                        ui->lineEdit_3->setText(strGeFuWidth);
                     }
                     if(ff3)
                     {
                          Zaihexishu--;
                         QString strZaihexishu = QString("%1").arg(Zaihexishu);
-                        ui->lineEdit_13->setText(strZaihexishu);
+                        ui->lineEdit_4->setText(strZaihexishu);
                     }
                     if(ff4)
                     {
                         Autospeed--;
                         QString strAutospeed = QString("%1").arg(Autospeed);
-                        ui->lineEdit_14->setText(strAutospeed);
+                        ui->lineEdit_5->setText(strAutospeed);
                     }
                     flagaction = true;
                 }
@@ -6092,6 +6131,10 @@ bool Widget::eventFilter(QObject *watched, QEvent *event)
                     if(ff1)
                     {
                         LCGetaiSetup++;
+                        if(LCGetaiSetup >=7)
+                        {
+                            LCGetaiSetup = 7;
+                        }
                         ui->listWidget_7->item(LCGetaiSetup)->setBackgroundColor(Qt::yellow);
                         ui->listWidget_7->item(LCGetaiSetup)->setTextColor(Qt::red);
                         ui->listWidget_7->item(LCGetaiSetup-1)->setBackgroundColor(Qt::transparent);
@@ -6101,23 +6144,23 @@ bool Widget::eventFilter(QObject *watched, QEvent *event)
                     {
                         GeFuWidth++;
                         QString strGeFuWidth = QString("%1").arg(GeFuWidth);
-                        ui->lineEdit_12->setText(strGeFuWidth);
+                        ui->lineEdit_3->setText(strGeFuWidth);
                     }
                     if(ff3)
                     {
                          Zaihexishu++;
                         QString strZaihexishu = QString("%1").arg(Zaihexishu);
-                        ui->lineEdit_13->setText(strZaihexishu);
+                        ui->lineEdit_4->setText(strZaihexishu);
                     }
                     if(ff4)
                     {
                         Autospeed++;
                         QString strAutospeed = QString("%1").arg(Autospeed);
-                        ui->lineEdit_14->setText(strAutospeed);
+                        ui->lineEdit_5->setText(strAutospeed);
                     }
                     flagaction = true;
                 }
-                else if ((key_event->key() == Qt::Key_F5)&&(watched == ui->lineEdit_15))
+                else if ((key_event->key() == Qt::Key_F5)&&(watched == ui->lineEdit_6))
                 {
                     //2017.5.5 割台数据库添加
                     //割台参数设置
@@ -6167,9 +6210,9 @@ bool Widget::eventFilter(QObject *watched, QEvent *event)
 
                   #endif
 
-                    ui->lineEdit_12->setText("3140");
-                    ui->lineEdit_13->setText("5");
-                    ui->lineEdit_14->setText("80");
+                    ui->lineEdit_3->setText("3140");
+                    ui->lineEdit_4->setText("5");
+                    ui->lineEdit_5->setText("80");
                     flagaction = true;
                 }
 
@@ -6256,7 +6299,7 @@ bool Widget::eventFilter(QObject *watched, QEvent *event)
 #endif
 
     //匹配性标定
-    else if((watched == ui->tableWidget_3)||(watched == ui->lineEdit_22))//
+    else if((watched == ui->tableWidget_3)||(watched == ui->lineEdit_7))//
     {
         if(event->type() == QEvent::KeyPress)
         {
@@ -6266,7 +6309,7 @@ bool Widget::eventFilter(QObject *watched, QEvent *event)
                 {
 
                     bool mm1 = ui->tableWidget_3->hasFocus();
-                    bool mm2 = ui->lineEdit_22->hasFocus();
+                    bool mm2 = ui->lineEdit_7->hasFocus();
                     if(mm1)
                     {
 #if 1
@@ -6294,7 +6337,7 @@ bool Widget::eventFilter(QObject *watched, QEvent *event)
                                 if(LCPiPeixingBiaoDing == 5)
                                 {
                                     focusNextChild();
-                                    ui->lineEdit_22->setFocus();
+                                    ui->lineEdit_7->setFocus();
                                 }
                         }
                         else
@@ -6337,8 +6380,8 @@ bool Widget::eventFilter(QObject *watched, QEvent *event)
                     ui->tableWidget_3->setSelectionBehavior(QAbstractItemView::SelectRows);
 
                     /********************2017.4.27************************************/
-                     ui->tableWidget_3->setItem(0,5,new QTableWidgetItem("Mar"));
-                     ui->tableWidget_3->setItem(1,5,new QTableWidgetItem("lskdkdk"));
+                     ui->tableWidget_3->setItem(0,5,new QTableWidgetItem(QString::number(--shoubingoffset)));
+                     ui->tableWidget_3->setItem(1,5,new QTableWidgetItem(QString::number(--langanoffset)));
                      /*****************************************************************/
 
                     flagaction = true;
@@ -6355,10 +6398,15 @@ bool Widget::eventFilter(QObject *watched, QEvent *event)
 
                     ui->tableWidget_3->setCurrentCell(LCPiPeixingBiaoDing,0);
                     ui->tableWidget_3->setSelectionBehavior(QAbstractItemView::SelectRows);
+                    /********************2017.4.27************************************/
+                     ui->tableWidget_3->setItem(0,5,new QTableWidgetItem(QString::number(++shoubingoffset)));
+                     ui->tableWidget_3->setItem(1,5,new QTableWidgetItem(QString::number(++langanoffset)));
+                     /*****************************************************************/
+
                     flagaction = true;
                     return true;
                 }
-                else if ((key_event->key() == Qt::Key_F5)&&(watched == ui->lineEdit_22))
+                else if ((key_event->key() == Qt::Key_F5)&&(watched == ui->lineEdit_7))
                 {
 
                     //2017.4.28    //更新匹配性标定设定数据库
@@ -6995,7 +7043,7 @@ void Widget::shanhua()//闪烁和平滑转动
 #if 1
     //油量 和 滚筒转速
 
-    if((flagmatchion == YZT_10)||(flagmatchion == YZBT_5)) //滚筒转速
+    if((flagmatchion == YZT_10)||(flagmatchion == YZT_5)) //滚筒转速
     {
         nu2 = cantest.m_Speed[SPEED_GUNTONG];
 
@@ -7016,10 +7064,11 @@ void Widget::shanhua()//闪烁和平滑转动
     else  //燃油量
     {
         nu2 = cantest.VolYL;
+        //qDebug()<<"cantest.VolYL ===============..................+++++++++++++ =    "<<cantest.VolYL<<endl;
 
-        if(nu2 > 6)
+        if(nu2 > 8)
         {
-            nu2 = 6;
+            nu2 = 8;
         }
 
         if(nu1 < nu2)//cantest.FDJ_speed
@@ -7031,9 +7080,6 @@ void Widget::shanhua()//闪烁和平滑转动
             nu1--;
         }
     }
-
-
-
 
 
     //水温
@@ -7055,7 +7101,6 @@ void Widget::shanhua()//闪烁和平滑转动
     {
         floatnu2 = 0;
     }
-
 
 
     //转速
@@ -7104,12 +7149,8 @@ void Widget::shanhua()//闪烁和平滑转动
     }
 
 
-
-
-
     if(flagaddnum)
     {
-
         //闪烁控制
 
         if(ecutest.flagECU == 0)
@@ -7632,7 +7673,6 @@ void Widget::myscroll()
     nPos++;
     ui->label_4->setText(CeshiZM[mm].mid(nPos));
 }
-
 
 //时间设置
 void Widget::on_dateTimeEdit_dateTimeChanged(const QDateTime &date)
