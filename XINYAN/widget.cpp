@@ -761,6 +761,55 @@ Widget::Widget(QWidget *parent) :
     ui->listWidget_3->insertItem(5,SItem6);
 
 
+    //2017.5.15
+    //整机型号选择
+    //机型选择
+    QListWidgetItem * TItem111 = new QListWidgetItem;
+    QListWidgetItem * TItem222 = new QListWidgetItem;
+    QListWidgetItem * TItem333 = new QListWidgetItem;
+    QListWidgetItem * TItem444 = new QListWidgetItem;
+    QListWidgetItem * TItem555 = new QListWidgetItem;
+    QListWidgetItem * TItem666 = new QListWidgetItem;
+    QListWidgetItem * TItem777 = new QListWidgetItem;
+    QListWidgetItem * TItem888 = new QListWidgetItem;
+
+    //QListWidgetItem * pItem3 = new QListWidgetItem;
+
+    TItem111->setSizeHint(QSize(30, 28));  //每次改变Item的高度
+    TItem111->setText("玉米");//
+
+    TItem222->setSizeHint(QSize(30, 28));  //每次改变Item的高度
+    TItem222->setText("小麦");//
+
+    TItem333->setSizeHint(QSize(30, 28));  //每次改变Item的高度
+    TItem333->setText("水稻");//
+
+
+    TItem444->setSizeHint(QSize(30, 28));  //每次改变Item的高度
+    TItem444->setText("大豆");//
+
+    TItem555->setSizeHint(QSize(30, 28));  //每次改变Item的高度
+    TItem555->setText("油菜籽");//
+
+    TItem666->setSizeHint(QSize(30, 28));  //每次改变Item的高度
+    TItem666->setText("大麦");//
+
+    TItem777->setSizeHint(QSize(30, 28));  //每次改变Item的高度
+    TItem777->setText("燕麦");//
+
+    TItem888->setSizeHint(QSize(30, 28));  //每次改变Item的高度
+    TItem888->setText("黑麦");//
+
+
+    ui->listWidget_7->insertItem(0,TItem111);
+    ui->listWidget_7->insertItem(1,TItem222);
+    ui->listWidget_7->insertItem(2,TItem333);
+    ui->listWidget_7->insertItem(3,TItem444);
+    ui->listWidget_7->insertItem(4,TItem555);
+    ui->listWidget_7->insertItem(5,TItem666);
+    ui->listWidget_7->insertItem(6,TItem777);
+    ui->listWidget_7->insertItem(7,TItem888);
+
 
     //整机型号选择
     //机型选择
@@ -7531,6 +7580,20 @@ void Widget::Licheng()//语言，发动机厂家，机器型号
 //小时计 槽函数
 void Widget::xiaoshiji()//小时计
 {
+
+    //2017.5.15 因新研股份辣椒机读取小时计是从ECU 内部读取，暂时先这样。
+    if((flagmatchion == YZT_10)||(flagmatchion == YZT_5)||(flagmatchion == JZ_3600))
+    {
+         ui->label_7->setText(QString::number(ecutest.m_EcuWorkTime,'f',1));
+    }
+    else
+    {
+         //机油温度
+         ui->label_7->setText(QString::number(ecutest.VolJYWD));
+
+    }
+
+#if 0
     QTextCodec::setCodecForTr(QTextCodec::codecForLocale());//汉字显示
     QSqlDatabase db;
     if(QSqlDatabase::contains("qt_sql_default_connection"))
@@ -7609,8 +7672,10 @@ void Widget::xiaoshiji()//小时计
 
     //qDebug()<<"id("<<query.value(0).toInt()<<")  name:"<<query.value(1).toString()<<"  age:"<<query.value(2).toInt();
  }
-
  query.exec(QObject::tr("drop xsj"));
+
+#endif
+
 #if 0
   if(ecutest.FDJ_speed>350)
    {

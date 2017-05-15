@@ -150,6 +150,7 @@ enum BIAO_DING_DATA_TYPE_EN
 	BD_DATA_FengJiZhuanSuLinMinDu,	/* 风机转速灵敏度 */
 	BD_DATA_JiaoLongZhuanSuLinMinDu,	/* 搅龙转速灵敏度 */
 	BD_DATA_GuoQiaoZhuanSuLinMinDu,	/* 过桥转速灵敏度 */
+	BD_DATA_ShengYunQiLinMinDu,		/* 升运器转速灵敏度 */
 	BD_DATA_BUTT
 };
 
@@ -356,6 +357,7 @@ typedef struct
 #if JINYEE_EXT	
 	float m_FuelVal;		/* 油耗值 INSTANT FUEL value */
 	float m_InsFuelVal;		/* 瞬间油耗值 INSTANT FUEL value */
+	float m_EcuWorkTime;	/* 发动机工作( 运行) 时间*/
 #endif	
 	
 	//SPN故障

@@ -453,8 +453,8 @@ public:
         listWidget_7 = new QListWidget(page_19);
         QFont font1;
         font1.setPointSize(16);
-        font1.setBold(true);
-        font1.setWeight(75);
+        font1.setBold(false);
+        font1.setWeight(50);
         QListWidgetItem *__qlistwidgetitem = new QListWidgetItem(listWidget_7);
         __qlistwidgetitem->setFont(font1);
         QListWidgetItem *__qlistwidgetitem1 = new QListWidgetItem(listWidget_7);
@@ -472,8 +472,9 @@ public:
         QListWidgetItem *__qlistwidgetitem7 = new QListWidgetItem(listWidget_7);
         __qlistwidgetitem7->setFont(font1);
         listWidget_7->setObjectName(QString::fromUtf8("listWidget_7"));
-        listWidget_7->setGeometry(QRect(315, 120, 91, 235));
+        listWidget_7->setGeometry(QRect(315, 120, 91, 231));
         listWidget_7->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        listWidget_7->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         lineEdit_3 = new QLineEdit(page_19);
         lineEdit_3->setObjectName(QString::fromUtf8("lineEdit_3"));
         lineEdit_3->setGeometry(QRect(450, 150, 91, 31));
@@ -491,7 +492,7 @@ public:
 
         retranslateUi(Widget);
 
-        stackedWidget->setCurrentIndex(0);
+        stackedWidget->setCurrentIndex(18);
 
 
         QMetaObject::connectSlotsByName(Widget);
