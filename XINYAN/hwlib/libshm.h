@@ -19,6 +19,9 @@ extern "C"{
 
 /****************************************************/
 
+#define RetIf(c)				if (c) return
+#define RetValueIf(c, value)	if (c) return (value)
+
 enum XINYAN_MACHINE_MODEL
 {
 	XY_MODEL_4YZT_5,								/* 4YZT-5 */
@@ -73,17 +76,28 @@ enum GZ_BIT_TYPE
 #define CLR_BIT(x,index)	CLR_GZ_BIT(x,index)
 #define CHK_BIT(x,index)	CHK_GZ_BIT(x,index)
 
+#define Bit(S, Bits, Value) ( (Value==1) ? (S|(1<<Bits)) : (S&(~(1<<Bits))) )
 
-#define MAX_SPEED_TYPE_NUM		15
+
+#define MAX_SPEED_TYPE_NUM		20
 enum SPEED_TYPE_EN
 {
 	SPEED_GUOQIAO,			/* 过桥转速 */
 	SPEED_JIAOLONG,			/* 绞龙转速 */
 	SPEED_GUNTONG,			/* 滚筒转速 */
-	SPEED_FENGJI,			/* 风机转速 */
-	SPEED_GETAI,			/* 割台转速 */	
-	SPEED_JUPAN,			/* 锯盘转速 */
-	SPEED_XINGZOU,			/* 时速/行走转速 */
+	SPEED_FENGJI,				/* 风机转速 */
+	SPEED_GETAI,				/* 割台转速 */	
+	SPEED_JUPAN,				/* 锯盘转速 */
+	SPEED_XINGZOU,				/* 时速/行走转速 */
+	SPEED_SHENGYUNQI,			/* 升运器转速 */
+	SPEED_BACHA,				/* 拔叉转速 */
+	SPEED_BAHELUN,			/* 拔禾轮转速 */
+	SPEED_BOPIJI,				/* 剥皮机转速 */
+	SPEED_SANREFENGSHAN,		/* 散热风扇转速 */
+	SPEED_PIN1,				/* 转速1 */
+	SPEED_PIN4,				/* 转速4 */
+	SPEED_PIN7,				/* 转速7 */
+	SPEED_PIN17,				/* 转速17 */
 	SPEED_BUTT		
 };
 

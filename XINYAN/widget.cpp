@@ -2524,6 +2524,12 @@ void Widget::paintEvent(QPaintEvent *)
                    pixdeng.load("./img/dengshan/10.png");//
                    paintdeng.drawPixmap(248,430,24,28,pixdeng);//正上方位置显示的图标
                }
+               //2017.5.15 当油量为1时，蜂鸣器响一声，油量指示灯常亮
+               if(cantest.VolYL == 1)//油量
+               {
+                   pixdeng.load("./img/dengshan/10.png");//
+                   paintdeng.drawPixmap(248,430,24,28,pixdeng);//正上方位置显示的图标
+               }
 
                //油中右水  油水分离  需要闪烁
                if(shanshuoYZYS)
@@ -3363,6 +3369,13 @@ void Widget::paintEvent(QPaintEvent *)
             }
 
             if (shanshuoYL)//油量
+            {
+                pixdeng.load("./img/dengshan/10.png");//
+                paintdeng.drawPixmap(248,430,24,28,pixdeng);//正上方位置显示的图标
+            }
+
+            //2017.5.15 当油量为1时，蜂鸣器响一声，油量指示灯常亮
+            if(cantest.VolYL == 1)//油量
             {
                 pixdeng.load("./img/dengshan/10.png");//
                 paintdeng.drawPixmap(248,430,24,28,pixdeng);//正上方位置显示的图标
@@ -7165,7 +7178,7 @@ void Widget::shanhua()//闪烁和平滑转动
                 shanshuoJYYL = 1;
             }
 
-            if(cantest.VolYL <= 1)//油量
+            if(cantest.VolYL < 1)//油量
             {
                 shanshuoYL = 1;
             }
@@ -7556,8 +7569,15 @@ void Widget::xiaoshiji()//小时计
 
    }
 
-   /*测试*/
-   xiaoshiJi_m++;
+
+
+   if(ecutest.FDJ_speed>350)
+    {
+         xiaoshiJi_m++;
+    }
+
+    /*测试*/
+   //xiaoshiJi_m++;
    xiaoshiJi_h = (xiaoshiJi_m/3600)*1000 + ((xiaoshiJi_m%3600)*1000)/3600;
    xiaoshiJi_h /= 1000;
 
