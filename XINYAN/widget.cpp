@@ -112,6 +112,16 @@ uchar ThreeOut;
 //2017.4.28
 bool tempflagShoubing = false;
 
+
+//2017.5.16 处理小数点后2位进位问题
+unsigned int shunshiyouhaoInt;
+float shunshiyouhaoFloat;
+
+long long xiaoshijiLongLong;
+double    xiaoshijiDouble;
+
+
+
 /*******************************************************************************************************************/
 //2017.1.14 wsj
 //uchar flagFrame;
@@ -3788,7 +3798,13 @@ void Widget::paintEvent(QPaintEvent *)
 //        }
 
         //2017.4.17 瞬时油耗
-        ui->label_6->setText(QString::number(ecutest.m_InsFuelVal,'f',1));
+
+        shunshiyouhaoInt = ecutest.m_InsFuelVal*10;
+        shunshiyouhaoFloat = shunshiyouhaoInt;
+        shunshiyouhaoFloat = shunshiyouhaoFloat / 10;
+
+        ui->label_6->setText(QString::number(shunshiyouhaoFloat,'f',1));
+        //qDebug()<<"ecutest.m_InsFuelVal ========================  "<<ecutest.m_InsFuelVal<<endl;
 
         //KM/H
         float floatworknu4 = (cantest.HourSpeed);///100
@@ -3801,9 +3817,6 @@ void Widget::paintEvent(QPaintEvent *)
         //单次里程 和 总里程
         ui->label_8->setText(QString::number(cantest.MIJI));// 单次里程floatworknu4,'f',1
         ui->label_9->setText(QString::number(cantest.VolMIJISUM));//总里程
-
-
-
 
         //        //油量
         //        YLBFB = cantest.VolYL;
@@ -3839,7 +3852,12 @@ void Widget::paintEvent(QPaintEvent *)
         }
         else //工作时间
         {
-            ui->label_10->setText(QString::number(xiaoshiJi_h,'f',1));
+            xiaoshijiLongLong = ecutest.m_EcuWorkTime;
+            xiaoshijiLongLong *= 10;
+            xiaoshijiDouble = xiaoshijiLongLong;
+            xiaoshijiDouble /= 10;
+
+            ui->label_10->setText(QString::number(xiaoshijiDouble,'f',1));
             ui->label_20->setText(" ");
         }
 
@@ -4127,7 +4145,6 @@ void Widget::paintEvent(QPaintEvent *)
             memcpy(YouAndTongxinArray[0],p2,sizeof(YouAndTongxinArray[0]));
             memcpy(AddSum[0],ecutest.spn_can.chgzm[0],(ecutest.spn_can.cnt)*sizeof(ecutest.spn_can.chgzm[0]));
             memcpy(AddSum[ecutest.spn_can.cnt],YouAndTongxinArray[0],lengthYX*sizeof(YouAndTongxinArray[0]));
-
         }
         //油量短路
         else if((ecutest.flagECU == 0)&&(cantest.StaYL == 2))
@@ -6002,7 +6019,6 @@ bool Widget::eventFilter(QObject *watched, QEvent *event)
                     bool mm8 = ui->lineEdit_30->hasFocus();
                     if(mm8)
                     {
-
                         qDebug()<<"kddddddddddddddddddddddddddddddddddddddddddddddddd"<<endl;
                     }
 
@@ -7093,10 +7109,6 @@ void Widget::gzmslottest()//故障码显示
     }
 }
 
-
-
-
-
 //闪烁 平滑转动
 //平滑转动
 void Widget::shanhua()//闪烁和平滑转动
@@ -7153,7 +7165,7 @@ void Widget::shanhua()//闪烁和平滑转动
 
     if(floatnu2 >=120)
     {
-        floatnu2 = 120;
+        floatnu2 = 80;
     }
     else if((floatnu2 >=40)&&(floatnu2 <120))
     {
@@ -7180,6 +7192,8 @@ void Widget::shanhua()//闪烁和平滑转动
     //ui->label_2->setText(QString::number(JYYL,'f',2));
 
     floatnu3 = JYYL;
+
+    //qDebug()<<"floatnu3........................ =============   "<<floatnu3<<endl;
 //    floatnu3 *= 10;
 
     if(floatnu3 >1)
@@ -7584,7 +7598,11 @@ void Widget::xiaoshiji()//小时计
     //2017.5.15 因新研股份辣椒机读取小时计是从ECU 内部读取，暂时先这样。
     if((flagmatchion == YZT_10)||(flagmatchion == YZT_5)||(flagmatchion == JZ_3600))
     {
-         ui->label_7->setText(QString::number(ecutest.m_EcuWorkTime,'f',1));
+        xiaoshijiLongLong = ecutest.m_EcuWorkTime;
+        xiaoshijiLongLong *= 10;
+        xiaoshijiDouble = xiaoshijiLongLong;
+        xiaoshijiDouble /= 10;
+         ui->label_7->setText(QString::number(xiaoshijiDouble,'f',1));
     }
     else
     {
