@@ -2953,7 +2953,7 @@ void Widget::paintEvent(QPaintEvent *)
 
                 /***********************************************/
                 //2016.6.25   画白圈
-                painter.setBrush(Qt::darkGray); //画上中心原点/home/vmuser/qtworkplace/chanpin/img2
+                painter.setBrush(Qt::green); //画上中心原点/home/vmuser/qtworkplace/chanpin/img2
                 painter.save();
                 painter.drawEllipse(QPoint(0,0),13,13);
                 painter.restore();
@@ -2961,7 +2961,7 @@ void Widget::paintEvent(QPaintEvent *)
                 //画白圈
                 /***********************************************/
 
-                painter.setBrush(Qt::black);//画上中心原点/home/vmuser/qtworkplace/chanpin/img2
+                painter.setBrush(Qt::darkGray);//画上中心原点/home/vmuser/qtworkplace/chanpin/img2
                 painter.save();
                 painter.drawEllipse(QPoint(0,0),10,10);
                 painter.restore();
@@ -2995,7 +2995,7 @@ void Widget::paintEvent(QPaintEvent *)
 
                 /***********************************************/
                 //2016.6.25   画白圈
-                painter.setBrush(Qt::darkGray); //画上中心原点/home/vmuser/qtworkplace/chanpin/img2
+                painter.setBrush(Qt::green); //画上中心原点/home/vmuser/qtworkplace/chanpin/img2
                 painter.save();
                 painter.drawEllipse(QPoint(0,0),13,13);
                 painter.restore();
@@ -3004,7 +3004,7 @@ void Widget::paintEvent(QPaintEvent *)
                 /***********************************************/
 
 
-                painter.setBrush(Qt::black);
+                painter.setBrush(Qt::darkGray);
                 painter.save();//画上中心原点
                 painter.drawEllipse(QPoint(0,0),10,10);
                 painter.restore();
@@ -3036,7 +3036,7 @@ void Widget::paintEvent(QPaintEvent *)
 
                 /***********************************************/
                 //2016.6.25   画白圈
-                painter.setBrush(Qt::darkGray); //画上中心原点/home/vmuser/qtworkplace/chanpin/img2
+                painter.setBrush(Qt::green); //画上中心原点/home/vmuser/qtworkplace/chanpin/img2
                 painter.save();
                 painter.drawEllipse(QPoint(0,0),13,13);
                 painter.restore();
@@ -3045,7 +3045,7 @@ void Widget::paintEvent(QPaintEvent *)
                 /***********************************************/
 
 
-                painter.setBrush(Qt::black);
+                painter.setBrush(Qt::darkGray);
                 painter.save();//画上中心原点
                 painter.drawEllipse(QPoint(0,0),10,10);
                 painter.restore();
