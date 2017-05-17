@@ -46,6 +46,9 @@ private:
     QTimer *timer_Juzhong;//居中显示
     QTimer *timergzmTihuan;//故障码替换
 
+    /******3秒内无边定时器变量******/
+    QTimer *ThreeSecondNoChangeTimer;
+
 protected:
     void paintEvent(QPaintEvent *);
     void keyPressEvent(QKeyEvent  *e);
@@ -63,6 +66,9 @@ private slots:
 
     void gzmTihuanslot();//故障码替换
    /*************************/
+
+    //2017.4.26 3秒内无边化函数判断和相应的动作
+    void NoChangeFun();
 
     //滚动播放
     void myscroll();
