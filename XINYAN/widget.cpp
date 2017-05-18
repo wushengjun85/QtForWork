@@ -43,8 +43,8 @@ uchar LCPiPeixingBiaoDing = 0;
 uchar LCZhujiFault = 0;
 uchar LCEngineFault = 0;
 //2017.5.9
-uint shoubingoffset = 10;
-uint langanoffset = 10;
+uint shoubingoffset = 0;
+uint langanoffset = 0;
 
 
 //2017.4.8
@@ -6540,41 +6540,38 @@ bool Widget::eventFilter(QObject *watched, QEvent *event)
                 //向下键
                 else if (key_event->key() == Qt::Key_F3)
                 {
-//                    LCPiPeixingBiaoDing--;
-//                    if(LCPiPeixingBiaoDing <= 0)
-//                    {
-//                        LCPiPeixingBiaoDing = 0;
-//                    }
-//                    ui->tableWidget_3->setCurrentCell(LCPiPeixingBiaoDing,0);
-//                    ui->tableWidget_3->setSelectionBehavior(QAbstractItemView::SelectRows);
 
                     /********************2017.4.27************************************/
-                    shoubingoffset--;
-                    langanoffset--;
-                     //ui->tableWidget_3->setItem(0,5,new QTableWidgetItem(QString::number(--shoubingoffset)));
-                     //ui->tableWidget_3->setItem(1,5,new QTableWidgetItem(QString::number(--langanoffset)));
-                     /*****************************************************************/
+                    if(LCPiPeixingBiaoDing==4)
+                    {
+                         shoubingoffset--;
+                    }
+                    else if(LCPiPeixingBiaoDing==5)
+                    {
+                        langanoffset--;
+                    }
+
+                    /*****************************************************************/
 
                     flagaction = true;
                     return true;
                 }//向上键
                 else if (key_event->key() == Qt::Key_F4)
                 {
-//                    LCPiPeixingBiaoDing++;
 
-//                    if(LCPiPeixingBiaoDing >= 3)
-//                    {
-//                        LCPiPeixingBiaoDing = 0;
-//                    }
-
-//                    ui->tableWidget_3->setCurrentCell(LCPiPeixingBiaoDing,0);
-//                    ui->tableWidget_3->setSelectionBehavior(QAbstractItemView::SelectRows);
                     /********************2017.4.27************************************/
-                    shoubingoffset++;
-                    langanoffset++;
-                     //ui->tableWidget_3->setItem(0,5,new QTableWidgetItem(QString::number(++shoubingoffset)));
-                     //ui->tableWidget_3->setItem(1,5,new QTableWidgetItem(QString::number(++langanoffset)));
-                     /*****************************************************************/
+                    if(LCPiPeixingBiaoDing==4)
+                    {
+                         shoubingoffset++;
+                    }
+                    else if(LCPiPeixingBiaoDing==5)
+                    {
+                        langanoffset++;
+                    }
+
+                    /*****************************************************************/
+
+                    qDebug()<<"LCPiPeixingBiaoDing: "<<LCPiPeixingBiaoDing<<endl;
 
                     flagaction = true;
                     return true;
@@ -6830,12 +6827,12 @@ void Widget::timeoutfun()
     {
         flagtimeoutnum = 0;
         flagaction = false;
-        qDebug()<<"flagtimeoutnum = "<<flagtimeoutnum<<endl;
+        //qDebug()<<"flagtimeoutnum = "<<flagtimeoutnum<<endl;
     }
     else
     {
         flagtimeoutnum++;
-        qDebug()<<"flagtimeoutnum false .......... = "<<flagtimeoutnum<<endl;
+        //qDebug()<<"flagtimeoutnum false .......... = "<<flagtimeoutnum<<endl;
         if(flagtimeoutnum == 15)
         {
             flagtimeout = true;
