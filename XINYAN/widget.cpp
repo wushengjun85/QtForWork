@@ -6125,10 +6125,10 @@ bool Widget::eventFilter(QObject *watched, QEvent *event)
                     zlh  = 80;
                     xllh = 80;
                     gqlh = 80;
-                    gtzs = 80;
-                    fjzs = 80;
-                    jlzs = 80;
-                    gqzs = 80;
+                    gtzs = 10;
+                    fjzs = 10;
+                    jlzs = 10;
+                    gqzs = 10;
 
                     //2017.4.22    //更新阀值设定数据库
 
@@ -6208,7 +6208,7 @@ bool Widget::eventFilter(QObject *watched, QEvent *event)
 
                     flagaction = true;
                     LCBiaoDingRow++;
-                    //return true;
+                    return true;
                 }
 
             }
@@ -6302,6 +6302,7 @@ bool Widget::eventFilter(QObject *watched, QEvent *event)
                         ui->lineEdit_5->setText(strAutospeed);
                     }
                     flagaction = true;
+                   return true;
                 }
                 else if (key_event->key() == Qt::Key_F4)
                 {
@@ -6336,6 +6337,7 @@ bool Widget::eventFilter(QObject *watched, QEvent *event)
                         ui->lineEdit_5->setText(strAutospeed);
                     }
                     flagaction = true;
+                    return true;
                 }
                 else if ((key_event->key() == Qt::Key_F5)&&(watched == ui->lineEdit_6))
                 {
@@ -6399,89 +6401,13 @@ bool Widget::eventFilter(QObject *watched, QEvent *event)
                     ui->listWidget_7->item(LCGetaiSetup)->setTextColor(Qt::red);
 
                     flagaction = true;
+                    return true;
                 }
 
             }
         }
     }
 
-#if 0
-    //匹配性标定
-    else if(watched == ui->tableWidget_3)
-    {
-        if(event->type() == QEvent::KeyPress)
-        {
-            QKeyEvent *key_event = static_cast < QKeyEvent *>(event); //将事件转化为键盘事件
-            {
-                if(key_event->key() == Qt::Key_F2)//下键
-                {
-
-                    if(LCPiPeixingBiaoDing>=5)
-                    {
-                        LCPiPeixingBiaoDing = 0;
-                       // ui->tableWidget->setStyleSheet("background-color:red;");//selection-
-                        ui->tableWidget_3->hasFocus();
-
-                        #if 0
-                        ui->tableWidget_3->setCurrentCell(LCPiPeixingBiaoDing,0);
-                        ui->tableWidget_3->setSelectionBehavior(QAbstractItemView::SelectItems);
-                        #endif
-
-                        ui->tableWidget_3->setCurrentCell(LCPiPeixingBiaoDing,0);
-                        ui->tableWidget_3->setSelectionBehavior(QAbstractItemView::SelectItems);
-
-                    }
-                    else
-                    {
-
-                        if(LCPiPeixingBiaoDing>=3)
-                        {
-                            ui->tableWidget_3->setCurrentCell(LCPiPeixingBiaoDing-3,5);
-                            ui->tableWidget_3->setSelectionBehavior(QAbstractItemView::SelectItems);//SelectRows
-                        }
-                        else
-                        {
-                            ui->tableWidget_3->setCurrentCell(LCPiPeixingBiaoDing,0);
-                            ui->tableWidget_3->setSelectionBehavior(QAbstractItemView::SelectItems);//SelectRows
-                        }
-                    }
-
-                    flagaction = true;
-                    LCPiPeixingBiaoDing++;
-
-                }
-                //向下键
-                else if (key_event->key() == Qt::Key_F3)
-                {
-                    LCPiPeixingBiaoDing--;
-                    if(LCPiPeixingBiaoDing <= 0)
-                    {
-                        LCPiPeixingBiaoDing = 0;
-                    }
-                    ui->tableWidget_3->setCurrentCell(LCPiPeixingBiaoDing,0);
-                    ui->tableWidget_3->setSelectionBehavior(QAbstractItemView::SelectRows);
-                    flagaction = true;
-                    return true;
-                }//向上键
-                else if (key_event->key() == Qt::Key_F4)
-                {
-                    LCPiPeixingBiaoDing++;
-
-                    if(LCPiPeixingBiaoDing >= 3)
-                    {
-                        LCPiPeixingBiaoDing = 0;
-                    }
-
-                    ui->tableWidget_3->setCurrentCell(LCPiPeixingBiaoDing,0);
-                    ui->tableWidget_3->setSelectionBehavior(QAbstractItemView::SelectRows);
-                    flagaction = true;
-                    return true;
-                }
-
-            }
-        }
-    }//end of  else if(watched == ui->tableWidget_3)
-#endif
 
     //匹配性标定
     else if((watched == ui->tableWidget_3)||(watched == ui->lineEdit_7))//
