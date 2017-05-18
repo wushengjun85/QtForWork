@@ -3874,7 +3874,7 @@ void Widget::paintEvent(QPaintEvent *)
         else if(flagmatchion == YZT_5)//主力合工作时间
         {
             ui->label_20->setText(QString::number(cantest.m_ZhuLiHeWorkTime));
-            ui->label_10->setText(QString::number(cantest.m_Speed[SPEED_JIAOLONG]));//处理label_10 搅龙转速
+            ui->label_10->setText(QString::number(cantest.m_Speed[SPEED_SHENGYUNQI]));//处理label_10 升运器转速
         }
         else if(flagmatchion == JZ_3600)//割台转速
         {

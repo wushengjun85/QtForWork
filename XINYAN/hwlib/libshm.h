@@ -101,6 +101,24 @@ enum SPEED_TYPE_EN
 	SPEED_BUTT		
 };
 
+enum
+{	
+	DID0_D0,			//数字量(开关量)输入输出第1个字节
+	DID0_D1,			//数字量(开关量)第2个字节
+	DID0_D2,			//数字量(开关量)第3个字节
+	DID0_D3,			//数字量(开关量)第4个字节
+	DID0_D4,			//数字量(开关量)第5个字节
+	DID0_D5,			//数字量(开关量)第6个字节
+	DID0_D6,			//数字量(开关量)第7个字节
+	DID0_D7,			//数字量(开关量)第8个字节
+	DID0_BUTT,			//末尾
+};
+enum DI_BIT_TYPE_EN
+{
+	DI_BIT_GunTongSpeed_Up=6,					//滚筒转速调整开关-升202-D1-B6
+	DI_BIT_GunTongSpeed_Down=7,				//滚筒转速调整开关-降202-D1-B7
+};
+
 enum GUI_CMD_CFG_REQ_TYPE_EN
 {
 	GUI_CMD_CFG_REQ_ALL,						/* 请求读取所有标定数据*/
@@ -257,7 +275,7 @@ typedef struct
 	//指示数值
 	int VolYL; //油量
 #if JINYEE_EXT	
-	int StaYL;//油量故障状态
+	int StaYL;//油量故障状态0代表正常 1代表开路 2代表短路 3代表异常
 #endif	
 	int VolYeyayouwen;//液压油温
 	int MIJI;//米计、单次里程
@@ -333,8 +351,10 @@ typedef struct
 	int m_GZBitFlag;	/* 用于标记各种故障的 bit 位 ,参考 enum GZ_BIT_TYPE */
 	int m_Speed[MAX_SPEED_TYPE_NUM];		/* 用于 记录控制器 发过来的各个部件速度 */
 	int m_extLampBitFlag;					/* 新研客户扩展指示灯标记, 参考 LAMP_BIT_TYPE */
-	int m_ZhuLiHeWorkTime;					/*	主离合工作时间	*/
+	double m_ZhuLiHeWorkTime;				/*	主离合工作时间	*/
 	int m_AoBanJianXi;						/*	凹板间隙	*/
+	u8 m_DI[DID0_BUTT];						/*	数字量/开关量输入*/
+	u8 m_DO[DID0_BUTT];						/*  数字量/开关量输出 */
 } RAM_CAN_sData;
 
 typedef struct
@@ -355,9 +375,9 @@ typedef struct
 	int VolJYYL;//机油压力
 	int FDJ_speed;//发动机转速
 #if JINYEE_EXT	
-	float m_FuelVal;		/* 油耗值 INSTANT FUEL value */
+	float m_FuelVal;			/* 油耗值 INSTANT FUEL value */
 	float m_InsFuelVal;		/* 瞬间油耗值 INSTANT FUEL value */
-	float m_EcuWorkTime;	/* 发动机工作( 运行) 时间*/
+	double m_EcuWorkTime;	/* 发动机工作( 运行) 时间*/
 #endif	
 	
 	//SPN故障
