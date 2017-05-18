@@ -105,8 +105,13 @@ bool FaZhiReadOK = true;
 //bool FlagFaZhirecover = false;
 
 //3秒内无变化函数
-int Shijizhi;
-int TempShijizhi;
+int ShoubingShijizhi;
+int ShoubingTempShijizhi;
+int XingzhoubengShijizhi;
+int XingzhoubengTempShijizhi;
+int AobanjianxiShijizhi;
+int AobanjianxiTempShijizhi;
+
 bool FlagNext = false;
 uchar ThreeOut;
 
@@ -302,6 +307,12 @@ float YLBFB;//油量百分比
 
 //闪烁标志
 //
+
+//2017.5.18
+//
+uchar shanshuoLiangshun;//洒粮损失闪烁
+/*****************************************/
+
 uchar shanshuoSW;//水温闪烁
 uchar shanshuoJYYL;//机油压力闪烁
 uchar shanshuoYL;//油量闪烁
@@ -638,11 +649,11 @@ Widget::Widget(QWidget *parent) :
     ui->lineEdit_28->setText(strjlzs);
     ui->lineEdit_29->setText(strgqzs);
 
-    /***********************************************************************************************/
+/**********************************************************************************************/
 
 
 
-    /**********************************************************************************************/
+/**********************************************************************************************/
 
     //2017.4.7
     //过滤器安装
@@ -3138,8 +3149,6 @@ void Widget::paintEvent(QPaintEvent *)
 
                 }
 
-
-
                 //粮损
  //               pixShanshuo_W.load("./img/liangshun/06.png");//07.jpg
  //               paintShanshuo_W.drawPixmap(760,110,27,120,pixShanshuo_W);
@@ -3261,6 +3270,7 @@ void Widget::paintEvent(QPaintEvent *)
 
            QPainter paintdeng(this);
            QPixmap pixdeng;
+
            //左转灯
            if(cantest.flagLeft)
            {
@@ -3450,6 +3460,15 @@ void Widget::paintEvent(QPaintEvent *)
             {
                 pixdeng.load("./img/dengshan/07.png");//
                 paintdeng.drawPixmap(586,432,24,28,pixdeng);//正上方位置显示的图标
+            }
+
+
+            //2017.5.18
+            //粮食损失
+            if(shanshuoLiangshun)
+            {
+                pixdeng.load("./img/dengshan/t1.png");//
+                paintdeng.drawPixmap(757,77,31,28,pixdeng);//正上方位置显示的图标
             }
 
             //液压油温
@@ -3768,7 +3787,14 @@ void Widget::paintEvent(QPaintEvent *)
         {
             ui->label_14->setText(QString::number(DCDY,'f',1));//系统电压
             ui->label_11->setText(QString::number(cantest.m_Speed[SPEED_FENGJI]));//风机转速
-            ui->label_21->setText(QString::number(cantest.m_Speed[SPEED_GUNTONG]));//滚筒转速
+            if(flagmatchion != JZ_3600)
+            {
+                ui->label_21->setText(QString::number(cantest.m_Speed[SPEED_GUNTONG]));//滚筒转速
+            }
+            else
+            {
+                ui->label_21->setText("");//滚筒转速
+            }
         }
         else
         {
@@ -3868,9 +3894,6 @@ void Widget::paintEvent(QPaintEvent *)
 
         //处理label_6 瞬时油耗
         //ui->label_6->setText(QString::number());
-
-
-
 
 
 /*************************************************************************************************************/
@@ -5385,6 +5408,7 @@ void Widget::keyPressEvent(QKeyEvent *e)
 bool Widget::eventFilter(QObject *watched, QEvent *event)
 {
 
+    //主界面选择
     if((watched == ui->label_2 && (event->type() == QEvent::Paint)))//||(watched == ui->label_5 && event->type() == QEvent::Paint))
     {
         magicTime();
@@ -5392,7 +5416,8 @@ bool Widget::eventFilter(QObject *watched, QEvent *event)
     else if((watched == ui->label_5 && (event->type() == QEvent::Paint)))
     {
         fun2();
-    }//主界面选择
+    }
+    //时间设置 语言选择 屏幕亮度调节
     else if((watched == ui->lineEdit)||(watched == ui->lineEdit_2)||(watched == ui->dateTimeEdit)||(watched == ui->progressBar))
     {
         if(event->type() == QEvent::KeyPress)
@@ -6337,7 +6362,7 @@ bool Widget::eventFilter(QObject *watched, QEvent *event)
                        //query.prepare("INSERT INTO GeTaiBD(GuWuSwitch, GeFuWidth, ZaiHeXishu,ChangeSpeed) VALUES (:GuWuSwitch, :GeFuWidth,:ZaiHeXishu, :ChangeSpeed)");
                        query.prepare("update GeTaiBD set GuWuSwitch = :GuWuSwitch,GeFuWidth = :GeFuWidth,ZaiHeXishu = :ZaiHeXishu,ChangeSpeed = :ChangeSpeed");//where
 
-                       query.bindValue(":GuWuSwitch",3000);
+                       query.bindValue(":GuWuSwitch",1);
                        query.bindValue(":GeFuWidth", 11);
                        query.bindValue(":ZaiHeXishu", 66);
                        query.bindValue(":ChangeSpeed", 77);
@@ -6636,9 +6661,9 @@ bool Widget::eventFilter(QObject *watched, QEvent *event)
                         //ui->tableWidget_3->setItem(2,0,new QTableWidgetItem(10));
                         ui->tableWidget_3->setItem(2,1,new QTableWidgetItem("99"));
                         ui->tableWidget_3->setItem(2,2,new QTableWidgetItem("99"));
-                        ui->tableWidget_3->setItem(2,3,new QTableWidgetItem("99"));
+                        //ui->tableWidget_3->setItem(2,3,new QTableWidgetItem("99"));
                         ui->tableWidget_3->setItem(2,4,new QTableWidgetItem("99"));
-                        ui->tableWidget_3->setItem(2,5,new QTableWidgetItem("99"));
+                        //ui->tableWidget_3->setItem(2,5,new QTableWidgetItem("99"));
 
                     /***************************************************************************************************************/
 
@@ -6810,11 +6835,10 @@ void Widget::timeoutfun()
     else
     {
         flagtimeoutnum++;
-        //qDebug()<<"flagaction false .......... = "<<flagtimeoutnum<<endl;
+        qDebug()<<"flagtimeoutnum false .......... = "<<flagtimeoutnum<<endl;
         if(flagtimeoutnum == 15)
         {
             flagtimeout = true;
-
         }
 
     }
@@ -7190,10 +7214,12 @@ void Widget::shanhua()//闪烁和平滑转动
     if((flagmatchion == YZT_10)||(flagmatchion == YZT_5)) //滚筒转速
     {
         nu2 = cantest.m_Speed[SPEED_GUNTONG];
+        nu2 /= 100;
+        nu2 *= 2;
 
-        if(nu2 > 3000)//3000 转
+        if(nu2 > 30)//3000 转
         {
-            nu2 = 3000;
+            nu2 = 30;
         }
 
         if(nu1 < nu2)//
@@ -7349,6 +7375,13 @@ void Widget::shanhua()//闪烁和平滑转动
             shanshuoLM = 1;
         }
 
+        //2017.5.18
+
+        if(cantest.SaLiangLV >= 5)
+        {
+            shanshuoLiangshun = 1;
+        }
+
 
         //闪烁算法 核心
         flagnum++;
@@ -7366,6 +7399,9 @@ void Widget::shanhua()//闪烁和平滑转动
 
         shanshuoSS = 0;//手刹
         shanshuoLM = 0;//粮满
+
+        //2017.5.18
+        shanshuoLiangshun = 0;
 
 
         flagnum--;
@@ -7868,22 +7904,39 @@ void Widget::gzmTihuanslot()
 //3秒内无边化函数
 void Widget::NoChangeFun()
 {
+    //2017.5.18
+    //ShoubingShijizhi =
+
+    SendReqCmdToController(GUI_CMD_CFG_REQ_ALL,0);
+    GetRspDataFromController(&biaoding);
+
+    ShoubingShijizhi = biaoding.m_XinZouJubing[BD_VALUE_RealValue];
+    XingzhoubengShijizhi = biaoding.m_XinZouLaGan[BD_VALUE_RealValue];
+    AobanjianxiShijizhi = biaoding.m_AoBanJianXi[BD_VALUE_RealValue];
+
+
+//    qDebug()<<"ShoubingShijizhi == "<<ShoubingShijizhi<<endl;
+//    qDebug()<<"XingzhoubengShijizhi == "<<XingzhoubengShijizhi<<endl;
+//    qDebug()<<"AobanjianxiShijizhi == "<<AobanjianxiShijizhi<<endl;
+
+
     if(LCPiPeixingBiaoDing == 1)
     {
         if((FlagNext == false)&&(FlagShouBing ==1))
         {
-            if(Shijizhi == TempShijizhi)
+            if(ShoubingTempShijizhi == ShoubingShijizhi)
             {
                 ThreeOut++;
             }
             else
             {
+                ShoubingTempShijizhi = ShoubingShijizhi;
                 ThreeOut = 0;
             }
         }
         if(ThreeOut == 3)
         {
-            qDebug()<<"ppppppppppppppppppppppppppppppppppppppppp = "<<LCPiPeixingBiaoDing<<endl;
+            //qDebug()<<"ppppppppppppppppppppppppppppppppppppppppp = "<<LCPiPeixingBiaoDing<<endl;
             //ui->label_16->setText("请推动手柄到最小位置");
 
             FlagShouBing = 2;
@@ -7898,12 +7951,13 @@ void Widget::NoChangeFun()
         //标定完成
         if((FlagNext == true)&&(FlagShouBing ==2))
         {
-            if(Shijizhi == TempShijizhi)
+            if(ShoubingTempShijizhi == ShoubingShijizhi)
             {
                 ThreeOut++;
             }
             else
             {
+                ShoubingTempShijizhi = ShoubingShijizhi;
                 ThreeOut = 0;
             }
         }
@@ -7924,12 +7978,13 @@ void Widget::NoChangeFun()
     {
         if((FlagNext == false)&&(FlagXingzouBeng == 1))
         {
-            if(Shijizhi == TempShijizhi)
+            if(XingzhoubengTempShijizhi == XingzhoubengShijizhi)
             {
                 ThreeOut++;
             }
             else
             {
+                XingzhoubengTempShijizhi = XingzhoubengShijizhi;
                 ThreeOut = 0;
             }
         }
@@ -7949,12 +8004,13 @@ void Widget::NoChangeFun()
         //标定完成
         if((FlagNext == true)&&(FlagXingzouBeng == 2))
         {
-            if(Shijizhi == TempShijizhi)
+            if(XingzhoubengTempShijizhi == XingzhoubengShijizhi)
             {
                 ThreeOut++;
             }
             else
             {
+                XingzhoubengTempShijizhi = XingzhoubengShijizhi;
                 ThreeOut = 0;
             }
         }
@@ -7975,12 +8031,13 @@ void Widget::NoChangeFun()
     {
         if((FlagNext == false)&&(FlagAoBanjianxi == 1))
         {
-            if(Shijizhi == TempShijizhi)
+            if(AobanjianxiTempShijizhi == AobanjianxiShijizhi)
             {
                 ThreeOut++;
             }
             else
             {
+                AobanjianxiTempShijizhi = AobanjianxiShijizhi;
                 ThreeOut = 0;
             }
         }
@@ -8000,12 +8057,13 @@ void Widget::NoChangeFun()
         //凹板间隙标定完成
         if((FlagNext == true)&&(FlagAoBanjianxi == 2))
         {
-            if(Shijizhi == TempShijizhi)
+            if(AobanjianxiTempShijizhi == AobanjianxiShijizhi)
             {
                 ThreeOut++;
             }
             else
             {
+                AobanjianxiTempShijizhi = AobanjianxiShijizhi;
                 ThreeOut = 0;
             }
         }
