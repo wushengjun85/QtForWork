@@ -30,7 +30,7 @@ bool LCBoolMachineModenu = true;
 
 //2017.5.4  割台设置
 int LCGetaiSetup = 1;
-uchar GeFuWidth = 3140;
+uint GeFuWidth = 3140;
 uchar Zaihexishu = 5;
 uchar Autospeed = 80;
 //
@@ -5115,6 +5115,10 @@ void Widget::keyPressEvent(QKeyEvent *e)
                      FlagShouBing = 0;
                      FlagXingzouBeng = 0;
                 }
+
+                //2017.5.18 向控制器 发送数据
+                SendReqCmdToController(GUI_CMD_CFG_REQ_XinZouJuBing_Offset,shoubingoffset);
+                SendReqCmdToController(GUI_CMD_CFG_REQ_XinZouLaGan_Offset,langanoffset);
            }
             break;
 
@@ -5173,7 +5177,7 @@ void Widget::keyPressEvent(QKeyEvent *e)
         #endif
 
 
-             //2017.5.2
+             //2017.5.2  向控制器 发送数据
              SendReqCmdToController(GUI_CMD_CFG_REQ_ZhuLiHeZhangJinLi,zlh);
              SendReqCmdToController(GUI_CMD_CFG_REQ_XieLiangLiHeZhangJinLi,xllh);
              SendReqCmdToController(GUI_CMD_CFG_REQ_GuoQiaoLiHeZhangJinLi,gqlh);
@@ -5245,9 +5249,9 @@ void Widget::keyPressEvent(QKeyEvent *e)
                            query.prepare("update GeTaiBD set GuWuSwitch = :GuWuSwitch,GeFuWidth = :GeFuWidth,ZaiHeXishu = :ZaiHeXishu,ChangeSpeed = :ChangeSpeed");//where
 
                            query.bindValue(":GuWuSwitch",1);
-                           query.bindValue(":GeFuWidth", 11);
-                           query.bindValue(":ZaiHeXishu", 66);
-                           query.bindValue(":ChangeSpeed", 77);
+                           query.bindValue(":GeFuWidth", 3140);
+                           query.bindValue(":ZaiHeXishu", 5);
+                           query.bindValue(":ChangeSpeed", 80);
                            query.exec();
 
                          query.exec("select GuWuSwitch, GeFuWidth, ZaiHeXishu,ChangeSpeed from GeTaiBD");
@@ -5260,6 +5264,13 @@ void Widget::keyPressEvent(QKeyEvent *e)
                           query.exec(QObject::tr("drop GuWuSwitch"));
 
                       #endif
+
+                            //2017.5.2  向控制器 发送数据
+                            SendReqCmdToController(GUI_CMD_CFG_REQ_GuWuZhongLei,LCGetaiSetup);
+                            SendReqCmdToController(GUI_CMD_CFG_REQ_GeFuKuanDu,GeFuWidth);
+                            SendReqCmdToController(GUI_CMD_CFG_REQ_ZaiHeXiShu,Zaihexishu);
+                            SendReqCmdToController(GUI_CMD_CFG_REQ_TiaoSuXiShu,Autospeed);
+
                           }
                           break;
 /**************************************************************************************************/
