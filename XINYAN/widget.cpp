@@ -29,10 +29,10 @@ bool LCBoolMachineModenu = true;
 
 
 //2017.5.4  割台设置
-int LCGetaiSetup = 0;
-uchar GeFuWidth = 0;
-uchar Zaihexishu = 0;
-uchar Autospeed = 0;
+int LCGetaiSetup = 1;
+uchar GeFuWidth = 3140;
+uchar Zaihexishu = 5;
+uchar Autospeed = 80;
 //
 
 //2017.4.7 add
@@ -5007,6 +5007,10 @@ void Widget::keyPressEvent(QKeyEvent *e)
             {
               flagwidget = PipeixingbiaodingMenu;
               ui->stackedWidget->setCurrentIndex(11);
+
+              //2017.5.17
+              shoubingoffset = biaoding.m_XinZouJubing[BD_VALUE_Offset];
+              langanoffset =   biaoding.m_XinZouJubing[BD_VALUE_Offset];
             }
             else if(LCBiaoDingRow == 2) //阀值标定
             {
@@ -5047,11 +5051,10 @@ void Widget::keyPressEvent(QKeyEvent *e)
                 ui->listWidget_7->setFocus();
                 //2017.5.9
 
-                GeFuWidth = biaoding.m_GeFuKuanDu;
-                Zaihexishu = biaoding.m_ZaiKeXiShu;
-                Autospeed = biaoding.m_TiaoSuXiShu;
-
-                LCGetaiSetup = biaoding.m_GuWuZhongLei;
+//                GeFuWidth = biaoding.m_GeFuKuanDu;
+//                Zaihexishu = biaoding.m_ZaiKeXiShu;
+//                Autospeed = biaoding.m_TiaoSuXiShu;
+//                LCGetaiSetup = biaoding.m_GuWuZhongLei;
 
 
                 ui->lineEdit_3->setText(QString::number(GeFuWidth));
@@ -5112,12 +5115,6 @@ void Widget::keyPressEvent(QKeyEvent *e)
                      FlagShouBing = 0;
                      FlagXingzouBeng = 0;
                 }
-
-                //2017.5.17
-                shoubingoffset = biaoding.m_XinZouJubing[BD_VALUE_Offset];
-                langanoffset =   biaoding.m_XinZouJubing[BD_VALUE_Offset];
-
-
            }
             break;
 
@@ -6382,6 +6379,14 @@ bool Widget::eventFilter(QObject *watched, QEvent *event)
                     ui->lineEdit_3->setText("3140");
                     ui->lineEdit_4->setText("5");
                     ui->lineEdit_5->setText("80");
+
+                    ui->listWidget_7->item(LCGetaiSetup)->setBackgroundColor(Qt::transparent);
+                    ui->listWidget_7->item(LCGetaiSetup)->setTextColor(Qt::black);
+                    LCGetaiSetup = 1;
+
+                    ui->listWidget_7->item(LCGetaiSetup)->setBackgroundColor(Qt::yellow);
+                    ui->listWidget_7->item(LCGetaiSetup)->setTextColor(Qt::red);
+
                     flagaction = true;
                 }
 
