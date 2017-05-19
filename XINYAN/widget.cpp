@@ -2740,7 +2740,6 @@ void Widget::paintEvent(QPaintEvent *)
                    painter.rotate(7.6*floatnu3);//
 
 
-
                    //painter.rotate(4.0 );  //设旋转(角度 = 6° * (分钟 + 秒 / 60))*shisu
                    //内测用
                    /****************************************************************************/
@@ -2917,10 +2916,6 @@ void Widget::paintEvent(QPaintEvent *)
 
 
             }//end of if(flagmatchion == YZBT_5)
-
-
-
-
 
 
             //
@@ -3970,46 +3965,6 @@ void Widget::paintEvent(QPaintEvent *)
 
 /***************************************************************************************************************/
 
-#if 0
-/**************************************************************************************************/
-               if(flagwidget == PipeixingbiaodingMenu)
-               {
-                   qDebug()<<"jddddddddddddddddddddddddddddddddddddddddddddddddddddd ====  "<<LCPiPeixingBiaoDing<<endl;
-                    if((LCPiPeixingBiaoDing == 1)&&(FlagShouBing ==0))
-                    {
-                        ui->label_17->setText("请按F5开始标定手柄");
-                    }
-                    else if((LCPiPeixingBiaoDing == 1)&&(FlagShouBing ==1))
-                    {
-                        ui->label_17->setText("请推动手柄到最大位置等待");
-                    }
-                    else if((LCPiPeixingBiaoDing == 2)&&(FlagXingzouBeng ==0))
-                    {
-                        ui->label_17->setText("按F5键开始标定行走泵杆");
-                    }
-                    else if((LCPiPeixingBiaoDing == 2)&&(FlagXingzouBeng ==1))
-                    {
-                         ui->label_17->setText("请推动手柄到最大位置等待");
-                    }
-                    else if((LCPiPeixingBiaoDing == 3)&&(FlagAoBanjianxi ==0))
-                    {
-                        ui->label_17->setText("按F5键开始标定凹板间隙");
-                    }
-                    else if((LCPiPeixingBiaoDing == 3)&&(FlagAoBanjianxi ==1))
-                    {
-                        ui->label_17->setText("请按住凹板间隙增大调整开关并等待");
-                    }
-
-                    //偏移量
-                    else if((LCPiPeixingBiaoDing == 4)||(LCPiPeixingBiaoDing == 5))
-                    {
-                        ui->label_17->setText(" ");
-                    }
-
-               }
-
-/**************************************************************************************************/
-#endif
 
 /***************************************************************************************************************/
                              if(flagwidget == PipeixingbiaodingMenu)
@@ -4040,71 +3995,8 @@ void Widget::paintEvent(QPaintEvent *)
                                  ui->tableWidget_3->setItem(2,4,new QTableWidgetItem(QString::number(biaoding.m_AoBanJianXi[BD_VALUE_Minimum])));
                                  //ui->tableWidget_3->setItem(2,5,new QTableWidgetItem(" "));//QString::number(biaoding.m_AoBanJianXi[BD_VALUE_Offset]
 
-#if 0
 
-                                     ui->tableWidget_3->setItem(0,1,new QTableWidgetItem("10"));
-                                     ui->tableWidget_3->setItem(0,2,new QTableWidgetItem("11"));
-                                     ui->tableWidget_3->setItem(0,3,new QTableWidgetItem("12"));
-                                     ui->tableWidget_3->setItem(0,4,new QTableWidgetItem("13"));
-                                     ui->tableWidget_3->setItem(0,5,new QTableWidgetItem("14"));
-
-
-                                     //ui->tableWidget_3->setItem(1,0,new QTableWidgetItem(10));
-                                     ui->tableWidget_3->setItem(1,1,new QTableWidgetItem("15"));
-                                     ui->tableWidget_3->setItem(1,2,new QTableWidgetItem("16"));
-                                     ui->tableWidget_3->setItem(1,3,new QTableWidgetItem("17"));
-                                     ui->tableWidget_3->setItem(1,4,new QTableWidgetItem("18"));
-                                     ui->tableWidget_3->setItem(1,5,new QTableWidgetItem("19"));
-
-                                     //ui->tableWidget_3->setItem(2,0,new QTableWidgetItem(10));
-                                     ui->tableWidget_3->setItem(2,1,new QTableWidgetItem("20"));
-                                     ui->tableWidget_3->setItem(2,2,new QTableWidgetItem("21"));
-                                     ui->tableWidget_3->setItem(2,3,new QTableWidgetItem("22"));
-                                     ui->tableWidget_3->setItem(2,4,new QTableWidgetItem("23"));
-                                     ui->tableWidget_3->setItem(2,5,new QTableWidgetItem("24"));
-
-#endif
                                  /***************************************************************************************************************/
-//                                   if((LCPiPeixingBiaoDing == 1)&&(FlagShouBing ==0))
-//                                   {
-//                                       ui->label_17->setText("请按F5开始标定手柄");
-//                                   }
-//                                   else if((LCPiPeixingBiaoDing == 1)&&(FlagShouBing ==1))
-//                                   {
-//                                       ui->label_17->setText("请推动手柄到最大位置等待");
-//                                   }
-
-//                                   //2017.4.28
-//                                   else if((tempflagShoubing ==true)&&(LCPiPeixingBiaoDing ==1)&&(FlagShouBing ==1))
-//                                   {
-//                                       ui->label_17->setText("请推动手柄到最小位置等待");
-//                                       qDebug()<<"jddddddddddddddddddddddddddddddddddddddddddddddddddddd ====  "<<LCPiPeixingBiaoDing<<endl;
-//                                   }
-//                                   else if((FlagNext == true)&&(FlagShouBing ==1)&&(LCPiPeixingBiaoDing ==1)&&(FlagShouBing ==1))
-//                                   {
-//                                      ui->label_17->setText("手柄标定完成");
-//                                   }
-//                                   //
-
-//                                   else if((LCPiPeixingBiaoDing == 2)&&(FlagXingzouBeng ==0))
-//                                   {
-//                                       ui->label_17->setText("按F5键开始标定行走泵杆");
-//                                   }
-//                                   else if((LCPiPeixingBiaoDing == 2)&&(FlagXingzouBeng ==1))
-//                                   {
-//                                        ui->label_17->setText("请推动手柄到最大位置等待");
-//                                   }
-//                                   else if((LCPiPeixingBiaoDing == 3)&&(FlagAoBanjianxi ==0))
-//                                   {
-//                                       ui->label_17->setText("按F5键开始标定凹板间隙");
-//                                   }
-//                                   else if((LCPiPeixingBiaoDing == 3)&&(FlagAoBanjianxi ==1))
-//                                   {
-//                                       ui->label_17->setText("请按住凹板间隙增大调整开关并等待");
-//                                   }
-
-
-
 
 /***************************************************************************************************************/
      if((LCPiPeixingBiaoDing == 1)&&(FlagShouBing ==0))
@@ -4218,12 +4110,7 @@ void Widget::paintEvent(QPaintEvent *)
         if((ecutest.flagECU == 0)&&(cantest.StaYL == 0))
         {
             memcpy(AddSum[0],ecutest.spn_can.chgzm[0],(ecutest.spn_can.cnt)*sizeof(ecutest.spn_can.chgzm[0]));
-            //YouAndTongxinArray[0][0] = *p2;
 
-//            memcpy(YouAndTongxinArray[0],p3,sizeof(YouAndTongxinArray[0]));
-//            memcpy(AddSum[0],ecutest.spn_can.chgzm[0],(ecutest.spn_can.cnt)*sizeof(ecutest.spn_can.chgzm[0]));
-//            memcpy(AddSum[ecutest.spn_can.cnt],YouAndTongxinArray[0],1*sizeof(YouAndTongxinArray[0]));
-//            qDebug()<<"AddSum[1] == "<<AddSum[1]<<endl;
         }
 
         //油量开路
@@ -4403,7 +4290,6 @@ void Widget::paintEvent(QPaintEvent *)
                    //qDebug()<<"!query.next().................. "<<endl;
 
                }
-
 
                 flagGzmclear = false;
            }
@@ -5016,28 +4902,6 @@ void Widget::keyPressEvent(QKeyEvent *e)
             {
                 flagwidget = FazhibiaodingMenu;
                 ui->stackedWidget->setCurrentIndex(12);
-
-//                //2017.5.2 add wsj
-//                SendReqCmdToController(GUI_CMD_CFG_REQ_ALL,0);
-//                GetRspDataFromController(&biaoding);
-
-//                //
-//                zlh = biaoding.m_ZhangJinLi_And_Sensitivity[BD_DATA_ZhuLiHeZhangJinLi];
-//                xllh = biaoding.m_ZhangJinLi_And_Sensitivity[BD_DATA_XieLiangLiHeZhangJinLi];
-//                gqlh = biaoding.m_ZhangJinLi_And_Sensitivity[BD_DATA_GuoQiaoLiHeZhangJinLi];
-//                gtzs = biaoding.m_ZhangJinLi_And_Sensitivity[BD_DATA_GunTongZhuanSuLinMinDu];
-//                fjzs = biaoding.m_ZhangJinLi_And_Sensitivity[BD_DATA_FengJiZhuanSuLinMinDu];
-//                jlzs = biaoding.m_ZhangJinLi_And_Sensitivity[BD_DATA_JiaoLongZhuanSuLinMinDu];
-//                gqzs = biaoding.m_ZhangJinLi_And_Sensitivity[BD_DATA_GuoQiaoZhuanSuLinMinDu];
-
-//                qDebug()<<"FAZHIBIAODING..............................."<<endl;
-//                qDebug()<<"zlh = "<<zlh;
-//                qDebug()<<"xllh = "<<xllh;
-//                qDebug()<<"gqlh = "<<gqlh;
-//                qDebug()<<"gtzs = "<<gtzs;
-//                qDebug()<<"fjzs = "<<fjzs;
-//                qDebug()<<"jlzs = "<<jlzs;
-//                qDebug()<<"gqzs = "<<gqzs;
             }
 
             //2017.5.4
