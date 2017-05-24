@@ -330,6 +330,8 @@ uchar shanshuoYYYW;//液压油温
 uchar shanshuoLM;//粮满
 uchar shanshuoSS;//手刹
 
+uchar shangshuoChongdian;//充电
+
 uchar shanshuoTXGZ;//通信故障
 
 uchar shanshuozlzs;//轴流滚筒转速
@@ -3298,6 +3300,7 @@ void Widget::paintEvent(QPaintEvent *)
                pixdeng.load("./img/dengshan/17.png");//
                paintdeng.drawPixmap(118,434,34,24,pixdeng);//正上方位置显示的图标
            }
+           //闪烁
 
            //远光
            if(cantest.flagYG != 0)
@@ -3558,6 +3561,16 @@ void Widget::paintEvent(QPaintEvent *)
                 pixdeng.load("./img/dengshan/t1.png");//
                 paintdeng.drawPixmap(757,77,31,28,pixdeng);//正上方位置显示的图标
             }
+
+            //2017.5.24
+            //充电指示灯  //闪烁
+
+            if(shangshuoChongdian)
+            {
+                pixdeng.load("./img/dengshan/17.png");//
+                paintdeng.drawPixmap(118,434,34,24,pixdeng);//正上方位置显示的图标
+            }
+
 
             //液压油温
             if(shanshuoYYYW)//液压油温  cantest.VolYeyayouwen
@@ -5083,6 +5096,68 @@ void Widget::keyPressEvent(QKeyEvent *e)
             {
                 flagwidget = FazhibiaodingMenu;
                 ui->stackedWidget->setCurrentIndex(12);
+
+                //2017.4.22   //更新阀值设定数据库
+
+                  QTextCodec::setCodecForTr(QTextCodec::codecForLocale());//汉字显示
+                  QSqlDatabase db;
+                  if(QSqlDatabase::contains("qt_sql_default_connection"))
+                    db = QSqlDatabase::database("qt_sql_default_connection");
+                  else
+                    db = QSqlDatabase::addDatabase("QSQLITE");
+
+                 db.setDatabaseName("jy.db");
+                 if (!db.open())
+                 {
+                     qDebug()<<"open database failed ---"<<db.lastError().text()<<endl;
+                 }
+                 QSqlQuery query;
+
+
+            #if 0
+                 //query.prepare("INSERT INTO FaZhiBingBD(ZLH, XLLH, GQLH,LmdGTZS,LmdFengJi,LmdJiaoLong,LmdGuoQiao) VALUES (:ZLH, :XLLH, :GQLH, :LmdGQZS, :LmdFengJi, :LmdJiaoLong, :LmdGuoQiao)");
+                 query.prepare("update FaZhiBingBD set ZLH = :ZLH,XLLH = :XLLH,GQLH = :GQLH,LmdGTZS = :LmdGQZS,LmdFengJi = :LmdFengJi,LmdJiaoLong = :LmdJiaoLong,LmdGuoQiao = :LmdGuoQiao");//where
+
+                 query.bindValue(":ZLH",zlh);
+                 query.bindValue(":XLLH", xllh);
+                 query.bindValue(":GQLH", gqlh);
+                 query.bindValue(":LmdGTZS", gtzs);
+                 query.bindValue(":LmdFengJi", fjzs);
+                 query.bindValue(":LmdJiaoLong", jlzs);
+                 query.bindValue(":LmdGuoQiao", gqzs);
+                 query.exec();
+
+            #endif
+
+
+//                 //2017.5.2  向控制器 发送数据
+//                 SendReqCmdToController(GUI_CMD_CFG_REQ_ZhuLiHeZhangJinLi,zlh);
+//                 SendReqCmdToController(GUI_CMD_CFG_REQ_XieLiangLiHeZhangJinLi,xllh);
+//                 SendReqCmdToController(GUI_CMD_CFG_REQ_GuoQiaoLiHeZhangJinLi,gqlh);
+//                 SendReqCmdToController(GUI_CMD_CFG_REQ_GunTongZhuanSuLinMinDu,gtzs);
+//                 SendReqCmdToController(GUI_CMD_CFG_REQ_FengJiZhuanSuLinMinDu,fjzs);
+//                 SendReqCmdToController(GUI_CMD_CFG_REQ_JiaoLongZhuanSuLinMinDu,jlzs);
+//                 SendReqCmdToController(GUI_CMD_CFG_REQ_GuoQiaoZhuanSuLinMinDu,gqzs);
+
+
+
+                 #if 1
+                query.exec("select ZLH, XLLH, GQLH,LmdGTZS,LmdFengJi,LmdJiaoLong,LmdGuoQiao from FaZhiBingBD");
+                while (query.next())
+                {
+
+                  qDebug()<<"id("<<query.value(0).toInt()<<")  name:"<<query.value(1).toString()<<"  age:"<<query.value(2).toInt();
+                  zlh = query.value(0).toInt();
+                  xllh = query.value(1).toInt();
+                  gqlh = query.value(2).toInt();
+                  gtzs = query.value(3).toInt();
+                  fjzs = query.value(4).toInt();
+                  jlzs = query.value(5).toInt();
+                  gqzs = query.value(6).toInt();
+                }
+                #endif
+                query.exec(QObject::tr("drop FaZhiBingBD"));
+
             }
 
             //2017.5.4
@@ -5105,6 +5180,40 @@ void Widget::keyPressEvent(QKeyEvent *e)
                 ui->lineEdit_3->setText(QString::number(GeFuWidth));
                 ui->lineEdit_4->setText(QString::number(Zaihexishu));
                 ui->lineEdit_5->setText(QString::number(Autospeed));
+
+
+                //2017.5.24
+                //割台参数读取
+              #if 1
+                    QTextCodec::setCodecForTr(QTextCodec::codecForLocale());//汉字显示
+                    QSqlDatabase db;
+                    if(QSqlDatabase::contains("qt_sql_default_connection"))
+                      db = QSqlDatabase::database("qt_sql_default_connection");
+                    else
+                      db = QSqlDatabase::addDatabase("QSQLITE");
+
+                   db.setDatabaseName("jy.db");
+                   if (!db.open())
+                   {
+                       qDebug()<<"open database failed ---"<<db.lastError().text()<<endl;
+                   }
+                   QSqlQuery query;
+
+                 query.exec("select GuWuSwitch, GeFuWidth, ZaiHeXishu,ChangeSpeed from GeTaiBD");
+                 while (query.next())
+                 {
+
+                    LCGetaiSetup = query.value(0).toInt();
+                    GeFuWidth = query.value(1).toInt();
+                    Zaihexishu = query.value(2).toInt();
+                    Autospeed = query.value(3).toInt();
+
+                    qDebug()<<"id("<<query.value(0).toInt()<<")  name:"<<query.value(1).toString()<<"  age:"<<query.value(2).toInt();
+
+                 }
+                  query.exec(QObject::tr("drop GuWuSwitch"));
+
+              #endif
 
 
             }
@@ -5300,18 +5409,23 @@ void Widget::keyPressEvent(QKeyEvent *e)
                            //query.prepare("INSERT INTO GeTaiBD(GuWuSwitch, GeFuWidth, ZaiHeXishu,ChangeSpeed) VALUES (:GuWuSwitch, :GeFuWidth,:ZaiHeXishu, :ChangeSpeed)");
                            query.prepare("update GeTaiBD set GuWuSwitch = :GuWuSwitch,GeFuWidth = :GeFuWidth,ZaiHeXishu = :ZaiHeXishu,ChangeSpeed = :ChangeSpeed");//where
 
-                           query.bindValue(":GuWuSwitch",1);
-                           query.bindValue(":GeFuWidth", 3140);
-                           query.bindValue(":ZaiHeXishu", 5);
-                           query.bindValue(":ChangeSpeed", 80);
-                           query.exec();
+//                           query.bindValue(":GuWuSwitch",1);
+//                           query.bindValue(":GeFuWidth", 3140);
+//                           query.bindValue(":ZaiHeXishu", 5);
+//                           query.bindValue(":ChangeSpeed", 80);
+//                           query.exec();
+
+                              query.bindValue(":GuWuSwitch",LCGetaiSetup);
+                              query.bindValue(":GeFuWidth", GeFuWidth);
+                              query.bindValue(":ZaiHeXishu", Zaihexishu);
+                              query.bindValue(":ChangeSpeed", Autospeed);
+                              query.exec();
+
 
                          query.exec("select GuWuSwitch, GeFuWidth, ZaiHeXishu,ChangeSpeed from GeTaiBD");
                          while (query.next())
                          {
-
                             qDebug()<<"id("<<query.value(0).toInt()<<")  name:"<<query.value(1).toString()<<"  age:"<<query.value(2).toInt();
-
                          }
                           query.exec(QObject::tr("drop GuWuSwitch"));
 
@@ -6010,10 +6124,13 @@ bool Widget::eventFilter(QObject *watched, QEvent *event)
                     ui->lineEdit_24->setFocus();
                     ui->lineEdit_24->hasFocus();
 
-//                    QPalette p=QPalette();
-//                    p.setColor(QPalette::Base,Qt::white);
-//                    ui->lineEdit_24->setPalette(p);
-//                    ui->lineEdit_24->
+                    QPalette p1=QPalette();
+                    p1.setColor(QPalette::Base,Qt::blue);
+                    ui->lineEdit_24->setPalette(p1);
+
+                    QPalette p2=QPalette();
+                    p2.setColor(QPalette::Base,Qt::white);
+                    ui->lineEdit_23->setPalette(p2);
 
                     }
                     if(m2)
@@ -6022,12 +6139,28 @@ bool Widget::eventFilter(QObject *watched, QEvent *event)
                         ui->lineEdit_25->setFocus();
                         ui->lineEdit_25->hasFocus();
 
+                        QPalette p1=QPalette();
+                        p1.setColor(QPalette::Base,Qt::blue);
+                        ui->lineEdit_25->setPalette(p1);
+
+                        QPalette p2=QPalette();
+                        p2.setColor(QPalette::Base,Qt::white);
+                        ui->lineEdit_24->setPalette(p2);
+
                     }
                     if(m3)
                     {
                         focusNextChild();
                         ui->lineEdit_26->setFocus();
                         ui->lineEdit_26->hasFocus();
+
+                        QPalette p1=QPalette();
+                        p1.setColor(QPalette::Base,Qt::blue);
+                        ui->lineEdit_26->setPalette(p1);
+
+                        QPalette p2=QPalette();
+                        p2.setColor(QPalette::Base,Qt::white);
+                        ui->lineEdit_25->setPalette(p2);
 
                     }
                     if(m4)
@@ -6036,12 +6169,28 @@ bool Widget::eventFilter(QObject *watched, QEvent *event)
                         ui->lineEdit_27->setFocus();
                         ui->lineEdit_27->hasFocus();
 
+                        QPalette p1=QPalette();
+                        p1.setColor(QPalette::Base,Qt::blue);
+                        ui->lineEdit_27->setPalette(p1);
+
+                        QPalette p2=QPalette();
+                        p2.setColor(QPalette::Base,Qt::white);
+                        ui->lineEdit_26->setPalette(p2);
+
                     }
                     if(m5)
                     {
                         focusNextChild();
                         ui->lineEdit_28->setFocus();
                         ui->lineEdit_28->hasFocus();
+
+                        QPalette p1=QPalette();
+                        p1.setColor(QPalette::Base,Qt::blue);
+                        ui->lineEdit_28->setPalette(p1);
+
+                        QPalette p2=QPalette();
+                        p2.setColor(QPalette::Base,Qt::white);
+                        ui->lineEdit_27->setPalette(p2);
 
                     }
                     if(m6)
@@ -6050,6 +6199,14 @@ bool Widget::eventFilter(QObject *watched, QEvent *event)
                         ui->lineEdit_29->setFocus();
                         ui->lineEdit_29->hasFocus();
 
+                        QPalette p1=QPalette();
+                        p1.setColor(QPalette::Base,Qt::blue);
+                        ui->lineEdit_29->setPalette(p1);
+
+                        QPalette p2=QPalette();
+                        p2.setColor(QPalette::Base,Qt::white);
+                        ui->lineEdit_28->setPalette(p2);
+
                     }
                     if(m7)
                     {
@@ -6057,12 +6214,28 @@ bool Widget::eventFilter(QObject *watched, QEvent *event)
                         ui->lineEdit_30->setFocus();
                         ui->lineEdit_30->hasFocus();
 
+                        QPalette p1=QPalette();
+                        p1.setColor(QPalette::Base,Qt::blue);
+                        ui->lineEdit_30->setPalette(p1);
+
+                        QPalette p2=QPalette();
+                        p2.setColor(QPalette::Base,Qt::white);
+                        ui->lineEdit_29->setPalette(p2);
+
                     }
                     if(m8)
                     {
                         focusNextChild();
                         ui->lineEdit_23->setFocus();
                         ui->lineEdit_23->hasFocus();
+
+                        QPalette p1=QPalette();
+                        p1.setColor(QPalette::Base,Qt::blue);
+                        ui->lineEdit_23->setPalette(p1);
+
+                        QPalette p2=QPalette();
+                        p2.setColor(QPalette::Base,Qt::white);
+                        ui->lineEdit_30->setPalette(p2);
 
 
                     }
@@ -7466,6 +7639,13 @@ void Widget::shanhua()//闪烁和平滑转动
 //            shanshuoLiangchangman2 = 1;
 //        }
 
+        //2017.5.24
+        //充电指示灯
+        if(cantest.flagBattery == 2)
+        {
+            shangshuoChongdian = 1;
+        }
+
 
 
         //闪烁算法 核心
@@ -7520,7 +7700,7 @@ void Widget::Licheng()//里程
 
         if((ecutest.flagECU == 0))
         {
-            if(((shanshuoSW == 1)||(shanshuoJYYL ==1)||(shanshuoLM == 1)||(shanshuoLiangshun == 1)||(shanshuoGunTong == 1)||(shanshuoShengyun == 1)||(shanshuoguoqiao == 1)||(shanshuofengji == 1)||(shanshuoSS == 1))&&(ecutest.FDJ_speed>350))//||shanshuoYL||shanshuozlzs||shanshuoftqzs||shanshuosyqzs
+            if(((shanshuoSW == 1)||(shanshuoJYYL ==1)||(shanshuoLM == 1)||(shanshuoLiangshun == 1)||(shanshuoGunTong == 1)||(shanshuoShengyun == 1)||(shanshuoguoqiao == 1)||(shanshuofengji == 1)||(shanshuoSS == 1)||(shangshuoChongdian == 1))&&(ecutest.FDJ_speed>350))//||shanshuoYL||shanshuozlzs||shanshuoftqzs||shanshuosyqzs
             {
                 if(flagbeep)
                 {
@@ -7532,7 +7712,7 @@ void Widget::Licheng()//里程
 //                qDebug()<<"beef on shanshuoJYYL  ==                  ff         == "<<shanshuoJYYL<<endl;
 
             }
-            else if((shanshuoSW != 1)||(shanshuoJYYL !=1)||(shanshuoLM != 1)||(shanshuoLiangshun != 1)||(shanshuoGunTong != 1)||(shanshuoShengyun != 1)||(shanshuoguoqiao != 1)||(shanshuofengji != 1)||(shanshuoSS != 1))
+            else if((shanshuoSW != 1)||(shanshuoJYYL !=1)||(shanshuoLM != 1)||(shanshuoLiangshun != 1)||(shanshuoGunTong != 1)||(shanshuoShengyun != 1)||(shanshuoguoqiao != 1)||(shanshuofengji != 1)||(shanshuoSS != 1)||(shangshuoChongdian != 1))
             {
                 if(flagbeepzero == 0)
                 {
@@ -7558,7 +7738,7 @@ void Widget::Licheng()//里程
                 if((shanshuoYL == 1))
                 {
                     DelayYLcounter++;
-                    if(DelayYLcounter == 60)
+                    if(DelayYLcounter == 6)//60
                     {
                         if(flagbeep)
                         {
