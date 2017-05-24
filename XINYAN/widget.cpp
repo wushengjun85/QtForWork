@@ -4141,6 +4141,9 @@ void Widget::paintEvent(QPaintEvent *)
      else if((LCPiPeixingBiaoDing ==1)&&(FlagShouBing ==3))
      {
         ui->label_17->setText("手柄标定完成");
+
+        //2017.5.24
+        FlagShouBing = 0;
      }
      //
 
@@ -4168,6 +4171,8 @@ void Widget::paintEvent(QPaintEvent *)
      else if((LCPiPeixingBiaoDing == 2)&&(FlagXingzouBeng ==3))
      {
           ui->label_17->setText("行走泵校准完成");
+          //2017.5.24
+          FlagXingzouBeng = 0;
      }
 
      else if((LCPiPeixingBiaoDing == 3)&&(FlagAoBanjianxi ==0))
@@ -4185,6 +4190,8 @@ void Widget::paintEvent(QPaintEvent *)
      else if((LCPiPeixingBiaoDing == 3)&&(FlagAoBanjianxi ==3))
      {
          ui->label_17->setText("凹板间隙标定完成");
+
+         FlagAoBanjianxi =3;
      }
 
 
@@ -6001,48 +6008,62 @@ bool Widget::eventFilter(QObject *watched, QEvent *event)
                     {
                     focusNextChild();
                     ui->lineEdit_24->setFocus();
+                    ui->lineEdit_24->hasFocus();
+
+//                    QPalette p=QPalette();
+//                    p.setColor(QPalette::Base,Qt::white);
+//                    ui->lineEdit_24->setPalette(p);
+//                    ui->lineEdit_24->
 
                     }
                     if(m2)
                     {
                         focusNextChild();
                         ui->lineEdit_25->setFocus();
+                        ui->lineEdit_25->hasFocus();
 
                     }
                     if(m3)
                     {
                         focusNextChild();
                         ui->lineEdit_26->setFocus();
+                        ui->lineEdit_26->hasFocus();
 
                     }
                     if(m4)
                     {
                         focusNextChild();
                         ui->lineEdit_27->setFocus();
+                        ui->lineEdit_27->hasFocus();
 
                     }
                     if(m5)
                     {
                         focusNextChild();
                         ui->lineEdit_28->setFocus();
+                        ui->lineEdit_28->hasFocus();
 
                     }
                     if(m6)
                     {
                         focusNextChild();
                         ui->lineEdit_29->setFocus();
+                        ui->lineEdit_29->hasFocus();
 
                     }
                     if(m7)
                     {
                         focusNextChild();
                         ui->lineEdit_30->setFocus();
+                        ui->lineEdit_30->hasFocus();
 
                     }
                     if(m8)
                     {
                         focusNextChild();
                         ui->lineEdit_23->setFocus();
+                        ui->lineEdit_23->hasFocus();
+
 
                     }
 

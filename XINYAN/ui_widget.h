@@ -444,6 +444,8 @@ public:
         listWidget_6 = new QListWidget(page_17);
         listWidget_6->setObjectName(QString::fromUtf8("listWidget_6"));
         listWidget_6->setGeometry(QRect(307, 164, 221, 158));
+        listWidget_6->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        listWidget_6->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         stackedWidget->addWidget(page_17);
         page_18 = new QWidget();
         page_18->setObjectName(QString::fromUtf8("page_18"));
