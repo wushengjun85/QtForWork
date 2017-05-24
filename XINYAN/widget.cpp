@@ -5286,8 +5286,19 @@ void Widget::keyPressEvent(QKeyEvent *e)
                 }
 
                 //2017.5.18 向控制器 发送数据
-                SendReqCmdToController(GUI_CMD_CFG_REQ_XinZouJuBing_Offset,shoubingoffset);
-                SendReqCmdToController(GUI_CMD_CFG_REQ_XinZouLaGan_Offset,langanoffset);
+//                SendReqCmdToController(GUI_CMD_CFG_REQ_XinZouJuBing_Offset,shoubingoffset);
+//                SendReqCmdToController(GUI_CMD_CFG_REQ_XinZouLaGan_Offset,langanoffset);
+
+
+                //2017.5.25
+                else if(LCPiPeixingBiaoDing == 4)
+                {
+                    SendReqCmdToController(GUI_CMD_CFG_REQ_XinZouJuBing_Offset,shoubingoffset);
+                }
+                else if(LCPiPeixingBiaoDing == 5)
+                {
+                    SendReqCmdToController(GUI_CMD_CFG_REQ_XinZouLaGan_Offset,langanoffset);
+                }
            }
             break;
 

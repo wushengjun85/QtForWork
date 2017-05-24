@@ -324,6 +324,7 @@ public:
         tableWidget_3->setObjectName(QString::fromUtf8("tableWidget_3"));
         tableWidget_3->setGeometry(QRect(178, 110, 451, 175));
         tableWidget_3->setStyleSheet(QString::fromUtf8("color: rgb(255, 255, 255);\n"
+"font: 75 14pt \"Ubuntu\";\n"
 "gridline-color: rgb(255, 0, 0);\n"
 "background-color: rgb(70, 70, 70);"));
         tableWidget_3->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -338,6 +339,7 @@ public:
         label_17->setObjectName(QString::fromUtf8("label_17"));
         label_17->setGeometry(QRect(178, 310, 451, 41));
         label_17->setStyleSheet(QString::fromUtf8("font: 75 12pt \"Ubuntu\";\n"
+"font: 75 16pt \"Ubuntu\";\n"
 "background-color: rgb(255, 255, 255);\n"
 ""));
         label_17->setFrameShape(QFrame::Box);
@@ -346,28 +348,38 @@ public:
         page_13->setObjectName(QString::fromUtf8("page_13"));
         lineEdit_30 = new QLineEdit(page_13);
         lineEdit_30->setObjectName(QString::fromUtf8("lineEdit_30"));
-        lineEdit_30->setGeometry(QRect(461, 303, 101, 29));
+        lineEdit_30->setGeometry(QRect(451, 303, 111, 29));
+        lineEdit_30->setStyleSheet(QString::fromUtf8("font: 75 12pt \"Ubuntu\";\n"
+"color: rgb(255, 170, 0);\n"
+"font: 75 12pt \"Ubuntu\";"));
         lineEdit_23 = new QLineEdit(page_13);
         lineEdit_23->setObjectName(QString::fromUtf8("lineEdit_23"));
         lineEdit_23->setGeometry(QRect(343, 163, 41, 21));
+        lineEdit_23->setStyleSheet(QString::fromUtf8("font: 75 14pt \"Ubuntu\";"));
         lineEdit_27 = new QLineEdit(page_13);
         lineEdit_27->setObjectName(QString::fromUtf8("lineEdit_27"));
         lineEdit_27->setGeometry(QRect(343, 230, 41, 21));
+        lineEdit_27->setStyleSheet(QString::fromUtf8("font: 75 14pt \"Ubuntu\";"));
         lineEdit_25 = new QLineEdit(page_13);
         lineEdit_25->setObjectName(QString::fromUtf8("lineEdit_25"));
         lineEdit_25->setGeometry(QRect(343, 197, 41, 21));
+        lineEdit_25->setStyleSheet(QString::fromUtf8("font: 75 14pt \"Ubuntu\";"));
         lineEdit_24 = new QLineEdit(page_13);
         lineEdit_24->setObjectName(QString::fromUtf8("lineEdit_24"));
         lineEdit_24->setGeometry(QRect(490, 163, 41, 21));
+        lineEdit_24->setStyleSheet(QString::fromUtf8("font: 75 14pt \"Ubuntu\";"));
         lineEdit_28 = new QLineEdit(page_13);
         lineEdit_28->setObjectName(QString::fromUtf8("lineEdit_28"));
         lineEdit_28->setGeometry(QRect(490, 230, 41, 21));
+        lineEdit_28->setStyleSheet(QString::fromUtf8("font: 75 14pt \"Ubuntu\";"));
         lineEdit_29 = new QLineEdit(page_13);
         lineEdit_29->setObjectName(QString::fromUtf8("lineEdit_29"));
         lineEdit_29->setGeometry(QRect(490, 262, 41, 21));
+        lineEdit_29->setStyleSheet(QString::fromUtf8("font: 75 14pt \"Ubuntu\";"));
         lineEdit_26 = new QLineEdit(page_13);
         lineEdit_26->setObjectName(QString::fromUtf8("lineEdit_26"));
         lineEdit_26->setGeometry(QRect(490, 197, 41, 21));
+        lineEdit_26->setStyleSheet(QString::fromUtf8("font: 75 14pt \"Ubuntu\";"));
         stackedWidget->addWidget(page_13);
         page_14 = new QWidget();
         page_14->setObjectName(QString::fromUtf8("page_14"));
@@ -469,6 +481,7 @@ public:
         listWidget_6->setObjectName(QString::fromUtf8("listWidget_6"));
         listWidget_6->setGeometry(QRect(307, 164, 221, 158));
         listWidget_6->setStyleSheet(QString::fromUtf8("background-color: rgb(81, 81, 81);\n"
+"font: 75 16pt \"Ubuntu\";\n"
 "gridline-color: rgb(255, 0, 0);\n"
 "color: rgb(255, 255, 255);"));
         listWidget_6->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -510,12 +523,15 @@ public:
         lineEdit_3 = new QLineEdit(page_19);
         lineEdit_3->setObjectName(QString::fromUtf8("lineEdit_3"));
         lineEdit_3->setGeometry(QRect(450, 150, 91, 31));
+        lineEdit_3->setStyleSheet(QString::fromUtf8("font: 75 16pt \"Ubuntu\";"));
         lineEdit_4 = new QLineEdit(page_19);
         lineEdit_4->setObjectName(QString::fromUtf8("lineEdit_4"));
         lineEdit_4->setGeometry(QRect(450, 210, 81, 27));
+        lineEdit_4->setStyleSheet(QString::fromUtf8("font: 75 16pt \"Ubuntu\";"));
         lineEdit_5 = new QLineEdit(page_19);
         lineEdit_5->setObjectName(QString::fromUtf8("lineEdit_5"));
         lineEdit_5->setGeometry(QRect(450, 270, 81, 27));
+        lineEdit_5->setStyleSheet(QString::fromUtf8("font: 75 16pt \"Ubuntu\";"));
         lineEdit_6 = new QLineEdit(page_19);
         lineEdit_6->setObjectName(QString::fromUtf8("lineEdit_6"));
         lineEdit_6->setGeometry(QRect(480, 310, 111, 31));

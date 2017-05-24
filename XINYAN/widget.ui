@@ -540,6 +540,7 @@ color: rgb(255, 255, 255);</string>
      </property>
      <property name="styleSheet">
       <string notr="true">color: rgb(255, 255, 255);
+font: 75 14pt &quot;Ubuntu&quot;;
 gridline-color: rgb(255, 0, 0);
 background-color: rgb(70, 70, 70);</string>
      </property>
@@ -644,6 +645,7 @@ font: 75 16pt &quot;Ubuntu&quot;;</string>
      </property>
      <property name="styleSheet">
       <string notr="true">font: 75 12pt &quot;Ubuntu&quot;;
+font: 75 16pt &quot;Ubuntu&quot;;
 background-color: rgb(255, 255, 255);
 </string>
      </property>
@@ -659,11 +661,16 @@ background-color: rgb(255, 255, 255);
     <widget class="QLineEdit" name="lineEdit_30">
      <property name="geometry">
       <rect>
-       <x>461</x>
+       <x>451</x>
        <y>303</y>
-       <width>101</width>
+       <width>111</width>
        <height>29</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 12pt &quot;Ubuntu&quot;;
+color: rgb(255, 170, 0);
+font: 75 12pt &quot;Ubuntu&quot;;</string>
      </property>
      <property name="text">
       <string>恢复到默认值</string>
@@ -678,6 +685,9 @@ background-color: rgb(255, 255, 255);
        <height>21</height>
       </rect>
      </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 14pt &quot;Ubuntu&quot;;</string>
+     </property>
     </widget>
     <widget class="QLineEdit" name="lineEdit_27">
      <property name="geometry">
@@ -687,6 +697,9 @@ background-color: rgb(255, 255, 255);
        <width>41</width>
        <height>21</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 14pt &quot;Ubuntu&quot;;</string>
      </property>
     </widget>
     <widget class="QLineEdit" name="lineEdit_25">
@@ -698,6 +711,9 @@ background-color: rgb(255, 255, 255);
        <height>21</height>
       </rect>
      </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 14pt &quot;Ubuntu&quot;;</string>
+     </property>
     </widget>
     <widget class="QLineEdit" name="lineEdit_24">
      <property name="geometry">
@@ -707,6 +723,9 @@ background-color: rgb(255, 255, 255);
        <width>41</width>
        <height>21</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 14pt &quot;Ubuntu&quot;;</string>
      </property>
     </widget>
     <widget class="QLineEdit" name="lineEdit_28">
@@ -718,6 +737,9 @@ background-color: rgb(255, 255, 255);
        <height>21</height>
       </rect>
      </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 14pt &quot;Ubuntu&quot;;</string>
+     </property>
     </widget>
     <widget class="QLineEdit" name="lineEdit_29">
      <property name="geometry">
@@ -728,6 +750,9 @@ background-color: rgb(255, 255, 255);
        <height>21</height>
       </rect>
      </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 14pt &quot;Ubuntu&quot;;</string>
+     </property>
     </widget>
     <widget class="QLineEdit" name="lineEdit_26">
      <property name="geometry">
@@ -737,6 +762,9 @@ background-color: rgb(255, 255, 255);
        <width>41</width>
        <height>21</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 14pt &quot;Ubuntu&quot;;</string>
      </property>
     </widget>
    </widget>
@@ -966,6 +994,7 @@ background-color: rgb(70, 70, 70);</string>
      </property>
      <property name="styleSheet">
       <string notr="true">background-color: rgb(81, 81, 81);
+font: 75 16pt &quot;Ubuntu&quot;;
 gridline-color: rgb(255, 0, 0);
 color: rgb(255, 255, 255);</string>
      </property>
@@ -1105,6 +1134,9 @@ color: rgb(255, 255, 255);</string>
        <height>31</height>
       </rect>
      </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 16pt &quot;Ubuntu&quot;;</string>
+     </property>
     </widget>
     <widget class="QLineEdit" name="lineEdit_4">
      <property name="geometry">
@@ -1115,6 +1147,9 @@ color: rgb(255, 255, 255);</string>
        <height>27</height>
       </rect>
      </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 16pt &quot;Ubuntu&quot;;</string>
+     </property>
     </widget>
     <widget class="QLineEdit" name="lineEdit_5">
      <property name="geometry">
@@ -1124,6 +1159,9 @@ color: rgb(255, 255, 255);</string>
        <width>81</width>
        <height>27</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 16pt &quot;Ubuntu&quot;;</string>
      </property>
     </widget>
     <widget class="QLineEdit" name="lineEdit_6">
