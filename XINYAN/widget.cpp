@@ -7700,7 +7700,7 @@ void Widget::Licheng()//里程
 
         if((ecutest.flagECU == 0))
         {
-            if(((shanshuoSW == 1)||(shanshuoJYYL ==1)||(shanshuoLM == 1)||(shanshuoLiangshun == 1)||(shanshuoGunTong == 1)||(shanshuoShengyun == 1)||(shanshuoguoqiao == 1)||(shanshuofengji == 1)||(shanshuoSS == 1)||(shangshuoChongdian == 1))&&(ecutest.FDJ_speed>350))//||shanshuoYL||shanshuozlzs||shanshuoftqzs||shanshuosyqzs
+            if(((shanshuoSW == 1)||(shanshuoJYYL ==1)||(shanshuoLM == 1)||(shanshuoLiangshun == 1)||(shanshuoGunTong == 1)||(shanshuoShengyun == 1)||(shanshuoguoqiao == 1)||(shanshuofengji == 1)||(shanshuoSS == 1)||(shangshuoChongdian == 1)||(shanshuoYL == 1))&&(ecutest.FDJ_speed>350))//||shanshuoYL||shanshuozlzs||shanshuoftqzs||shanshuosyqzs
             {
                 if(flagbeep)
                 {
@@ -7712,7 +7712,7 @@ void Widget::Licheng()//里程
 //                qDebug()<<"beef on shanshuoJYYL  ==                  ff         == "<<shanshuoJYYL<<endl;
 
             }
-            else if((shanshuoSW != 1)||(shanshuoJYYL !=1)||(shanshuoLM != 1)||(shanshuoLiangshun != 1)||(shanshuoGunTong != 1)||(shanshuoShengyun != 1)||(shanshuoguoqiao != 1)||(shanshuofengji != 1)||(shanshuoSS != 1)||(shangshuoChongdian != 1))
+            else if((shanshuoSW != 1)||(shanshuoJYYL !=1)||(shanshuoLM != 1)||(shanshuoLiangshun != 1)||(shanshuoGunTong != 1)||(shanshuoShengyun != 1)||(shanshuoguoqiao != 1)||(shanshuofengji != 1)||(shanshuoSS != 1)||(shangshuoChongdian != 1)||(shanshuoYL != 1))
             {
                 if(flagbeepzero == 0)
                 {
@@ -7733,12 +7733,14 @@ void Widget::Licheng()//里程
 ////////////////////////////////////////////////////////////////////////////////////
 //发动机转速达到 350时 蜂鸣器报警 。
 #if 1
+
+#if 0
        if((ecutest.flagECU == 0))//&&(ecutest.FDJ_speed>350)
         {
                 if((shanshuoYL == 1))
                 {
                     DelayYLcounter++;
-                    if(DelayYLcounter == 6)//60
+                    if(DelayYLcounter == 60)//60
                     {
                         if(flagbeep)
                         {
@@ -7762,6 +7764,7 @@ void Widget::Licheng()//里程
                      Delagbeepoff = 0;
                 }
         }
+#endif
 
     }//endoff if((flagwidget == xingZouWidget)||(flagwidget == workWidget))
     else
