@@ -399,6 +399,9 @@ int GetRspDataFromController(BiaoDingDataRsp *_ptRsp);
 void SetXinYanMachineModel(XINYAN_MACHINE_MODEL _enModel);
 int GetXinYanMachineModel(void);
 int GuiTransportInit();
+int BiaoDingInit();	/* 进入标定初始化界面	*/
+int BiaoDingExit();	/* 退出标定界面 */
+int Cfg_sSingMileageClear();	/*	单次里程/米计清零 */
 
 
 //加共享内存锁
