@@ -233,7 +233,9 @@ public:
         listWidget = new QListWidget(page_4);
         listWidget->setObjectName(QString::fromUtf8("listWidget"));
         listWidget->setGeometry(QRect(310, 150, 171, 131));
-        listWidget->setStyleSheet(QString::fromUtf8(""));
+        listWidget->setStyleSheet(QString::fromUtf8("background-color: rgb(81, 81, 81);\n"
+"gridline-color: rgb(255, 0, 0);\n"
+"color: rgb(255, 255, 255);"));
         listWidget->setViewMode(QListView::ListMode);
         stackedWidget->addWidget(page_4);
         page_5 = new QWidget();
@@ -244,15 +246,24 @@ public:
         listWidget_2 = new QListWidget(page_6);
         listWidget_2->setObjectName(QString::fromUtf8("listWidget_2"));
         listWidget_2->setGeometry(QRect(280, 170, 283, 72));
+        listWidget_2->setStyleSheet(QString::fromUtf8("background-color: rgb(81, 81, 81);\n"
+"gridline-color: rgb(255, 0, 0);\n"
+"color: rgb(255, 255, 255);"));
         stackedWidget->addWidget(page_6);
         page_7 = new QWidget();
         page_7->setObjectName(QString::fromUtf8("page_7"));
         listWidget_3 = new QListWidget(page_7);
         listWidget_3->setObjectName(QString::fromUtf8("listWidget_3"));
         listWidget_3->setGeometry(QRect(258, 117, 162, 224));
+        listWidget_3->setStyleSheet(QString::fromUtf8("background-color: rgb(81, 81, 81);\n"
+"gridline-color: rgb(255, 0, 0);\n"
+"color: rgb(255, 255, 255);"));
         listWidget_4 = new QListWidget(page_7);
         listWidget_4->setObjectName(QString::fromUtf8("listWidget_4"));
         listWidget_4->setGeometry(QRect(442, 117, 162, 225));
+        listWidget_4->setStyleSheet(QString::fromUtf8("background-color: rgb(81, 81, 81);\n"
+"gridline-color: rgb(255, 0, 0);\n"
+"color: rgb(255, 255, 255);"));
         stackedWidget->addWidget(page_7);
         page_8 = new QWidget();
         page_8->setObjectName(QString::fromUtf8("page_8"));
@@ -265,6 +276,9 @@ public:
         listWidget_5 = new QListWidget(page_10);
         listWidget_5->setObjectName(QString::fromUtf8("listWidget_5"));
         listWidget_5->setGeometry(QRect(310, 113, 172, 213));
+        listWidget_5->setStyleSheet(QString::fromUtf8("background-color: rgb(81, 81, 81);\n"
+"gridline-color: rgb(255, 0, 0);\n"
+"color: rgb(255, 255, 255);"));
         stackedWidget->addWidget(page_10);
         page_11 = new QWidget();
         page_11->setObjectName(QString::fromUtf8("page_11"));
@@ -309,12 +323,16 @@ public:
         tableWidget_3->setItem(2, 0, __qtablewidgetitem11);
         tableWidget_3->setObjectName(QString::fromUtf8("tableWidget_3"));
         tableWidget_3->setGeometry(QRect(178, 110, 451, 175));
+        tableWidget_3->setStyleSheet(QString::fromUtf8("color: rgb(255, 255, 255);\n"
+"gridline-color: rgb(255, 0, 0);\n"
+"background-color: rgb(70, 70, 70);"));
         tableWidget_3->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         tableWidget_3->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         lineEdit_7 = new QLineEdit(page_12);
         lineEdit_7->setObjectName(QString::fromUtf8("lineEdit_7"));
         lineEdit_7->setGeometry(QRect(490, 275, 141, 36));
         lineEdit_7->setStyleSheet(QString::fromUtf8("color: rgb(255, 0, 0);\n"
+"background-color: rgb(255, 170, 0);\n"
 "font: 75 16pt \"Ubuntu\";"));
         label_17 = new QLabel(page_12);
         label_17->setObjectName(QString::fromUtf8("label_17"));
@@ -386,6 +404,9 @@ public:
         tableWidget_2->setVerticalHeaderItem(9, __qtablewidgetitem24);
         tableWidget_2->setObjectName(QString::fromUtf8("tableWidget_2"));
         tableWidget_2->setGeometry(QRect(216, 110, 415, 250));
+        tableWidget_2->setStyleSheet(QString::fromUtf8("color: rgb(255, 255, 255);\n"
+"gridline-color: rgb(255, 0, 0);\n"
+"background-color: rgb(70, 70, 70);"));
         tableWidget_2->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         tableWidget_2->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
         stackedWidget->addWidget(page_14);
@@ -424,6 +445,9 @@ public:
         tableWidget->setVerticalHeaderItem(9, __qtablewidgetitem36);
         tableWidget->setObjectName(QString::fromUtf8("tableWidget"));
         tableWidget->setGeometry(QRect(256, 116, 304, 247));
+        tableWidget->setStyleSheet(QString::fromUtf8("color: rgb(255, 255, 255);\n"
+"gridline-color: rgb(255, 0, 0);\n"
+"background-color: rgb(70, 70, 70);"));
         tableWidget->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         stackedWidget->addWidget(page_15);
         page_16 = new QWidget();
@@ -444,6 +468,9 @@ public:
         listWidget_6 = new QListWidget(page_17);
         listWidget_6->setObjectName(QString::fromUtf8("listWidget_6"));
         listWidget_6->setGeometry(QRect(307, 164, 221, 158));
+        listWidget_6->setStyleSheet(QString::fromUtf8("background-color: rgb(81, 81, 81);\n"
+"gridline-color: rgb(255, 0, 0);\n"
+"color: rgb(255, 255, 255);"));
         listWidget_6->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         listWidget_6->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         stackedWidget->addWidget(page_17);
@@ -475,6 +502,9 @@ public:
         __qlistwidgetitem7->setFont(font1);
         listWidget_7->setObjectName(QString::fromUtf8("listWidget_7"));
         listWidget_7->setGeometry(QRect(315, 120, 91, 231));
+        listWidget_7->setStyleSheet(QString::fromUtf8("background-color: rgb(81, 81, 81);\n"
+"gridline-color: rgb(255, 0, 0);\n"
+"color: rgb(255, 255, 255);"));
         listWidget_7->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         listWidget_7->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         lineEdit_3 = new QLineEdit(page_19);
@@ -489,7 +519,8 @@ public:
         lineEdit_6 = new QLineEdit(page_19);
         lineEdit_6->setObjectName(QString::fromUtf8("lineEdit_6"));
         lineEdit_6->setGeometry(QRect(480, 310, 111, 31));
-        lineEdit_6->setStyleSheet(QString::fromUtf8("font: 75 14pt \"Ubuntu\";"));
+        lineEdit_6->setStyleSheet(QString::fromUtf8("font: 75 14pt \"Ubuntu\";\n"
+"background-color: rgb(255, 170, 0);"));
         stackedWidget->addWidget(page_19);
 
         retranslateUi(Widget);

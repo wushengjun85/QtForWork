@@ -53,6 +53,12 @@ uchar FlagShouBing = 0;
 uchar FlagXingzouBeng = 0;
 uchar FlagAoBanjianxi = 0;
 
+//2017.5.24
+uchar FlagShouBingBDFinish = 0;
+uchar FlagXingzouBengBDFinish = 0;
+uchar FlagAoBanjianxiBDFinish = 0;
+
+
 //蜂鸣器状态标志
 uchar flagbeep = 1;
 
@@ -4156,7 +4162,7 @@ void Widget::paintEvent(QPaintEvent *)
         ui->label_17->setText("手柄标定完成");
 
         //2017.5.24
-        FlagShouBing = 0;
+        //FlagShouBing = 0;
      }
      //
 
@@ -4185,7 +4191,7 @@ void Widget::paintEvent(QPaintEvent *)
      {
           ui->label_17->setText("行走泵校准完成");
           //2017.5.24
-          FlagXingzouBeng = 0;
+          //FlagXingzouBeng = 0;
      }
 
      else if((LCPiPeixingBiaoDing == 3)&&(FlagAoBanjianxi ==0))
@@ -4204,7 +4210,7 @@ void Widget::paintEvent(QPaintEvent *)
      {
          ui->label_17->setText("凹板间隙标定完成");
 
-         FlagAoBanjianxi =3;
+         //FlagAoBanjianxi =3;
      }
 
 
@@ -7734,7 +7740,7 @@ void Widget::Licheng()//里程
 //发动机转速达到 350时 蜂鸣器报警 。
 #if 1
 
-#if 0
+#if 1
        if((ecutest.flagECU == 0))//&&(ecutest.FDJ_speed>350)
         {
                 if((shanshuoYL == 1))
@@ -8266,9 +8272,15 @@ void Widget::NoChangeFun()
             FlagNext = false;
             ThreeOut = 0;
         }
-        else
+        //手柄标定完成
+        else if(FlagShouBing == 3)
         {
-            //ui->label_16->setText("请推动手柄到最大位置");
+            FlagShouBingBDFinish++;
+            if(FlagShouBingBDFinish == 6)
+            {
+                FlagShouBing =  0;
+                FlagShouBingBDFinish = 0;
+            }
         }
     }
     else if(LCPiPeixingBiaoDing == 2)//行走泵标定
@@ -8299,7 +8311,7 @@ void Widget::NoChangeFun()
         }
         else
         {
-            ui->label_16->setText("行走泵校准中");
+            //ui->label_16->setText("行走泵校准中");
         }
 
         //标定完成
@@ -8323,9 +8335,15 @@ void Widget::NoChangeFun()
             FlagNext = false;
             ThreeOut = 0;
         }
-        else
+        //行走泵标定完成
+        else if(FlagXingzouBeng == 3)
         {
-            //ui->label_16->setText("请推动手柄到最大位置");
+            FlagXingzouBengBDFinish++;
+            if(FlagXingzouBengBDFinish == 6)
+            {
+                FlagXingzouBeng =  0;
+                FlagXingzouBengBDFinish = 0;
+            }
         }
     }
     else if(LCPiPeixingBiaoDing == 3)//凹板间隙
@@ -8379,9 +8397,15 @@ void Widget::NoChangeFun()
             FlagNext = false;
             ThreeOut = 0;
         }
-        else
+        //凹板间隙标定完成
+        else if(FlagAoBanjianxi == 3)
         {
-            //ui->label_16->setText("请推动手柄到最大位置");
+            FlagAoBanjianxiBDFinish++;
+            if(FlagAoBanjianxiBDFinish == 6)
+            {
+                FlagAoBanjianxi =  0;
+                FlagAoBanjianxiBDFinish = 0;
+            }
         }
     }
 }

@@ -432,7 +432,9 @@ font: 75 16pt &quot;Ubuntu&quot;;</string>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true"/>
+      <string notr="true">background-color: rgb(81, 81, 81);
+gridline-color: rgb(255, 0, 0);
+color: rgb(255, 255, 255);</string>
      </property>
      <property name="viewMode">
       <enum>QListView::ListMode</enum>
@@ -450,6 +452,11 @@ font: 75 16pt &quot;Ubuntu&quot;;</string>
        <height>72</height>
       </rect>
      </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(81, 81, 81);
+gridline-color: rgb(255, 0, 0);
+color: rgb(255, 255, 255);</string>
+     </property>
     </widget>
    </widget>
    <widget class="QWidget" name="page_7">
@@ -462,6 +469,11 @@ font: 75 16pt &quot;Ubuntu&quot;;</string>
        <height>224</height>
       </rect>
      </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(81, 81, 81);
+gridline-color: rgb(255, 0, 0);
+color: rgb(255, 255, 255);</string>
+     </property>
     </widget>
     <widget class="QListWidget" name="listWidget_4">
      <property name="geometry">
@@ -471,6 +483,11 @@ font: 75 16pt &quot;Ubuntu&quot;;</string>
        <width>162</width>
        <height>225</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(81, 81, 81);
+gridline-color: rgb(255, 0, 0);
+color: rgb(255, 255, 255);</string>
      </property>
     </widget>
    </widget>
@@ -485,6 +502,11 @@ font: 75 16pt &quot;Ubuntu&quot;;</string>
        <width>172</width>
        <height>213</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(81, 81, 81);
+gridline-color: rgb(255, 0, 0);
+color: rgb(255, 255, 255);</string>
      </property>
     </widget>
    </widget>
@@ -515,6 +537,11 @@ font: 75 16pt &quot;Ubuntu&quot;;</string>
        <width>451</width>
        <height>175</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);
+gridline-color: rgb(255, 0, 0);
+background-color: rgb(70, 70, 70);</string>
      </property>
      <property name="verticalScrollBarPolicy">
       <enum>Qt::ScrollBarAlwaysOff</enum>
@@ -599,6 +626,7 @@ font: 75 16pt &quot;Ubuntu&quot;;</string>
      </property>
      <property name="styleSheet">
       <string notr="true">color: rgb(255, 0, 0);
+background-color: rgb(255, 170, 0);
 font: 75 16pt &quot;Ubuntu&quot;;</string>
      </property>
      <property name="text">
@@ -722,6 +750,11 @@ background-color: rgb(255, 255, 255);
        <height>250</height>
       </rect>
      </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);
+gridline-color: rgb(255, 0, 0);
+background-color: rgb(70, 70, 70);</string>
+     </property>
      <property name="verticalScrollBarPolicy">
       <enum>Qt::ScrollBarAlwaysOff</enum>
      </property>
@@ -804,6 +837,11 @@ background-color: rgb(255, 255, 255);
        <width>304</width>
        <height>247</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255);
+gridline-color: rgb(255, 0, 0);
+background-color: rgb(70, 70, 70);</string>
      </property>
      <property name="verticalScrollBarPolicy">
       <enum>Qt::ScrollBarAlwaysOff</enum>
@@ -926,6 +964,11 @@ background-color: rgb(255, 255, 255);
        <height>158</height>
       </rect>
      </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(81, 81, 81);
+gridline-color: rgb(255, 0, 0);
+color: rgb(255, 255, 255);</string>
+     </property>
      <property name="verticalScrollBarPolicy">
       <enum>Qt::ScrollBarAlwaysOff</enum>
      </property>
@@ -944,6 +987,11 @@ background-color: rgb(255, 255, 255);
        <width>91</width>
        <height>231</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(81, 81, 81);
+gridline-color: rgb(255, 0, 0);
+color: rgb(255, 255, 255);</string>
      </property>
      <property name="verticalScrollBarPolicy">
       <enum>Qt::ScrollBarAlwaysOff</enum>
@@ -1088,7 +1136,8 @@ background-color: rgb(255, 255, 255);
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">font: 75 14pt &quot;Ubuntu&quot;;</string>
+      <string notr="true">font: 75 14pt &quot;Ubuntu&quot;;
+background-color: rgb(255, 170, 0);</string>
      </property>
      <property name="text">
       <string>恢复默认值</string>
