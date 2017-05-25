@@ -120,9 +120,10 @@ public:
         label_2->setStyleSheet(QString::fromUtf8("border-image: url(:/new/prefix1/img/icon/zhuansu.png);"));
         label_3 = new QLabel(page);
         label_3->setObjectName(QString::fromUtf8("label_3"));
-        label_3->setGeometry(QRect(562, 15, 95, 41));
+        label_3->setGeometry(QRect(566, 15, 95, 41));
         label_3->setStyleSheet(QString::fromUtf8("color: rgb(255, 255, 255);\n"
-"font: 75 14pt \"Ubuntu\";"));
+"font: 75 16pt \"Ubuntu\";"));
+        label_3->setAlignment(Qt::AlignCenter);
         label_5 = new QLabel(page);
         label_5->setObjectName(QString::fromUtf8("label_5"));
         label_5->setGeometry(QRect(526, 72, 204, 204));
@@ -130,26 +131,23 @@ public:
         label_6 = new QLabel(page);
         label_6->setObjectName(QString::fromUtf8("label_6"));
         label_6->setGeometry(QRect(130, 210, 80, 24));
-        label_6->setStyleSheet(QString::fromUtf8("font: 75 italic 16pt \"Ubuntu\";\n"
-"font: 75 16pt \"Ubuntu\";"));
+        label_6->setStyleSheet(QString::fromUtf8("font: 20pt \"WenQuanYi Zen Hei\";"));
         label_6->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
         label_7 = new QLabel(page);
         label_7->setObjectName(QString::fromUtf8("label_7"));
         label_7->setGeometry(QRect(594, 212, 76, 24));
-        label_7->setStyleSheet(QString::fromUtf8("font: 75 italic 16pt \"Ubuntu\";\n"
-"font: 75 16pt \"Ubuntu\";"));
+        label_7->setStyleSheet(QString::fromUtf8("font: 18pt \"WenQuanYi Zen Hei\";"));
         label_7->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
         label_8 = new QLabel(page);
         label_8->setObjectName(QString::fromUtf8("label_8"));
-        label_8->setGeometry(QRect(357, 353, 55, 24));
-        label_8->setStyleSheet(QString::fromUtf8("font: 75 italic 16pt \"Ubuntu\";\n"
-"font: 75 16pt \"Ubuntu\";\n"
+        label_8->setGeometry(QRect(361, 356, 55, 24));
+        label_8->setStyleSheet(QString::fromUtf8("font: 75 14pt \"Ubuntu\";\n"
 ""));
         label_8->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
         label_9 = new QLabel(page);
         label_9->setObjectName(QString::fromUtf8("label_9"));
-        label_9->setGeometry(QRect(366, 394, 77, 24));
-        label_9->setStyleSheet(QString::fromUtf8("font: 75 16pt \"Ubuntu\";\n"
+        label_9->setGeometry(QRect(375, 394, 77, 24));
+        label_9->setStyleSheet(QString::fromUtf8("font: 75 18pt \"Ubuntu\";\n"
 "color: rgb(255, 255, 255);"));
         label_9->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
         label_4 = new QLabel(page);
@@ -162,28 +160,30 @@ public:
         label_10->setObjectName(QString::fromUtf8("label_10"));
         label_10->setGeometry(QRect(87, 363, 51, 21));
         label_10->setStyleSheet(QString::fromUtf8("color: rgb(255, 255, 255);\n"
-"font: 75 16pt \"Ubuntu\";"));
+"font: 75 18pt \"Ubuntu\";"));
         label_10->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
         label_11 = new QLabel(page);
         label_11->setObjectName(QString::fromUtf8("label_11"));
         label_11->setGeometry(QRect(660, 363, 54, 26));
         label_11->setStyleSheet(QString::fromUtf8("color: rgb(255, 255, 255);\n"
-"font: 75 16pt \"Ubuntu\";"));
+"font: 75 18pt \"Ubuntu\";"));
         label_12 = new QLabel(page);
         label_12->setObjectName(QString::fromUtf8("label_12"));
-        label_12->setGeometry(QRect(733, 15, 66, 41));
+        label_12->setGeometry(QRect(735, 15, 66, 41));
         label_12->setStyleSheet(QString::fromUtf8("color: rgb(255, 255, 255);\n"
-"font: 75 14pt \"Ubuntu\";"));
+"font: 75 16pt \"Ubuntu\";"));
+        label_12->setAlignment(Qt::AlignCenter);
         label_13 = new QLabel(page);
         label_13->setObjectName(QString::fromUtf8("label_13"));
-        label_13->setGeometry(QRect(659, 15, 77, 41));
+        label_13->setGeometry(QRect(663, 15, 77, 41));
         label_13->setStyleSheet(QString::fromUtf8("color: rgb(255, 255, 255);\n"
-"font: 75 14pt \"Ubuntu\";"));
+"font: 75 16pt \"Ubuntu\";"));
+        label_13->setAlignment(Qt::AlignCenter);
         label_14 = new QLabel(page);
         label_14->setObjectName(QString::fromUtf8("label_14"));
         label_14->setGeometry(QRect(656, 322, 54, 26));
         label_14->setStyleSheet(QString::fromUtf8("color: rgb(255, 255, 255);\n"
-"font: 75 16pt \"Ubuntu\";"));
+"font: 75 18pt \"Ubuntu\";"));
         label_15 = new QLabel(page);
         label_15->setObjectName(QString::fromUtf8("label_15"));
         label_15->setGeometry(QRect(310, 15, 151, 41));
@@ -192,14 +192,14 @@ public:
         label_15->setAlignment(Qt::AlignCenter);
         label_20 = new QLabel(page);
         label_20->setObjectName(QString::fromUtf8("label_20"));
-        label_20->setGeometry(QRect(95, 316, 46, 31));
+        label_20->setGeometry(QRect(92, 316, 56, 31));
         label_20->setStyleSheet(QString::fromUtf8("color: rgb(255, 255, 255);\n"
-"font: 75 16pt \"Ubuntu\";"));
-        label_20->setAlignment(Qt::AlignCenter);
+"font: 75 14pt \"Ubuntu\";"));
+        label_20->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
         label_21 = new QLabel(page);
         label_21->setObjectName(QString::fromUtf8("label_21"));
         label_21->setGeometry(QRect(554, 391, 54, 22));
-        label_21->setStyleSheet(QString::fromUtf8("font: 75 16pt \"Ubuntu\";"));
+        label_21->setStyleSheet(QString::fromUtf8("font: 75 18pt \"Ubuntu\";"));
         label_21->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
         stackedWidget->addWidget(page);
         page_2 = new QWidget();
@@ -207,17 +207,21 @@ public:
         lineEdit = new QLineEdit(page_2);
         lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
         lineEdit->setGeometry(QRect(350, 155, 65, 29));
+        lineEdit->setStyleSheet(QString::fromUtf8("font: 75 14pt \"Ubuntu\";"));
         lineEdit_2 = new QLineEdit(page_2);
         lineEdit_2->setObjectName(QString::fromUtf8("lineEdit_2"));
         lineEdit_2->setGeometry(QRect(426, 155, 70, 31));
+        lineEdit_2->setStyleSheet(QString::fromUtf8("font: 75 14pt \"Ubuntu\";"));
         progressBar = new QProgressBar(page_2);
         progressBar->setObjectName(QString::fromUtf8("progressBar"));
         progressBar->setGeometry(QRect(372, 253, 169, 13));
         progressBar->setFocusPolicy(Qt::StrongFocus);
+        progressBar->setStyleSheet(QString::fromUtf8("font: 75 14pt \"Ubuntu\";"));
         progressBar->setValue(24);
         dateTimeEdit = new QDateTimeEdit(page_2);
         dateTimeEdit->setObjectName(QString::fromUtf8("dateTimeEdit"));
         dateTimeEdit->setGeometry(QRect(340, 200, 236, 31));
+        dateTimeEdit->setStyleSheet(QString::fromUtf8("font: 75 14pt \"Ubuntu\";"));
         dateTimeEdit->setTimeSpec(Qt::LocalTime);
         stackedWidget->addWidget(page_2);
         page_3 = new QWidget();
@@ -234,8 +238,11 @@ public:
         listWidget->setObjectName(QString::fromUtf8("listWidget"));
         listWidget->setGeometry(QRect(310, 150, 171, 131));
         listWidget->setStyleSheet(QString::fromUtf8("background-color: rgb(81, 81, 81);\n"
+"font: 75 18pt \"Ubuntu\";\n"
 "gridline-color: rgb(255, 0, 0);\n"
 "color: rgb(255, 255, 255);"));
+        listWidget->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        listWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         listWidget->setViewMode(QListView::ListMode);
         stackedWidget->addWidget(page_4);
         page_5 = new QWidget();
@@ -247,6 +254,7 @@ public:
         listWidget_2->setObjectName(QString::fromUtf8("listWidget_2"));
         listWidget_2->setGeometry(QRect(280, 170, 283, 72));
         listWidget_2->setStyleSheet(QString::fromUtf8("background-color: rgb(81, 81, 81);\n"
+"font: 75 18pt \"Ubuntu\";\n"
 "gridline-color: rgb(255, 0, 0);\n"
 "color: rgb(255, 255, 255);"));
         stackedWidget->addWidget(page_6);
@@ -256,14 +264,20 @@ public:
         listWidget_3->setObjectName(QString::fromUtf8("listWidget_3"));
         listWidget_3->setGeometry(QRect(258, 117, 162, 224));
         listWidget_3->setStyleSheet(QString::fromUtf8("background-color: rgb(81, 81, 81);\n"
+"font: 75 16pt \"Ubuntu\";\n"
 "gridline-color: rgb(255, 0, 0);\n"
 "color: rgb(255, 255, 255);"));
+        listWidget_3->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        listWidget_3->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         listWidget_4 = new QListWidget(page_7);
         listWidget_4->setObjectName(QString::fromUtf8("listWidget_4"));
         listWidget_4->setGeometry(QRect(442, 117, 162, 225));
         listWidget_4->setStyleSheet(QString::fromUtf8("background-color: rgb(81, 81, 81);\n"
+"font: 75 16pt \"Ubuntu\";\n"
 "gridline-color: rgb(255, 0, 0);\n"
 "color: rgb(255, 255, 255);"));
+        listWidget_4->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        listWidget_4->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         stackedWidget->addWidget(page_7);
         page_8 = new QWidget();
         page_8->setObjectName(QString::fromUtf8("page_8"));
@@ -277,8 +291,11 @@ public:
         listWidget_5->setObjectName(QString::fromUtf8("listWidget_5"));
         listWidget_5->setGeometry(QRect(310, 113, 172, 213));
         listWidget_5->setStyleSheet(QString::fromUtf8("background-color: rgb(81, 81, 81);\n"
+"font: 75 18pt \"Ubuntu\";\n"
 "gridline-color: rgb(255, 0, 0);\n"
 "color: rgb(255, 255, 255);"));
+        listWidget_5->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        listWidget_5->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         stackedWidget->addWidget(page_10);
         page_11 = new QWidget();
         page_11->setObjectName(QString::fromUtf8("page_11"));
@@ -324,7 +341,7 @@ public:
         tableWidget_3->setObjectName(QString::fromUtf8("tableWidget_3"));
         tableWidget_3->setGeometry(QRect(178, 110, 451, 175));
         tableWidget_3->setStyleSheet(QString::fromUtf8("color: rgb(255, 255, 255);\n"
-"font: 75 14pt \"Ubuntu\";\n"
+"font: 75 16pt \"Ubuntu\";\n"
 "gridline-color: rgb(255, 0, 0);\n"
 "background-color: rgb(70, 70, 70);"));
         tableWidget_3->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -338,7 +355,7 @@ public:
         label_17 = new QLabel(page_12);
         label_17->setObjectName(QString::fromUtf8("label_17"));
         label_17->setGeometry(QRect(178, 310, 451, 41));
-        label_17->setStyleSheet(QString::fromUtf8("font: 75 12pt \"Ubuntu\";\n"
+        label_17->setStyleSheet(QString::fromUtf8("color: rgb(255, 0, 0);\n"
 "font: 75 16pt \"Ubuntu\";\n"
 "background-color: rgb(255, 255, 255);\n"
 ""));
@@ -350,8 +367,7 @@ public:
         lineEdit_30->setObjectName(QString::fromUtf8("lineEdit_30"));
         lineEdit_30->setGeometry(QRect(451, 303, 111, 29));
         lineEdit_30->setStyleSheet(QString::fromUtf8("font: 75 12pt \"Ubuntu\";\n"
-"color: rgb(255, 170, 0);\n"
-"font: 75 12pt \"Ubuntu\";"));
+"background-color: rgb(255, 170, 0);"));
         lineEdit_23 = new QLineEdit(page_13);
         lineEdit_23->setObjectName(QString::fromUtf8("lineEdit_23"));
         lineEdit_23->setGeometry(QRect(343, 163, 41, 21));
@@ -417,10 +433,11 @@ public:
         tableWidget_2->setObjectName(QString::fromUtf8("tableWidget_2"));
         tableWidget_2->setGeometry(QRect(216, 110, 415, 250));
         tableWidget_2->setStyleSheet(QString::fromUtf8("color: rgb(255, 255, 255);\n"
+"font: 75 16pt \"Ubuntu\";\n"
 "gridline-color: rgb(255, 0, 0);\n"
 "background-color: rgb(70, 70, 70);"));
         tableWidget_2->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-        tableWidget_2->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+        tableWidget_2->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         stackedWidget->addWidget(page_14);
         page_15 = new QWidget();
         page_15->setObjectName(QString::fromUtf8("page_15"));
@@ -458,9 +475,11 @@ public:
         tableWidget->setObjectName(QString::fromUtf8("tableWidget"));
         tableWidget->setGeometry(QRect(256, 116, 304, 247));
         tableWidget->setStyleSheet(QString::fromUtf8("color: rgb(255, 255, 255);\n"
+"font: 75 16pt \"Ubuntu\";\n"
 "gridline-color: rgb(255, 0, 0);\n"
 "background-color: rgb(70, 70, 70);"));
         tableWidget->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        tableWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         stackedWidget->addWidget(page_15);
         page_16 = new QWidget();
         page_16->setObjectName(QString::fromUtf8("page_16"));
@@ -481,7 +500,7 @@ public:
         listWidget_6->setObjectName(QString::fromUtf8("listWidget_6"));
         listWidget_6->setGeometry(QRect(307, 164, 221, 158));
         listWidget_6->setStyleSheet(QString::fromUtf8("background-color: rgb(81, 81, 81);\n"
-"font: 75 16pt \"Ubuntu\";\n"
+"font: 75 20pt \"Ubuntu\";\n"
 "gridline-color: rgb(255, 0, 0);\n"
 "color: rgb(255, 255, 255);"));
         listWidget_6->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -516,6 +535,7 @@ public:
         listWidget_7->setObjectName(QString::fromUtf8("listWidget_7"));
         listWidget_7->setGeometry(QRect(315, 120, 91, 231));
         listWidget_7->setStyleSheet(QString::fromUtf8("background-color: rgb(81, 81, 81);\n"
+"font: 75 18pt \"Ubuntu\";\n"
 "gridline-color: rgb(255, 0, 0);\n"
 "color: rgb(255, 255, 255);"));
         listWidget_7->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -555,8 +575,8 @@ public:
         label_3->setText(QApplication::translate("Widget", "TextLabel", 0, QApplication::UnicodeUTF8));
         label_5->setText(QString());
         label_6->setText(QApplication::translate("Widget", "123", 0, QApplication::UnicodeUTF8));
-        label_7->setText(QApplication::translate("Widget", "456", 0, QApplication::UnicodeUTF8));
-        label_8->setText(QApplication::translate("Widget", "789", 0, QApplication::UnicodeUTF8));
+        label_7->setText(QApplication::translate("Widget", "66456", 0, QApplication::UnicodeUTF8));
+        label_8->setText(QApplication::translate("Widget", "88789", 0, QApplication::UnicodeUTF8));
         label_9->setText(QApplication::translate("Widget", "99999", 0, QApplication::UnicodeUTF8));
         label_4->setText(QString());
         label_10->setText(QApplication::translate("Widget", "8977", 0, QApplication::UnicodeUTF8));
@@ -565,7 +585,7 @@ public:
         label_13->setText(QApplication::translate("Widget", "TextLabel", 0, QApplication::UnicodeUTF8));
         label_14->setText(QString());
         label_15->setText(QString());
-        label_20->setText(QApplication::translate("Widget", "TextLabel", 0, QApplication::UnicodeUTF8));
+        label_20->setText(QApplication::translate("Widget", "66766", 0, QApplication::UnicodeUTF8));
         label_21->setText(QApplication::translate("Widget", "66666", 0, QApplication::UnicodeUTF8));
         lineEdit->setText(QApplication::translate("Widget", "\344\270\255\346\226\207", 0, QApplication::UnicodeUTF8));
         lineEdit_2->setText(QApplication::translate("Widget", "English", 0, QApplication::UnicodeUTF8));

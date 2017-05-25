@@ -64,7 +64,7 @@
     <widget class="QLabel" name="label_3">
      <property name="geometry">
       <rect>
-       <x>562</x>
+       <x>566</x>
        <y>15</y>
        <width>95</width>
        <height>41</height>
@@ -72,10 +72,13 @@
      </property>
      <property name="styleSheet">
       <string notr="true">color: rgb(255, 255, 255);
-font: 75 14pt &quot;Ubuntu&quot;;</string>
+font: 75 16pt &quot;Ubuntu&quot;;</string>
      </property>
      <property name="text">
       <string>TextLabel</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
      </property>
     </widget>
     <widget class="QLabel" name="label_5">
@@ -104,8 +107,7 @@ font: 75 14pt &quot;Ubuntu&quot;;</string>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">font: 75 italic 16pt &quot;Ubuntu&quot;;
-font: 75 16pt &quot;Ubuntu&quot;;</string>
+      <string notr="true">font: 20pt &quot;WenQuanYi Zen Hei&quot;;</string>
      </property>
      <property name="text">
       <string>123</string>
@@ -124,11 +126,10 @@ font: 75 16pt &quot;Ubuntu&quot;;</string>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">font: 75 italic 16pt &quot;Ubuntu&quot;;
-font: 75 16pt &quot;Ubuntu&quot;;</string>
+      <string notr="true">font: 18pt &quot;WenQuanYi Zen Hei&quot;;</string>
      </property>
      <property name="text">
-      <string>456</string>
+      <string>66456</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -137,19 +138,18 @@ font: 75 16pt &quot;Ubuntu&quot;;</string>
     <widget class="QLabel" name="label_8">
      <property name="geometry">
       <rect>
-       <x>357</x>
-       <y>353</y>
+       <x>361</x>
+       <y>356</y>
        <width>55</width>
        <height>24</height>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">font: 75 italic 16pt &quot;Ubuntu&quot;;
-font: 75 16pt &quot;Ubuntu&quot;;
+      <string notr="true">font: 75 14pt &quot;Ubuntu&quot;;
 </string>
      </property>
      <property name="text">
-      <string>789</string>
+      <string>88789</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -158,14 +158,14 @@ font: 75 16pt &quot;Ubuntu&quot;;
     <widget class="QLabel" name="label_9">
      <property name="geometry">
       <rect>
-       <x>366</x>
+       <x>375</x>
        <y>394</y>
        <width>77</width>
        <height>24</height>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">font: 75 16pt &quot;Ubuntu&quot;;
+      <string notr="true">font: 75 18pt &quot;Ubuntu&quot;;
 color: rgb(255, 255, 255);</string>
      </property>
      <property name="text">
@@ -206,7 +206,7 @@ color: rgb(255, 255, 0);</string>
      </property>
      <property name="styleSheet">
       <string notr="true">color: rgb(255, 255, 255);
-font: 75 16pt &quot;Ubuntu&quot;;</string>
+font: 75 18pt &quot;Ubuntu&quot;;</string>
      </property>
      <property name="text">
       <string>8977</string>
@@ -226,7 +226,7 @@ font: 75 16pt &quot;Ubuntu&quot;;</string>
      </property>
      <property name="styleSheet">
       <string notr="true">color: rgb(255, 255, 255);
-font: 75 16pt &quot;Ubuntu&quot;;</string>
+font: 75 18pt &quot;Ubuntu&quot;;</string>
      </property>
      <property name="text">
       <string>898</string>
@@ -235,7 +235,7 @@ font: 75 16pt &quot;Ubuntu&quot;;</string>
     <widget class="QLabel" name="label_12">
      <property name="geometry">
       <rect>
-       <x>733</x>
+       <x>735</x>
        <y>15</y>
        <width>66</width>
        <height>41</height>
@@ -243,16 +243,19 @@ font: 75 16pt &quot;Ubuntu&quot;;</string>
      </property>
      <property name="styleSheet">
       <string notr="true">color: rgb(255, 255, 255);
-font: 75 14pt &quot;Ubuntu&quot;;</string>
+font: 75 16pt &quot;Ubuntu&quot;;</string>
      </property>
      <property name="text">
       <string>TextLabel</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
      </property>
     </widget>
     <widget class="QLabel" name="label_13">
      <property name="geometry">
       <rect>
-       <x>659</x>
+       <x>663</x>
        <y>15</y>
        <width>77</width>
        <height>41</height>
@@ -260,10 +263,13 @@ font: 75 14pt &quot;Ubuntu&quot;;</string>
      </property>
      <property name="styleSheet">
       <string notr="true">color: rgb(255, 255, 255);
-font: 75 14pt &quot;Ubuntu&quot;;</string>
+font: 75 16pt &quot;Ubuntu&quot;;</string>
      </property>
      <property name="text">
       <string>TextLabel</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
      </property>
     </widget>
     <widget class="QLabel" name="label_14">
@@ -277,7 +283,7 @@ font: 75 14pt &quot;Ubuntu&quot;;</string>
      </property>
      <property name="styleSheet">
       <string notr="true">color: rgb(255, 255, 255);
-font: 75 16pt &quot;Ubuntu&quot;;</string>
+font: 75 18pt &quot;Ubuntu&quot;;</string>
      </property>
      <property name="text">
       <string/>
@@ -306,21 +312,21 @@ font: 75 italic 16pt &quot;Ubuntu&quot;;</string>
     <widget class="QLabel" name="label_20">
      <property name="geometry">
       <rect>
-       <x>95</x>
+       <x>92</x>
        <y>316</y>
-       <width>46</width>
+       <width>56</width>
        <height>31</height>
       </rect>
      </property>
      <property name="styleSheet">
       <string notr="true">color: rgb(255, 255, 255);
-font: 75 16pt &quot;Ubuntu&quot;;</string>
+font: 75 14pt &quot;Ubuntu&quot;;</string>
      </property>
      <property name="text">
-      <string>TextLabel</string>
+      <string>66766</string>
      </property>
      <property name="alignment">
-      <set>Qt::AlignCenter</set>
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
     </widget>
     <widget class="QLabel" name="label_21">
@@ -333,7 +339,7 @@ font: 75 16pt &quot;Ubuntu&quot;;</string>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">font: 75 16pt &quot;Ubuntu&quot;;</string>
+      <string notr="true">font: 75 18pt &quot;Ubuntu&quot;;</string>
      </property>
      <property name="text">
       <string>66666</string>
@@ -353,6 +359,9 @@ font: 75 16pt &quot;Ubuntu&quot;;</string>
        <height>29</height>
       </rect>
      </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 14pt &quot;Ubuntu&quot;;</string>
+     </property>
      <property name="text">
       <string>中文</string>
      </property>
@@ -365,6 +374,9 @@ font: 75 16pt &quot;Ubuntu&quot;;</string>
        <width>70</width>
        <height>31</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 14pt &quot;Ubuntu&quot;;</string>
      </property>
      <property name="text">
       <string>English</string>
@@ -382,6 +394,9 @@ font: 75 16pt &quot;Ubuntu&quot;;</string>
      <property name="focusPolicy">
       <enum>Qt::StrongFocus</enum>
      </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 14pt &quot;Ubuntu&quot;;</string>
+     </property>
      <property name="value">
       <number>24</number>
      </property>
@@ -394,6 +409,9 @@ font: 75 16pt &quot;Ubuntu&quot;;</string>
        <width>236</width>
        <height>31</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 14pt &quot;Ubuntu&quot;;</string>
      </property>
      <property name="timeSpec">
       <enum>Qt::LocalTime</enum>
@@ -433,8 +451,15 @@ font: 75 16pt &quot;Ubuntu&quot;;</string>
      </property>
      <property name="styleSheet">
       <string notr="true">background-color: rgb(81, 81, 81);
+font: 75 18pt &quot;Ubuntu&quot;;
 gridline-color: rgb(255, 0, 0);
 color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="verticalScrollBarPolicy">
+      <enum>Qt::ScrollBarAlwaysOff</enum>
+     </property>
+     <property name="horizontalScrollBarPolicy">
+      <enum>Qt::ScrollBarAlwaysOff</enum>
      </property>
      <property name="viewMode">
       <enum>QListView::ListMode</enum>
@@ -454,6 +479,7 @@ color: rgb(255, 255, 255);</string>
      </property>
      <property name="styleSheet">
       <string notr="true">background-color: rgb(81, 81, 81);
+font: 75 18pt &quot;Ubuntu&quot;;
 gridline-color: rgb(255, 0, 0);
 color: rgb(255, 255, 255);</string>
      </property>
@@ -471,8 +497,15 @@ color: rgb(255, 255, 255);</string>
      </property>
      <property name="styleSheet">
       <string notr="true">background-color: rgb(81, 81, 81);
+font: 75 16pt &quot;Ubuntu&quot;;
 gridline-color: rgb(255, 0, 0);
 color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="verticalScrollBarPolicy">
+      <enum>Qt::ScrollBarAlwaysOff</enum>
+     </property>
+     <property name="horizontalScrollBarPolicy">
+      <enum>Qt::ScrollBarAlwaysOff</enum>
      </property>
     </widget>
     <widget class="QListWidget" name="listWidget_4">
@@ -486,8 +519,15 @@ color: rgb(255, 255, 255);</string>
      </property>
      <property name="styleSheet">
       <string notr="true">background-color: rgb(81, 81, 81);
+font: 75 16pt &quot;Ubuntu&quot;;
 gridline-color: rgb(255, 0, 0);
 color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="verticalScrollBarPolicy">
+      <enum>Qt::ScrollBarAlwaysOff</enum>
+     </property>
+     <property name="horizontalScrollBarPolicy">
+      <enum>Qt::ScrollBarAlwaysOff</enum>
      </property>
     </widget>
    </widget>
@@ -505,8 +545,15 @@ color: rgb(255, 255, 255);</string>
      </property>
      <property name="styleSheet">
       <string notr="true">background-color: rgb(81, 81, 81);
+font: 75 18pt &quot;Ubuntu&quot;;
 gridline-color: rgb(255, 0, 0);
 color: rgb(255, 255, 255);</string>
+     </property>
+     <property name="verticalScrollBarPolicy">
+      <enum>Qt::ScrollBarAlwaysOff</enum>
+     </property>
+     <property name="horizontalScrollBarPolicy">
+      <enum>Qt::ScrollBarAlwaysOff</enum>
      </property>
     </widget>
    </widget>
@@ -540,7 +587,7 @@ color: rgb(255, 255, 255);</string>
      </property>
      <property name="styleSheet">
       <string notr="true">color: rgb(255, 255, 255);
-font: 75 14pt &quot;Ubuntu&quot;;
+font: 75 16pt &quot;Ubuntu&quot;;
 gridline-color: rgb(255, 0, 0);
 background-color: rgb(70, 70, 70);</string>
      </property>
@@ -644,7 +691,7 @@ font: 75 16pt &quot;Ubuntu&quot;;</string>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">font: 75 12pt &quot;Ubuntu&quot;;
+      <string notr="true">color: rgb(255, 0, 0);
 font: 75 16pt &quot;Ubuntu&quot;;
 background-color: rgb(255, 255, 255);
 </string>
@@ -669,8 +716,7 @@ background-color: rgb(255, 255, 255);
      </property>
      <property name="styleSheet">
       <string notr="true">font: 75 12pt &quot;Ubuntu&quot;;
-color: rgb(255, 170, 0);
-font: 75 12pt &quot;Ubuntu&quot;;</string>
+background-color: rgb(255, 170, 0);</string>
      </property>
      <property name="text">
       <string>恢复到默认值</string>
@@ -780,6 +826,7 @@ font: 75 12pt &quot;Ubuntu&quot;;</string>
      </property>
      <property name="styleSheet">
       <string notr="true">color: rgb(255, 255, 255);
+font: 75 16pt &quot;Ubuntu&quot;;
 gridline-color: rgb(255, 0, 0);
 background-color: rgb(70, 70, 70);</string>
      </property>
@@ -787,7 +834,7 @@ background-color: rgb(70, 70, 70);</string>
       <enum>Qt::ScrollBarAlwaysOff</enum>
      </property>
      <property name="horizontalScrollBarPolicy">
-      <enum>Qt::ScrollBarAsNeeded</enum>
+      <enum>Qt::ScrollBarAlwaysOff</enum>
      </property>
      <row>
       <property name="text">
@@ -868,10 +915,14 @@ background-color: rgb(70, 70, 70);</string>
      </property>
      <property name="styleSheet">
       <string notr="true">color: rgb(255, 255, 255);
+font: 75 16pt &quot;Ubuntu&quot;;
 gridline-color: rgb(255, 0, 0);
 background-color: rgb(70, 70, 70);</string>
      </property>
      <property name="verticalScrollBarPolicy">
+      <enum>Qt::ScrollBarAlwaysOff</enum>
+     </property>
+     <property name="horizontalScrollBarPolicy">
       <enum>Qt::ScrollBarAlwaysOff</enum>
      </property>
      <row>
@@ -994,7 +1045,7 @@ background-color: rgb(70, 70, 70);</string>
      </property>
      <property name="styleSheet">
       <string notr="true">background-color: rgb(81, 81, 81);
-font: 75 16pt &quot;Ubuntu&quot;;
+font: 75 20pt &quot;Ubuntu&quot;;
 gridline-color: rgb(255, 0, 0);
 color: rgb(255, 255, 255);</string>
      </property>
@@ -1019,6 +1070,7 @@ color: rgb(255, 255, 255);</string>
      </property>
      <property name="styleSheet">
       <string notr="true">background-color: rgb(81, 81, 81);
+font: 75 18pt &quot;Ubuntu&quot;;
 gridline-color: rgb(255, 0, 0);
 color: rgb(255, 255, 255);</string>
      </property>
