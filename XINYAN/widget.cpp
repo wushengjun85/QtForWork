@@ -439,6 +439,22 @@ unsigned char shanshuofengji = 0;
 //unsigned char shanshuoLiangchangman2 = 0;
 
 
+//2017.5.25
+//报警消音
+//
+unsigned char XiaoYinshanshuoSW;//XiaoYin
+unsigned char XiaoYinshanshuoJYYL;
+unsigned char XiaoYinshanshuoLM;
+unsigned char XiaoYinshanshuoLiangshun;
+unsigned char  XiaoYinshanshuoGunTong;
+unsigned char  XiaoYinshanshuoShengyun;
+unsigned char XiaoYinshanshuoguoqiao;
+unsigned char  XiaoYinshanshuofengji;
+unsigned char  XiaoYinshanshuoSS;
+unsigned char  XiaoYinshangshuoChongdian;
+unsigned char  XiaoYinshanshuoYL;
+
+
 /**************************************************************************************************************/
 
 /**************************************************************************************************************/
@@ -3301,7 +3317,7 @@ void Widget::paintEvent(QPaintEvent *)
                paintdeng.drawPixmap(73,435,36,23,pixdeng);//正上方位置显示的图标
            }
            //充电指示灯
-           if(cantest.flagBattery)
+           if(cantest.flagBattery == 1)
            {
                pixdeng.load("./img/dengshan/17.png");//
                paintdeng.drawPixmap(118,434,34,24,pixdeng);//正上方位置显示的图标
@@ -3519,6 +3535,12 @@ void Widget::paintEvent(QPaintEvent *)
 
 
 
+           //2017.5.25
+           if((cantest.flagSS > 0)&&(cantest.HourSpeed <500))
+           {
+               pixdeng.load("./img/dengshan/13.png");//
+               paintdeng.drawPixmap(278,433,37,29,pixdeng);//正上方位置显示的图标
+           }
            //闪烁控制
 
            //手刹
@@ -3954,7 +3976,14 @@ void Widget::paintEvent(QPaintEvent *)
 
         //单次里程 和 总里程
         ui->label_8->setText(QString::number(cantest.MIJI));// 单次里程floatworknu4,'f',1
-        ui->label_9->setText(QString::number(cantest.VolMIJISUM));//总里程
+
+        float Zonglicheng;
+        unsigned int TempZonglicheng = cantest.VolMIJISUM;
+        TempZonglicheng /= 100;
+        Zonglicheng = TempZonglicheng;
+        Zonglicheng /= 10;
+
+        ui->label_9->setText(QString::number(Zonglicheng,'f',1));//总里程cantest.VolMIJISUM
 
         //        //油量
         //        YLBFB = cantest.VolYL;
@@ -7596,10 +7625,11 @@ void Widget::shanhua()//闪烁和平滑转动
         }
 
         //手刹
-        if(cantest.flagSS)
+        if((cantest.flagSS > 0)&&(cantest.HourSpeed >500))
         {
             shanshuoSS = 1;
         }
+
         //籽粒回收满
         //if(cantest.flagLCM)
         if(CHK_GZ_BIT(cantest.m_extLampBitFlag,LAMP_BIT_ZhiLiHuiShou))
@@ -7658,7 +7688,7 @@ void Widget::shanhua()//闪烁和平滑转动
 
         //2017.5.24
         //充电指示灯
-        if(cantest.flagBattery == 2)
+        if(cantest.flagBattery > 1)
         {
             shangshuoChongdian = 1;
         }
@@ -7691,6 +7721,7 @@ void Widget::shanhua()//闪烁和平滑转动
         shanshuoguoqiao = 0;
         shanshuofengji = 0;
         //shanshuoLiangchangman2 = 0;
+        shangshuoChongdian = 0;
 
 
         flagnum--;
@@ -7711,6 +7742,21 @@ void Widget::Licheng()//里程
 
         //if((ecutest.flagECU == 0)&&(ecutest.FDJ_speed>350))
 
+    //2017.5.25
+    //报警消音
+    //
+//    unsigned char XiaoYinshanshuoSW;//XiaoYin
+//    unsigned char XiaoYinshanshuoJYYL;
+//    unsigned char XiaoYinshanshuoLM;
+//    unsigned char XiaoYinshanshuoLiangshun;
+//    unsigned char  XiaoYinshanshuoGunTong;
+//    unsigned char  XiaoYinshanshuoShengyun;
+//    unsigned char XiaoYinshanshuoguoqiao;
+//    unsigned char  XiaoYinshanshuofengji;
+//    unsigned char  XiaoYinshanshuoSS;
+//    unsigned char  XiaoYinshangshuoChongdian;
+//    unsigned char  XiaoYinshanshuoYL;
+
 
     if(flagwidget == xingZouWidget)
     {
@@ -7719,7 +7765,7 @@ void Widget::Licheng()//里程
         {
             if(((shanshuoSW == 1)||(shanshuoJYYL ==1)||(shanshuoLM == 1)||(shanshuoLiangshun == 1)||(shanshuoGunTong == 1)||(shanshuoShengyun == 1)||(shanshuoguoqiao == 1)||(shanshuofengji == 1)||(shanshuoSS == 1)||(shangshuoChongdian == 1)||(shanshuoYL == 1))&&(ecutest.FDJ_speed>350))//||shanshuoYL||shanshuozlzs||shanshuoftqzs||shanshuosyqzs
             {
-                if(flagbeep)
+                if((flagbeep)||(XiaoYinshanshuoSW == 1)||(XiaoYinshanshuoJYYL == 1)||(XiaoYinshanshuoLM == 1)||(XiaoYinshanshuoLiangshun == 1)||(XiaoYinshanshuoGunTong ==1)||(XiaoYinshanshuoShengyun ==1)||(XiaoYinshanshuoguoqiao ==1)||(XiaoYinshanshuofengji ==1)||(XiaoYinshanshuoSS ==1)||(XiaoYinshangshuoChongdian ==1)||(XiaoYinshanshuoYL ==1))
                 {
                     beep_on();
                     //qDebug()<<"beef on 00000000000000000000000000000000000000000000000000000000   ======   "<<ecutest.flagECU<<endl;
