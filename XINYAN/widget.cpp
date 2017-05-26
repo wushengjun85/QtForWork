@@ -2430,15 +2430,15 @@ void Widget::paintEvent(QPaintEvent *)
 
 
                    //油量
-                   painter.translate(380,3);//重新定位坐标起始点，把坐标原点放到窗体的中央
-                   //painter.scale(side / 400.0, side / 300.0);
+                   //painter.translate(380,3);//重新定位坐标起始点，把坐标原点放到窗体的中央
+                    painter.translate(377,1);//重新定位坐标起始点，把坐标原点放到窗体的中央
 
                    painter.setPen(Qt::NoPen);
                    painter.setBrush(Qt::red);
                    painter.setRenderHint(QPainter::Antialiasing, true);
                    painter.save();
 
-                   painter.rotate(-114.5);
+                   painter.rotate(-114);
                    painter.rotate(28.2*nu1);//
                    //painter.rotate(7.6*nu1);//
                    //qDebug()<<"nu1 =======================================   "<<nu1<<endl;
@@ -2480,7 +2480,7 @@ void Widget::paintEvent(QPaintEvent *)
                    painter.save();
 
                    //painter.rotate(6.0 *time.second());  //设旋转(角度 = 6° * (分钟 + 秒 / 60))
-                   painter.rotate(-114);
+                   painter.rotate(-115);
                    //painter.rotate(8*nu3);
                    painter.rotate(7.6*nu3);//
 
@@ -2581,17 +2581,19 @@ void Widget::paintEvent(QPaintEvent *)
    //               pixdeng.load("./img/dengshan/08.png");//
    //               paintdeng.drawPixmap(550,435,29,20,pixdeng);//正上方位置显示的图标
    //           }
-              //燃油进水指示灯
-              if(shanshuoYZYS)
-              {
-                  pixdeng.load("./img/dengshan/07.png");//
-                  paintdeng.drawPixmap(586,432,24,28,pixdeng);//正上方位置显示的图标
-              }
+
+//              //燃油进水指示灯
+//              if(shanshuoYZYS)
+//              {
+//                  pixdeng.load("./img/dengshan/07.png");//
+//                  paintdeng.drawPixmap(586,432,24,28,pixdeng);//正上方位置显示的图标
+//              }
+
               //液压油压力
               if(CHK_GZ_BIT(cantest.m_extLampBitFlag,LAMP_BIT_YeYaYouYa))
               {
                   pixdeng.load("./img/dengshan/99.png");//
-                  paintdeng.drawPixmap(616,432,15,28,pixdeng);//正上方位置显示的图标
+                  paintdeng.drawPixmap(616,432,24,28,pixdeng);//正上方位置显示的图标
               }
    //           //空滤灯
    //           if(1)
@@ -2649,8 +2651,18 @@ void Widget::paintEvent(QPaintEvent *)
                //油中右水  油水分离  需要闪烁
                if(shanshuoYZYS)
                {
-                   pixdeng.load("./img/dengshan/07.png");//
+                  //pixdeng.load("./img/dengshan/07.png");//
+
+                   pixdeng.load("./img/dengshan/65.png");//
                    paintdeng.drawPixmap(586,432,24,28,pixdeng);//正上方位置显示的图标
+               }
+
+               //充电指示灯  //闪烁
+
+               if(shangshuoChongdian)
+               {
+                   pixdeng.load("./img/dengshan/17.png");//
+                   paintdeng.drawPixmap(118,434,34,24,pixdeng);//正上方位置显示的图标
                }
 
                //液压油温
@@ -2942,6 +2954,16 @@ void Widget::paintEvent(QPaintEvent *)
                    pixdeng.load("./img/dengshan/07.png");//
                    paintdeng.drawPixmap(586,432,24,28,pixdeng);//正上方位置显示的图标
                }
+
+               //2017.5.24
+               //充电指示灯  //闪烁
+
+               if(shangshuoChongdian)
+               {
+                   pixdeng.load("./img/dengshan/17.png");//
+                   paintdeng.drawPixmap(118,434,34,24,pixdeng);//正上方位置显示的图标
+               }
+
 
                //液压油温
                if(shanshuoYYYW)//液压油温  cantest.VolYeyayouwen
@@ -4872,16 +4894,14 @@ void Widget::keyPressEvent(QKeyEvent *e)
         case ClearMenu:
         {
             //单次里程清零// 米计清零
-            if(clearflag == 1)
+            if(LCClearMenuRow == 1)
             {
                 //给控制器发送指令
                 Cfg_sSingMileageClear();	/*	单次里程/米计清零 */
+                qDebug()<<"Cfg_sSingMileageClear();/*	单次里程/米计清零 */"<<endl;
             }
         }
-//        flagwidget = MainMenu;
-//        ui->stackedWidget->setCurrentIndex(2);
         break;
-
 
             //2017.5.22
               case xingZouWidget:
