@@ -2561,8 +2561,9 @@ void Widget::paintEvent(QPaintEvent *)
                   pixdeng.load("./img/dengshan/14.png");//
                   paintdeng.drawPixmap(73,435,36,23,pixdeng);//正上方位置显示的图标
               }
+
               //充电指示灯
-              if(cantest.flagBattery)
+              if(cantest.flagBattery == 1)
               {
                   pixdeng.load("./img/dengshan/17.png");//
                   paintdeng.drawPixmap(118,434,34,24,pixdeng);//正上方位置显示的图标
@@ -2624,6 +2625,15 @@ void Widget::paintEvent(QPaintEvent *)
                   pixdeng.load("./img/dengshan/99.png");//
                   paintdeng.drawPixmap(616,432,24,28,pixdeng);//正上方位置显示的图标
               }
+
+
+              //液压滤清
+              if(CHK_GZ_BIT(cantest.m_extLampBitFlag,LAMP_BIT_YeYaLvQing))
+              {
+                  pixdeng.load("./img/zhujiemianicon/09.png");//
+                  //paintdeng.drawPixmap(490,319,16,28,pixdeng);//正上方位置显示的图标
+                  paintdeng.drawPixmap(616,432,24,28,pixdeng);//正上方位置显示的图标
+              }
    //           //空滤灯
    //           if(1)
    //           {
@@ -2683,7 +2693,7 @@ void Widget::paintEvent(QPaintEvent *)
                   //pixdeng.load("./img/dengshan/07.png");//
 
                    pixdeng.load("./img/dengshan/65.png");//
-                   paintdeng.drawPixmap(586,432,24,28,pixdeng);//正上方位置显示的图标
+                   paintdeng.drawPixmap(584,432,24,28,pixdeng);//正上方位置显示的图标
                }
 
                //充电指示灯  //闪烁
