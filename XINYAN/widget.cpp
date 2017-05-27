@@ -212,10 +212,21 @@ CJ CJSwitch = YuCai;
 //摄像头开始标志位
 uchar flagvedio = 1;
 
+#define Lajiao 1
+
 enum flagvedioChange
 {
+//#define Ziliji
+#ifdef Ziliji
     AV2 = 0,
     AV3
+#endif
+
+#ifdef Lajiao
+    AV1 = 0,
+    AV2
+#endif
+
 };
 flagvedioChange flagcurrentvideo = AV2;
 uchar flagyihuovideo;
@@ -442,17 +453,32 @@ unsigned char shanshuofengji = 0;
 //2017.5.25
 //报警消音
 //
-unsigned char XiaoYinshanshuoSW;//XiaoYin
-unsigned char XiaoYinshanshuoJYYL;
-unsigned char XiaoYinshanshuoLM;
-unsigned char XiaoYinshanshuoLiangshun;
-unsigned char  XiaoYinshanshuoGunTong;
-unsigned char  XiaoYinshanshuoShengyun;
-unsigned char XiaoYinshanshuoguoqiao;
-unsigned char  XiaoYinshanshuofengji;
-unsigned char  XiaoYinshanshuoSS;
-unsigned char  XiaoYinshangshuoChongdian;
-unsigned char  XiaoYinshanshuoYL;
+unsigned char XiaoYinshanshuoSW = 0;//XiaoYin
+unsigned char XiaoYinshanshuoJYYL = 0;
+unsigned char XiaoYinshanshuoLM = 0;
+unsigned char XiaoYinshanshuoLiangshun = 0;
+unsigned char  XiaoYinshanshuoGunTong = 0;
+unsigned char  XiaoYinshanshuoShengyun = 0;
+unsigned char XiaoYinshanshuoguoqiao = 0;
+unsigned char  XiaoYinshanshuofengji = 0;
+unsigned char  XiaoYinshanshuoSS = 0;
+unsigned char  XiaoYinshangshuoChongdian = 0;
+unsigned char  XiaoYinshanshuoYL = 0;
+unsigned char  XiaoYinshanshuoYZYS = 0;
+
+//2017.5.27
+unsigned char SaveshanshuoSW = 0;//
+unsigned char SaveshanshuoJYYL = 0;
+unsigned char SaveshanshuoLM = 0;
+unsigned char SaveshanshuoLiangshun = 0;
+unsigned char  SaveshanshuoGunTong = 0;
+unsigned char  SaveshanshuoShengyun = 0;
+unsigned char Saveshanshuoguoqiao = 0;
+unsigned char  Saveshanshuofengji = 0;
+unsigned char  SaveshanshuoSS = 0;
+unsigned char  SaveshangshuoChongdian = 0;
+unsigned char  SaveshanshuoYL = 0;
+unsigned char SaveshanshuoYZYS = 0;
 
 
 /**************************************************************************************************************/
@@ -990,6 +1016,9 @@ Widget::Widget(QWidget *parent) :
         //2017.4.8
         //匹配性标定
         ui->tableWidget_3->installEventFilter(this);
+
+
+        SetXinYanMachineModel(	XY_MODEL_4JZ_3600);
 }
 
 
@@ -3396,6 +3425,8 @@ void Widget::paintEvent(QPaintEvent *)
                pixdeng.load("./img/dengshan/99.png");//
                paintdeng.drawPixmap(619,432,15,28,pixdeng);//正上方位置显示的图标
            }
+
+
            //空滤灯
            if(cantest.flagKL)
            {
@@ -4128,8 +4159,93 @@ void Widget::paintEvent(QPaintEvent *)
     }
 
 /***************************************************************************************************************/
+//2017.5.26
+//添加蜂鸣器 取消 再来报警时 报警继续
+     //
+     if((SaveshanshuoSW == 1)&&(XiaoYinshanshuoSW == 0))
+     {
+         SaveshanshuoSW = 0;
+     }
+     if((SaveshanshuoJYYL == 1)&&(XiaoYinshanshuoJYYL == 0))
+     {
+         SaveshanshuoJYYL = 0;
+     }
+
+     if((SaveshanshuoLM == 1)&&(XiaoYinshanshuoLM == 0))
+     {
+         SaveshanshuoLM = 0;
+     }
+     if((SaveshanshuoLiangshun == 1)&&(XiaoYinshanshuoLiangshun == 0))
+     {
+         SaveshanshuoLiangshun = 0;
+     }
+
+     if((SaveshanshuoGunTong == 1)&&(XiaoYinshanshuoGunTong == 0))
+     {
+         SaveshanshuoGunTong = 0;
+     }
+     if((SaveshanshuoShengyun == 1)&&(XiaoYinshanshuoShengyun == 0))
+     {
+         SaveshanshuoShengyun = 0;
+     }
+
+     if((Saveshanshuoguoqiao == 1)&&(XiaoYinshanshuoguoqiao == 0))
+     {
+         Saveshanshuoguoqiao = 0;
+     }
+     if((Saveshanshuofengji == 1)&&(XiaoYinshanshuofengji == 0))
+     {
+         Saveshanshuofengji = 0;
+     }
+
+     if((SaveshanshuoSS == 1)&&(XiaoYinshanshuoSS == 0))
+     {
+         SaveshanshuoSS = 0;
+     }
+     if((SaveshangshuoChongdian == 1)&&(XiaoYinshangshuoChongdian == 0))
+     {
+         SaveshangshuoChongdian = 0;
+     }
+
+     if((SaveshanshuoYL == 1)&&(XiaoYinshanshuoYL == 0))
+     {
+         SaveshanshuoYL = 0;
+     }
+     if((SaveshanshuoYZYS == 1)&&(XiaoYinshanshuoYZYS == 0))
+     {
+         SaveshanshuoYZYS = 0;
+     }
+
+     //报警消音
+    if(((SaveshanshuoSW == 0)&&(XiaoYinshanshuoSW == 1))
+            ||((SaveshanshuoJYYL == 0)&&(XiaoYinshanshuoJYYL == 1))
+            ||((SaveshanshuoLM == 0)&&(XiaoYinshanshuoLM == 1))
+            ||((SaveshanshuoLiangshun == 0)&&(XiaoYinshanshuoLiangshun == 1))
+            ||((SaveshanshuoGunTong == 0)&&(XiaoYinshanshuoGunTong == 1))
+            ||((SaveshanshuoShengyun == 0)&&(XiaoYinshanshuoShengyun == 1))
+            ||((Saveshanshuoguoqiao == 0)&&(XiaoYinshanshuoguoqiao == 1))
+            ||((Saveshanshuofengji == 0)&&(XiaoYinshanshuofengji == 1))
+            ||((SaveshanshuoSS == 0)&&(XiaoYinshanshuoSS == 1))
+            ||((SaveshangshuoChongdian == 0)&&(XiaoYinshangshuoChongdian == 1))
+            ||((SaveshanshuoYL == 0)&&(XiaoYinshanshuoYL == 1))
+            ||((SaveshanshuoYZYS == 0)&&(XiaoYinshanshuoYZYS == 1))
+      )
+
+    {
+        flagbeep = 1;
+    }
 
 
+
+    if(flagbeep)
+    {
+        ui->pushButton_2->setStyleSheet("QPushButton{border-image:url(./img/jiemian/labayes.png);background-repeat: background-xy;background-position: center;background-attachment: fixed;background-clip: padding}");
+    }
+    else
+    {
+        //2017.5.26
+        ui->pushButton_2->setStyleSheet("QPushButton{border-image:url(./img/jiemian/labano.png);background-repeat: background-xy;background-position: center;background-attachment: fixed;background-clip: padding}");
+    }
 /***************************************************************************************************************/
                              if(flagwidget == PipeixingbiaodingMenu)
                    //if(1)
@@ -4910,14 +5026,81 @@ void Widget::keyPressEvent(QKeyEvent *e)
               break;
 
             case MainMenu:  //静音
-            flagbeep ^= 1;
-            if(flagbeep)
             {
-                ui->pushButton_2->setStyleSheet("QPushButton{border-image:url(./img/jiemian/labayes.png);background-repeat: background-xy;background-position: center;background-attachment: fixed;background-clip: padding}");
-            }
-            else
-            {
-                ui->pushButton_2->setStyleSheet("QPushButton{border-image:url(./img/jiemian/labano.png);background-repeat: background-xy;background-position: center;background-attachment: fixed;background-clip: padding}");
+                flagbeep ^= 1;
+                if(flagbeep)
+                {
+                    ui->pushButton_2->setStyleSheet("QPushButton{border-image:url(./img/jiemian/labayes.png);background-repeat: background-xy;background-position: center;background-attachment: fixed;background-clip: padding}");
+                    //2017.5.27
+                #if 1
+                     SaveshanshuoSW = 0;//
+                     SaveshanshuoJYYL = 0;
+                     SaveshanshuoLM = 0;
+                     SaveshanshuoLiangshun = 0;
+                      SaveshanshuoGunTong = 0;
+                      SaveshanshuoShengyun = 0;
+                     Saveshanshuoguoqiao = 0;
+                      Saveshanshuofengji = 0;
+                      SaveshanshuoSS = 0;
+                      SaveshangshuoChongdian = 0;
+                     SaveshanshuoYL = 0;
+                     SaveshanshuoYZYS = 0;
+                #endif
+                }
+                else
+                {
+                    ui->pushButton_2->setStyleSheet("QPushButton{border-image:url(./img/jiemian/labano.png);background-repeat: background-xy;background-position: center;background-attachment: fixed;background-clip: padding}");
+                    //2017.5.26
+                    if(XiaoYinshanshuoSW==1)
+                    {
+                        SaveshanshuoSW = 1;
+                    }
+                    if(XiaoYinshanshuoJYYL == 1)
+                    {
+                        SaveshanshuoJYYL = 1;
+                    }
+                    if(XiaoYinshanshuoLM == 1)
+                    {
+                        SaveshanshuoLM = 1;
+                    }
+                    if(XiaoYinshanshuoLiangshun == 1)
+                    {
+                        SaveshanshuoLiangshun = 1;
+                    }
+                    if(XiaoYinshanshuoGunTong == 1)
+                    {
+                        SaveshanshuoGunTong = 1;
+                    }
+                    if(XiaoYinshanshuoShengyun == 1)
+                    {
+                        SaveshanshuoShengyun = 1;
+                    }
+                    if(XiaoYinshanshuoguoqiao == 1)
+                    {
+                        Saveshanshuoguoqiao = 1;
+                    }
+                    if(XiaoYinshanshuofengji == 1)
+                    {
+                        Saveshanshuofengji = 1;
+                    }
+                    if(XiaoYinshanshuoSS == 1)
+                    {
+                        SaveshanshuoSS = 1;
+                    }
+                    if(XiaoYinshangshuoChongdian == 1)
+                    {
+                        SaveshangshuoChongdian = 1;
+                    }
+                    if(XiaoYinshanshuoYL == 1)
+                    {
+                        SaveshanshuoYL = 1;
+                    }
+                    if(XiaoYinshanshuoYZYS == 1)
+                    {
+                        SaveshanshuoYZYS = 1;
+                    }
+
+                }
             }
              break;
 
@@ -5005,7 +5188,8 @@ void Widget::keyPressEvent(QKeyEvent *e)
 
 
              //2017.5.6  暂时先这样给下边传数据
-             SetXinYanMachineModel(	XY_MODEL_4YZT_5);
+//             SetXinYanMachineModel(	XY_MODEL_4YZT_5);
+//             SetXinYanMachineModel(	XY_MODEL_4JZ_3600);
 
              query.exec(QObject::tr("drop config"));
 
@@ -7610,16 +7794,31 @@ void Widget::shanhua()//闪烁和平滑转动
             if(ecutest.VolSW > 100)//水温
             {
                 shanshuoSW = 1;
+                XiaoYinshanshuoSW = 1;
+            }
+            else
+            {
+                XiaoYinshanshuoSW = 0;
             }
 
             if(JYYL < 0.08)//机油
             {
                 shanshuoJYYL = 1;
+                XiaoYinshanshuoJYYL = 1;
+            }
+            else
+            {
+                XiaoYinshanshuoJYYL = 0;
             }
 
             if(cantest.VolYL < 1)//油量
             {
                 shanshuoYL = 1;
+                XiaoYinshanshuoYL = 1;
+            }
+            else
+            {
+                XiaoYinshanshuoYL = 0;
             }
         }
 
@@ -7636,6 +7835,11 @@ void Widget::shanhua()//闪烁和平滑转动
         if(ecutest.flagYSFL_ECU == 1)//油中有水
         {
             shanshuoYZYS = 1;
+            XiaoYinshanshuoYZYS = 1;
+        }
+        else
+        {
+             XiaoYinshanshuoYZYS = 0;
         }
 
         //液压油温
@@ -7648,6 +7852,11 @@ void Widget::shanhua()//闪烁和平滑转动
         if((cantest.flagSS > 0)&&(cantest.HourSpeed >500))
         {
             shanshuoSS = 1;
+            XiaoYinshanshuoSS = 1;
+        }
+        else
+        {
+            XiaoYinshanshuoSS = 0;
         }
 
         //籽粒回收满
@@ -7655,6 +7864,11 @@ void Widget::shanhua()//闪烁和平滑转动
         if(CHK_GZ_BIT(cantest.m_extLampBitFlag,LAMP_BIT_ZhiLiHuiShou))
         {
             shanshuoLM = 1;
+            XiaoYinshanshuoLM = 1;
+        }
+        else
+        {
+            XiaoYinshanshuoLM = 0;
         }
 
         //2017.5.18
@@ -7662,6 +7876,12 @@ void Widget::shanhua()//闪烁和平滑转动
         if(cantest.SaLiangLV >= 5)
         {
             shanshuoLiangshun = 1;
+            XiaoYinshanshuoLiangshun = 1;
+
+        }
+        else
+        {
+            XiaoYinshanshuoLiangshun = 0;
         }
 
         //2017.5.22
@@ -7672,12 +7892,22 @@ void Widget::shanhua()//闪烁和平滑转动
         if(CHK_GZ_BIT(cantest.m_GZBitFlag,GZ_BIT_GUOQIAO))
         {
             shanshuoguoqiao = 1;
+            XiaoYinshanshuoguoqiao = 1;
+        }
+        else
+        {
+            XiaoYinshanshuoguoqiao = 0;
         }
         //风机故障
 
         if(CHK_GZ_BIT(cantest.m_GZBitFlag,GZ_BIT_FENGJI))
         {
             shanshuofengji = 1;
+            XiaoYinshanshuofengji = 0;
+        }
+        else
+        {
+            XiaoYinshanshuofengji = 1;
         }
 
         //滚筒故障
@@ -7685,6 +7915,11 @@ void Widget::shanhua()//闪烁和平滑转动
         if(CHK_GZ_BIT(cantest.m_GZBitFlag,GZ_BIT_GUNTONG))
         {
             shanshuoGunTong = 1;
+             XiaoYinshanshuoGunTong = 1;
+        }
+        else
+        {
+               XiaoYinshanshuoGunTong = 0;
         }
 
         //升运器故障
@@ -7692,6 +7927,11 @@ void Widget::shanhua()//闪烁和平滑转动
         if(CHK_GZ_BIT(cantest.m_GZBitFlag,GZ_BIT_SHENGYUNQI))
         {
             shanshuoShengyun = 1;
+            XiaoYinshanshuoShengyun = 1;
+        }
+        else
+        {
+            XiaoYinshanshuoShengyun = 0;
         }
 
 //        //卸粮中
@@ -7711,6 +7951,11 @@ void Widget::shanhua()//闪烁和平滑转动
         if(cantest.flagBattery > 1)
         {
             shangshuoChongdian = 1;
+            XiaoYinshangshuoChongdian = 1;
+        }
+        else
+        {
+            XiaoYinshangshuoChongdian = 0;
         }
 
 
@@ -7783,19 +8028,19 @@ void Widget::Licheng()//里程
 
         if((ecutest.flagECU == 0))
         {
-            if(((shanshuoSW == 1)||(shanshuoJYYL ==1)||(shanshuoLM == 1)||(shanshuoLiangshun == 1)||(shanshuoGunTong == 1)||(shanshuoShengyun == 1)||(shanshuoguoqiao == 1)||(shanshuofengji == 1)||(shanshuoSS == 1)||(shangshuoChongdian == 1)||(shanshuoYL == 1))&&(ecutest.FDJ_speed>350))//||shanshuoYL||shanshuozlzs||shanshuoftqzs||shanshuosyqzs
+            if(((shanshuoSW == 1)||(shanshuoJYYL ==1)||(shanshuoLM == 1)||(shanshuoLiangshun == 1)||(shanshuoGunTong == 1)||(shanshuoShengyun == 1)||(shanshuoguoqiao == 1)||(shanshuofengji == 1)||(shanshuoSS == 1)||(shangshuoChongdian == 1)||(shanshuoYL == 1)||(shanshuoYZYS == 1))&&(ecutest.FDJ_speed>350))//||shanshuoYL||shanshuozlzs||shanshuoftqzs||shanshuosyqzs
             {
-                if((flagbeep)||(XiaoYinshanshuoSW == 1)||(XiaoYinshanshuoJYYL == 1)||(XiaoYinshanshuoLM == 1)||(XiaoYinshanshuoLiangshun == 1)||(XiaoYinshanshuoGunTong ==1)||(XiaoYinshanshuoShengyun ==1)||(XiaoYinshanshuoguoqiao ==1)||(XiaoYinshanshuofengji ==1)||(XiaoYinshanshuoSS ==1)||(XiaoYinshangshuoChongdian ==1)||(XiaoYinshanshuoYL ==1))
+                //if((flagbeep)&&((XiaoYinshanshuoSW == 1)||(XiaoYinshanshuoJYYL == 1)||(XiaoYinshanshuoLM == 1)||(XiaoYinshanshuoLiangshun == 1)||(XiaoYinshanshuoGunTong ==1)||(XiaoYinshanshuoShengyun ==1)||(XiaoYinshanshuoguoqiao ==1)||(XiaoYinshanshuofengji ==1)||(XiaoYinshanshuoSS ==1)||(XiaoYinshangshuoChongdian ==1)||(XiaoYinshanshuoYL ==1)))
+                if(flagbeep)
                 {
                     beep_on();
                     //qDebug()<<"beef on 00000000000000000000000000000000000000000000000000000000   ======   "<<ecutest.flagECU<<endl;
-
                 }
                // qDebug()<<"beef on 00000000000000000000000000000000000000000000000000000000   ======   "<<ecutest.flagECU<<endl;
 //                qDebug()<<"beef on shanshuoJYYL  ==                  ff         == "<<shanshuoJYYL<<endl;
 
             }
-            else if((shanshuoSW != 1)||(shanshuoJYYL !=1)||(shanshuoLM != 1)||(shanshuoLiangshun != 1)||(shanshuoGunTong != 1)||(shanshuoShengyun != 1)||(shanshuoguoqiao != 1)||(shanshuofengji != 1)||(shanshuoSS != 1)||(shangshuoChongdian != 1)||(shanshuoYL != 1))
+            else if((shanshuoSW != 1)||(shanshuoJYYL !=1)||(shanshuoLM != 1)||(shanshuoLiangshun != 1)||(shanshuoGunTong != 1)||(shanshuoShengyun != 1)||(shanshuoguoqiao != 1)||(shanshuofengji != 1)||(shanshuoSS != 1)||(shangshuoChongdian != 1)||(shanshuoYL != 1)||(shanshuoYZYS != 1))
             {
                 if(flagbeepzero == 0)
                 {
