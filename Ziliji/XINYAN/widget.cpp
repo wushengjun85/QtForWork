@@ -1201,7 +1201,7 @@ void Widget::paintEvent(QPaintEvent *)
    }
    #endif
 
-   //query.prepare("INSERT INTO otherflag(item1, item2, item3) VALUES (:item1, :item2, :item3)");
+   query.prepare("INSERT INTO otherflag(item1, item2, item3) VALUES (:item1, :item2, :item3)");
 #if 0
    query.prepare("update otherflag set item1 = :item1,item2 = :item2,item3 = :item3");//where
 
@@ -1220,7 +1220,9 @@ void Widget::paintEvent(QPaintEvent *)
     //qDebug()<<""<<endl;
  }
 
-  //query.exec(QObject::tr("drop otherflag"));
+  query.exec(QObject::tr("drop otherflag"));
+
+ //qDebug()<<"flagdbvideoCurrent ...................."<<flagdbvideoCurrent<<endl;
 
 #endif
 
