@@ -74,26 +74,26 @@ bool f4;
 //
 //主离合
 unsigned char zlh = 80;
-QString strzlh = QString("%1").arg(zlh);
+//QString strzlh = QString("%1").arg(zlh);
 //卸粮离合
 unsigned char xllh = 80;
-QString strxllh = QString("%1").arg(xllh);
+//QString strxllh = QString("%1").arg(xllh);
 //过桥离合
 unsigned char gqlh = 80;
-QString strgqlh = QString("%1").arg(gqlh);
+//QString strgqlh = QString("%1").arg(gqlh);
 
 //滚筒
 unsigned char gtzs = 10;
-QString strgtzs = QString("%1").arg(gtzs);
+//QString strgtzs = QString("%1").arg(gtzs);
 //风机
 unsigned char fjzs = 10;
-QString strfjzs = QString("%1").arg(fjzs);
+//QString strfjzs = QString("%1").arg(fjzs);
 //搅龙
 unsigned char jlzs = 10;
-QString strjlzs = QString("%1").arg(jlzs);
+//QString strjlzs = QString("%1").arg(jlzs);
 //过桥
 unsigned char gqzs = 10;
-QString strgqzs = QString("%1").arg(gqzs);
+//QString strgqzs = QString("%1").arg(gqzs);
 
 
 //过渡变量 //临时变量
@@ -190,7 +190,8 @@ enum matchion
     JZ_3600,
     YZBT_5,
     YZT_5,
-    S3000
+    S3000,
+    MGS300
 };
 matchion flagmatchion;
 
@@ -682,7 +683,7 @@ Widget::Widget(QWidget *parent) :
 
 #endif
 
-
+#if 0
     //2017.4.6
     //
     //主离合
@@ -715,6 +716,7 @@ Widget::Widget(QWidget *parent) :
     ui->lineEdit_27->setText(strgqlh);
     ui->lineEdit_28->setText(strjlzs);
     ui->lineEdit_29->setText(strgqzs);
+#endif
 
 /**********************************************************************************************/
 
@@ -837,13 +839,13 @@ Widget::Widget(QWidget *parent) :
 
 
     SItem4->setSizeHint(QSize(30, 37));  //每次改变Item的高度
-    SItem4->setText("4JZ-3600");//
+    SItem4->setText("3JA-3600");//
 
     SItem5->setSizeHint(QSize(30, 37));  //每次改变Item的高度
     SItem5->setText("4QZ-2200/2200A");//
 
     SItem6->setSizeHint(QSize(30, 37));  //每次改变Item的高度
-    SItem6->setText("4YZB-6/4(560)");//
+    SItem6->setText("4MGS-300");//
 
 
     ui->listWidget_3->insertItem(0,SItem1);
@@ -1084,6 +1086,11 @@ void Widget::paintEvent(QPaintEvent *)
             case S3000:
             pix.load("./img/jiemian/S3000.bmp");
             ui->label_5->setStyleSheet("border-image: url(:/new/prefix1/img/icon/jiyouyali.png);");
+            break;
+
+            case MGS300:
+            pix.load("./img/jiemian/4MGS_300.bmp");
+            ui->label_5->setStyleSheet("border-image: url(:/new/prefix1/img/icon/shuiwen.png);");
             break;
 
             default:
@@ -1335,7 +1342,7 @@ void Widget::paintEvent(QPaintEvent *)
 
                 case 3:
                 flagmatchion = JZ_3600;
-                ui->label_19->setText("4JZ-3600");
+                ui->label_19->setText("3JA-3600");
                 SetXinYanMachineModel(XY_MODEL_4JZ_3600);
                 break;
 
@@ -1358,6 +1365,12 @@ void Widget::paintEvent(QPaintEvent *)
                 ui->label_19->setText("S3000/S3000A");
                 SetXinYanMachineModel(XY_MODEL_4QZ_S3000);
                 break;
+
+//                case 7:
+//                flagmatchion = MGS300;
+//                ui->label_19->setText("S3000/S3000A");
+//                SetXinYanMachineModel(XY_MODEL_4QZ_S3000);
+//                break;
 
                 default:
                 break;
@@ -2426,7 +2439,8 @@ void Widget::paintEvent(QPaintEvent *)
 
             //
             //2017.4.2  辣椒机器
-            else if(flagmatchion == JZ_3600)
+            //else if(flagmatchion == JZ_3600)
+            else if((flagmatchion == JZ_3600)||(flagmatchion == MGS300))
             {
                    //int side = qMin(width(), height());  //绘制的范围(宽、高中最小值)
 
@@ -2641,6 +2655,14 @@ void Widget::paintEvent(QPaintEvent *)
 //                  paintdeng.drawPixmap(586,432,24,28,pixdeng);//正上方位置显示的图标
 //              }
 
+              //空滤灯
+              if(cantest.flagKL)
+              {
+                  pixdeng.load("./img/dengshan/05.png");//
+                  paintdeng.drawPixmap(634,430,32,32,pixdeng);//正上方位置显示的图标
+              }
+
+#if 0
               //液压油压力
               if(CHK_GZ_BIT(cantest.m_extLampBitFlag,LAMP_BIT_YeYaYouYa))
               {
@@ -2656,6 +2678,7 @@ void Widget::paintEvent(QPaintEvent *)
                   //paintdeng.drawPixmap(490,319,16,28,pixdeng);//正上方位置显示的图标
                   paintdeng.drawPixmap(616,432,24,28,pixdeng);//正上方位置显示的图标
               }
+#endif
    //           //空滤灯
    //           if(1)
    //           {
@@ -3999,7 +4022,14 @@ void Widget::paintEvent(QPaintEvent *)
         //label_11 he label_14 处理
         if((flagmatchion == YZT_10)||(flagmatchion == YZT_5)||(flagmatchion == JZ_3600))
         {
-            ui->label_14->setText(QString::number(DCDY,'f',1));//系统电压
+            if((flagmatchion == YZT_5)||(flagmatchion == JZ_3600))
+            {
+                ui->label_10->setText(QString::number(DCDY,'f',1));//系统电压
+            }
+            else
+            {
+                ui->label_14->setText(QString::number(DCDY,'f',1));//系统电压
+            }
             ui->label_11->setText(QString::number(cantest.m_Speed[SPEED_FENGJI]));//风机转速
             if(flagmatchion != JZ_3600)
             {
@@ -4014,6 +4044,16 @@ void Widget::paintEvent(QPaintEvent *)
         {
             ui->label_11->setText(QString::number(DCDY,'f',1));//风机转速
             ui->label_14->setText("");//系统电压
+            ui->label_21->setText("");//滚筒转速
+        }
+
+        if(flagmatchion == MGS300)
+        {
+            ui->label_10->setText(QString::number(DCDY,'f',1));//系统电压
+
+            ui->label_11->setText("");//风机转速
+            ui->label_14->setText("");//系统电压
+            ui->label_20->setText("");//主力合工作时间
             ui->label_21->setText("");//滚筒转速
         }
 
@@ -4095,12 +4135,15 @@ void Widget::paintEvent(QPaintEvent *)
         else if(flagmatchion == YZT_5)//主力合工作时间
         {
             ui->label_20->setText(QString::number(cantest.m_ZhuLiHeWorkTime));
-            ui->label_10->setText(QString::number(cantest.m_Speed[SPEED_SHENGYUNQI]));//处理label_10 升运器转速
+            ui->label_14->setText(QString::number(cantest.m_Speed[SPEED_SHENGYUNQI]));//处理label_10 升运器转速
         }
         else if(flagmatchion == JZ_3600)//割台转速
         {
-           ui->label_10->setText(QString::number(cantest.m_Speed[SPEED_GETAI]));
-           ui->label_20->setText(" ");
+           //ui->label_10->setText(QString::number(cantest.m_Speed[SPEED_GETAI]));
+           ui->label_14->setText(QString::number(cantest.m_Speed[SPEED_GETAI]));
+           //ui->label_20->setText(" ");
+           ui->label_20->setText(QString::number(cantest.m_ZhuLiHeWorkTime));
+
         }
         else //工作时间
         {
@@ -4490,7 +4533,7 @@ void Widget::paintEvent(QPaintEvent *)
             memcpy(AddSum[0],ecutest.spn_can.chgzm[0],(ecutest.spn_can.cnt)*sizeof(ecutest.spn_can.chgzm[0]));
             memcpy(AddSum[ecutest.spn_can.cnt],YouAndTongxinArray[0],lengthYX*sizeof(YouAndTongxinArray[0]));
         }
-        //剧中显示 油量和通讯故障
+        //居中显示 油量和通讯故障
         else if((ecutest.flagECU == 1)&&(cantest.StaYL == 0))
         {
             memcpy(YouAndTongxinArray[0],p1,sizeof(YouAndTongxinArray[0]));
@@ -4947,6 +4990,7 @@ void Widget::keyPressEvent(QKeyEvent *e)
          }
          break;
 
+Cfg_sVideoInputChn()
 
     case Qt::Key_F4:
         switch(flagwidget)
@@ -5172,6 +5216,11 @@ void Widget::keyPressEvent(QKeyEvent *e)
                 {
                     flagmatchion = JZ_3600;
                 }
+
+                else if((LCMachineModeMenu == 6)&&(LCBoolMachineModenu == true))
+                {
+                    flagmatchion = MGS300;
+                }
                 //
                 //ui->listwidget4
                 else if((LCMachineModeMenu == 1)&&(LCBoolMachineModenu == false))
@@ -5218,7 +5267,6 @@ void Widget::keyPressEvent(QKeyEvent *e)
                 //qDebug()<<"matchine.......  ==  "<<query.value(0).toInt()<<endl;
              }
 
-
              //2017.5.6  暂时先这样给下边传数据
 //             SetXinYanMachineModel(	XY_MODEL_4YZT_5);
 //             SetXinYanMachineModel(	XY_MODEL_4JZ_3600);
@@ -5227,7 +5275,6 @@ void Widget::keyPressEvent(QKeyEvent *e)
 
           }
          break;
-
 
             //发动机厂家
             case EngineSwitchMenu:
@@ -5368,7 +5415,7 @@ void Widget::keyPressEvent(QKeyEvent *e)
                 flagwidget = FazhibiaodingMenu;
                 ui->stackedWidget->setCurrentIndex(12);
 
-                //2017.4.22   //更新阀值设定数据库
+                //2017.4.22   //读取阀值数据库
 
                   QTextCodec::setCodecForTr(QTextCodec::codecForLocale());//汉字显示
                   QSqlDatabase db;
@@ -5428,6 +5475,41 @@ void Widget::keyPressEvent(QKeyEvent *e)
                 }
                 #endif
                 query.exec(QObject::tr("drop FaZhiBingBD"));
+
+#if 1
+    //2017.4.6
+    //
+    //主离合
+    //int zlh = 80;
+    QString strzlhtemp = QString("%1").arg(zlh);
+    //卸粮离合
+    //int xllh = 80;
+    QString strxllhtemp = QString("%1").arg(xllh);
+    //过桥离合
+    //int gqlh = 80;
+    QString strgqlhtemp = QString("%1").arg(gqlh);
+
+    //滚筒
+    //int gtzs = 80;
+    QString strgtzstemp = QString("%1").arg(gtzs);
+    //风机
+    //int fjzs = 80;
+    QString strfjzstemp = QString("%1").arg(fjzs);
+    //搅龙
+    //int jlzs = 80;
+    QString strjlzstemp = QString("%1").arg(jlzs);
+    //过桥
+    //int gqzs = 80;
+    QString strgqzstemp = QString("%1").arg(gqzs);
+
+    ui->lineEdit_23->setText(strzlhtemp);
+    ui->lineEdit_24->setText(strgtzstemp);
+    ui->lineEdit_25->setText(strxllhtemp);
+    ui->lineEdit_26->setText(strfjzstemp);
+    ui->lineEdit_27->setText(strgqlhtemp);
+    ui->lineEdit_28->setText(strjlzstemp);
+    ui->lineEdit_29->setText(strgqzstemp);
+#endif
 
             }
 
@@ -7476,7 +7558,8 @@ void Widget::gzmslottest()//故障码显示
 
                     if(cantest.flagDC)
                     {
-                        ui->label_2->setText("");
+                        //ui->label_2->setText("");
+                        ui->label_4->setText("");
                     }
                     else
                     {
@@ -7492,17 +7575,12 @@ void Widget::gzmslottest()//故障码显示
                             //qDebug()<<"Kongkong AAAA.....?????? == "<<numdaoche<<endl;
 
                         }
-
-
                     }
                     //ui->label_2->setText(QString::fromUtf8(AddSum[i]));
                     //qDebug()<<"中文故障码  ============   "<<QString::fromUtf8(AddSum[i])<<endl;
-
-
                 }
                 else if(ecutest.spn_can.ifch[i] == 0) // 没有对应的故障码显示 spn fmi 对应的值
                 {
-
                      //qDebug()<<"spn   fmi ========   "<<ecutest.spn_can.spn[i]<<"..........."<<ecutest.spn_can.fmi[i]<<"i ==  "<<i<<endl;
                     if((ecutest.spn_can.cnt == 1)&&(lengthYX == 1))
                     {
@@ -7641,7 +7719,6 @@ void Widget::gzmslottest()//故障码显示
            //  通信故障 和 油量开路轮流显示
 
           #if 1
-
                   //通信故障
                   if((ecutest.spn_can.if_data == 0))//是否有数据 1表示有数据
                   {
@@ -7674,9 +7751,7 @@ void Widget::gzmslottest()//故障码显示
 
                       }
 
-
                       flagjuzhongnum++;
-
                       timergzm->stop();
                       timergzmTihuan->start(3000);//2000
                      }
