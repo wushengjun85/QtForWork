@@ -142,6 +142,9 @@ float shunshiyouhaoFloat;
 long long xiaoshijiLongLong;
 double    xiaoshijiDouble;
 
+//2017.6.12
+float jiyouwendu = 0.0; //发动机温度
+
 
 
 /*******************************************************************************************************************/
@@ -1062,7 +1065,7 @@ void Widget::paintEvent(QPaintEvent *)
             case YZB_4_5_7_8:
             pix.load("./img/jiemian/4YZB_4_5_7_8.bmp");
             //切换到YZBHaishan界面小表盘
-            ui->label_5->setStyleSheet("border-image: url(:/new/prefix1/img/icon/jiyouyali.png);");
+            ui->label_5->setStyleSheet("border-image: url(:/new/prefix1/img/icon/shuiwen.png);");
             break;
 
             //2017.4.2 add
@@ -2160,156 +2163,149 @@ void Widget::paintEvent(QPaintEvent *)
 
             else if(flagmatchion == YZB_4_5_7_8)
             {
-                   //int side = qMin(width(), height());  //绘制的范围(宽、高中最小值)
+                //int side = qMin(width(), height());  //绘制的范围(宽、高中最小值)
 
-                   painter.setRenderHint(QPainter::Antialiasing);//绘制的图像反锯齿
-                   //painter.translate(width() / 2, height() / 2);//重新定位坐标起始点，把坐标原点放到窗体的中央
+                painter.setRenderHint(QPainter::Antialiasing);//绘制的图像反锯齿
+                //painter.translate(width() / 2, height() / 2);//重新定位坐标起始点，把坐标原点放到窗体的中央
 
-                   //painter.translate(405, 184);//重新定位坐标起始点，把坐标原点放到窗体的中央
-                    painter.translate(210, 363);//重新定位坐标起始点，把坐标原点放到窗体的中央
-                   //painter.scale(side / 400.0, side / 300.0);//设定画布的边界,用窗体宽高的最小值来计算时钟的大小，防止窗体拉伸导致的时钟变形以及显示不全
+                //painter.translate(405, 184);//重新定位坐标起始点，把坐标原点放到窗体的中央
+                 painter.translate(210, 363);//重新定位坐标起始点，把坐标原点放到窗体的中央
+                //painter.scale(side / 400.0, side / 300.0);//设定画布的边界,用窗体宽高的最小值来计算时钟的大小，防止窗体拉伸导致的时钟变形以及显示不全
 
-                   //下面两个数组用来定义表针的两个顶点，以便后面的填充
-                   static const QPoint hourHand[4] = {
-                       QPoint(8, 0),
-                       QPoint(-8,0),
-                       QPoint(-1.5, -160),
-                       QPoint(1.5, -160)
-                   };
-                   static const QPoint minuteHand[4] = {
-                       QPoint(4, 0),
-                       QPoint(-4, 0),
-                       QPoint(-1, -55),
-                       QPoint(1, -55)
-                   };
+                //下面两个数组用来定义表针的两个顶点，以便后面的填充
+                static const QPoint hourHand[4] = {
+                    QPoint(8, 0),
+                    QPoint(-8,0),
+                    QPoint(-1.5, -160),
+                    QPoint(1.5, -160)
+                };
+                static const QPoint minuteHand[4] = {
+                    QPoint(4, 0),
+                    QPoint(-4, 0),
+                    QPoint(-1, -55),
+                    QPoint(1, -55)
+                };
 
-                   //油压
-                   painter.setPen(Qt::NoPen);//填充时针，不需要边线所以NoPen
-                   painter.setBrush(Qt::red);
-                   painter.setRenderHint(QPainter::Antialiasing, true);
-                   painter.save();
-                   //painter.rotate(6.0 *time.second());  //设旋转(角度 = 6° * (分钟 + 秒 / 60))
-                    painter.rotate(-114.5);
-                   //painter.rotate(6.0 *numtmp);  //设置旋转(6° * 秒)
-                   //painter.rotate(numtmp++);  //设置旋转(6° * 秒)
-                   //painter.rotate(4.0 );//*shisu
+                //油压
 
-                   //painter.rotate(8*nu1);//floatnu2
-                   painter.rotate(228*floatnu3);//floatnu1
+                painter.setPen(Qt::NoPen);//填充时针，不需要边线所以NoPen
+                painter.setBrush(Qt::red);
+                painter.setRenderHint(QPainter::Antialiasing, true);
+                painter.save();
+                //painter.rotate(6.0 *time.second());  //设旋转(角度 = 6° * (分钟 + 秒 / 60))
+                painter.rotate(-114.5);
+                painter.rotate(228*floatnu3);//floatnu1
 
-                   painter.drawConvexPolygon(minuteHand, 4);  //填充分针部分
-                   painter.restore();
+                painter.drawConvexPolygon(minuteHand, 4);  //填充分针部分
+                painter.restore();
 
-                   /***********************************************/
-                   //2016.6.25   画白圈
-                   painter.setBrush(Qt::black); //画上中心原点/home/vmuser/qtworkplace/chanpin/img2
-                   painter.save();
-                   painter.drawEllipse(QPoint(0,0),13,13);
-                   painter.restore();
+                /***********************************************/
+                //2016.6.25   画白圈
+                painter.setBrush(Qt::green); //画上中心原点/home/vmuser/qtworkplace/chanpin/img2
+                painter.save();
+                painter.drawEllipse(QPoint(0,0),13,13);
+                painter.restore();
 
-                   //画白圈
-                   /***********************************************/
+                //画白圈
+                /***********************************************/
 
-                   painter.setBrush(Qt::darkGray);//画上中心原点/home/vmuser/qtworkplace/chanpin/img2
-                   painter.save();
-                   painter.drawEllipse(QPoint(0,0),10,10);
-                   painter.restore();
+                painter.setBrush(Qt::darkGray);//画上中心原点/home/vmuser/qtworkplace/chanpin/img2
+                painter.save();
+                painter.drawEllipse(QPoint(0,0),10,10);
+                painter.restore();
 
 
-                   //油量
-                   painter.translate(377,1);//重新定位坐标起始点，把坐标原点放到窗体的中央
-                   //painter.scale(side / 400.0, side / 300.0);
+                //油量
+                //painter.translate(380,3);//重新定位坐标起始点，把坐标原点放到窗体的中央
+                 painter.translate(377,1);//重新定位坐标起始点，把坐标原点放到窗体的中央
 
-                   painter.setPen(Qt::NoPen);
-                   painter.setBrush(Qt::red);
-                   painter.setRenderHint(QPainter::Antialiasing, true);
-                   painter.save();
+                painter.setPen(Qt::NoPen);
+                painter.setBrush(Qt::red);
+                painter.setRenderHint(QPainter::Antialiasing, true);
+                painter.save();
 
-                   //painter.rotate(6.0 *time.second());  //设旋转(角度 = 6° * (分钟 + 秒 / 60))
-                    painter.rotate(-114.5);
-                   //painter.rotate(8*nu3);
-                   painter.rotate(7.6*nu1);//
+                painter.rotate(-114);
+                painter.rotate(28.2*nu1);//
+                //painter.rotate(7.6*nu1);//
+                //qDebug()<<"nu1 =======================================   "<<nu1<<endl;
 
+                //painter.rotate(4.0 );  //设旋转(角度 = 6° * (分钟 + 秒 / 60))*shisu
+                //内测用
+                /****************************************************************************/
+                //qDebug()<<"time: "<<time.second()<<endl;
 
+                /****************************************************************************/
 
-                   //painter.rotate(4.0 );  //设旋转(角度 = 6° * (分钟 + 秒 / 60))*shisu
-                   //内测用
-                   /****************************************************************************/
-                   //qDebug()<<"time: "<<time.second()<<endl;
+                painter.drawConvexPolygon(minuteHand, 4);  //填充分针部分
+                painter.setRenderHint(QPainter::Antialiasing, true);
+                painter.restore();
 
-                   /****************************************************************************/
+                /***********************************************/
+                //2016.6.25   画白圈
+                painter.setBrush(Qt::green); //画上中心原点/home/vmuser/qtworkplace/chanpin/img2
+                painter.save();
+                painter.drawEllipse(QPoint(0,0),13,13);
+                painter.restore();
 
-                   painter.drawConvexPolygon(minuteHand, 4);  //填充分针部分
-                   painter.setRenderHint(QPainter::Antialiasing, true);
-                   painter.restore();
-
-                   /***********************************************/
-                   //2016.6.25   画白圈
-                   painter.setBrush(Qt::black); //画上中心原点/home/vmuser/qtworkplace/chanpin/img2
-                   painter.save();
-                   painter.drawEllipse(QPoint(0,0),13,13);
-                   painter.restore();
-
-                   //画白圈
-                   /***********************************************/
+                //画白圈
+                /***********************************************/
 
 
-                   painter.setBrush(Qt::darkGray);
-                   painter.save();//画上中心原点
-                   painter.drawEllipse(QPoint(0,0),10,10);
-                   painter.restore();
+                painter.setBrush(Qt::darkGray);
+                painter.save();//画上中心原点
+                painter.drawEllipse(QPoint(0,0),10,10);
+                painter.restore();
 
-                   //KM/H
-                   painter.translate(-187,-35);//重新定位坐标起始点，把坐标原点放到窗体的中央
-                   //painter.scale(side / 400.0, side / 300.0);
+                //KM/H
+                painter.translate(-190,-36);//重新定位坐标起始点，把坐标原点放到窗体的中央
+                //painter.scale(side / 400.0, side / 300.0);
 
-                   painter.setPen(Qt::NoPen);
-                   painter.setBrush(Qt::red);
-                   painter.setRenderHint(QPainter::Antialiasing, true);
-                   painter.save();
+                painter.setPen(Qt::NoPen);
+                painter.setBrush(Qt::red);
+                painter.setRenderHint(QPainter::Antialiasing, true);
+                painter.save();
 
-                   //painter.rotate(6.0 *time.second());  //设旋转(角度 = 6° * (分钟 + 秒 / 60))
-                   painter.rotate(-114);
-                   //painter.rotate(8*nu3);
-                   painter.rotate(7.6*nu3);//
+                //painter.rotate(6.0 *time.second());  //设旋转(角度 = 6° * (分钟 + 秒 / 60))
+                painter.rotate(-115);
+                //painter.rotate(8*nu3);
+                painter.rotate(7.6*nu3);//
 
 
 
-                   //painter.rotate(4.0 );  //设旋转(角度 = 6° * (分钟 + 秒 / 60))*shisu
-                   //内测用
-                   /****************************************************************************/
-                   //qDebug()<<"time: "<<time.second()<<endl;
+                //painter.rotate(4.0 );  //设旋转(角度 = 6° * (分钟 + 秒 / 60))*shisu
+                //内测用
+                /****************************************************************************/
+                //qDebug()<<"time: "<<time.second()<<endl;
 
-                   /****************************************************************************/
+                /****************************************************************************/
 
-                   painter.drawConvexPolygon(minuteHand, 4);  //填充分针部分
-                   painter.setRenderHint(QPainter::Antialiasing, true);
-                   painter.restore();
+                painter.drawConvexPolygon(minuteHand, 4);  //填充分针部分
+                painter.setRenderHint(QPainter::Antialiasing, true);
+                painter.restore();
 
-                   /***********************************************/
-                   //2016.6.25   画白圈
-                   painter.setBrush(Qt::black); //画上中心原点/home/vmuser/qtworkplace/chanpin/img2
-                   painter.save();
-                   painter.drawEllipse(QPoint(0,0),13,13);
-                   painter.restore();
+                /***********************************************/
+                //2016.6.25   画白圈
+                painter.setBrush(Qt::green); //画上中心原点/home/vmuser/qtworkplace/chanpin/img2
+                painter.save();
+                painter.drawEllipse(QPoint(0,0),13,13);
+                painter.restore();
 
-                   //画白圈
-                   /***********************************************/
-
-
-                   painter.setBrush(Qt::darkGray);
-                   painter.save();//画上中心原点
-                   painter.drawEllipse(QPoint(0,0),10,10);
-                   painter.restore();
-
-                   //处理图片闪烁
-                   painter.translate(-390,-226);//平移到左边角
+                //画白圈
+                /***********************************************/
 
 
-               //报警灯
-              QPainter paintdeng(this);
-              QPixmap pixdeng;
-#if 1
+                painter.setBrush(Qt::darkGray);
+                painter.save();//画上中心原点
+                painter.drawEllipse(QPoint(0,0),10,10);
+                painter.restore();
+
+                //处理图片闪烁
+                painter.translate(-390,-226);//平移到左边角
+
+
+            //报警灯
+           QPainter paintdeng(this);
+           QPixmap pixdeng;
            //左转灯
            if(cantest.flagLeft)
            {
@@ -2322,8 +2318,9 @@ void Widget::paintEvent(QPaintEvent *)
                pixdeng.load("./img/dengshan/14.png");//
                paintdeng.drawPixmap(73,435,36,23,pixdeng);//正上方位置显示的图标
            }
+
            //充电指示灯
-           if(cantest.flagBattery)
+           if(cantest.flagBattery == 1)
            {
                pixdeng.load("./img/dengshan/17.png");//
                paintdeng.drawPixmap(118,434,34,24,pixdeng);//正上方位置显示的图标
@@ -2359,42 +2356,72 @@ void Widget::paintEvent(QPaintEvent *)
                pixdeng.load("./img/dengshan/11.png");//
                paintdeng.drawPixmap(463,434,37,23,pixdeng);//正上方位置显示的图标
            }
-           //籽粒满仓
-           if(CHK_GZ_BIT(cantest.m_extLampBitFlag,LAMP_BIT_ZhiLiHuiShou))
-           {
-               pixdeng.load("./img/dengshan/15.png");//
-               paintdeng.drawPixmap(509,430,32,32,pixdeng);//正上方位置显示的图标
-           }
+          //量满
+          if(cantest.flagLCM)//
+          {
+              pixdeng.load("./img/dengshan/15.png");//
+              paintdeng.drawPixmap(509,430,32,32,pixdeng);//正上方位置显示的图标
+          }
 //           //粮仓满
 //           if(1)
 //           {
 //               pixdeng.load("./img/dengshan/08.png");//
 //               paintdeng.drawPixmap(550,435,29,20,pixdeng);//正上方位置显示的图标
 //           }
-           //燃油进水指示灯
-           if(shanshuoYZYS)
+
+//              //燃油进水指示灯
+//              if(shanshuoYZYS)
+//              {
+//                  pixdeng.load("./img/dengshan/07.png");//
+//                  paintdeng.drawPixmap(586,432,24,28,pixdeng);//正上方位置显示的图标
+//              }
+
+           //空滤灯
+           if(cantest.flagKL)//
            {
-               pixdeng.load("./img/dengshan/07.png");//
-               paintdeng.drawPixmap(586,432,24,28,pixdeng);//正上方位置显示的图标
+               pixdeng.load("./img/dengshan/05.png");//
+               paintdeng.drawPixmap(644,430,32,32,pixdeng);//正上方位置显示的图标
            }
+
+#if 0
            //液压油压力
            if(CHK_GZ_BIT(cantest.m_extLampBitFlag,LAMP_BIT_YeYaYouYa))
            {
                pixdeng.load("./img/dengshan/99.png");//
-               paintdeng.drawPixmap(616,432,15,28,pixdeng);//正上方位置显示的图标
+               paintdeng.drawPixmap(616,432,24,28,pixdeng);//正上方位置显示的图标
            }
-           //空滤灯
-           if(cantest.flagKL)
+
+#endif
+           //液压滤清
+           if(CHK_GZ_BIT(cantest.m_extLampBitFlag,LAMP_BIT_YeYaLvQing))//
            {
-               pixdeng.load("./img/dengshan/05.png");//
-               paintdeng.drawPixmap(510,430,32,32,pixdeng);//正上方位置显示的图标
+               pixdeng.load("./img/zhujiemianicon/09.png");//
+               //paintdeng.drawPixmap(490,319,16,28,pixdeng);//正上方位置显示的图标
+               paintdeng.drawPixmap(616,432,16,28,pixdeng);//正上方位置显示的图标
            }
-           //草箱限制
-           if(CHK_GZ_BIT(cantest.m_extLampBitFlag,LAMP_BIT_CaoXiangXianZhi))
+
+//           //空滤灯
+//           if(1)
+//           {
+//               pixdeng.load("./img/dengshan/05.png");//
+//               paintdeng.drawPixmap(640,430,32,32,pixdeng);//正上方位置显示的图标
+//           }
+//              //草箱限制
+//              if(1)
+//              {
+//                  pixdeng.load("./img/dengshan/19.png");//
+//                  paintdeng.drawPixmap(643,431,34,26,pixdeng);//正上方位置显示的图标
+//              }
+
+           //刹车自动故障
+#if 0
+           if(CHK_GZ_BIT(cantest.m_GZBitFlag,GZ_BIT_SHACHEZHIDONG))
            {
-               pixdeng.load("./img/dengshan/19.png");//
-               paintdeng.drawPixmap(643,431,34,26,pixdeng);//正上方位置显示的图标
+               pixdeng.load("./img/zhujiemianicon/10.png");//
+               paintdeng.drawPixmap(643,434,31,24,pixdeng);//正上方位置显示的图标
            }
+#endif
+
            //右转灯
            if(cantest.flagRight)
            {
@@ -2402,38 +2429,60 @@ void Widget::paintEvent(QPaintEvent *)
                paintdeng.drawPixmap(740,415,49,55,pixdeng);//正上方位置显示的图标
            }
 
+
            //闪烁控制
-           if(shanshuoSW)//水温 0~120度  95度以上报警。
-           {
-               pixdeng.load("./img/dengshan/09.png");//
-               paintdeng.drawPixmap(161,432,31,28,pixdeng);//正上方位置显示的图标
-           }
+            if(shanshuoSW)//水温 0~120度  95度以上报警。
+            {
+                pixdeng.load("./img/dengshan/09.png");//
+                paintdeng.drawPixmap(161,432,31,28,pixdeng);//正上方位置显示的图标
+            }
 
-           if(shanshuoJYYL) //机油  油压报警 0～1 MPa,在0.1 MPa 以下为报警区。
-           {
-               pixdeng.load("./img/dengshan/12.png");//
-               paintdeng.drawPixmap(200,436,39,20,pixdeng);//正上方位置显示的图标
-           }
+            if(shanshuoJYYL) //机油  油压报警 0～1 MPa,在0.1 MPa 以下为报警区。
+            {
+                pixdeng.load("./img/dengshan/12.png");//
+                paintdeng.drawPixmap(200,436,39,20,pixdeng);//正上方位置显示的图标
+            }
 
-           if (shanshuoYL)//油量
-           {
-               pixdeng.load("./img/dengshan/10.png");//
-               paintdeng.drawPixmap(248,430,24,28,pixdeng);//正上方位置显示的图标
-           }
+            if (shanshuoYL)//油量
+            {
+                pixdeng.load("./img/dengshan/10.png");//
+                paintdeng.drawPixmap(248,430,24,28,pixdeng);//正上方位置显示的图标
+            }
+            //2017.5.15 当油量为1时，蜂鸣器响一声，油量指示灯常亮
+            if(cantest.VolYL == 1)//油量
+            {
+                pixdeng.load("./img/dengshan/10.png");//
+                paintdeng.drawPixmap(248,430,24,28,pixdeng);//正上方位置显示的图标
+            }
 
-           //油中右水  油水分离  需要闪烁
-           if(shanshuoYZYS)
-           {
-               pixdeng.load("./img/dengshan/07.png");//
-               paintdeng.drawPixmap(586,432,24,28,pixdeng);//正上方位置显示的图标
-           }
+            //油中右水  油水分离  需要闪烁
+            if(shanshuoYZYS)
+            {
+               //pixdeng.load("./img/dengshan/07.png");//
 
-           //液压油温
-           if(shanshuoYYYW)//液压油温  cantest.VolYeyayouwen
-           {
+                pixdeng.load("./img/dengshan/65.png");//
+                paintdeng.drawPixmap(584,432,24,28,pixdeng);//正上方位置显示的图标
+            }
 
-           }
-#endif
+            //充电指示灯  //闪烁
+
+            if(shangshuoChongdian)
+            {
+                pixdeng.load("./img/dengshan/17.png");//
+                paintdeng.drawPixmap(118,434,34,24,pixdeng);//正上方位置显示的图标
+            }
+
+            //液压油温
+            if(shanshuoYYYW)//液压油温  cantest.VolYeyayouwen
+            {
+
+            }
+
+           //显示油量，机油压力，小时计 等要显示的值
+           //
+           //机油压力
+           //ui->label_7->setText("jiyouyali");
+
          }//end of if(flagmatchion == YZB_4_5_7_8)
 
 
@@ -4042,7 +4091,7 @@ void Widget::paintEvent(QPaintEvent *)
         }
         else
         {
-            ui->label_11->setText(QString::number(DCDY,'f',1));//风机转速
+            ui->label_11->setText(QString::number(DCDY,'f',1));//系统电压
             ui->label_14->setText("");//系统电压
             ui->label_21->setText("");//滚筒转速
         }
@@ -4144,6 +4193,18 @@ void Widget::paintEvent(QPaintEvent *)
            //ui->label_20->setText(" ");
            ui->label_20->setText(QString::number(cantest.m_ZhuLiHeWorkTime));
 
+        }
+        //2017.6.12 add
+        else if(flagmatchion == YZB_4_5_7_8)
+        {
+            if(ecutest.flagECU != 1)
+            {
+                jiyouwendu = ecutest.VolJYWD;
+                jiyouwendu *= 0.03125;
+                jiyouwendu -= 273;
+            }
+            ui->label_10->setText(QString::number(jiyouwendu,'f',1));
+            ui->label_20->setText(" ");
         }
         else //工作时间
         {
@@ -4989,8 +5050,6 @@ void Widget::keyPressEvent(QKeyEvent *e)
              break;
          }
          break;
-
-Cfg_sVideoInputChn()
 
     case Qt::Key_F4:
         switch(flagwidget)
