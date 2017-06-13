@@ -146,6 +146,11 @@ double    xiaoshijiDouble;
 float jiyouwendu = 0.0; //发动机温度
 
 
+//2017.6.13
+Info_SYS_ERR   DigitalFault[20];
+int  digitalFaultLength = 0;
+int tempDigitFault = 0;
+
 
 /*******************************************************************************************************************/
 //2017.1.14 wsj
@@ -487,6 +492,29 @@ unsigned char SaveshanshuoYZYS = 0;
 
 
 /**************************************************************************************************************/
+//报警轮流显示对应的中文
+
+char dataSum[10][30] = {"中文","英文","33","44","55"};
+int numSumTemp = 0;
+int tempNum = 0;
+int FlagSum = 0;
+
+char *WarningShuiwen = "水温偏高请检查";
+char *WarningJiyouLi = "机油压力偏低请检查";
+char *WarningYouliang = "油量偏低";
+char *WarningShouSha  = "手刹报警";
+char *WarningLiangChang =  "粮仓已满";
+char *WarningKongLv = "空气滤芯堵塞";
+char *WarningYeYayouLvqing = "液压油滤清";
+char *WarningRanyoujinshui = "燃油进水";
+char *WarningChongdianGuzhang = "充电故障";
+
+char *WarningFengjiGuzhang = "风机故障";
+char *WarningGunTongGuzhang = "滚筒故障";
+char *WarningShengyunqiGuzhang = "升运器故障";
+char *WarningGuoQiaoGuzhang = "过桥故障";
+char *WarningShachepanZhidongGuzhang = "刹车盘自动故障";
+char *WarningShaLiang = "洒粮损失报警";
 
 /**************************************************************************************************************/
 
@@ -546,6 +574,16 @@ Widget::Widget(QWidget *parent) :
     timer_Licheng->start(1000);//里程
     timergzm->start(1000);//故障码//3000
     timer_shanhua->start(30);
+
+
+
+
+    /******************************************************************/
+    //2017.6.12
+    FlagTimerJiange = new QTimer(this);
+    connect(FlagTimerJiange,  SIGNAL(timeout()),  this,  SLOT(OneSecondOff()));
+    FlagTimerJiange->start(1000);
+    /******************************************************************/
 
 
     //滚动播放 很有用
@@ -1340,13 +1378,13 @@ void Widget::paintEvent(QPaintEvent *)
                 case 2:
                 flagmatchion = YZB_4_5_7_8;
                 ui->label_19->setText("4YZB-4/5/7/8");
-                 SetXinYanMachineModel(XY_MODEL_4YZB_4_7_8);
+                SetXinYanMachineModel(XY_MODEL_4YZB_4_5_7_8);
                 break;
 
                 case 3:
                 flagmatchion = JZ_3600;
                 ui->label_19->setText("3JA-3600");
-                SetXinYanMachineModel(XY_MODEL_4JZ_3600);
+                SetXinYanMachineModel(XY_MODEL_3JA_3600);
                 break;
 
                 case 4:
@@ -4203,6 +4241,7 @@ void Widget::paintEvent(QPaintEvent *)
                 jiyouwendu *= 0.03125;
                 jiyouwendu -= 273;
             }
+            //qDebug()<<"jiyouwendu == "<<jiyouwendu<<endl;
             ui->label_10->setText(QString::number(jiyouwendu,'f',1));
             ui->label_20->setText(" ");
         }
@@ -4621,6 +4660,11 @@ void Widget::paintEvent(QPaintEvent *)
         }
 
 
+//2017.6.12 添加Label_22
+    //
+
+
+
 /*************************************************************************************************************/
 
 //从数据库读出机型
@@ -4811,24 +4855,34 @@ void Widget::paintEvent(QPaintEvent *)
 /****************************************************************************************************/
 /****************************************************************************************************/
 //主机故障查询
-#if 0
-          query.prepare("update zjgz set id = :id,name = :name");//,age = :age
 
-          query.bindValue(":id", 1);
-          query.bindValue(":name","");//QObject::tr("%1").arg(66666)
+//2017.6.13
 
-          query.exec();
+          digitalFaultLength = GetHostSystemErrorInfo(DigitalFault,20);
+          qDebug()<<"digitalFaultLength"<<digitalFaultLength<<endl;
 
-          query.bindValue(":id",2);
-          query.bindValue(":name", "");//QObject::tr("%1").arg(99999)
-          query.exec();
+          qDebug()<<"digitalFaultLength"<<QString::fromUtf8(DigitalFault[tempDigitFault].m_strErrMsg) <<endl;
 
+          //query.prepare("update zjgz set id = :id,name = :name");//,age = :age
+          for(tempDigitFault = 0; tempDigitFault < digitalFaultLength; tempDigitFault++)
+          {
+
+              query.prepare("INSERT INTO zjgz (id, name, age) VALUES (:id, :name, :age)");
+              //query.prepare("update zjgz set id = :id,name = :name");//,age = :age
+              qDebug()<<"DigitalFault[tempDigitFault].m_strErrMsg == "<<DigitalFault[tempDigitFault].m_strErrMsg<<endl;
+
+              query.bindValue(":id", tempDigitFault);
+              query.bindValue(":name",DigitalFault[tempDigitFault].m_strErrMsg);//QObject::tr("%1").arg(66666)
+              //query.bindValue(":age",555);//QObject::tr("%1").arg(66666)
+              query.exec();
+          }
+          query.exec(QObject::tr("drop zjgz"));
 
         query.exec("select id, name, age from zjgz");
         while (query.next())
         {
 
-           //qDebug()<<"id*******"<<query.value(0).toInt()<<"*************** name:"<<query.value(1).toString()<<"  age:"<<query.value(2).toInt();
+           qDebug()<<"id*******"<<query.value(0).toInt()<<"*************** name:"<<query.value(1).toString()<<"  age:"<<query.value(2).toInt();
            IdItem[zjgzun] = query.value(0).toInt();
            zjMsItem[zjgzun] = query.value(1).toString();
 
@@ -4836,15 +4890,15 @@ void Widget::paintEvent(QPaintEvent *)
            ui->tableWidget->setItem(zjgzun,1,new QTableWidgetItem(zjMsItem[zjgzun]));
 
            zjgzun++;
-//           if(zjgzun>=10)
-//           {
-//               zjgzun = 0;
-//           }
+           if(zjgzun>=digitalFaultLength)
+           {
+               zjgzun = 0;
+           }
         }
-        zjgzun = 0;
+        //zjgzun = 0;
 
          query.exec(QObject::tr("drop zjgz"));
-#endif
+
 
 /****************************************************************************************************/
 }
@@ -7961,6 +8015,9 @@ void Widget::shanhua()//闪烁和平滑转动
             {
                 shanshuoSW = 1;
                 XiaoYinshanshuoSW = 1;
+
+                memcpy(dataSum[FlagSum],WarningShuiwen,30);
+                FlagSum++;
             }
             else
             {
@@ -7971,6 +8028,9 @@ void Widget::shanhua()//闪烁和平滑转动
             {
                 shanshuoJYYL = 1;
                 XiaoYinshanshuoJYYL = 1;
+
+                memcpy(dataSum[FlagSum],WarningJiyouLi,30);
+                FlagSum++;
             }
             else
             {
@@ -7981,12 +8041,24 @@ void Widget::shanhua()//闪烁和平滑转动
             {
                 shanshuoYL = 1;
                 XiaoYinshanshuoYL = 1;
+
+                memcpy(dataSum[FlagSum],WarningYouliang,30);
+                FlagSum++;
             }
             else
             {
                 XiaoYinshanshuoYL = 0;
             }
-        }
+
+            //
+//            if(FlagSum>8)
+//            {
+//                FlagSum = 0;
+//                memset(dataSum[0],0,300);
+
+//            }
+//        }
+
 
 
 //        if(cantest.flagTXCS == 0)//cantest.flagTXCS == 1 mcu  故障
@@ -8002,6 +8074,9 @@ void Widget::shanhua()//闪烁和平滑转动
         {
             shanshuoYZYS = 1;
             XiaoYinshanshuoYZYS = 1;
+
+            memcpy(dataSum[FlagSum],WarningRanyoujinshui,30);
+            FlagSum++;
         }
         else
         {
@@ -8019,6 +8094,9 @@ void Widget::shanhua()//闪烁和平滑转动
         {
             shanshuoSS = 1;
             XiaoYinshanshuoSS = 1;
+
+            memcpy(dataSum[FlagSum],WarningShouSha,30);
+            FlagSum++;
         }
         else
         {
@@ -8031,6 +8109,9 @@ void Widget::shanhua()//闪烁和平滑转动
         {
             shanshuoLM = 1;
             XiaoYinshanshuoLM = 1;
+
+            memcpy(dataSum[FlagSum],WarningLiangChang,30);
+            FlagSum++;
         }
         else
         {
@@ -8044,6 +8125,8 @@ void Widget::shanhua()//闪烁和平滑转动
             shanshuoLiangshun = 1;
             XiaoYinshanshuoLiangshun = 1;
 
+            memcpy(dataSum[FlagSum],WarningShaLiang,30);
+            FlagSum++;
         }
         else
         {
@@ -8059,6 +8142,9 @@ void Widget::shanhua()//闪烁和平滑转动
         {
             shanshuoguoqiao = 1;
             XiaoYinshanshuoguoqiao = 1;
+
+            memcpy(dataSum[FlagSum],WarningGuoQiaoGuzhang,30);
+            FlagSum++;
         }
         else
         {
@@ -8070,6 +8156,10 @@ void Widget::shanhua()//闪烁和平滑转动
         {
             shanshuofengji = 1;
             XiaoYinshanshuofengji = 0;
+
+            memcpy(dataSum[FlagSum],WarningFengjiGuzhang,30);
+            FlagSum++;
+
         }
         else
         {
@@ -8082,6 +8172,9 @@ void Widget::shanhua()//闪烁和平滑转动
         {
             shanshuoGunTong = 1;
              XiaoYinshanshuoGunTong = 1;
+
+             memcpy(dataSum[FlagSum],WarningGunTongGuzhang,30);
+             FlagSum++;
         }
         else
         {
@@ -8094,6 +8187,9 @@ void Widget::shanhua()//闪烁和平滑转动
         {
             shanshuoShengyun = 1;
             XiaoYinshanshuoShengyun = 1;
+
+            memcpy(dataSum[FlagSum],WarningShengyunqiGuzhang,30);
+            FlagSum++;
         }
         else
         {
@@ -8118,11 +8214,25 @@ void Widget::shanhua()//闪烁和平滑转动
         {
             shangshuoChongdian = 1;
             XiaoYinshangshuoChongdian = 1;
+
+            memcpy(dataSum[FlagSum],WarningChongdianGuzhang,30);
+            FlagSum++;
         }
         else
         {
             XiaoYinshangshuoChongdian = 0;
         }
+
+
+        //2017.6.13
+        if(FlagSum>8)
+        {
+            FlagSum = 0;
+            memset(dataSum[0],0,300);
+
+        }
+        //
+    }
 
 
 
@@ -8892,6 +9002,66 @@ void Widget::NoChangeFun()
                 FlagAoBanjianxiBDFinish = 0;
             }
         }
+    }
+}
+
+
+//2017.6.12
+void Widget::OneSecondOff()
+{
+
+    if(ecutest.flagECU == 0)
+    {
+           //2017.6.13
+            if(FlagSum>9)
+            {
+                FlagSum = 0;
+                memset(dataSum[0],0,300);
+
+            }
+
+            //qDebug()<<"cantest.StaYL === "<<cantest.StaYL<<endl;
+
+             if((ecutest.spn_can.if_data == 0)&&(cantest.StaYL == 0)) //显示故障码时 下移
+
+             {
+                 ui->label_22->move(310,15);
+                 ui->label_22->setText(QString::fromUtf8(dataSum[numSumTemp]));
+                 //qDebug()<<"7777777777777777777777777777 == "<<ecutest.spn_can.if_data<<endl;
+             }
+             else
+             {
+                 ui->label_22->move(310,43);
+                 ui->label_22->setText(QString::fromUtf8(dataSum[numSumTemp]));
+                 //qDebug()<<"888888888888888888888888888888 == "<<ecutest.spn_can.if_data<<endl;
+             }
+            tempNum++;
+            //qDebug()<<"tempNum == "<<tempNum<<endl;
+            if((tempNum == 3)||(tempNum == 4))
+            {
+               // qDebug()<<"222222222222222222222 == "<<tempNum<<endl;
+                if(tempNum == 4)
+                {
+                    numSumTemp++;
+                    if(numSumTemp > FlagSum)
+                    {
+                        numSumTemp = 0;
+                    }
+                }
+
+                 ui->label_22->setText(" ");
+            }
+            else if(tempNum == 5)
+            {
+                tempNum = 0;
+            }
+
+    }
+    else
+    {
+        FlagSum = 0;
+        memset(dataSum[0],0,300);
+        ui->label_22->setText(" ");
     }
 }
 

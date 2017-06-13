@@ -49,6 +49,10 @@ private:
     /******3秒内无边定时器变量******/
     QTimer *ThreeSecondNoChangeTimer;
 
+    //2017.6.12
+    QTimer *FlagTimerJiange;
+
+
 protected:
     void paintEvent(QPaintEvent *);
     void keyPressEvent(QKeyEvent  *e);
@@ -69,6 +73,9 @@ private slots:
 
     //2017.4.26 3秒内无边化函数判断和相应的动作
     void NoChangeFun();
+
+    //2017.6.12
+    void OneSecondOff();
 
     //滚动播放
     void myscroll();

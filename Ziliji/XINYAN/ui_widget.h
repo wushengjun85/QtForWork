@@ -48,6 +48,7 @@ public:
     QLabel *label_15;
     QLabel *label_20;
     QLabel *label_21;
+    QLabel *label_22;
     QWidget *page_2;
     QLineEdit *lineEdit;
     QLineEdit *lineEdit_2;
@@ -201,6 +202,12 @@ public:
         label_21->setGeometry(QRect(554, 391, 54, 22));
         label_21->setStyleSheet(QString::fromUtf8("font: 75 18pt \"Ubuntu\";"));
         label_21->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+        label_22 = new QLabel(page);
+        label_22->setObjectName(QString::fromUtf8("label_22"));
+        label_22->setGeometry(QRect(310, 43, 151, 41));
+        label_22->setStyleSheet(QString::fromUtf8("color: rgb(255, 0, 0);\n"
+"font: 75 italic 16pt \"Ubuntu\";"));
+        label_22->setAlignment(Qt::AlignCenter);
         stackedWidget->addWidget(page);
         page_2 = new QWidget();
         page_2->setObjectName(QString::fromUtf8("page_2"));
@@ -587,6 +594,7 @@ public:
         label_15->setText(QString());
         label_20->setText(QApplication::translate("Widget", "66766", 0, QApplication::UnicodeUTF8));
         label_21->setText(QApplication::translate("Widget", "66666", 0, QApplication::UnicodeUTF8));
+        label_22->setText(QString());
         lineEdit->setText(QApplication::translate("Widget", "\344\270\255\346\226\207", 0, QApplication::UnicodeUTF8));
         lineEdit_2->setText(QApplication::translate("Widget", "English", 0, QApplication::UnicodeUTF8));
         pushButton_2->setText(QString());

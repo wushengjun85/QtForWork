@@ -21,20 +21,28 @@ extern "C"{
 
 #define RetIf(c)				if (c) return
 #define RetValueIf(c, value)	if (c) return (value)
+#define DoIf(c, a)				if (c) {a;}
+#define JumpIf(c, lable)		if (c) goto lable
+#define BreakIf(c)				if (c) break
+#define ContinueIf(c)			if (c) continue
+#define Max(x, y)	((x) >= (y) ? (x) : (y))
+#define Min(x, y)	((x) >= (y) ? (y) : (x))
 
 enum XINYAN_MACHINE_MODEL
 {
 	XY_MODEL_4YZT_5,								/* 4YZT-5 */
 	XY_MODEL_4YZT_10,								/* 4YZT-10 */
 	XY_MODEL_4YZT_8,								/* 4YZT-8 */
-	XY_MODEL_4YZB_4_7_8,							/* 4YZB-4/7/8 */
+	XY_MODEL_4YZB_4_5_7_8,						/* 4YZB-4/5/7/8 */
 	XY_MODEL_4YZB_3A,								/* 4YZB-3A */
 	XY_MODEL_4YZB_4B,								/* 4YZB-4B */
 	XY_MODEL_4YZBT_5_8,							/* 4YZBT-5/8 */
 	XY_MODEL_4YZ_3_12V,							/* 4YZ-3(12V) */
 	XY_MODEL_4QZ_2200_2600,						/* 4QZ-2200/2600 */
 	XY_MODEL_4QZ_S3000,							/* 4QZ-S3000 */
-	XY_MODEL_4JZ_3600							/* 4JZ-3600	*/
+	XY_MODEL_3JA_3600,							/* 3JA-3600	*/
+	XY_MODEL_4MGS_300,							/* 4MGS-300 */
+	XY_MODEL_BUTT									/* end */
 };
 
 enum VIDEO_INPUT_CHANNEL_EN
@@ -49,6 +57,25 @@ enum VIDEO_INPUT_CHANNEL_EN
 typedef struct{
 		XINYAN_MACHINE_MODEL m_Model;
 }XY_MachineInfo;
+
+
+typedef struct
+{
+	int m_iSPN;				//发动机spn码
+	int m_iFMI;				//发动机fmi码
+}ECU_ErrCode;			
+
+typedef struct {
+    int	m_iErrType;		//0:图标异常故障、1:发动机故障、2:主机电路故障
+    int	m_iTime;		//故障时间
+   union
+	{
+		int   	m_iErrNo;		//故障号
+		ECU_ErrCode 	m_stEcuErrCode;	//发动机故障码
+   	} ;
+    char   m_strErrMsg[128];	 //故障信息
+} Info_SYS_ERR;
+
 
 enum LAMP_BIT_TYPE
 {
@@ -429,6 +456,20 @@ int BiaoDingInit();	/* 进入标定初始化界面	*/
 int BiaoDingExit();	/* 退出标定界面 */
 int Cfg_sSingMileageClear();	/*	单次里程/米计清零 */
 int Cfg_sVideoInputChn(VIDEO_INPUT_CHANNEL_EN _enViChn);	/* 设置预览视频通道*/
+
+/**********************************************************************
+函数名:		GetHostSystemErrorInfo()
+功	能:		获取epower 系统故障信息
+参　数:	[in,out]		_ptErrorInfo    故障信息结构体
+			[in ]			_iLen:		故障信息结构体长度(  小于MAX_ERROR_INFO_NUM )
+返回值:	
+		大于0 :返回实际故障信息数目
+		等于0 :实际故障信息数目为零
+		等于-1:参数错误
+**********************************************************************/
+
+int GetHostSystemErrorInfo(Info_SYS_ERR *_ptErrorInfo,int _iLen);
+
 
 //加共享内存锁
 void lockshm();
