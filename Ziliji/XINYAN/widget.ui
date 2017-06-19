@@ -351,9 +351,9 @@ font: 75 14pt &quot;Ubuntu&quot;;</string>
     <widget class="QLabel" name="label_22">
      <property name="geometry">
       <rect>
-       <x>310</x>
+       <x>240</x>
        <y>43</y>
-       <width>151</width>
+       <width>311</width>
        <height>41</height>
       </rect>
      </property>

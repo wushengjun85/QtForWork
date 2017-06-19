@@ -204,7 +204,7 @@ public:
         label_21->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
         label_22 = new QLabel(page);
         label_22->setObjectName(QString::fromUtf8("label_22"));
-        label_22->setGeometry(QRect(310, 43, 151, 41));
+        label_22->setGeometry(QRect(240, 43, 311, 41));
         label_22->setStyleSheet(QString::fromUtf8("color: rgb(255, 0, 0);\n"
 "font: 75 italic 16pt \"Ubuntu\";"));
         label_22->setAlignment(Qt::AlignCenter);

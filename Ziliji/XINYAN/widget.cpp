@@ -384,8 +384,156 @@ uchar j=0;
 uchar jflag = 0;
 uint mm=0;
 uchar jjjflag = 0;
-unsigned char  mybufflag[15] = {0};
-unsigned char  myindex[15] = {0};
+unsigned char  mybufflag[80] = {0};
+unsigned char  myindex[80] = {0};
+
+//2017.6.19
+//主机故障报警变量
+uchar bit00;
+uchar bit01;
+uchar bit02;
+uchar bit03;
+uchar bit04;
+uchar bit05;
+uchar bit06;
+uchar bit07;
+
+uchar bit10;
+uchar bit11;
+uchar bit12;
+uchar bit13;
+uchar bit14;
+uchar bit15;
+uchar bit16;
+uchar bit17;
+
+uchar bit20;
+uchar bit21;
+uchar bit22;
+uchar bit23;
+uchar bit24;
+uchar bit25;
+uchar bit26;
+uchar bit27;
+
+uchar bit30;
+uchar bit31;
+uchar bit32;
+uchar bit33;
+uchar bit34;
+uchar bit35;
+uchar bit36;
+uchar bit37;
+
+uchar bit40;
+uchar bit41;
+uchar bit42;
+uchar bit43;
+uchar bit44;
+uchar bit45;
+uchar bit46;
+uchar bit47;
+
+uchar bit50;
+uchar bit51;
+uchar bit52;
+uchar bit53;
+uchar bit54;
+uchar bit55;
+uchar bit56;
+uchar bit57;
+
+uchar bit60;
+uchar bit61;
+uchar bit62;
+uchar bit63;
+uchar bit64;
+uchar bit65;
+uchar bit66;
+uchar bit67;
+
+uchar bit70;
+uchar bit71;
+uchar bit72;
+uchar bit73;
+uchar bit74;
+uchar bit75;
+uchar bit76;
+uchar bit77;
+
+char *Warning00 = "";
+char *Warning01 = "";
+char *Warning02 = "点火保险F15断路";
+char *Warning03 = "";
+char *Warning04 = "";
+char *Warning05 = "空调供电继电器保险F7断路";
+char *Warning06 = "";
+char *Warning07 = "";
+
+char *Warning10 = "电喇叭刹车灯保险F16断路";
+char *Warning11 = "空调保险F14断路";
+char *Warning12 = "警灯保险F17断路";
+char *Warning13 = "";
+char *Warning14 = "";
+char *Warning15 = "";
+char *Warning16 = "";
+char *Warning17 = "";
+
+char *Warning20 = "割台降电磁阀电源短路";
+char *Warning21 = "粮筒升电磁阀电源短路";
+char *Warning22 = "传感器供电电源短路";
+char *Warning23 = "风机电机方向控制电路短路";
+char *Warning24 = "前工作灯电源短路";
+char *Warning25 = "粮筒降电磁阀电源短路";
+char *Warning26 = "倒车灯电源短路";
+char *Warning27 = "拨禾轮降电磁阀电源短路";
+
+char *Warning30 = "风机调速电机电源短路";
+char *Warning31 = "割台升电磁阀电源短路";
+char *Warning32 = "行走泵推杆控制器控制短路";
+char *Warning33 = "行走泵推杆控制器控制短路";
+char *Warning34 = "近光灯电源短路";
+char *Warning35 = "暖风机供电短路";
+char *Warning36 = "电磁阀总阀电源短路";
+char *Warning37 = "远光灯电源短路";
+
+
+char *Warning40 = "拨禾轮升电磁阀电源短路";
+char *Warning41 = "";
+char *Warning42 = "";
+char *Warning43 = "";
+char *Warning44 = "";
+char *Warning45 = "";
+char *Warning46 = "";
+char *Warning47 = "";
+
+char *Warning50 = "割台降电磁阀电源断路";
+char *Warning51 = "粮筒升电磁阀电源断路";
+char *Warning52 = "";
+char *Warning53 = "";
+char *Warning54 = "前工作灯电源断路";
+char *Warning55 = "粮筒降电磁阀电源断路";
+char *Warning56 = "倒车灯电源断路";
+char *Warning57 = "拨禾轮降电磁阀电源断路";
+
+char *Warning60 = "风机调速电机电源断路";
+char *Warning61 = "割台升电磁阀电源断路";
+char *Warning62 = "行走泵推杆控制器控制信号丢失";
+char *Warning63 = "行走泵推杆控制器控制信号丢失";
+char *Warning64 = "近光灯电源断路";
+char *Warning65 = "暖风机供电断路";
+char *Warning66 = "电磁阀总阀电源断路";
+char *Warning67 = "远光灯电源断路";
+
+char *Warning70 = "";
+char *Warning71 = "";
+char *Warning72 = "";
+char *Warning73 = "";
+char *Warning74 = "";
+char *Warning75 = "";
+char *Warning76 = "";
+char *Warning77 = "拨禾轮升电磁阀电源断路";
+
 
 /**************************/
 
@@ -505,7 +653,7 @@ unsigned char SaveshanshuoYZYS = 0;
 /**************************************************************************************************************/
 //报警轮流显示对应的中文
 
-char dataSum[20][30] = {0};
+char dataSum[80][30] = {0};
 int numSumTemp = 0;
 int tempNum = 0;
 int FlagSum = 0;
@@ -4872,6 +5020,592 @@ void Widget::paintEvent(QPaintEvent *)
 #if 1
           digitalFaultLength = GetHostSystemErrorInfo(&DigitalFault[0],64);
 
+
+          //2017.6.19 添加主机故障在故障码区域显示
+
+          //bit00
+          if(DigitalFault[tempDigitFault].m_iErrNo == 0)
+          {
+              bit00 = 1;
+          }
+          else
+          {
+              bit00 = 0;
+          }
+          //bit01
+          if(DigitalFault[tempDigitFault].m_iErrNo == 1)
+          {
+              bit01 = 1;
+          }
+          else
+          {
+              bit01 = 0;
+          }
+          //bit02
+          if(DigitalFault[tempDigitFault].m_iErrNo == 2)
+          {
+              bit02 = 1;
+          }
+          else
+          {
+              bit02 = 0;
+          }
+          //bit03
+          if(DigitalFault[tempDigitFault].m_iErrNo == 3)
+          {
+              bit03 = 1;
+          }
+          else
+          {
+              bit03 = 0;
+          }
+          //bit04
+          if(DigitalFault[tempDigitFault].m_iErrNo == 4)
+          {
+              bit04 = 1;
+          }
+          else
+          {
+              bit04 = 0;
+          }
+          //bit05
+          if(DigitalFault[tempDigitFault].m_iErrNo == 5)
+          {
+              bit05 = 1;
+          }
+          else
+          {
+              bit05 = 0;
+          }
+          //bit06
+          if(DigitalFault[tempDigitFault].m_iErrNo == 6)
+          {
+              bit06 = 1;
+          }
+          else
+          {
+              bit06 = 0;
+          }
+          //bit07
+          if(DigitalFault[tempDigitFault].m_iErrNo == 7)
+          {
+              bit07 = 1;
+          }
+          else
+          {
+              bit07 = 0;
+          }
+          //bit10
+          if(DigitalFault[tempDigitFault].m_iErrNo == 10)
+          {
+              bit10 = 1;
+          }
+          else
+          {
+              bit10 = 0;
+          }
+          //bit11
+          if(DigitalFault[tempDigitFault].m_iErrNo == 11)
+          {
+              bit11 = 1;
+          }
+          else
+          {
+              bit11 = 0;
+          }
+          //bit12
+          if(DigitalFault[tempDigitFault].m_iErrNo == 12)
+          {
+              bit12 = 1;
+          }
+          else
+          {
+              bit12 = 0;
+          }
+          //bit13
+          if(DigitalFault[tempDigitFault].m_iErrNo == 13)
+          {
+              bit13 = 1;
+          }
+          else
+          {
+              bit13 = 0;
+          }
+          //bit04
+          if(DigitalFault[tempDigitFault].m_iErrNo == 14)
+          {
+              bit14 = 1;
+          }
+          else
+          {
+              bit14 = 0;
+          }
+          //bit15
+          if(DigitalFault[tempDigitFault].m_iErrNo == 15)
+          {
+              bit15 = 1;
+          }
+          else
+          {
+              bit15 = 0;
+          }
+          //bit16
+          if(DigitalFault[tempDigitFault].m_iErrNo == 16)
+          {
+              bit16 = 1;
+          }
+          else
+          {
+              bit16 = 0;
+          }
+          //bit17
+          if(DigitalFault[tempDigitFault].m_iErrNo == 17)
+          {
+              bit17 = 1;
+          }
+          else
+          {
+              bit17 = 0;
+          }
+
+          //bit20
+          if(DigitalFault[tempDigitFault].m_iErrNo == 20)
+          {
+              bit20 = 1;
+          }
+          else
+          {
+              bit20 = 0;
+          }
+          //bit21
+          if(DigitalFault[tempDigitFault].m_iErrNo == 21)
+          {
+              bit21 = 1;
+          }
+          else
+          {
+              bit21 = 0;
+          }
+          //bit22
+          if(DigitalFault[tempDigitFault].m_iErrNo == 22)
+          {
+              bit22 = 1;
+          }
+          else
+          {
+              bit22 = 0;
+          }
+          //bit23
+          if(DigitalFault[tempDigitFault].m_iErrNo == 23)
+          {
+              bit23 = 1;
+          }
+          else
+          {
+              bit23 = 0;
+          }
+          //bit24
+          if(DigitalFault[tempDigitFault].m_iErrNo == 24)
+          {
+              bit24 = 1;
+          }
+          else
+          {
+              bit24 = 0;
+          }
+          //bit25
+          if(DigitalFault[tempDigitFault].m_iErrNo == 25)
+          {
+              bit25 = 1;
+          }
+          else
+          {
+              bit25 = 0;
+          }
+          //bit26
+          if(DigitalFault[tempDigitFault].m_iErrNo == 26)
+          {
+              bit26 = 1;
+          }
+          else
+          {
+              bit26 = 0;
+          }
+          //bit27
+          if(DigitalFault[tempDigitFault].m_iErrNo == 27)
+          {
+              bit27 = 1;
+          }
+          else
+          {
+              bit27 = 0;
+          }
+
+          //bit30
+          if(DigitalFault[tempDigitFault].m_iErrNo == 30)
+          {
+              bit30 = 1;
+          }
+          else
+          {
+              bit30 = 0;
+          }
+          //bit31
+          if(DigitalFault[tempDigitFault].m_iErrNo == 31)
+          {
+              bit31 = 1;
+          }
+          else
+          {
+              bit31 = 0;
+          }
+          //bit32
+          if(DigitalFault[tempDigitFault].m_iErrNo == 32)
+          {
+              bit32 = 1;
+          }
+          else
+          {
+              bit32 = 0;
+          }
+          //bit33
+          if(DigitalFault[tempDigitFault].m_iErrNo == 33)
+          {
+              bit33 = 1;
+          }
+          else
+          {
+              bit33 = 0;
+          }
+          //bit34
+          if(DigitalFault[tempDigitFault].m_iErrNo == 34)
+          {
+              bit34 = 1;
+          }
+          else
+          {
+              bit34 = 0;
+          }
+          //bit35
+          if(DigitalFault[tempDigitFault].m_iErrNo == 35)
+          {
+              bit35 = 1;
+          }
+          else
+          {
+              bit35 = 0;
+          }
+          //bit36
+          if(DigitalFault[tempDigitFault].m_iErrNo == 36)
+          {
+              bit36 = 1;
+          }
+          else
+          {
+              bit36 = 0;
+          }
+          //bit37
+          if(DigitalFault[tempDigitFault].m_iErrNo == 37)
+          {
+              bit37 = 1;
+          }
+          else
+          {
+              bit37 = 0;
+          }
+
+          //bit40
+          if(DigitalFault[tempDigitFault].m_iErrNo == 40)
+          {
+              bit40 = 1;
+          }
+          else
+          {
+              bit40 = 0;
+          }
+          //bit11
+          if(DigitalFault[tempDigitFault].m_iErrNo == 41)
+          {
+              bit41 = 1;
+          }
+          else
+          {
+              bit41 = 0;
+          }
+          //bit42
+          if(DigitalFault[tempDigitFault].m_iErrNo == 42)
+          {
+              bit42 = 1;
+          }
+          else
+          {
+              bit42 = 0;
+          }
+          //bit43
+          if(DigitalFault[tempDigitFault].m_iErrNo == 43)
+          {
+              bit43 = 1;
+          }
+          else
+          {
+              bit43 = 0;
+          }
+          //bit44
+          if(DigitalFault[tempDigitFault].m_iErrNo == 44)
+          {
+              bit44 = 1;
+          }
+          else
+          {
+              bit44 = 0;
+          }
+          //bit45
+          if(DigitalFault[tempDigitFault].m_iErrNo == 45)
+          {
+              bit45 = 1;
+          }
+          else
+          {
+              bit45 = 0;
+          }
+          //bit46
+          if(DigitalFault[tempDigitFault].m_iErrNo == 46)
+          {
+              bit46 = 1;
+          }
+          else
+          {
+              bit46 = 0;
+          }
+          //bit47
+          if(DigitalFault[tempDigitFault].m_iErrNo == 47)
+          {
+              bit47 = 1;
+          }
+          else
+          {
+              bit47 = 0;
+          }
+
+          //bit50
+          if(DigitalFault[tempDigitFault].m_iErrNo == 50)
+          {
+              bit50 = 1;
+          }
+          else
+          {
+              bit50 = 0;
+          }
+          //bit51
+          if(DigitalFault[tempDigitFault].m_iErrNo == 51)
+          {
+              bit51 = 1;
+          }
+          else
+          {
+              bit51 = 0;
+          }
+          //bit52
+          if(DigitalFault[tempDigitFault].m_iErrNo == 52)
+          {
+              bit52 = 1;
+          }
+          else
+          {
+              bit52 = 0;
+          }
+          //bit53
+          if(DigitalFault[tempDigitFault].m_iErrNo == 53)
+          {
+              bit53 = 1;
+          }
+          else
+          {
+              bit53 = 0;
+          }
+          //bit54
+          if(DigitalFault[tempDigitFault].m_iErrNo == 54)
+          {
+              bit54 = 1;
+          }
+          else
+          {
+              bit54 = 0;
+          }
+          //bit55
+          if(DigitalFault[tempDigitFault].m_iErrNo == 55)
+          {
+              bit55 = 1;
+          }
+          else
+          {
+              bit55 = 0;
+          }
+          //bit56
+          if(DigitalFault[tempDigitFault].m_iErrNo == 56)
+          {
+              bit56 = 1;
+          }
+          else
+          {
+              bit56 = 0;
+          }
+          //bit57
+          if(DigitalFault[tempDigitFault].m_iErrNo == 57)
+          {
+              bit57 = 1;
+          }
+          else
+          {
+              bit57 = 0;
+          }
+
+          //bit60
+          if(DigitalFault[tempDigitFault].m_iErrNo == 60)
+          {
+              bit60 = 1;
+          }
+          else
+          {
+              bit60 = 0;
+          }
+          //bit61
+          if(DigitalFault[tempDigitFault].m_iErrNo == 61)
+          {
+              bit61 = 1;
+          }
+          else
+          {
+              bit61 = 0;
+          }
+          //bit62
+          if(DigitalFault[tempDigitFault].m_iErrNo == 62)
+          {
+              bit62 = 1;
+          }
+          else
+          {
+              bit62 = 0;
+          }
+          //bit63
+          if(DigitalFault[tempDigitFault].m_iErrNo == 63)
+          {
+              bit63 = 1;
+          }
+          else
+          {
+              bit63 = 0;
+          }
+          //bit64
+          if(DigitalFault[tempDigitFault].m_iErrNo == 64)
+          {
+              bit64 = 1;
+          }
+          else
+          {
+              bit64 = 0;
+          }
+          //bit65
+          if(DigitalFault[tempDigitFault].m_iErrNo == 65)
+          {
+              bit65 = 1;
+          }
+          else
+          {
+              bit65 = 0;
+          }
+          //bit66
+          if(DigitalFault[tempDigitFault].m_iErrNo == 66)
+          {
+              bit66 = 1;
+          }
+          else
+          {
+              bit66 = 0;
+          }
+          //bit67
+          if(DigitalFault[tempDigitFault].m_iErrNo == 67)
+          {
+              bit67 = 1;
+          }
+          else
+          {
+              bit67 = 0;
+          }
+          //bit70
+          if(DigitalFault[tempDigitFault].m_iErrNo == 70)
+          {
+              bit70 = 1;
+          }
+          else
+          {
+              bit70 = 0;
+          }
+          //bit71
+          if(DigitalFault[tempDigitFault].m_iErrNo == 71)
+          {
+              bit71 = 1;
+          }
+          else
+          {
+              bit71 = 0;
+          }
+          //bit72
+          if(DigitalFault[tempDigitFault].m_iErrNo == 72)
+          {
+              bit72 = 1;
+          }
+          else
+          {
+              bit72 = 0;
+          }
+          //bit73
+          if(DigitalFault[tempDigitFault].m_iErrNo == 73)
+          {
+              bit73 = 1;
+          }
+          else
+          {
+              bit73 = 0;
+          }
+          //bit74
+          if(DigitalFault[tempDigitFault].m_iErrNo == 74)
+          {
+              bit74 = 1;
+          }
+          else
+          {
+              bit74 = 0;
+          }
+          //bit75
+          if(DigitalFault[tempDigitFault].m_iErrNo == 75)
+          {
+              bit75 = 1;
+          }
+          else
+          {
+              bit75 = 0;
+          }
+          //bit76
+          if(DigitalFault[tempDigitFault].m_iErrNo == 76)
+          {
+              bit76 = 1;
+          }
+          else
+          {
+              bit76 = 0;
+          }
+          //bit77
+          if(DigitalFault[tempDigitFault].m_iErrNo == 77)
+          {
+              bit77 = 1;
+          }
+          else
+          {
+              bit77 = 0;
+          }
+
+
           //qDebug()<<"digitalFaultLength"<<digitalFaultLength<<endl;
           //qDebug()<<"DigitalFault[tempDigitFault].m_iErrNo == "<<DigitalFault[tempDigitFault].m_iErrNo<<endl;
 
@@ -8473,9 +9207,105 @@ void Widget::shanhua()//闪烁和平滑转动
 
 //        mybufflag[14] =  flagSwSenserfault;//水温传感器故障
 
+        //2017.6.19 add 主机故障报警区域显示中文
+        //
+        mybufflag[12] = bit00;
+        mybufflag[13] = bit01;
+        mybufflag[14] = bit02;
+        mybufflag[15] = bit03;
+        mybufflag[16] = bit04;
+        mybufflag[17] = bit05;
+        mybufflag[18] = bit06;
+        mybufflag[19] = bit07;
+
+        mybufflag[20] = bit10;
+        mybufflag[21] = bit11;
+        mybufflag[22] = bit12;
+        mybufflag[23] = bit13;
+        mybufflag[24] = bit14;
+        mybufflag[25] = bit15;
+        mybufflag[26] = bit16;
+        mybufflag[27] = bit17;
+
+        mybufflag[28] = bit20;
+        mybufflag[29] = bit21;
+        mybufflag[30] = bit22;
+        mybufflag[31] = bit23;
+        mybufflag[32] = bit24;
+        mybufflag[33] = bit25;
+        mybufflag[34] = bit26;
+        mybufflag[35] = bit27;
+
+
+        mybufflag[36] = bit30;
+        mybufflag[37] = bit31;
+        mybufflag[38] = bit32;
+        mybufflag[39] = bit33;
+        mybufflag[40] = bit34;
+        mybufflag[41] = bit35;
+        mybufflag[42] = bit36;
+        mybufflag[43] = bit37;
+
+        mybufflag[44] = bit40;
+        mybufflag[45] = bit41;
+        mybufflag[46] = bit42;
+        mybufflag[47] = bit43;
+        mybufflag[48] = bit44;
+        mybufflag[49] = bit45;
+        mybufflag[50] = bit46;
+        mybufflag[51] = bit47;
+
+        mybufflag[52] = bit50;
+        mybufflag[53] = bit51;
+        mybufflag[54] = bit52;
+        mybufflag[55] = bit53;
+        mybufflag[56] = bit54;
+        mybufflag[57] = bit55;
+        mybufflag[58] = bit56;
+        mybufflag[59] = bit57;
+
+        mybufflag[60] = bit60;
+        mybufflag[61] = bit61;
+        mybufflag[62] = bit62;
+        mybufflag[63] = bit63;
+        mybufflag[64] = bit64;
+        mybufflag[65] = bit65;
+        mybufflag[66] = bit66;
+        mybufflag[67] = bit67;
+
+        mybufflag[68] = bit70;
+        mybufflag[69] = bit71;
+        mybufflag[70] = bit72;
+        mybufflag[71] = bit73;
+        mybufflag[72] = bit74;
+        mybufflag[73] = bit75;
+        mybufflag[74] = bit76;
+        mybufflag[75] = bit77;
+
+//        mybufflag[76] = bit00;
+//        mybufflag[77] = bit01;
+//        mybufflag[78] = bit02;
+//        mybufflag[79] = bit03;
+//        mybufflag[80] = bit04;
+//        mybufflag[81] = bit05;
+//        mybufflag[82] = bit06;
+//        mybufflag[83] = bit07;
+
+//        mybufflag[84] = bit00;
+//        mybufflag[85] = bit01;
+//        mybufflag[86] = bit02;
+//        mybufflag[87] = bit03;
+//        mybufflag[88] = bit04;
+//        mybufflag[89] = bit05;
+//        mybufflag[90] = bit06;
+//        mybufflag[91] = bit07;
+
+
+
+
 
         //建立索引 对mybufflag进行提取。
-        for (mm = 0; mm < 20; mm++)
+        for (mm = 0; mm < 80; mm++)
         {
             if(mybufflag[mm] == 1)
             {
@@ -8525,6 +9355,218 @@ void Widget::shanhua()//闪烁和平滑转动
                     memcpy(dataSum[jflag],WarningRanyoujinshui,30);
                     break;
 
+                case 12:
+                    memcpy(dataSum[jflag],Warning00,30);
+                    break;
+                case 13:
+                    memcpy(dataSum[jflag],Warning01,30);
+                    break;
+                case 14:
+                    memcpy(dataSum[jflag],Warning02,30);
+                    break;
+                case 15:
+                    memcpy(dataSum[jflag],Warning03,30);
+                    break;
+                case 16:
+                    memcpy(dataSum[jflag],Warning04,30);
+                    break;
+                case 17:
+                    memcpy(dataSum[jflag],Warning05,30);
+                    break;
+                case 18:
+                    memcpy(dataSum[jflag],Warning06,30);
+                    break;
+                case 19:
+                    memcpy(dataSum[jflag],Warning07,30);
+                    break;
+
+                //bit 10
+
+                case 20:
+                    memcpy(dataSum[jflag],Warning10,30);
+                    break;
+                case 21:
+                    memcpy(dataSum[jflag],Warning11,30);
+                    break;
+                case 22:
+                    memcpy(dataSum[jflag],Warning12,30);
+                    break;
+                case 23:
+                    memcpy(dataSum[jflag],Warning13,30);
+                    break;
+                case 24:
+                    memcpy(dataSum[jflag],Warning14,30);
+                    break;
+                case 25:
+                    memcpy(dataSum[jflag],Warning15,30);
+                    break;
+                case 26:
+                    memcpy(dataSum[jflag],Warning16,30);
+                    break;
+                case 27:
+                    memcpy(dataSum[jflag],Warning17,30);
+                    break;
+
+                //bit 20
+                case 28:
+                    memcpy(dataSum[jflag],Warning20,30);
+                    break;
+                case 29:
+                    memcpy(dataSum[jflag],Warning21,30);
+                    break;
+                case 30:
+                    memcpy(dataSum[jflag],Warning22,30);
+                    break;
+                case 31:
+                    memcpy(dataSum[jflag],Warning23,30);
+                    break;
+                case 32:
+                    memcpy(dataSum[jflag],Warning24,30);
+                    break;
+                case 33:
+                    memcpy(dataSum[jflag],Warning25,30);
+                    break;
+                case 34:
+                    memcpy(dataSum[jflag],Warning26,30);
+                    break;
+                case 35:
+                    memcpy(dataSum[jflag],Warning27,30);
+                    break;
+
+                //bit 30
+                case 36:
+                    memcpy(dataSum[jflag],Warning30,30);
+                    break;
+                case 37:
+                    memcpy(dataSum[jflag],Warning31,30);
+                    break;
+                case 38:
+                    memcpy(dataSum[jflag],Warning32,30);
+                    break;
+                case 39:
+                    memcpy(dataSum[jflag],Warning33,30);
+                    break;
+                case 40:
+                    memcpy(dataSum[jflag],Warning34,30);
+                    break;
+                case 41:
+                    memcpy(dataSum[jflag],Warning35,30);
+                    break;
+                case 42:
+                    memcpy(dataSum[jflag],Warning36,30);
+                    break;
+                case 43:
+                    memcpy(dataSum[jflag],Warning37,30);
+                    break;
+
+                //bit40
+                case 44:
+                    memcpy(dataSum[jflag],Warning40,30);
+                    break;
+                case 45:
+                    memcpy(dataSum[jflag],Warning41,30);
+                    break;
+                case 46:
+                    memcpy(dataSum[jflag],Warning42,30);
+                    break;
+                case 47:
+                    memcpy(dataSum[jflag],Warning43,30);
+                    break;
+                case 48:
+                    memcpy(dataSum[jflag],Warning44,30);
+                    break;
+                case 49:
+                    memcpy(dataSum[jflag],Warning45,30);
+                    break;
+                case 50:
+                    memcpy(dataSum[jflag],Warning46,30);
+                    break;
+                case 51:
+                    memcpy(dataSum[jflag],Warning47,30);
+                    break;
+                //bit50
+
+                case 52:
+                    memcpy(dataSum[jflag],Warning50,30);
+                    break;
+                case 53:
+                    memcpy(dataSum[jflag],Warning51,30);
+                    break;
+                case 54:
+                    memcpy(dataSum[jflag],Warning52,30);
+                    break;
+                case 55:
+                    memcpy(dataSum[jflag],Warning53,30);
+                    break;
+                case 56:
+                    memcpy(dataSum[jflag],Warning54,30);
+                    break;
+                case 57:
+                    memcpy(dataSum[jflag],Warning55,30);
+                    break;
+                case 58:
+                    memcpy(dataSum[jflag],Warning56,30);
+                    break;
+                case 59:
+                    memcpy(dataSum[jflag],Warning57,30);
+                    break;
+
+                //bit60
+
+                case 60:
+                    memcpy(dataSum[jflag],Warning60,30);
+                    break;
+                case 61:
+                    memcpy(dataSum[jflag],Warning61,30);
+                    break;
+                case 62:
+                    memcpy(dataSum[jflag],Warning62,30);
+                    break;
+                case 63:
+                    memcpy(dataSum[jflag],Warning63,30);
+                    break;
+                case 64:
+                    memcpy(dataSum[jflag],Warning64,30);
+                    break;
+                case 65:
+                    memcpy(dataSum[jflag],Warning65,30);
+                    break;
+                case 66:
+                    memcpy(dataSum[jflag],Warning66,30);
+                    break;
+                case 67:
+                    memcpy(dataSum[jflag],Warning67,30);
+                    break;
+
+
+                //bit70
+
+                case 68:
+                    memcpy(dataSum[jflag],Warning70,30);
+                    break;
+                case 69:
+                    memcpy(dataSum[jflag],Warning71,30);
+                    break;
+                case 70:
+                    memcpy(dataSum[jflag],Warning72,30);
+                    break;
+                case 71:
+                    memcpy(dataSum[jflag],Warning73,30);
+                    break;
+                case 72:
+                    memcpy(dataSum[jflag],Warning74,30);
+                    break;
+                case 73:
+                    memcpy(dataSum[jflag],Warning75,30);
+                    break;
+                case 74:
+                    memcpy(dataSum[jflag],Warning76,30);
+                    break;
+                case 75:
+                    memcpy(dataSum[jflag],Warning77,30);
+                    break;
+
+
                 default:
                     break;
                 }
@@ -8536,7 +9578,7 @@ void Widget::shanhua()//闪烁和平滑转动
 
 if(jflag == 0)
 {
-    memset(dataSum[0],0,600);//15
+    memset(dataSum[0],0,2400);//15
 }
 
 FlagSum = jflag;
@@ -9293,7 +10335,8 @@ void Widget::OneSecondOff()
     {
            //2017.6.13
          //qDebug()<<"7777777777777777777777777777 == "<<FlagSum<<endl;
-            if(FlagSum>18)
+            //if(FlagSum>18)
+            if(FlagSum>74)
             {
                 FlagSum = 0;
                 memset(dataSum[0],0,600);
@@ -9305,13 +10348,13 @@ void Widget::OneSecondOff()
              if((ecutest.spn_can.if_data == 0)&&(cantest.StaYL == 0)) //显示故障码时 下移
 
              {
-                 ui->label_22->move(310,15);
+                 ui->label_22->move(240,15);
                  ui->label_22->setText(QString::fromUtf8(dataSum[numSumTemp]));
                  //qDebug()<<"7777777777777777777777777777 == "<<ecutest.spn_can.if_data<<endl;
              }
              else
              {
-                 ui->label_22->move(310,43);
+                 ui->label_22->move(240,43);
                  ui->label_22->setText(QString::fromUtf8(dataSum[numSumTemp]));
                  //qDebug()<<"888888888888888888888888888888 == "<<ecutest.spn_can.if_data<<endl;
              }
@@ -9340,7 +10383,7 @@ void Widget::OneSecondOff()
     else
     {
         FlagSum = 0;
-        memset(dataSum[0],0,600);
+        memset(dataSum[0],0,2400);
         ui->label_22->setText(" ");
     }
 }
