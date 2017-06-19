@@ -15,7 +15,14 @@
 bool flagGzmclear = false;
 unsigned char clearItem;
 
+
+
 QString trd;
+QString zjgztrd;//主机故障
+//主机故障清除
+bool flagZJGZclear = false;
+unsigned char clearZJGZItem;
+
 
 int focuseflag;
 uchar valueprogressbar;
@@ -144,12 +151,15 @@ double    xiaoshijiDouble;
 
 //2017.6.12
 float jiyouwendu = 0.0; //发动机温度
+int IntJiyouwendu = 0;
 
 
 //2017.6.13
-Info_SYS_ERR   DigitalFault[20];
-int  digitalFaultLength = 0;
-int tempDigitFault = 0;
+Info_SYS_ERR   DigitalFault[64];
+uchar  digitalFaultLength = 0;
+uchar  tempDigitFault = 0;
+
+char *zjgzffff[128] = {"11","22","33","44","55","66","77","88","99"};
 
 
 /*******************************************************************************************************************/
@@ -231,6 +241,7 @@ enum flagvedioChange
     AV2 = 0,
     AV3
 #endif
+
 
 #ifdef Lajiao
     AV1 = 0,
@@ -440,8 +451,8 @@ unsigned int fdjgzcount;
 
 //主机故障码
 unsigned char zjgzun = 0;
-unsigned char IdItem[10];
-QString zjMsItem[10];
+unsigned char IdItem[64];
+QString zjMsItem[64];
 
 
 
@@ -494,7 +505,7 @@ unsigned char SaveshanshuoYZYS = 0;
 /**************************************************************************************************************/
 //报警轮流显示对应的中文
 
-char dataSum[10][30] = {"中文","英文","33","44","55"};
+char dataSum[20][30] = {0};
 int numSumTemp = 0;
 int tempNum = 0;
 int FlagSum = 0;
@@ -4240,9 +4251,11 @@ void Widget::paintEvent(QPaintEvent *)
                 jiyouwendu = ecutest.VolJYWD;
                 jiyouwendu *= 0.03125;
                 jiyouwendu -= 273;
+                IntJiyouwendu = jiyouwendu;
             }
             //qDebug()<<"jiyouwendu == "<<jiyouwendu<<endl;
-            ui->label_10->setText(QString::number(jiyouwendu,'f',1));
+            //ui->label_10->setText(QString::number(jiyouwendu,'f',1));
+            ui->label_10->setText(QString::number(IntJiyouwendu));
             ui->label_20->setText(" ");
         }
         else //工作时间
@@ -4856,33 +4869,133 @@ void Widget::paintEvent(QPaintEvent *)
 /****************************************************************************************************/
 //主机故障查询
 
-//2017.6.13
+#if 1
+          digitalFaultLength = GetHostSystemErrorInfo(&DigitalFault[0],64);
 
-          digitalFaultLength = GetHostSystemErrorInfo(DigitalFault,20);
-          qDebug()<<"digitalFaultLength"<<digitalFaultLength<<endl;
+          //qDebug()<<"digitalFaultLength"<<digitalFaultLength<<endl;
+          //qDebug()<<"DigitalFault[tempDigitFault].m_iErrNo == "<<DigitalFault[tempDigitFault].m_iErrNo<<endl;
 
-          qDebug()<<"digitalFaultLength"<<QString::fromUtf8(DigitalFault[tempDigitFault].m_strErrMsg) <<endl;
+           if((flagZJGZclear == true)&&(digitalFaultLength > 0))
+           {
+               trd = QString("select * from zjgz where id = %1 and name = '%2'").arg(DigitalFault[tempDigitFault].m_iErrNo).arg(DigitalFault[tempDigitFault].m_strErrMsg);//.arg(spnnum)
+               query.exec(trd);
+               if(!query.next())
+               {
+                  query.prepare("INSERT INTO zjgz (id, name, age) VALUES (:id, :name, :age)");
+                  query.bindValue(":id", DigitalFault[tempDigitFault].m_iErrNo);
+                  query.bindValue(":name",DigitalFault[tempDigitFault].m_strErrMsg);//QObject::tr("%1").arg(66666)
+                  query.bindValue(":age",333);//QObject::tr("%1").arg(66666)
 
-          //query.prepare("update zjgz set id = :id,name = :name");//,age = :age
-          for(tempDigitFault = 0; tempDigitFault < digitalFaultLength; tempDigitFault++)
-          {
+                  query.exec();
 
-              query.prepare("INSERT INTO zjgz (id, name, age) VALUES (:id, :name, :age)");
-              //query.prepare("update zjgz set id = :id,name = :name");//,age = :age
-              qDebug()<<"DigitalFault[tempDigitFault].m_strErrMsg == "<<DigitalFault[tempDigitFault].m_strErrMsg<<endl;
+                  //qDebug()<<"555555555555555555555.................. "<<endl;
+               }
+               else
+               {
+                   //qDebug()<<"6666!query.next().................. "<<endl;
 
-              query.bindValue(":id", tempDigitFault);
-              query.bindValue(":name",DigitalFault[tempDigitFault].m_strErrMsg);//QObject::tr("%1").arg(66666)
-              //query.bindValue(":age",555);//QObject::tr("%1").arg(66666)
-              query.exec();
-          }
+               }
+
+                flagZJGZclear = false;
+           }
+           else  if(flagZJGZclear == false)
+           {
+
+               trd = QString("select * from zjgz where id = %1 and name = '%2'").arg(DigitalFault[tempDigitFault].m_iErrNo).arg(DigitalFault[tempDigitFault].m_strErrMsg);//.arg(spnnum)
+               //trd = QString("select * from zjgz where id = %1").arg(tempDigitFault);//.arg(spnnum)
+
+               query.exec(trd);
+               if(!query.next())
+               {
+                   query.prepare("INSERT INTO zjgz (id, name, age) VALUES (:id, :name, :age)");
+                   query.bindValue(":id", DigitalFault[tempDigitFault].m_iErrNo);
+                   query.bindValue(":name",DigitalFault[tempDigitFault].m_strErrMsg);//QObject::tr("%1").arg(66666)
+                   query.bindValue(":age",9999);//QObject::tr("%1").arg(66666)
+                   query.exec();
+
+                    //qDebug()<<"8888888 666666666 zjgz"<<endl;
+               }
+               else
+               {
+                   //qDebug()<<"666666666  select select select"<<endl;
+                   //query.exec("select id, name, age from zjgz");
+                   query.exec("select *from zjgz order by id asc");
+                   while (query.next())//指向下一条记录
+                   {
+                       //qDebug()<<"id*******"<<query.value(0).toInt()<<"*************** name:"<<query.value(1).toString()<<"  age:"<<query.value(2).toInt()<<" ----- ------ "<<zjgzun<<endl;
+                       IdItem[zjgzun] = query.value(0).toInt();
+                       zjMsItem[zjgzun] = query.value(1).toString();
+
+                       if(flagZJGZclear == false)
+                       {
+                           ui->tableWidget->setItem(zjgzun,0,new QTableWidgetItem(QString::number(IdItem[zjgzun])));
+                           ui->tableWidget->setItem(zjgzun,1,new QTableWidgetItem(zjMsItem[zjgzun]));
+                       }
+                        zjgzun++;
+                        if(zjgzun >= 64)
+                        {
+                            zjgzun = 0;
+
+                        }
+                   }
+                   zjgzun = 0;
+
+               }
+
+           }
+#endif
+
+            tempDigitFault++;
+            if(tempDigitFault>=digitalFaultLength)
+            {
+                tempDigitFault = 0;
+            }
+
           query.exec(QObject::tr("drop zjgz"));
 
+#if 0
+//2017.6.13
+
+
+
+          digitalFaultLength = GetHostSystemErrorInfo(&DigitalFault[0],64);
+
+          qDebug()<<"digitalFaultLength"<<digitalFaultLength<<endl;
+
+          //qDebug()<<"digitalFaultLength"<<QString::fromUtf8(DigitalFault[tempDigitFault].m_strErrMsg) <<endl;
+
+          //query.prepare("update zjgz set id = :id,name = :name");//,age = :age
+          while((!query.next())&&(tempDigitFault < digitalFaultLength))
+          {
+                  //query.prepare("INSERT INTO zjgz (id, name, age) VALUES (:id, :name, :age)");
+                  //query.prepare("update zjgz set id = :id,name = :name,age = :age");//
+                  //query.prepare("update zjgz set name = DigitalFault[tempDigitFault].m_strErrMsg,age = 8899 where id = tempDigitFault");//
+              zjgztrd = QString("update zjgz set name = %1 where id = %2").arg(DigitalFault[tempDigitFault].m_strErrMsg).arg(tempDigitFault);//
+              //zjgztrd = QString("update zjgz set name = %1 where id = %2").arg(zjgzffff[tempDigitFault]).arg(tempDigitFault);//DigitalFault[tempDigitFault].m_strErrMsg
+              query.exec(zjgztrd);
+
+//                  query.bindValue(":id", tempDigitFault);
+//                  query.bindValue(":name",DigitalFault[tempDigitFault].m_strErrMsg);//QObject::tr("%1").arg(66666)
+//                  query.bindValue(":age",333);//QObject::tr("%1").arg(66666)
+                  query.exec();
+                  tempDigitFault++;
+                  qDebug()<<"20 99999999999999 DigitalFault[tempDigitFault].m_strErrMsg == "<<DigitalFault[tempDigitFault].m_strErrMsg<<" ----- ------ "<<tempDigitFault<<endl;
+
+          }
+          //else
+          //{
+            tempDigitFault = 0;
+            qDebug()<<"Zeror................................"<<endl;
+          //}
+          //query.exec();
+          //query.exec(QObject::tr("drop zjgz"));
+
         query.exec("select id, name, age from zjgz");
-        while (query.next())
+        //while (query.next())
+        while((query.next())&&(zjgzun < digitalFaultLength))
         {
 
-           qDebug()<<"id*******"<<query.value(0).toInt()<<"*************** name:"<<query.value(1).toString()<<"  age:"<<query.value(2).toInt();
+           qDebug()<<"id*******"<<query.value(0).toInt()<<"*************** name:"<<query.value(1).toString()<<"  age:"<<query.value(2).toInt()<<" ----- ------ "<<zjgzun<<endl;
            IdItem[zjgzun] = query.value(0).toInt();
            zjMsItem[zjgzun] = query.value(1).toString();
 
@@ -4890,16 +5003,16 @@ void Widget::paintEvent(QPaintEvent *)
            ui->tableWidget->setItem(zjgzun,1,new QTableWidgetItem(zjMsItem[zjgzun]));
 
            zjgzun++;
-           if(zjgzun>=digitalFaultLength)
-           {
-               zjgzun = 0;
-           }
+//           if(zjgzun>=digitalFaultLength)
+//           {
+//               zjgzun = 0;
+//               //break;
+//           }
         }
-        //zjgzun = 0;
+        zjgzun = 0;
 
          query.exec(QObject::tr("drop zjgz"));
-
-
+#endif
 /****************************************************************************************************/
 }
 
@@ -5458,6 +5571,8 @@ void Widget::keyPressEvent(QKeyEvent *e)
             {
                 flagGzmclear = true;
 
+                flagZJGZclear = true;
+
                 //存储数据
                 //
                 QTextCodec::setCodecForTr(QTextCodec::codecForLocale());//汉字显示
@@ -5495,6 +5610,26 @@ void Widget::keyPressEvent(QKeyEvent *e)
                {
                    clearItem = 0;
                }
+
+
+               //2017.6.16 add zjgz
+
+               query.prepare("delete from zjgz");//
+               query.exec();
+               qDebug()<<"8888888888kdddddddddddddddddddddddddddddddddddddddddddddddddddddd"<<endl;
+               query.exec(QObject::tr("drop zjgz"));
+
+               for(clearZJGZItem = 0; clearZJGZItem<64;clearZJGZItem++)
+               {
+                   ui->tableWidget->setItem(clearZJGZItem,0,new QTableWidgetItem(""));
+                   ui->tableWidget->setItem(clearZJGZItem,1,new QTableWidgetItem(""));
+                   ui->tableWidget->setItem(clearZJGZItem,2,new QTableWidgetItem(""));
+               }
+               if(clearZJGZItem>=64)
+               {
+                   clearZJGZItem = 0;
+               }
+
             }
             break;
 
@@ -6462,7 +6597,7 @@ bool Widget::eventFilter(QObject *watched, QEvent *event)
                 if(key_event->key() == Qt::Key_F2)//下键
                 {
 
-                    if(LCZhujiFault>=10)
+                    if(LCZhujiFault>=64)
                     {
                         LCZhujiFault = 0;
                        // ui->tableWidget->setStyleSheet("background-color:red;");//selection-
@@ -6498,7 +6633,7 @@ bool Widget::eventFilter(QObject *watched, QEvent *event)
                 {
                     LCZhujiFault++;
 
-                    if(LCZhujiFault >= 10)
+                    if(LCZhujiFault >= 64)
                     {
                         LCZhujiFault = 0;
                     }
@@ -8016,8 +8151,8 @@ void Widget::shanhua()//闪烁和平滑转动
                 shanshuoSW = 1;
                 XiaoYinshanshuoSW = 1;
 
-                memcpy(dataSum[FlagSum],WarningShuiwen,30);
-                FlagSum++;
+//                memcpy(dataSum[FlagSum],WarningShuiwen,30);
+//                FlagSum++;
             }
             else
             {
@@ -8029,8 +8164,8 @@ void Widget::shanhua()//闪烁和平滑转动
                 shanshuoJYYL = 1;
                 XiaoYinshanshuoJYYL = 1;
 
-                memcpy(dataSum[FlagSum],WarningJiyouLi,30);
-                FlagSum++;
+//                memcpy(dataSum[FlagSum],WarningJiyouLi,30);
+//                FlagSum++;
             }
             else
             {
@@ -8042,12 +8177,14 @@ void Widget::shanhua()//闪烁和平滑转动
                 shanshuoYL = 1;
                 XiaoYinshanshuoYL = 1;
 
-                memcpy(dataSum[FlagSum],WarningYouliang,30);
-                FlagSum++;
+//                memcpy(dataSum[FlagSum],WarningYouliang,30);
+//                FlagSum++;
+//                qDebug()<<"1111111111111111666666666666666666666666 == "<<FlagSum<<endl;
             }
             else
             {
                 XiaoYinshanshuoYL = 0;
+                //qDebug()<<"22222222222222222222222666666666666666666666666 == "<<FlagSum<<endl;
             }
 
             //
@@ -8075,8 +8212,8 @@ void Widget::shanhua()//闪烁和平滑转动
             shanshuoYZYS = 1;
             XiaoYinshanshuoYZYS = 1;
 
-            memcpy(dataSum[FlagSum],WarningRanyoujinshui,30);
-            FlagSum++;
+//            memcpy(dataSum[FlagSum],WarningRanyoujinshui,30);
+//            FlagSum++;
         }
         else
         {
@@ -8095,8 +8232,8 @@ void Widget::shanhua()//闪烁和平滑转动
             shanshuoSS = 1;
             XiaoYinshanshuoSS = 1;
 
-            memcpy(dataSum[FlagSum],WarningShouSha,30);
-            FlagSum++;
+//            memcpy(dataSum[FlagSum],WarningShouSha,30);
+//            FlagSum++;
         }
         else
         {
@@ -8110,8 +8247,8 @@ void Widget::shanhua()//闪烁和平滑转动
             shanshuoLM = 1;
             XiaoYinshanshuoLM = 1;
 
-            memcpy(dataSum[FlagSum],WarningLiangChang,30);
-            FlagSum++;
+//            memcpy(dataSum[FlagSum],WarningLiangChang,30);
+//            FlagSum++;
         }
         else
         {
@@ -8125,8 +8262,8 @@ void Widget::shanhua()//闪烁和平滑转动
             shanshuoLiangshun = 1;
             XiaoYinshanshuoLiangshun = 1;
 
-            memcpy(dataSum[FlagSum],WarningShaLiang,30);
-            FlagSum++;
+//            memcpy(dataSum[FlagSum],WarningShaLiang,30);
+//            FlagSum++;
         }
         else
         {
@@ -8143,8 +8280,8 @@ void Widget::shanhua()//闪烁和平滑转动
             shanshuoguoqiao = 1;
             XiaoYinshanshuoguoqiao = 1;
 
-            memcpy(dataSum[FlagSum],WarningGuoQiaoGuzhang,30);
-            FlagSum++;
+//            memcpy(dataSum[FlagSum],WarningGuoQiaoGuzhang,30);
+//            FlagSum++;
         }
         else
         {
@@ -8155,15 +8292,15 @@ void Widget::shanhua()//闪烁和平滑转动
         if(CHK_GZ_BIT(cantest.m_GZBitFlag,GZ_BIT_FENGJI))
         {
             shanshuofengji = 1;
-            XiaoYinshanshuofengji = 0;
+            XiaoYinshanshuofengji = 1;
 
-            memcpy(dataSum[FlagSum],WarningFengjiGuzhang,30);
-            FlagSum++;
+//            memcpy(dataSum[FlagSum],WarningFengjiGuzhang,30);
+//            FlagSum++;
 
         }
         else
         {
-            XiaoYinshanshuofengji = 1;
+            XiaoYinshanshuofengji = 0;
         }
 
         //滚筒故障
@@ -8173,8 +8310,8 @@ void Widget::shanhua()//闪烁和平滑转动
             shanshuoGunTong = 1;
              XiaoYinshanshuoGunTong = 1;
 
-             memcpy(dataSum[FlagSum],WarningGunTongGuzhang,30);
-             FlagSum++;
+//             memcpy(dataSum[FlagSum],WarningGunTongGuzhang,30);
+//             FlagSum++;
         }
         else
         {
@@ -8188,8 +8325,8 @@ void Widget::shanhua()//闪烁和平滑转动
             shanshuoShengyun = 1;
             XiaoYinshanshuoShengyun = 1;
 
-            memcpy(dataSum[FlagSum],WarningShengyunqiGuzhang,30);
-            FlagSum++;
+//            memcpy(dataSum[FlagSum],WarningShengyunqiGuzhang,30);
+//            FlagSum++;
         }
         else
         {
@@ -8215,8 +8352,8 @@ void Widget::shanhua()//闪烁和平滑转动
             shangshuoChongdian = 1;
             XiaoYinshangshuoChongdian = 1;
 
-            memcpy(dataSum[FlagSum],WarningChongdianGuzhang,30);
-            FlagSum++;
+//            memcpy(dataSum[FlagSum],WarningChongdianGuzhang,30);
+//            FlagSum++;
         }
         else
         {
@@ -8224,13 +8361,15 @@ void Widget::shanhua()//闪烁和平滑转动
         }
 
 
-        //2017.6.13
-        if(FlagSum>8)
-        {
-            FlagSum = 0;
-            memset(dataSum[0],0,300);
+//        //2017.6.13
+//        if(FlagSum>18)
+//        {
+//            FlagSum = 0;
+//            memset(dataSum[0],0,600);
 
-        }
+//        }
+
+
         //
     }
 
@@ -8272,6 +8411,144 @@ void Widget::shanhua()//闪烁和平滑转动
         }
     }
 #endif
+
+    //2017.6.16 建立索引 报警信息
+    //
+    //
+    /*******************************************************************/
+    /*
+    /*
+    /*
+    /*******************************************************************/
+//    char *BJArry[20] = {"661","662","663","664","665","666","667","668","669","610"};
+//    char *DisplayBJArry[20] = {" "};
+//    uchar FlagBJ = 0;
+//    uchar mybufflag[20] = {0};
+
+//        //2017.5.25
+//        //报警消音
+//        //
+//        unsigned char XiaoYinshanshuoSW = 0;//XiaoYin
+//        unsigned char XiaoYinshanshuoJYYL = 0;
+//        unsigned char XiaoYinshanshuoLM = 0;
+//        unsigned char XiaoYinshanshuoLiangshun = 0;
+//        unsigned char  XiaoYinshanshuoGunTong = 0;
+//        unsigned char  XiaoYinshanshuoShengyun = 0;
+//        unsigned char XiaoYinshanshuoguoqiao = 0;
+//        unsigned char  XiaoYinshanshuofengji = 0;
+//        unsigned char  XiaoYinshanshuoSS = 0;
+//        unsigned char  XiaoYinshangshuoChongdian = 0;
+//        unsigned char  XiaoYinshanshuoYL = 0;
+//        unsigned char  XiaoYinshanshuoYZYS = 0;
+
+//        if(XiaoYinshanshuoSW == 1)
+//        {
+//            DisplayBJArry[FlagBJ] = BJArry[];
+//        }
+
+
+
+
+
+        mybufflag[0] =   XiaoYinshanshuoSW;//flagSW;//水温报警
+        mybufflag[1] = XiaoYinshanshuoJYYL;//flagJY;//机油  油压报警 0～1 MPa,在0.1 MPa 以下为报警区。
+
+        mybufflag[2] = XiaoYinshanshuoLM;//粮仓满
+        mybufflag[3] = XiaoYinshanshuoLiangshun;//粮损
+
+        mybufflag[4] =  XiaoYinshanshuoGunTong; //滚筒
+        mybufflag[5] =  XiaoYinshanshuoShengyun;  //升运气
+
+        mybufflag[6] =  XiaoYinshanshuoguoqiao;//过桥
+        mybufflag[7] =  XiaoYinshanshuofengji;  //风机
+
+        mybufflag[8] = XiaoYinshanshuoSS;//手刹 报警
+        mybufflag[9] = XiaoYinshangshuoChongdian;//充电
+
+        mybufflag[10] = XiaoYinshanshuoYL;//油量
+        mybufflag[11] = XiaoYinshanshuoYZYS; //油中进水
+
+//        mybufflag[12] =  flagQulunzhoufault;//曲轴故障
+//        mybufflag[13] =  flagBattery;//蓄电池故障
+
+//        mybufflag[14] =  flagSwSenserfault;//水温传感器故障
+
+
+        //建立索引 对mybufflag进行提取。
+        for (mm = 0; mm < 20; mm++)
+        {
+            if(mybufflag[mm] == 1)
+            {
+                //myindex[jflag] = mm+1;
+
+                switch(mm)
+                {
+                    case 0:
+                    memcpy(dataSum[jflag],WarningShuiwen,30);
+                    break;
+                    case 1:
+                    memcpy(dataSum[jflag],WarningJiyouLi,30);
+                    break;
+
+                    case 2:
+                    memcpy(dataSum[jflag],WarningLiangChang,30);
+                    break;
+                    case 3:
+                    memcpy(dataSum[jflag],WarningShaLiang,30);
+                    break;
+
+                    case 4:
+                    memcpy(dataSum[jflag],WarningGunTongGuzhang,30);
+                    break;
+                    case 5:
+                    memcpy(dataSum[jflag],WarningShengyunqiGuzhang,30);
+                    break;
+
+                    case 6:
+                    memcpy(dataSum[jflag],WarningGuoQiaoGuzhang,30);
+                    break;
+                    case 7:
+                    memcpy(dataSum[jflag],WarningFengjiGuzhang,30);
+                    break;
+
+                    case 8:
+                    memcpy(dataSum[jflag],WarningShouSha,30);
+                    break;
+                    case 9:
+                    memcpy(dataSum[jflag],WarningChongdianGuzhang,30);
+                    break;
+
+                    case 10:
+                    memcpy(dataSum[jflag],WarningYouliang,30);
+                    break;
+                    case 11:
+                    memcpy(dataSum[jflag],WarningRanyoujinshui,30);
+                    break;
+
+                default:
+                    break;
+                }
+                jflag++;
+            }
+
+        }
+
+
+if(jflag == 0)
+{
+    memset(dataSum[0],0,600);//15
+}
+
+FlagSum = jflag;
+jflag = 0;
+
+//if (j >= FlagSum)
+//{
+//j = 0;
+//memset(dataSum,0,600);//15
+//}
+
+
 }
 
 
@@ -8754,6 +9031,7 @@ uint Widget::GuzhangmaYucaiIndex(long spn, uchar fmi)
 
 void Widget::myscroll()
 {
+#if 0
     //QString 数组
     QString CeshiZM[7] = {"空调压缩机开路","空调压缩机对电源短路","空调压缩机对地短路"};//{,"空气质量流量传感器电压超上限"};
     static int nPos = 0;
@@ -8764,6 +9042,7 @@ void Widget::myscroll()
     }
     nPos++;
     ui->label_4->setText(CeshiZM[mm].mid(nPos));
+#endif
 }
 
 //时间设置
@@ -9013,10 +9292,11 @@ void Widget::OneSecondOff()
     if(ecutest.flagECU == 0)
     {
            //2017.6.13
-            if(FlagSum>9)
+         //qDebug()<<"7777777777777777777777777777 == "<<FlagSum<<endl;
+            if(FlagSum>18)
             {
                 FlagSum = 0;
-                memset(dataSum[0],0,300);
+                memset(dataSum[0],0,600);
 
             }
 
@@ -9060,7 +9340,7 @@ void Widget::OneSecondOff()
     else
     {
         FlagSum = 0;
-        memset(dataSum[0],0,300);
+        memset(dataSum[0],0,600);
         ui->label_22->setText(" ");
     }
 }
